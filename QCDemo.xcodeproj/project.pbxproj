@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9BBB4A086B4DFCED34000E79 /* libPods-QCDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 693145D77CF87148BA2BDB51 /* libPods-QCDemo.a */; };
 		CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60F92535508A00311269 /* AppDelegate.m */; };
 		CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60FC2535508A00311269 /* SceneDelegate.m */; };
 		CCBE61002535508A00311269 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60FF2535508A00311269 /* ViewController.m */; };
@@ -17,6 +18,9 @@
 		CCBE610E2535508C00311269 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE610D2535508C00311269 /* main.m */; };
 		CCBE61182535508C00311269 /* QCDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE61172535508C00311269 /* QCDemoTests.m */; };
 		CCBE61232535508C00311269 /* QCDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE61222535508C00311269 /* QCDemoUITests.m */; };
+		CCBE613D2535515600311269 /* QCTarBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE61342535515600311269 /* QCTarBarController.m */; };
+		CCBE613E2535515600311269 /* QCAFNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE61382535515600311269 /* QCAFNetWorking.m */; };
+		CCBE613F2535515600311269 /* QCClassFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE613C2535515600311269 /* QCClassFunction.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		693145D77CF87148BA2BDB51 /* libPods-QCDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QCDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		895FC554312154FE77B8A8BD /* Pods-QCDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QCDemo/Pods-QCDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		C793F687E901964F9C932165 /* Pods-QCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-QCDemo/Pods-QCDemo.release.xcconfig"; sourceTree = "<group>"; };
 		CCBE60F52535508A00311269 /* QCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBE60F82535508A00311269 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CCBE60F92535508A00311269 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -56,6 +63,13 @@
 		CCBE611E2535508C00311269 /* QCDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QCDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBE61222535508C00311269 /* QCDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCDemoUITests.m; sourceTree = "<group>"; };
 		CCBE61242535508C00311269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCBE61332535515600311269 /* QCTarBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCTarBarController.h; sourceTree = "<group>"; };
+		CCBE61342535515600311269 /* QCTarBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCTarBarController.m; sourceTree = "<group>"; };
+		CCBE61362535515600311269 /* QCHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCHeader.pch; sourceTree = "<group>"; };
+		CCBE61382535515600311269 /* QCAFNetWorking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCAFNetWorking.m; sourceTree = "<group>"; };
+		CCBE61392535515600311269 /* QCAFNetWorking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCAFNetWorking.h; sourceTree = "<group>"; };
+		CCBE613B2535515600311269 /* QCClassFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCClassFunction.h; sourceTree = "<group>"; };
+		CCBE613C2535515600311269 /* QCClassFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCClassFunction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BBB4A086B4DFCED34000E79 /* libPods-QCDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C2954123CB3DEC2E4B30F7B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				693145D77CF87148BA2BDB51 /* libPods-QCDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CCBE60EC2535508A00311269 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +113,8 @@
 				CCBE61162535508C00311269 /* QCDemoTests */,
 				CCBE61212535508C00311269 /* QCDemoUITests */,
 				CCBE60F62535508A00311269 /* Products */,
+				E7EE1B4417A9C97E985694A8 /* Pods */,
+				C2954123CB3DEC2E4B30F7B7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +131,10 @@
 		CCBE60F72535508A00311269 /* QCDemo */ = {
 			isa = PBXGroup;
 			children = (
+				CCBE61312535515600311269 /* QCClasses */,
+				CCBE61322535515600311269 /* QCTarBar */,
+				CCBE61302535515600311269 /* QCThirdParty */,
+				CCBE61352535515600311269 /* QCTools */,
 				CCBE60F82535508A00311269 /* AppDelegate.h */,
 				CCBE60F92535508A00311269 /* AppDelegate.m */,
 				CCBE60FB2535508A00311269 /* SceneDelegate.h */,
@@ -140,6 +169,66 @@
 			path = QCDemoUITests;
 			sourceTree = "<group>";
 		};
+		CCBE61302535515600311269 /* QCThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = QCThirdParty;
+			sourceTree = "<group>";
+		};
+		CCBE61312535515600311269 /* QCClasses */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = QCClasses;
+			sourceTree = "<group>";
+		};
+		CCBE61322535515600311269 /* QCTarBar */ = {
+			isa = PBXGroup;
+			children = (
+				CCBE61332535515600311269 /* QCTarBarController.h */,
+				CCBE61342535515600311269 /* QCTarBarController.m */,
+			);
+			path = QCTarBar;
+			sourceTree = "<group>";
+		};
+		CCBE61352535515600311269 /* QCTools */ = {
+			isa = PBXGroup;
+			children = (
+				CCBE61362535515600311269 /* QCHeader.pch */,
+				CCBE61372535515600311269 /* QCAFNetWorking */,
+				CCBE613A2535515600311269 /* QCClassFunction */,
+			);
+			path = QCTools;
+			sourceTree = "<group>";
+		};
+		CCBE61372535515600311269 /* QCAFNetWorking */ = {
+			isa = PBXGroup;
+			children = (
+				CCBE61382535515600311269 /* QCAFNetWorking.m */,
+				CCBE61392535515600311269 /* QCAFNetWorking.h */,
+			);
+			path = QCAFNetWorking;
+			sourceTree = "<group>";
+		};
+		CCBE613A2535515600311269 /* QCClassFunction */ = {
+			isa = PBXGroup;
+			children = (
+				CCBE613B2535515600311269 /* QCClassFunction.h */,
+				CCBE613C2535515600311269 /* QCClassFunction.m */,
+			);
+			path = QCClassFunction;
+			sourceTree = "<group>";
+		};
+		E7EE1B4417A9C97E985694A8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				895FC554312154FE77B8A8BD /* Pods-QCDemo.debug.xcconfig */,
+				C793F687E901964F9C932165 /* Pods-QCDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,9 +236,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CCBE61272535508C00311269 /* Build configuration list for PBXNativeTarget "QCDemo" */;
 			buildPhases = (
+				380D69850ECCFF2FA9535A70 /* [CP] Check Pods Manifest.lock */,
 				CCBE60F12535508A00311269 /* Sources */,
 				CCBE60F22535508A00311269 /* Frameworks */,
 				CCBE60F32535508A00311269 /* Resources */,
+				6D119F20D1C1F5FEDBB43097 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -265,6 +356,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		380D69850ECCFF2FA9535A70 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QCDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D119F20D1C1F5FEDBB43097 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-QCDemo/Pods-QCDemo-resources.sh",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QCDemo/Pods-QCDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CCBE60F12535508A00311269 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -273,7 +411,10 @@
 				CCBE610E2535508C00311269 /* main.m in Sources */,
 				CCBE61062535508A00311269 /* QCDemo.xcdatamodeld in Sources */,
 				CCBE61002535508A00311269 /* ViewController.m in Sources */,
+				CCBE613D2535515600311269 /* QCTarBarController.m in Sources */,
+				CCBE613F2535515600311269 /* QCClassFunction.m in Sources */,
 				CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */,
+				CCBE613E2535515600311269 /* QCAFNetWorking.m in Sources */,
 				CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,6 +510,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/QCDemo/QCTools/QCHeader.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -379,7 +521,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -425,13 +567,14 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/QCDemo/QCTools/QCHeader.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -441,10 +584,13 @@
 		};
 		CCBE61282535508C00311269 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 895FC554312154FE77B8A8BD /* Pods-QCDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W222BAL58W;
 				INFOPLIST_FILE = QCDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -457,10 +603,13 @@
 		};
 		CCBE61292535508C00311269 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C793F687E901964F9C932165 /* Pods-QCDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W222BAL58W;
 				INFOPLIST_FILE = QCDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
