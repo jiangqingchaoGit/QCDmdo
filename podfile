@@ -1,0 +1,12 @@
+platform :ios, '9.0'
+target "QCDemo" do
+    pod 'AFNetworking'
+    pod 'JSONModel'
+    pod 'MJRefresh'
+    pod 'MBProgressHUD'
+    pod 'Masonry'
+    # 无限循环自动图片轮播器
+    pod 'SDCycleScrollView'
+
+
+end
