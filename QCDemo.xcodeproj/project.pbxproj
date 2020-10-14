@@ -3,11 +3,23 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		9BBB4A086B4DFCED34000E79 /* libPods-QCDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 693145D77CF87148BA2BDB51 /* libPods-QCDemo.a */; };
+		CC4E12DF2536A96500337586 /* XXPageTabItemLable.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E12DB2536A96500337586 /* XXPageTabItemLable.m */; };
+		CC4E12E02536A96500337586 /* XXPageTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E12DC2536A96500337586 /* XXPageTabView.m */; };
+		CC4E12EA2536AB1800337586 /* QCMapInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E12E92536AB1800337586 /* QCMapInstance.m */; };
+		CC4E13042536C5FC00337586 /* QCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E13032536C5FC00337586 /* QCLoginViewController.m */; };
+		CC4E13232536D1D300337586 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E13222536D1CB00337586 /* libsqlite3.tbd */; };
+		CC4E13282536D1DF00337586 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E13272536D1DF00337586 /* CoreGraphics.framework */; };
+		CC4E132A2536D1F100337586 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E13292536D1F100337586 /* WebKit.framework */; };
+		CC4E132C2536D23E00337586 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E132B2536D23E00337586 /* SystemConfiguration.framework */; };
+		CC4E132E2536D24400337586 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E132D2536D24400337586 /* CoreTelephony.framework */; };
+		CC4E132F2536D24D00337586 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E13222536D1CB00337586 /* libsqlite3.tbd */; };
+		CC4E13352536D26A00337586 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E13342536D25F00337586 /* libz.tbd */; };
+		CC4E13392536D27500337586 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E13332536D25500337586 /* libc++.tbd */; };
 		CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60F92535508A00311269 /* AppDelegate.m */; };
 		CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60FC2535508A00311269 /* SceneDelegate.m */; };
 		CCBE61032535508A00311269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBE61012535508A00311269 /* Main.storyboard */; };
@@ -50,6 +62,21 @@
 		693145D77CF87148BA2BDB51 /* libPods-QCDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QCDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		895FC554312154FE77B8A8BD /* Pods-QCDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QCDemo/Pods-QCDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		C793F687E901964F9C932165 /* Pods-QCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-QCDemo/Pods-QCDemo.release.xcconfig"; sourceTree = "<group>"; };
+		CC4E12DB2536A96500337586 /* XXPageTabItemLable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXPageTabItemLable.m; sourceTree = "<group>"; };
+		CC4E12DC2536A96500337586 /* XXPageTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXPageTabView.m; sourceTree = "<group>"; };
+		CC4E12DD2536A96500337586 /* XXPageTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXPageTabView.h; sourceTree = "<group>"; };
+		CC4E12DE2536A96500337586 /* XXPageTabItemLable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXPageTabItemLable.h; sourceTree = "<group>"; };
+		CC4E12E82536AB1800337586 /* QCMapInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCMapInstance.h; sourceTree = "<group>"; };
+		CC4E12E92536AB1800337586 /* QCMapInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCMapInstance.m; sourceTree = "<group>"; };
+		CC4E13022536C5FC00337586 /* QCLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCLoginViewController.h; sourceTree = "<group>"; };
+		CC4E13032536C5FC00337586 /* QCLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCLoginViewController.m; sourceTree = "<group>"; };
+		CC4E13222536D1CB00337586 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		CC4E13272536D1DF00337586 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CC4E13292536D1F100337586 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		CC4E132B2536D23E00337586 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CC4E132D2536D24400337586 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		CC4E13332536D25500337586 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		CC4E13342536D25F00337586 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CCBE60F52535508A00311269 /* QCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBE60F82535508A00311269 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CCBE60F92535508A00311269 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -95,6 +122,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC4E13282536D1DF00337586 /* CoreGraphics.framework in Frameworks */,
+				CC4E13352536D26A00337586 /* libz.tbd in Frameworks */,
+				CC4E132C2536D23E00337586 /* SystemConfiguration.framework in Frameworks */,
+				CC4E132F2536D24D00337586 /* libsqlite3.tbd in Frameworks */,
+				CC4E13232536D1D300337586 /* libsqlite3.tbd in Frameworks */,
+				CC4E132A2536D1F100337586 /* WebKit.framework in Frameworks */,
+				CC4E13392536D27500337586 /* libc++.tbd in Frameworks */,
+				CC4E132E2536D24400337586 /* CoreTelephony.framework in Frameworks */,
 				9BBB4A086B4DFCED34000E79 /* libPods-QCDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,9 +154,53 @@
 		C2954123CB3DEC2E4B30F7B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CC4E13342536D25F00337586 /* libz.tbd */,
+				CC4E13332536D25500337586 /* libc++.tbd */,
+				CC4E132D2536D24400337586 /* CoreTelephony.framework */,
+				CC4E132B2536D23E00337586 /* SystemConfiguration.framework */,
+				CC4E13292536D1F100337586 /* WebKit.framework */,
+				CC4E13272536D1DF00337586 /* CoreGraphics.framework */,
+				CC4E13222536D1CB00337586 /* libsqlite3.tbd */,
 				693145D77CF87148BA2BDB51 /* libPods-QCDemo.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CC4E12DA2536A96500337586 /* XXPageTab */ = {
+			isa = PBXGroup;
+			children = (
+				CC4E12DD2536A96500337586 /* XXPageTabView.h */,
+				CC4E12DC2536A96500337586 /* XXPageTabView.m */,
+				CC4E12DE2536A96500337586 /* XXPageTabItemLable.h */,
+				CC4E12DB2536A96500337586 /* XXPageTabItemLable.m */,
+			);
+			path = XXPageTab;
+			sourceTree = "<group>";
+		};
+		CC4E12E72536AB1800337586 /* QCMapInstance */ = {
+			isa = PBXGroup;
+			children = (
+				CC4E12E82536AB1800337586 /* QCMapInstance.h */,
+				CC4E12E92536AB1800337586 /* QCMapInstance.m */,
+			);
+			path = QCMapInstance;
+			sourceTree = "<group>";
+		};
+		CC4E13002536C5C800337586 /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				CC4E13012536C5D800337586 /* QCLoginViewController */,
+			);
+			path = "登录";
+			sourceTree = "<group>";
+		};
+		CC4E13012536C5D800337586 /* QCLoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC4E13022536C5FC00337586 /* QCLoginViewController.h */,
+				CC4E13032536C5FC00337586 /* QCLoginViewController.m */,
+			);
+			path = QCLoginViewController;
 			sourceTree = "<group>";
 		};
 		CCBE60EC2535508A00311269 = {
@@ -189,6 +268,7 @@
 		CCBE61302535515600311269 /* QCThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				CC4E12DA2536A96500337586 /* XXPageTab */,
 			);
 			path = QCThirdParty;
 			sourceTree = "<group>";
@@ -196,6 +276,7 @@
 		CCBE61312535515600311269 /* QCClasses */ = {
 			isa = PBXGroup;
 			children = (
+				CC4E13002536C5C800337586 /* 登录 */,
 				CCD509BA2536A0A3002CECEF /* 首页 */,
 				CCD509B92536A09F002CECEF /* 发布 */,
 				CCD509B82536A09D002CECEF /* 消息 */,
@@ -218,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				CCBE61362535515600311269 /* QCHeader.pch */,
+				CC4E12E72536AB1800337586 /* QCMapInstance */,
 				CCBE61372535515600311269 /* QCAFNetWorking */,
 				CCBE613A2535515600311269 /* QCClassFunction */,
 			);
@@ -503,20 +585,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-QCDemo/Pods-QCDemo-resources.sh",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-QCDemo/Pods-QCDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-QCDemo/Pods-QCDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QCDemo/Pods-QCDemo-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QCDemo/Pods-QCDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -535,10 +612,14 @@
 				CCD509D02536A19E002CECEF /* QCBookViewController.m in Sources */,
 				CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */,
 				CCD509A525369C21002CECEF /* QCNavigationBar.m in Sources */,
+				CC4E12E02536A96500337586 /* XXPageTabView.m in Sources */,
+				CC4E12DF2536A96500337586 /* XXPageTabItemLable.m in Sources */,
+				CC4E12EA2536AB1800337586 /* QCMapInstance.m in Sources */,
 				CCD509D62536A1B3002CECEF /* QCPersonViewController.m in Sources */,
 				CCD509C72536A191002CECEF /* QCMessageViewController.m in Sources */,
 				CCBE613E2535515600311269 /* QCAFNetWorking.m in Sources */,
 				CCD509BD2536A0DC002CECEF /* QCReleaseViewController.m in Sources */,
+				CC4E13042536C5FC00337586 /* QCLoginViewController.m in Sources */,
 				CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -712,14 +793,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W222BAL58W;
+				DEVELOPMENT_TEAM = CK54N84G6B;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = QCDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = www.jqc.com.QCDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chat1.xdd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -731,14 +813,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W222BAL58W;
+				DEVELOPMENT_TEAM = CK54N84G6B;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = QCDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = www.jqc.com.QCDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chat1.xdd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

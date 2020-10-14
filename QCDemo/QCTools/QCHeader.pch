@@ -13,17 +13,20 @@
 /*
  *  自定义分栏控制器
  */
-  #import "QCTarBarController.h"
+#import "QCTarBarController.h"
 /*
  *  导航控制器
  */
-  #import "BaseNavigationController.h"
+#import "BaseNavigationController.h"
 /*
  *  自定义导航控制器
  */
-  #import "QCNavigationBar.h"
+#import "QCNavigationBar.h"
 
-
+/*
+ *  登录
+ */
+#import "QCLoginViewController.h"
 /*
  *  网络请求
  */
@@ -40,7 +43,7 @@
 /*
  *  定位单例
  */
-//  #import "QCMapInstance.h"
+#import "QCMapInstance.h"
 /*
  *  选择城市
  */
@@ -99,8 +102,8 @@
 #define KTIM_SECRETKEY @"200e8fbdb881d29bd698fe081543cb60ea526508a75b426313e6eb9b2a0439a5"
 
 /*
-*  极光推送
-*/
+ *  极光推送
+ */
 #define KJPUSH_appKey @"c6a3bba38147746c945c2ccb"
 
 //#define
@@ -188,7 +191,6 @@
 
 //  默认图片
 #define KHeaderImage [UIImage imageNamed:@"header"]
-//#define KFillImage   [UIImage imageNamed:@"default"]
 #define KFillImage   [UIImage imageNamed:@""]
 
 

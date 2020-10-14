@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import <UMShare/UMShare.h>
+#import <UShareUI/UShareUI.h>
+#import <UMCommon/UMCommon.h>
+#import <WXApi.h>
 
 @interface AppDelegate ()
 
@@ -18,6 +22,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    
+    [WXApi registerApp:@"wxee57a3177d3643b4" universalLink:@"https://universal-links.xianduoduo123.com/"];
+
+    [UMSocialGlobal shareInstance].isUsingWaterMark = YES;
+    [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxee57a3177d3643b4" appSecret:@"5ae16e3a812bbe1c7051b6ebe8a0da26" redirectURL:@"https://your_domain/app11111/"];
+    [UMConfigure initWithAppkey:@"5b92186af29d9806c800021c" channel:@"AppStore"];
+
+
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     QCTarBarController  *tab = [[QCTarBarController alloc]init];
     self.window.rootViewController=tab;
@@ -29,6 +42,18 @@
     return YES;
 }
 
+
+// 支持所有iOS系统 URL回调方法
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url options:options];
+    
+    if (!result) {
+         // 其他如支付等SDK的回调
+    }
+    return result;
+    
+}
 
 #pragma mark - UISceneSession lifecycle
 

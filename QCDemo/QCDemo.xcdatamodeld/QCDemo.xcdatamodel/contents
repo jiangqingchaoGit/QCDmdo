@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Entity" representedClassName="Entity" isAbstract="YES" syncable="YES" codeGenerationType="class"/>
+    <entity name="Entity1" representedClassName="Entity1" isAbstract="YES" syncable="YES" codeGenerationType="class"/>
+    <entity name="Entity2" representedClassName="Entity2" isAbstract="YES" syncable="YES" codeGenerationType="class"/>
+    <entity name="Entity3" representedClassName="Entity3" isAbstract="YES" syncable="YES" codeGenerationType="class"/>
+    <entity name="Entity4" representedClassName="Entity4" syncable="YES" codeGenerationType="class"/>
+    <elements>
+        <element name="Entity" positionX="-63" positionY="-18" width="128" height="43"/>
+        <element name="Entity1" positionX="-54" positionY="-9" width="128" height="43"/>
+        <element name="Entity2" positionX="-36" positionY="9" width="128" height="43"/>
+        <element name="Entity3" positionX="-18" positionY="27" width="128" height="43"/>
+        <element name="Entity4" positionX="0" positionY="45" width="128" height="43"/>
+    </elements>
 </model>
