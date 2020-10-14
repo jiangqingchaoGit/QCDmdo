@@ -10,7 +10,6 @@
 		9BBB4A086B4DFCED34000E79 /* libPods-QCDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 693145D77CF87148BA2BDB51 /* libPods-QCDemo.a */; };
 		CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60F92535508A00311269 /* AppDelegate.m */; };
 		CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60FC2535508A00311269 /* SceneDelegate.m */; };
-		CCBE61002535508A00311269 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60FF2535508A00311269 /* ViewController.m */; };
 		CCBE61032535508A00311269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBE61012535508A00311269 /* Main.storyboard */; };
 		CCBE61062535508A00311269 /* QCDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCBE61042535508A00311269 /* QCDemo.xcdatamodeld */; };
 		CCBE61082535508C00311269 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCBE61072535508C00311269 /* Assets.xcassets */; };
@@ -21,6 +20,13 @@
 		CCBE613D2535515600311269 /* QCTarBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE61342535515600311269 /* QCTarBarController.m */; };
 		CCBE613E2535515600311269 /* QCAFNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE61382535515600311269 /* QCAFNetWorking.m */; };
 		CCBE613F2535515600311269 /* QCClassFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE613C2535515600311269 /* QCClassFunction.m */; };
+		CCD509A425369C21002CECEF /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD509A125369C21002CECEF /* BaseNavigationController.m */; };
+		CCD509A525369C21002CECEF /* QCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD509A325369C21002CECEF /* QCNavigationBar.m */; };
+		CCD509AF25369D4E002CECEF /* QCHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD509AE25369D4E002CECEF /* QCHomeViewController.m */; };
+		CCD509BD2536A0DC002CECEF /* QCReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD509BC2536A0DC002CECEF /* QCReleaseViewController.m */; };
+		CCD509C72536A191002CECEF /* QCMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD509C62536A191002CECEF /* QCMessageViewController.m */; };
+		CCD509D02536A19E002CECEF /* QCBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD509CF2536A19E002CECEF /* QCBookViewController.m */; };
+		CCD509D62536A1B3002CECEF /* QCPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD509D52536A1B3002CECEF /* QCPersonViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +55,6 @@
 		CCBE60F92535508A00311269 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CCBE60FB2535508A00311269 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		CCBE60FC2535508A00311269 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		CCBE60FE2535508A00311269 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CCBE60FF2535508A00311269 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CCBE61022535508A00311269 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CCBE61052535508A00311269 /* QCDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QCDemo.xcdatamodel; sourceTree = "<group>"; };
 		CCBE61072535508C00311269 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -70,6 +74,20 @@
 		CCBE61392535515600311269 /* QCAFNetWorking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCAFNetWorking.h; sourceTree = "<group>"; };
 		CCBE613B2535515600311269 /* QCClassFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCClassFunction.h; sourceTree = "<group>"; };
 		CCBE613C2535515600311269 /* QCClassFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCClassFunction.m; sourceTree = "<group>"; };
+		CCD509A025369C21002CECEF /* QCNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCNavigationBar.h; sourceTree = "<group>"; };
+		CCD509A125369C21002CECEF /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
+		CCD509A225369C21002CECEF /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
+		CCD509A325369C21002CECEF /* QCNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCNavigationBar.m; sourceTree = "<group>"; };
+		CCD509AD25369D4E002CECEF /* QCHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCHomeViewController.h; sourceTree = "<group>"; };
+		CCD509AE25369D4E002CECEF /* QCHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCHomeViewController.m; sourceTree = "<group>"; };
+		CCD509BB2536A0DC002CECEF /* QCReleaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCReleaseViewController.h; sourceTree = "<group>"; };
+		CCD509BC2536A0DC002CECEF /* QCReleaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCReleaseViewController.m; sourceTree = "<group>"; };
+		CCD509C52536A191002CECEF /* QCMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCMessageViewController.h; sourceTree = "<group>"; };
+		CCD509C62536A191002CECEF /* QCMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCMessageViewController.m; sourceTree = "<group>"; };
+		CCD509CE2536A19E002CECEF /* QCBookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCBookViewController.h; sourceTree = "<group>"; };
+		CCD509CF2536A19E002CECEF /* QCBookViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCBookViewController.m; sourceTree = "<group>"; };
+		CCD509D42536A1B3002CECEF /* QCPersonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCPersonViewController.h; sourceTree = "<group>"; };
+		CCD509D52536A1B3002CECEF /* QCPersonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCPersonViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				CCBE61312535515600311269 /* QCClasses */,
+				CCD5099F25369C21002CECEF /* QCNav */,
 				CCBE61322535515600311269 /* QCTarBar */,
 				CCBE61302535515600311269 /* QCThirdParty */,
 				CCBE61352535515600311269 /* QCTools */,
@@ -139,8 +158,6 @@
 				CCBE60F92535508A00311269 /* AppDelegate.m */,
 				CCBE60FB2535508A00311269 /* SceneDelegate.h */,
 				CCBE60FC2535508A00311269 /* SceneDelegate.m */,
-				CCBE60FE2535508A00311269 /* ViewController.h */,
-				CCBE60FF2535508A00311269 /* ViewController.m */,
 				CCBE61012535508A00311269 /* Main.storyboard */,
 				CCBE61072535508C00311269 /* Assets.xcassets */,
 				CCBE61092535508C00311269 /* LaunchScreen.storyboard */,
@@ -179,6 +196,11 @@
 		CCBE61312535515600311269 /* QCClasses */ = {
 			isa = PBXGroup;
 			children = (
+				CCD509BA2536A0A3002CECEF /* 首页 */,
+				CCD509B92536A09F002CECEF /* 发布 */,
+				CCD509B82536A09D002CECEF /* 消息 */,
+				CCD509B72536A09A002CECEF /* 通讯录 */,
+				CCD509B62536A096002CECEF /* 个人 */,
 			);
 			path = QCClasses;
 			sourceTree = "<group>";
@@ -218,6 +240,102 @@
 				CCBE613C2535515600311269 /* QCClassFunction.m */,
 			);
 			path = QCClassFunction;
+			sourceTree = "<group>";
+		};
+		CCD5099F25369C21002CECEF /* QCNav */ = {
+			isa = PBXGroup;
+			children = (
+				CCD509A025369C21002CECEF /* QCNavigationBar.h */,
+				CCD509A325369C21002CECEF /* QCNavigationBar.m */,
+				CCD509A225369C21002CECEF /* BaseNavigationController.h */,
+				CCD509A125369C21002CECEF /* BaseNavigationController.m */,
+			);
+			path = QCNav;
+			sourceTree = "<group>";
+		};
+		CCD509AC25369D2F002CECEF /* QCHomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CCD509AD25369D4E002CECEF /* QCHomeViewController.h */,
+				CCD509AE25369D4E002CECEF /* QCHomeViewController.m */,
+			);
+			path = QCHomeViewController;
+			sourceTree = "<group>";
+		};
+		CCD509B62536A096002CECEF /* 个人 */ = {
+			isa = PBXGroup;
+			children = (
+				CCD509C42536A15C002CECEF /* QCPersonViewController */,
+			);
+			path = "个人";
+			sourceTree = "<group>";
+		};
+		CCD509B72536A09A002CECEF /* 通讯录 */ = {
+			isa = PBXGroup;
+			children = (
+				CCD509C32536A149002CECEF /* QCBookViewController */,
+			);
+			path = "通讯录";
+			sourceTree = "<group>";
+		};
+		CCD509B82536A09D002CECEF /* 消息 */ = {
+			isa = PBXGroup;
+			children = (
+				CCD509C22536A120002CECEF /* QCMessageViewController */,
+			);
+			path = "消息";
+			sourceTree = "<group>";
+		};
+		CCD509B92536A09F002CECEF /* 发布 */ = {
+			isa = PBXGroup;
+			children = (
+				CCD509C12536A0EE002CECEF /* QCReleaseViewController */,
+			);
+			path = "发布";
+			sourceTree = "<group>";
+		};
+		CCD509BA2536A0A3002CECEF /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				CCD509AC25369D2F002CECEF /* QCHomeViewController */,
+			);
+			path = "首页";
+			sourceTree = "<group>";
+		};
+		CCD509C12536A0EE002CECEF /* QCReleaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CCD509BB2536A0DC002CECEF /* QCReleaseViewController.h */,
+				CCD509BC2536A0DC002CECEF /* QCReleaseViewController.m */,
+			);
+			path = QCReleaseViewController;
+			sourceTree = "<group>";
+		};
+		CCD509C22536A120002CECEF /* QCMessageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CCD509C52536A191002CECEF /* QCMessageViewController.h */,
+				CCD509C62536A191002CECEF /* QCMessageViewController.m */,
+			);
+			path = QCMessageViewController;
+			sourceTree = "<group>";
+		};
+		CCD509C32536A149002CECEF /* QCBookViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CCD509CE2536A19E002CECEF /* QCBookViewController.h */,
+				CCD509CF2536A19E002CECEF /* QCBookViewController.m */,
+			);
+			path = QCBookViewController;
+			sourceTree = "<group>";
+		};
+		CCD509C42536A15C002CECEF /* QCPersonViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CCD509D42536A1B3002CECEF /* QCPersonViewController.h */,
+				CCD509D52536A1B3002CECEF /* QCPersonViewController.m */,
+			);
+			path = QCPersonViewController;
 			sourceTree = "<group>";
 		};
 		E7EE1B4417A9C97E985694A8 /* Pods */ = {
@@ -410,11 +528,17 @@
 			files = (
 				CCBE610E2535508C00311269 /* main.m in Sources */,
 				CCBE61062535508A00311269 /* QCDemo.xcdatamodeld in Sources */,
-				CCBE61002535508A00311269 /* ViewController.m in Sources */,
+				CCD509AF25369D4E002CECEF /* QCHomeViewController.m in Sources */,
 				CCBE613D2535515600311269 /* QCTarBarController.m in Sources */,
 				CCBE613F2535515600311269 /* QCClassFunction.m in Sources */,
+				CCD509A425369C21002CECEF /* BaseNavigationController.m in Sources */,
+				CCD509D02536A19E002CECEF /* QCBookViewController.m in Sources */,
 				CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */,
+				CCD509A525369C21002CECEF /* QCNavigationBar.m in Sources */,
+				CCD509D62536A1B3002CECEF /* QCPersonViewController.m in Sources */,
+				CCD509C72536A191002CECEF /* QCMessageViewController.m in Sources */,
 				CCBE613E2535515600311269 /* QCAFNetWorking.m in Sources */,
+				CCD509BD2536A0DC002CECEF /* QCReleaseViewController.m in Sources */,
 				CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

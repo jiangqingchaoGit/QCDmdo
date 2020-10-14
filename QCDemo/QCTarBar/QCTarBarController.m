@@ -7,8 +7,11 @@
 //
 
 #import "QCTarBarController.h"
-
-
+#import "QCHomeViewController.h"
+#import "QCReleaseViewController.h"
+#import "QCMessageViewController.h"
+#import "QCBookViewController.h"
+#import "QCPersonViewController.h"
 
 @interface QCTarBarController ()<UITabBarControllerDelegate>
 
@@ -20,110 +23,54 @@
     [super viewDidLoad];
     [self setupChildControllers];
 
-//    [self startLocation];
 
 }
 
 
-- (void)startLocation {
-    
-//    
-//    [[QCMapInstance shared] startLocationIsNeedCity:YES WithCompletion:^(CLLocationCoordinate2D coor, NSString *city,NSString *cityCode) {
-//        
-//        
-//        
-//        if([city rangeOfString:@"市"].location !=NSNotFound) {
-//            city = [city stringByReplacingOccurrencesOfString:@"市" withString:@""];
-//            
-//        }else{
-//            
-//        }
-//        
-//        
-//        
-//        
-//        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"确定要退出登录吗?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-//
-//            UIAlertAction *alertT = [UIAlertAction actionWithTitle:@"退出登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//
-//                NSLog(@"点击退出登录");
-//
-//
-//            }];
-//
-//            UIAlertAction *alertF = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//
-//                NSLog(@"点击了取消");
-//
-//            }];
-//
-//
-//            [actionSheet addAction:alertT];
-//
-//            [actionSheet addAction:alertF];
-//
-//            [self presentViewController:actionSheet animated:YES completion:nil];
-//
-//
-//
-//
-//        
-//    }];
-//    
-    
-    
-    
-}
 
 
 //这里设置两个视图控制器的代码是重复的，为了便于观察理解，我没有抽取，大家日常写代码的时候请注意养成良好的代码习惯。
 - (void)setupChildControllers {
 
-    
     if (@available(iOS 10.0, *)) {
         //  没有被选中的颜色
-//        self.tabBar.unselectedItemTintColor = [QCClassFunction stringTOColor:@"#999999"];
+        self.tabBar.unselectedItemTintColor = [QCClassFunction stringTOColor:@"#999999"];
     } else {
 
     }
         //  选中时的颜色
-//    self.tabBar.tintColor = KTEXT_COLOR;
-//    self.delegate = self;
-//    QCNewHomeViewController * homeViewController = [[QCNewHomeViewController alloc] init];
-//    homeViewController.typeStr = @"1";
-//    BaseNavigationController * homeViewNav = [[BaseNavigationController alloc] initWithRootViewController:homeViewController];
-//    homeViewNav.tabBarItem.title = @"精选";
-//    //设置图片
-//    homeViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
-//    //设置选中图片
-//    homeViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
-//
-//    JFAllViewController * allViewController = [[JFAllViewController alloc] init];
-//    BaseNavigationController * allNav = [[BaseNavigationController alloc] initWithRootViewController:allViewController];
-//    allNav.tabBarItem.title = @"全部";
-//    allNav.tabBarItem.image = [UIImage imageNamed:@"all"];
-//    allNav.tabBarItem.selectedImage = [UIImage imageNamed:@"all_s"];
-//    
-//    QCTurnTicketViewController * turnTicketViewController = [[QCTurnTicketViewController alloc] init];
-//    BaseNavigationController * turnTicketNav = [[BaseNavigationController alloc] initWithRootViewController:turnTicketViewController];
-//    turnTicketNav.tabBarItem.title = @"转票";
-//     turnTicketNav.tabBarItem.image = [UIImage imageNamed:@"turn"];
-//    turnTicketNav.tabBarItem.selectedImage = [UIImage imageNamed:@"turn_s"];
-//    
-//    QCTheRaiseViewController * theRaiseViewController = [[QCTheRaiseViewController alloc] init];
-//    BaseNavigationController * theRaiseNav = [[BaseNavigationController alloc] initWithRootViewController:theRaiseViewController];
-//    theRaiseNav.tabBarItem.title = @"众筹";
-//    theRaiseNav.tabBarItem.image = [UIImage imageNamed:@"raise"];
-//    theRaiseNav.tabBarItem.selectedImage = [UIImage imageNamed:@"raise_s"];
-//
-//    JFMineController * personViewController = [[JFMineController alloc] init];
-//    BaseNavigationController * personNav = [[BaseNavigationController alloc] initWithRootViewController:personViewController];
-//    personNav.tabBarItem.title = @"我的";
-//    personNav.tabBarItem.image = [UIImage imageNamed:@"person"];
-//    personNav.tabBarItem.selectedImage = [UIImage imageNamed:@"person_s"];
-//
-//
-//    self.viewControllers = @[homeViewNav,allNav,turnTicketNav,theRaiseNav,personNav];
+    self.tabBar.tintColor = KTEXT_COLOR;
+    self.delegate = self;
+    QCHomeViewController * homeViewController = [[QCHomeViewController alloc] init];
+    BaseNavigationController * homeViewNav = [[BaseNavigationController alloc] initWithRootViewController:homeViewController];
+    homeViewNav.tabBarItem.title = @"集市";
+    homeViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
+    homeViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
+    
+    QCReleaseViewController * releaseViewController = [[QCReleaseViewController alloc] init];
+    BaseNavigationController * releaseViewNav = [[BaseNavigationController alloc] initWithRootViewController:releaseViewController];
+    releaseViewNav.tabBarItem.title = @"发布";
+    releaseViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
+    releaseViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
+    
+    QCMessageViewController * messageViewController = [[QCMessageViewController alloc] init];
+    BaseNavigationController * messageViewNav = [[BaseNavigationController alloc] initWithRootViewController:messageViewController];
+    messageViewNav.tabBarItem.title = @"消息";
+    messageViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
+    messageViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
+    
+    QCBookViewController * bookViewController = [[QCBookViewController alloc] init];
+    BaseNavigationController * bookViewNav = [[BaseNavigationController alloc] initWithRootViewController:bookViewController];
+    bookViewNav.tabBarItem.title = @"通讯录";
+    bookViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
+    bookViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
+    
+    QCPersonViewController * personViewController = [[QCPersonViewController alloc] init];
+    BaseNavigationController * personViewNav = [[BaseNavigationController alloc] initWithRootViewController:personViewController];
+    personViewNav.tabBarItem.title = @"我";
+    personViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
+    personViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
+    self.viewControllers = @[homeViewNav,releaseViewNav,messageViewNav,bookViewNav,personViewNav];
 }
 
 - (void)didReceiveMemoryWarning {

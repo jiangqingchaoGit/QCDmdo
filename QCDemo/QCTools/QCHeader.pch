@@ -9,10 +9,25 @@
 //  https://www.jianshu.com/p/889cff2b3a52  (改变状态栏的颜色)
 
 
+
+/*
+ *  自定义分栏控制器
+ */
+  #import "QCTarBarController.h"
+/*
+ *  导航控制器
+ */
+  #import "BaseNavigationController.h"
+/*
+ *  自定义导航控制器
+ */
+  #import "QCNavigationBar.h"
+
+
 /*
  *  网络请求
  */
-//#import "QCAFNetWorking.h"
+#import "QCAFNetWorking.h"
 /*
  *  公共类别
  */
@@ -21,14 +36,7 @@
  *  图片加载
  */
 #import <UIImageView+WebCache.h>
-/*
- *  导航控制器
- */
-//  #import "BaseNavigationController.h"
-/*
- *  自定义导航控制器
- */
-//  #import "QCNavigationBar.h"
+
 /*
  *  定位单例
  */

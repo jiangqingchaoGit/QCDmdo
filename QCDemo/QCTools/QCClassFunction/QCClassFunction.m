@@ -306,6 +306,7 @@
         
     }
     
+    
     NSLog(@"statusBar.backgroundColor--->%@",statusBar.backgroundColor);
     
     
