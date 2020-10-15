@@ -8,6 +8,10 @@
 
 //  https://www.jianshu.com/p/889cff2b3a52  (改变状态栏的颜色)
 
+/*
+ *  友盟
+ */
+#import <UMShare/UMShare.h>
 
 
 /*
@@ -175,6 +179,8 @@
 #define K_20_BFONT [UIFont fontWithName:@"Helvetica-Bold" size:K_X_WIDTH(KSCALE_WIDTH(20))]
 #define K_22_BFONT [UIFont fontWithName:@"Helvetica-Bold" size:K_X_WIDTH(KSCALE_WIDTH(22))]
 #define K_24_BFONT [UIFont fontWithName:@"Helvetica-Bold" size:K_X_WIDTH(KSCALE_WIDTH(24))]
+#define K_28_BFONT [UIFont fontWithName:@"Helvetica-Bold" size:K_X_WIDTH(KSCALE_WIDTH(28))]
+
 #define K_30_BFONT [UIFont fontWithName:@"Helvetica-Bold" size:K_X_WIDTH(KSCALE_WIDTH(30))]
 
 

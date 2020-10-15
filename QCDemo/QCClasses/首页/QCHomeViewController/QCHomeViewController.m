@@ -7,10 +7,10 @@
 //
 
 #import "QCHomeViewController.h"
-
-#import <UMShare/UMShare.h>
+#import "QCLoginViewController.h"
 
 @interface QCHomeViewController ()
+
 
 @end
 
@@ -22,29 +22,24 @@
     
     UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
     button.backgroundColor = [UIColor greenColor];
-    [self.view addSubview:button];
     [button addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
     [[QCMapInstance shared] startLocationIsNeedCity:YES WithCompletion:^(CLLocationCoordinate2D coor, NSString *city, NSString *cityCode) {
         NSLog(@"%@",city);
-        
-            
     }];
 
 
 }
 - (void)buttonAction {
-//    [self shareWebPageToPlatformType:1];
-    [self weChatLogin];
+    [self shareWebPageToPlatformType:1];
+
+
+    
 }
 
 
-- (void)weChatLogin {
-    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
-            
-        
-        NSLog(@"%@",result);
-    }];
-}
+
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
 {
     //创建分享消息对象

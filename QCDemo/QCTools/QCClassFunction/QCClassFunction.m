@@ -285,8 +285,10 @@
     
     
 }
-+(void)filletImageView:(UIImageView *)imageView {
-    imageView.layer.cornerRadius = 5;
++(void)filletImageView:(id)view withRadius:(CGFloat)radius{
+    
+    UIImageView * imageView = (UIImageView *)view;
+    imageView.layer.cornerRadius = radius;
     imageView.layer.masksToBounds = YES;
 }
 

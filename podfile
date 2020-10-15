@@ -7,6 +7,14 @@ target "QCDemo" do
     pod 'Masonry'
     # 无限循环自动图片轮播器
     pod 'SDCycleScrollView'
+    
+    
+    # 友盟依赖库
+    pod 'UMCCommon'
+    # U-Share SDK UI模块（分享面板，建议添加）
+    pod 'UMCShare/UI'
+    # 集成微信(完整版14.4M)
+    pod 'UMCShare/Social/WeChat'
 
 
 end

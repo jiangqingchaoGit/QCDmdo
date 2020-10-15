@@ -1,33 +1,24 @@
 //
-//  QCLoginViewController.m
+//  QCBindingViewController.m
 //  QCDemo
 //
-//  Created by JQC on 2020/10/14.
+//  Created by JQC on 2020/10/15.
 //  Copyright © 2020 JQC. All rights reserved.
 //
 
-#import "QCLoginViewController.h"
-#import "QCCodeViewController.h"
-#import "QCAccountViewController.h"
-#import "QCPhoneLoginViewController.h"
 #import "QCBindingViewController.h"
-#import "QCDisableViewController.h"
-#import "QCTitlesViewController.h"
+#import "QCCodeViewController.h"
 
-@interface QCLoginViewController ()<UITextFieldDelegate>
+@interface QCBindingViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong) UIImageView * backImageView;
 @property (nonatomic, strong) UIButton * backButton;
 @property (nonatomic, strong) UITextField * phoneTextField;
 @property (nonatomic, strong) UIButton * clearButton;
 @property (nonatomic, strong) UIButton * loginButton;
-@property (nonatomic, strong) UIButton * phoneButton;
-@property (nonatomic, strong) UIButton * accountButton;
-@property (nonatomic, strong) UIButton * wechatButton;
-@property (nonatomic, strong) UIButton * agreementButton;
 
 @end
 
-@implementation QCLoginViewController
+@implementation QCBindingViewController
 
 -(void)viewWillAppear:(BOOL)animated {
     [self.navigationController.navigationBar setHidden:YES];
@@ -55,14 +46,14 @@
     [self.view addSubview:self.backButton];
     
     UILabel * loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(125), KSCALE_WIDTH(200), KSCALE_WIDTH(30))];
-    loginLabel.text = @"登录多多";
+    loginLabel.text = @"绑定手机号";
     loginLabel.font = K_24_BFONT;
     loginLabel.textColor = KTEXT_COLOR;
     loginLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:loginLabel];
     
     UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(160), KSCALE_WIDTH(300), KSCALE_WIDTH(18))];
-    tipLabel.text = @"如未注册账号，手机验证码即自动注册";
+    tipLabel.text = @"绑定后可同时使用此手机号登录";
     tipLabel.font = K_14_FONT;
     tipLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     tipLabel.textAlignment = NSTextAlignmentLeft;
@@ -89,7 +80,6 @@
     [self.phoneTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.phoneTextField];
 
-    
     self.clearButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(310), KSCALE_WIDTH(227),KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
     self.clearButton.hidden = YES;
 //    [self.clearButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
@@ -112,50 +102,9 @@
     [QCClassFunction filletImageView:self.loginButton withRadius:KSCALE_WIDTH(13)];
     [self.view addSubview:self.loginButton];
     
-    self.phoneButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(362), KSCALE_WIDTH(100), KSCALE_WIDTH(30))];
-    self.phoneButton.backgroundColor = KCLEAR_COLOR;
-    self.phoneButton.titleLabel.font = K_14_FONT;
-    self.phoneButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [self.phoneButton setTitle:@"本机号码登录" forState:UIControlStateNormal];
-    [self.phoneButton setTitleColor:[QCClassFunction stringTOColor:@"#BCBCBC"] forState:UIControlStateNormal];
-    [self.phoneButton addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.phoneButton];
 
-    self.accountButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(258), KSCALE_WIDTH(362), KSCALE_WIDTH(84), KSCALE_WIDTH(30))];
-    self.accountButton.backgroundColor = KCLEAR_COLOR;
-    self.accountButton.titleLabel.font = K_14_FONT;
-    self.accountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [self.accountButton setTitle:@"密码登录" forState:UIControlStateNormal];
-    [self.accountButton setTitleColor:[QCClassFunction stringTOColor:@"#BCBCBC"] forState:UIControlStateNormal];
-    [self.accountButton addTarget:self action:@selector(accountAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.accountButton];
     
-    
-    self.wechatButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(157.5), KSCALE_HEIGHT(540), KSCALE_WIDTH(60), KSCALE_WIDTH(60))];
-    [self.wechatButton setImage:KHeaderImage forState:UIControlStateNormal];
-    [QCClassFunction filletImageView:self.wechatButton withRadius:KSCALE_WIDTH(30)];
-    [self.wechatButton addTarget:self action:@selector(wechatAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.wechatButton];
-    
-    UILabel * weChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(0), KSCALE_HEIGHT(600), KSCALE_WIDTH(375), KSCALE_WIDTH(28))];
-    weChatLabel.text = @"微信登录";
-    weChatLabel.font = K_14_FONT;
-    weChatLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];;
-    weChatLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:weChatLabel];
-    
-    UILabel * agreementLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(0), KSCALE_HEIGHT(627), KSCALE_WIDTH(375), KSCALE_WIDTH(40))];
-    agreementLabel.text = @"登录即代表您同意《用户服务协议》及《隐私政策》";
-    agreementLabel.font = K_13_FONT;
-    agreementLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
-    agreementLabel.textAlignment = NSTextAlignmentCenter;
-    agreementLabel.attributedText = [QCClassFunction getColorWithString:agreementLabel.text andTargetString:@"《用户服务协议》及《隐私政策》" withColor:KTEXT_COLOR];
-    [self.view addSubview:agreementLabel];
-    
-    self.agreementButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(0), KSCALE_HEIGHT(627), KSCALE_WIDTH(375), KSCALE_WIDTH(40))];
-    self.agreementButton.backgroundColor = KCLEAR_COLOR;
-    [self.agreementButton addTarget:self action:@selector(agreementAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.agreementButton];
+   
     
 }
 
@@ -196,46 +145,8 @@
     [self.navigationController pushViewController:codeViewController animated:YES];
 }
 
-- (void)phoneAction:(UIButton *)sender {
-    [self.phoneTextField resignFirstResponder];
 
-    //  本机号码登录
-    
-    QCPhoneLoginViewController * phoneLoginViewController = [[QCPhoneLoginViewController alloc] init];
-    phoneLoginViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:phoneLoginViewController animated:YES];
 
-}
-- (void)accountAction:(UIButton *)sender {
-    [self.phoneTextField resignFirstResponder];
-
-    //  账号密码登录
-    QCAccountViewController * accountViewController = [[QCAccountViewController alloc] init];
-    accountViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:accountViewController animated:YES];
-}
-- (void)wechatAction:(UIButton *)sender {
-    [self.phoneTextField resignFirstResponder];
-    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
-            
-        
-        NSLog(@"%@",result);
-    }];
-    //  微信登录
-}
-
-- (void)agreementAction:(UIButton *)sender {
-    [self.phoneTextField resignFirstResponder];
-//
-//    QCBindingViewController * bindingViewController = [[QCBindingViewController alloc] init];
-//    bindingViewController.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:bindingViewController animated:YES];
-//    
-    QCTitlesViewController * bindingViewController = [[QCTitlesViewController alloc] init];
-    bindingViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:bindingViewController animated:YES];
-    //  登录协议
-}
 
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidChange:(UITextField *)sender {

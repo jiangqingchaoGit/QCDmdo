@@ -12,7 +12,6 @@
 		CC4E12E02536A96500337586 /* XXPageTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E12DC2536A96500337586 /* XXPageTabView.m */; };
 		CC4E12EA2536AB1800337586 /* QCMapInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E12E92536AB1800337586 /* QCMapInstance.m */; };
 		CC4E13042536C5FC00337586 /* QCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E13032536C5FC00337586 /* QCLoginViewController.m */; };
-		CC4E13232536D1D300337586 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E13222536D1CB00337586 /* libsqlite3.tbd */; };
 		CC4E13282536D1DF00337586 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E13272536D1DF00337586 /* CoreGraphics.framework */; };
 		CC4E132A2536D1F100337586 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E13292536D1F100337586 /* WebKit.framework */; };
 		CC4E132C2536D23E00337586 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E132B2536D23E00337586 /* SystemConfiguration.framework */; };
@@ -20,6 +19,13 @@
 		CC4E132F2536D24D00337586 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E13222536D1CB00337586 /* libsqlite3.tbd */; };
 		CC4E13352536D26A00337586 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E13342536D25F00337586 /* libz.tbd */; };
 		CC4E13392536D27500337586 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4E13332536D25500337586 /* libc++.tbd */; };
+		CC4E13602536E69400337586 /* QCHtmlUrlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E135F2536E69300337586 /* QCHtmlUrlViewController.m */; };
+		CC4E13C825381AC800337586 /* QCCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E13C725381AC800337586 /* QCCodeViewController.m */; };
+		CC4E13CF2538445400337586 /* QCAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E13CE2538445400337586 /* QCAccountViewController.m */; };
+		CC4E13D625384B3E00337586 /* QCPhoneLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E13D525384B3E00337586 /* QCPhoneLoginViewController.m */; };
+		CC4E13DD25384F2A00337586 /* QCBindingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E13DC25384F2A00337586 /* QCBindingViewController.m */; };
+		CC4E13E42538510A00337586 /* QCDisableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E13E32538510A00337586 /* QCDisableViewController.m */; };
+		CC4E13EB2538513F00337586 /* QCTitlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E13EA2538513F00337586 /* QCTitlesViewController.m */; };
 		CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60F92535508A00311269 /* AppDelegate.m */; };
 		CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60FC2535508A00311269 /* SceneDelegate.m */; };
 		CCBE61032535508A00311269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBE61012535508A00311269 /* Main.storyboard */; };
@@ -77,6 +83,21 @@
 		CC4E132D2536D24400337586 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		CC4E13332536D25500337586 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		CC4E13342536D25F00337586 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		CC4E135E2536E69300337586 /* QCHtmlUrlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCHtmlUrlViewController.h; sourceTree = "<group>"; };
+		CC4E135F2536E69300337586 /* QCHtmlUrlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCHtmlUrlViewController.m; sourceTree = "<group>"; };
+		CC4E136E2536ED2D00337586 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		CC4E13C625381AC800337586 /* QCCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCCodeViewController.h; sourceTree = "<group>"; };
+		CC4E13C725381AC800337586 /* QCCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCCodeViewController.m; sourceTree = "<group>"; };
+		CC4E13CD2538445400337586 /* QCAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCAccountViewController.h; sourceTree = "<group>"; };
+		CC4E13CE2538445400337586 /* QCAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCAccountViewController.m; sourceTree = "<group>"; };
+		CC4E13D425384B3E00337586 /* QCPhoneLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCPhoneLoginViewController.h; sourceTree = "<group>"; };
+		CC4E13D525384B3E00337586 /* QCPhoneLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCPhoneLoginViewController.m; sourceTree = "<group>"; };
+		CC4E13DB25384F2A00337586 /* QCBindingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCBindingViewController.h; sourceTree = "<group>"; };
+		CC4E13DC25384F2A00337586 /* QCBindingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCBindingViewController.m; sourceTree = "<group>"; };
+		CC4E13E22538510A00337586 /* QCDisableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCDisableViewController.h; sourceTree = "<group>"; };
+		CC4E13E32538510A00337586 /* QCDisableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCDisableViewController.m; sourceTree = "<group>"; };
+		CC4E13E92538513F00337586 /* QCTitlesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCTitlesViewController.h; sourceTree = "<group>"; };
+		CC4E13EA2538513F00337586 /* QCTitlesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCTitlesViewController.m; sourceTree = "<group>"; };
 		CCBE60F52535508A00311269 /* QCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBE60F82535508A00311269 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CCBE60F92535508A00311269 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -126,7 +147,6 @@
 				CC4E13352536D26A00337586 /* libz.tbd in Frameworks */,
 				CC4E132C2536D23E00337586 /* SystemConfiguration.framework in Frameworks */,
 				CC4E132F2536D24D00337586 /* libsqlite3.tbd in Frameworks */,
-				CC4E13232536D1D300337586 /* libsqlite3.tbd in Frameworks */,
 				CC4E132A2536D1F100337586 /* WebKit.framework in Frameworks */,
 				CC4E13392536D27500337586 /* libc++.tbd in Frameworks */,
 				CC4E132E2536D24400337586 /* CoreTelephony.framework in Frameworks */,
@@ -154,6 +174,7 @@
 		C2954123CB3DEC2E4B30F7B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CC4E136E2536ED2D00337586 /* JavaScriptCore.framework */,
 				CC4E13342536D25F00337586 /* libz.tbd */,
 				CC4E13332536D25500337586 /* libc++.tbd */,
 				CC4E132D2536D24400337586 /* CoreTelephony.framework */,
@@ -189,6 +210,12 @@
 		CC4E13002536C5C800337586 /* 登录 */ = {
 			isa = PBXGroup;
 			children = (
+				CC4E13E82538511900337586 /* QCTitlesViewController */,
+				CC4E13E1253850F200337586 /* QCDisableViewController */,
+				CC4E13DA25384EFD00337586 /* QCBindingViewController */,
+				CC4E13D325384B2900337586 /* QCPhoneLoginViewController */,
+				CC4E13CC2538444000337586 /* QCAccountViewController */,
+				CC4E13C525381AB200337586 /* QCCodeViewController */,
 				CC4E13012536C5D800337586 /* QCLoginViewController */,
 			);
 			path = "登录";
@@ -201,6 +228,60 @@
 				CC4E13032536C5FC00337586 /* QCLoginViewController.m */,
 			);
 			path = QCLoginViewController;
+			sourceTree = "<group>";
+		};
+		CC4E13C525381AB200337586 /* QCCodeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC4E13C625381AC800337586 /* QCCodeViewController.h */,
+				CC4E13C725381AC800337586 /* QCCodeViewController.m */,
+			);
+			path = QCCodeViewController;
+			sourceTree = "<group>";
+		};
+		CC4E13CC2538444000337586 /* QCAccountViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC4E13CD2538445400337586 /* QCAccountViewController.h */,
+				CC4E13CE2538445400337586 /* QCAccountViewController.m */,
+			);
+			path = QCAccountViewController;
+			sourceTree = "<group>";
+		};
+		CC4E13D325384B2900337586 /* QCPhoneLoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC4E13D425384B3E00337586 /* QCPhoneLoginViewController.h */,
+				CC4E13D525384B3E00337586 /* QCPhoneLoginViewController.m */,
+			);
+			path = QCPhoneLoginViewController;
+			sourceTree = "<group>";
+		};
+		CC4E13DA25384EFD00337586 /* QCBindingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC4E13DB25384F2A00337586 /* QCBindingViewController.h */,
+				CC4E13DC25384F2A00337586 /* QCBindingViewController.m */,
+			);
+			path = QCBindingViewController;
+			sourceTree = "<group>";
+		};
+		CC4E13E1253850F200337586 /* QCDisableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC4E13E22538510A00337586 /* QCDisableViewController.h */,
+				CC4E13E32538510A00337586 /* QCDisableViewController.m */,
+			);
+			path = QCDisableViewController;
+			sourceTree = "<group>";
+		};
+		CC4E13E82538511900337586 /* QCTitlesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC4E13E92538513F00337586 /* QCTitlesViewController.h */,
+				CC4E13EA2538513F00337586 /* QCTitlesViewController.m */,
+			);
+			path = QCTitlesViewController;
 			sourceTree = "<group>";
 		};
 		CCBE60EC2535508A00311269 = {
@@ -298,6 +379,8 @@
 		CCBE61352535515600311269 /* QCTools */ = {
 			isa = PBXGroup;
 			children = (
+				CC4E135E2536E69300337586 /* QCHtmlUrlViewController.h */,
+				CC4E135F2536E69300337586 /* QCHtmlUrlViewController.m */,
 				CCBE61362535515600311269 /* QCHeader.pch */,
 				CC4E12E72536AB1800337586 /* QCMapInstance */,
 				CCBE61372535515600311269 /* QCAFNetWorking */,
@@ -493,7 +576,7 @@
 		CCBE60ED2535508A00311269 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = JQC;
 				TargetAttributes = {
 					CCBE60F42535508A00311269 = {
@@ -606,6 +689,7 @@
 				CCBE610E2535508C00311269 /* main.m in Sources */,
 				CCBE61062535508A00311269 /* QCDemo.xcdatamodeld in Sources */,
 				CCD509AF25369D4E002CECEF /* QCHomeViewController.m in Sources */,
+				CC4E13D625384B3E00337586 /* QCPhoneLoginViewController.m in Sources */,
 				CCBE613D2535515600311269 /* QCTarBarController.m in Sources */,
 				CCBE613F2535515600311269 /* QCClassFunction.m in Sources */,
 				CCD509A425369C21002CECEF /* BaseNavigationController.m in Sources */,
@@ -613,14 +697,20 @@
 				CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */,
 				CCD509A525369C21002CECEF /* QCNavigationBar.m in Sources */,
 				CC4E12E02536A96500337586 /* XXPageTabView.m in Sources */,
+				CC4E13E42538510A00337586 /* QCDisableViewController.m in Sources */,
 				CC4E12DF2536A96500337586 /* XXPageTabItemLable.m in Sources */,
+				CC4E13C825381AC800337586 /* QCCodeViewController.m in Sources */,
 				CC4E12EA2536AB1800337586 /* QCMapInstance.m in Sources */,
 				CCD509D62536A1B3002CECEF /* QCPersonViewController.m in Sources */,
+				CC4E13602536E69400337586 /* QCHtmlUrlViewController.m in Sources */,
 				CCD509C72536A191002CECEF /* QCMessageViewController.m in Sources */,
 				CCBE613E2535515600311269 /* QCAFNetWorking.m in Sources */,
+				CC4E13CF2538445400337586 /* QCAccountViewController.m in Sources */,
 				CCD509BD2536A0DC002CECEF /* QCReleaseViewController.m in Sources */,
+				CC4E13DD25384F2A00337586 /* QCBindingViewController.m in Sources */,
 				CC4E13042536C5FC00337586 /* QCLoginViewController.m in Sources */,
 				CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */,
+				CC4E13EB2538513F00337586 /* QCTitlesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,6 +791,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -760,6 +851,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -801,7 +893,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chat1.xdd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chat.xdd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -821,7 +913,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chat1.xdd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chat.xdd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -81,15 +81,18 @@
     
     
 //    if ([kFetchNSUserDefaults(@"token") isEqualToString:@"0"] || kFetchNSUserDefaults(@"token") == nil) {
-//        if ( [viewController.tabBarItem.title isEqualToString:@"收入"] || [viewController.tabBarItem.title isEqualToString:@"我的"]) {
-//            QCLoginViewController * loginViewController = [QCLoginViewController new];
-//            BaseNavigationController * loginNav = [[BaseNavigationController alloc] initWithRootViewController:loginViewController];
 //
-//            [self presentViewController:meNav animated:YES completion:nil];
-//            return NO;
-//            
-//        }
 //    }
+    
+    if ( [viewController.tabBarItem.title isEqualToString:@"收入"] || [viewController.tabBarItem.title isEqualToString:@"我"]) {
+        QCLoginViewController * loginViewController = [QCLoginViewController new];
+        BaseNavigationController * loginNav = [[BaseNavigationController alloc] initWithRootViewController:loginViewController];
+        loginNav.modalPresentationStyle=UIModalPresentationCustom;
+        [self presentViewController:loginNav animated:YES completion:nil];
+        return NO;
+        
+    }
+    
     return  YES;
 }
 

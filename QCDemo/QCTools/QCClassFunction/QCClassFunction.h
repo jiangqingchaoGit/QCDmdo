@@ -74,8 +74,7 @@
 /*
  *  倒圆角
  */
-+(void)filletImageView:(UIImageView *)imageView;
-
++(void)filletImageView:(id)view withRadius:(CGFloat)radius;
 
 /*
  *  设置状态栏背景颜色

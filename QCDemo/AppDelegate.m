@@ -12,7 +12,7 @@
 #import <UMCommon/UMCommon.h>
 #import <WXApi.h>
 
-@interface AppDelegate ()
+@interface AppDelegate ()<WXApiDelegate>
 
 @end
 
@@ -54,6 +54,21 @@
     return result;
     
 }
+
+
+ 
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
+    
+    
+    if (![[UMSocialManager defaultManager] handleUniversalLink:userActivity options:nil]) {
+          // 其他SDK的回调
+      
+         return [WXApi handleOpenUniversalLink:userActivity delegate:self];
+      }
+      return YES;
+}
+
+
 
 #pragma mark - UISceneSession lifecycle
 
