@@ -182,6 +182,7 @@
 #define K_28_BFONT [UIFont fontWithName:@"Helvetica-Bold" size:K_X_WIDTH(KSCALE_WIDTH(28))]
 
 #define K_30_BFONT [UIFont fontWithName:@"Helvetica-Bold" size:K_X_WIDTH(KSCALE_WIDTH(30))]
+#define K_40_BFONT [UIFont fontWithName:@"Helvetica-Bold" size:K_X_WIDTH(KSCALE_WIDTH(40))]
 
 
 

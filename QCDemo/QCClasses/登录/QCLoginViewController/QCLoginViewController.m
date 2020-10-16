@@ -30,7 +30,7 @@
 @implementation QCLoginViewController
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self.navigationController.navigationBar setHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -45,12 +45,12 @@
 #pragma mark - initUI
 - (void)initUI {
     
-    self.backImageView = [[UIImageView alloc] initWithFrame:KSCREEN_BOUNDS];
-    self.backImageView.image = KFillImage;
+    self.backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(10), 0, KSCALE_WIDTH(265), KSCALE_WIDTH(150))];
+    self.backImageView.image = [UIImage imageNamed:@"底图"];
     [self.view addSubview:self.backImageView];
     
-    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(10), KSCALE_WIDTH(30),KSCALE_WIDTH(10), KSCALE_WIDTH(10))];
-    [self.backButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KNavHight - 44, 56, 44)];
+    [self.backButton setImage:[UIImage imageNamed:@"back_s"] forState:UIControlStateNormal];
     [self.backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.backButton];
     
@@ -132,7 +132,7 @@
     
     
     self.wechatButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(157.5), KSCALE_HEIGHT(540), KSCALE_WIDTH(60), KSCALE_WIDTH(60))];
-    [self.wechatButton setImage:KHeaderImage forState:UIControlStateNormal];
+    [self.wechatButton setImage:[UIImage imageNamed:@"weixin"] forState:UIControlStateNormal];
     [QCClassFunction filletImageView:self.wechatButton withRadius:KSCALE_WIDTH(30)];
     [self.wechatButton addTarget:self action:@selector(wechatAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.wechatButton];

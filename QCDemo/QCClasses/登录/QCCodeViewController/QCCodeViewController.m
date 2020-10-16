@@ -39,12 +39,12 @@
     
     
     self.view.backgroundColor = KBACK_COLOR;
-    self.backImageView = [[UIImageView alloc] initWithFrame:KSCREEN_BOUNDS];
-    self.backImageView.image = KFillImage;
+        self.backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(10), 0, KSCALE_WIDTH(265), KSCALE_WIDTH(150))];
+    self.backImageView.image = [UIImage imageNamed:@"底图"];
     [self.view addSubview:self.backImageView];
     
     self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(10), KSCALE_WIDTH(10),KSCALE_WIDTH(10), KSCALE_WIDTH(10))];
-    [self.backButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [self.backButton setImage:[UIImage imageNamed:@"back_s"] forState:UIControlStateNormal];
     [self.backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.backButton];
     

@@ -26,6 +26,11 @@
 		CC4E13DD25384F2A00337586 /* QCBindingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E13DC25384F2A00337586 /* QCBindingViewController.m */; };
 		CC4E13E42538510A00337586 /* QCDisableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E13E32538510A00337586 /* QCDisableViewController.m */; };
 		CC4E13EB2538513F00337586 /* QCTitlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E13EA2538513F00337586 /* QCTitlesViewController.m */; };
+		CC82621D25394013001C3AD9 /* QCPersonHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82621C25394013001C3AD9 /* QCPersonHeaderView.m */; };
+		CC82622325397F49001C3AD9 /* QCPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82622225397F49001C3AD9 /* QCPersonCell.m */; };
+		CC82622A25398402001C3AD9 /* QCWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82622925398402001C3AD9 /* QCWalletViewController.m */; };
+		CC8262312539926C001C3AD9 /* QCPaymentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262302539926C001C3AD9 /* QCPaymentsViewController.m */; };
+		CC82623A2539A190001C3AD9 /* QCPaymentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262392539A190001C3AD9 /* QCPaymentsCell.m */; };
 		CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60F92535508A00311269 /* AppDelegate.m */; };
 		CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60FC2535508A00311269 /* SceneDelegate.m */; };
 		CCBE61032535508A00311269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBE61012535508A00311269 /* Main.storyboard */; };
@@ -98,6 +103,16 @@
 		CC4E13E32538510A00337586 /* QCDisableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCDisableViewController.m; sourceTree = "<group>"; };
 		CC4E13E92538513F00337586 /* QCTitlesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCTitlesViewController.h; sourceTree = "<group>"; };
 		CC4E13EA2538513F00337586 /* QCTitlesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCTitlesViewController.m; sourceTree = "<group>"; };
+		CC82621B25394013001C3AD9 /* QCPersonHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCPersonHeaderView.h; sourceTree = "<group>"; };
+		CC82621C25394013001C3AD9 /* QCPersonHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCPersonHeaderView.m; sourceTree = "<group>"; };
+		CC82622125397F49001C3AD9 /* QCPersonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCPersonCell.h; sourceTree = "<group>"; };
+		CC82622225397F49001C3AD9 /* QCPersonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCPersonCell.m; sourceTree = "<group>"; };
+		CC82622825398402001C3AD9 /* QCWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCWalletViewController.h; sourceTree = "<group>"; };
+		CC82622925398402001C3AD9 /* QCWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCWalletViewController.m; sourceTree = "<group>"; };
+		CC82622F2539926C001C3AD9 /* QCPaymentsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCPaymentsViewController.h; sourceTree = "<group>"; };
+		CC8262302539926C001C3AD9 /* QCPaymentsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCPaymentsViewController.m; sourceTree = "<group>"; };
+		CC8262382539A190001C3AD9 /* QCPaymentsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCPaymentsCell.h; sourceTree = "<group>"; };
+		CC8262392539A190001C3AD9 /* QCPaymentsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCPaymentsCell.m; sourceTree = "<group>"; };
 		CCBE60F52535508A00311269 /* QCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBE60F82535508A00311269 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CCBE60F92535508A00311269 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -284,6 +299,26 @@
 			path = QCTitlesViewController;
 			sourceTree = "<group>";
 		};
+		CC826227253983BD001C3AD9 /* QCWalletViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC82622825398402001C3AD9 /* QCWalletViewController.h */,
+				CC82622925398402001C3AD9 /* QCWalletViewController.m */,
+			);
+			path = QCWalletViewController;
+			sourceTree = "<group>";
+		};
+		CC82622E25399250001C3AD9 /* QCPaymentsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC82622F2539926C001C3AD9 /* QCPaymentsViewController.h */,
+				CC8262302539926C001C3AD9 /* QCPaymentsViewController.m */,
+				CC8262382539A190001C3AD9 /* QCPaymentsCell.h */,
+				CC8262392539A190001C3AD9 /* QCPaymentsCell.m */,
+			);
+			path = QCPaymentsViewController;
+			sourceTree = "<group>";
+		};
 		CCBE60EC2535508A00311269 = {
 			isa = PBXGroup;
 			children = (
@@ -430,6 +465,8 @@
 		CCD509B62536A096002CECEF /* 个人 */ = {
 			isa = PBXGroup;
 			children = (
+				CC82622E25399250001C3AD9 /* QCPaymentsViewController */,
+				CC826227253983BD001C3AD9 /* QCWalletViewController */,
 				CCD509C42536A15C002CECEF /* QCPersonViewController */,
 			);
 			path = "个人";
@@ -499,6 +536,10 @@
 			children = (
 				CCD509D42536A1B3002CECEF /* QCPersonViewController.h */,
 				CCD509D52536A1B3002CECEF /* QCPersonViewController.m */,
+				CC82621B25394013001C3AD9 /* QCPersonHeaderView.h */,
+				CC82621C25394013001C3AD9 /* QCPersonHeaderView.m */,
+				CC82622125397F49001C3AD9 /* QCPersonCell.h */,
+				CC82622225397F49001C3AD9 /* QCPersonCell.m */,
 			);
 			path = QCPersonViewController;
 			sourceTree = "<group>";
@@ -688,6 +729,7 @@
 			files = (
 				CCBE610E2535508C00311269 /* main.m in Sources */,
 				CCBE61062535508A00311269 /* QCDemo.xcdatamodeld in Sources */,
+				CC82621D25394013001C3AD9 /* QCPersonHeaderView.m in Sources */,
 				CCD509AF25369D4E002CECEF /* QCHomeViewController.m in Sources */,
 				CC4E13D625384B3E00337586 /* QCPhoneLoginViewController.m in Sources */,
 				CCBE613D2535515600311269 /* QCTarBarController.m in Sources */,
@@ -704,13 +746,17 @@
 				CCD509D62536A1B3002CECEF /* QCPersonViewController.m in Sources */,
 				CC4E13602536E69400337586 /* QCHtmlUrlViewController.m in Sources */,
 				CCD509C72536A191002CECEF /* QCMessageViewController.m in Sources */,
+				CC82622A25398402001C3AD9 /* QCWalletViewController.m in Sources */,
 				CCBE613E2535515600311269 /* QCAFNetWorking.m in Sources */,
 				CC4E13CF2538445400337586 /* QCAccountViewController.m in Sources */,
+				CC8262312539926C001C3AD9 /* QCPaymentsViewController.m in Sources */,
 				CCD509BD2536A0DC002CECEF /* QCReleaseViewController.m in Sources */,
 				CC4E13DD25384F2A00337586 /* QCBindingViewController.m in Sources */,
 				CC4E13042536C5FC00337586 /* QCLoginViewController.m in Sources */,
+				CC82623A2539A190001C3AD9 /* QCPaymentsCell.m in Sources */,
 				CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */,
 				CC4E13EB2538513F00337586 /* QCTitlesViewController.m in Sources */,
+				CC82622325397F49001C3AD9 /* QCPersonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

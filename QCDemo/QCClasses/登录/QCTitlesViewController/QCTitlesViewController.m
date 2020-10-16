@@ -28,7 +28,7 @@
 @implementation QCTitlesViewController
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self.navigationController.navigationBar setHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -41,12 +41,12 @@
 #pragma mark - initUI
 - (void)initUI {
     
-    self.backImageView = [[UIImageView alloc] initWithFrame:KSCREEN_BOUNDS];
-    self.backImageView.image = KFillImage;
+    self.backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(10), 0, KSCALE_WIDTH(265), KSCALE_WIDTH(150))];
+    self.backImageView.image = [UIImage imageNamed:@"底图"];
     [self.view addSubview:self.backImageView];
-    
-    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(10), KSCALE_WIDTH(30),KSCALE_WIDTH(10), KSCALE_WIDTH(10))];
-    [self.backButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        
+    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KNavHight - 44, 56, 44)];
+    [self.backButton setImage:[UIImage imageNamed:@"back_s"] forState:UIControlStateNormal];
     [self.backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.backButton];
     
@@ -91,10 +91,10 @@
     limitLabels.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];;
     [self.view addSubview:limitLabels];
     
-    self.limitLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(120), KSCALE_WIDTH(330), KSCALE_WIDTH(220), KSCALE_WIDTH(22))];
+    self.limitLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(330), KSCALE_WIDTH(230), KSCALE_WIDTH(22))];
     self.limitLabel.text = @"永久";
     self.limitLabel.font = K_14_FONT;
-    self.limitLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];;
+    self.limitLabel.textColor = KTEXT_COLOR;
     [self.view addSubview:self.limitLabel];
     
     UILabel * contentLabels = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(367), KSCALE_WIDTH(80), KSCALE_WIDTH(22))];
@@ -103,10 +103,10 @@
     contentLabels.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];;
     [self.view addSubview:contentLabels];
     
-    self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(120), KSCALE_WIDTH(367), KSCALE_WIDTH(220), KSCALE_WIDTH(22))];
+    self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(367), KSCALE_WIDTH(230), KSCALE_WIDTH(22))];
     self.contentLabel.text = @"涉嫌上传敏感图片！";
     self.contentLabel.font = K_14_FONT;
-    self.contentLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];;
+    self.contentLabel.textColor = KTEXT_COLOR;
     [self.view addSubview:self.contentLabel];
     
     UIView * lineViews = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(405), KSCALE_WIDTH(309), KSCALE_WIDTH(1))];

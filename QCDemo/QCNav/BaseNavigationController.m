@@ -65,7 +65,7 @@
         
         // 设置返回按钮
         self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.backButton setImage:[UIImage imageNamed:@"blackBack"] forState:UIControlStateNormal];
+        [self.backButton setImage:[UIImage imageNamed:@"back_s"] forState:UIControlStateNormal];
         [self.backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
         self.backButton.frame =CGRectMake(0, 0, 20, 20);
 
