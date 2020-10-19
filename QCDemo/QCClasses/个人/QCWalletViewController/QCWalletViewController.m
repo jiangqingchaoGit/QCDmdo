@@ -9,6 +9,15 @@
 #import "QCWalletViewController.h"
 //  收支明细
 #import "QCPaymentsViewController.h"
+//  红包明细
+#import "QCEnvelopeViewController.h"
+//  我的银行卡
+#import "QCBankViewController.h"
+//  提现人脸认证
+#import "QCCertificationViewController.h"
+//  实名认证
+#import "QCRealnameViewController.h"
+#import "QCRealnamedViewController.h"
 @interface QCWalletViewController ()
 @property (nonatomic, strong) UIButton * backButton;
 @property (nonatomic, strong) UIButton * eyeButton;
@@ -57,7 +66,11 @@
             
             break;
         case 2:
-            
+        {
+            QCCertificationViewController * certificationViewController = [[QCCertificationViewController alloc] init];
+            certificationViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:certificationViewController animated:YES];
+        }
             break;
             
         default:
@@ -75,16 +88,36 @@
         }
             break;
         case 2:
-            
+        {
+            QCEnvelopeViewController * envelopeViewController = [[QCEnvelopeViewController alloc] init];
+            envelopeViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:envelopeViewController animated:YES];
+        }
             break;
         case 3:
+   
+        {
+            QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
+            realnameViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:realnameViewController animated:YES];
             
+//            QCRealnamedViewController * realnamedViewController = [[QCRealnamedViewController alloc] init];
+//            realnamedViewController.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:realnamedViewController animated:YES];
+        }
             break;
         case 4:
+        {
+            QCBankViewController * bankViewController = [[QCBankViewController alloc] init];
+            bankViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:bankViewController animated:YES];
+        }
             
             break;
         case 5:
-            
+        {
+
+        }
             break;
             
         default:

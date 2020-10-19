@@ -226,6 +226,7 @@
 
 - (void)agreementAction:(UIButton *)sender {
     [self.phoneTextField resignFirstResponder];
+    
 //
 //    QCBindingViewController * bindingViewController = [[QCBindingViewController alloc] init];
 //    bindingViewController.hidesBottomBarWhenPushed = YES;

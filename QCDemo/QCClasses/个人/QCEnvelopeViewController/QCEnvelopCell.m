@@ -1,14 +1,14 @@
 //
-//  QCPaymentsCell.m
+//  QCEnvelopCell.m
 //  QCDemo
 //
-//  Created by JQC on 2020/10/16.
+//  Created by JQC on 2020/10/19.
 //  Copyright © 2020 JQC. All rights reserved.
 //
 
-#import "QCPaymentsCell.h"
+#import "QCEnvelopCell.h"
 
-@implementation QCPaymentsCell
+@implementation QCEnvelopCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -26,7 +26,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
 
         self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(10), KSCALE_WIDTH(200), KSCALE_WIDTH(24))];
-        self.contentLabel.text = @"【提现】到  ***3621";
+        self.contentLabel.text = @"【红包】来自  Dancing";
         self.contentLabel.font = K_16_BFONT;
         self.contentLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];
         [self.contentView addSubview:self.contentLabel];
@@ -56,5 +56,4 @@
     }
     return self;;
 }
-
 @end

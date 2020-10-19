@@ -39,7 +39,7 @@
 #pragma mark - initUI
 - (void)initUI {
     
-        self.backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(10), 0, KSCALE_WIDTH(265), KSCALE_WIDTH(150))];
+    self.backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(10), 0, KSCALE_WIDTH(265), KSCALE_WIDTH(150))];
     self.backImageView.image = [UIImage imageNamed:@"底图"];
     [self.view addSubview:self.backImageView];
     
@@ -78,10 +78,10 @@
     self.phoneTextField.delegate = self;
     [self.phoneTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.phoneTextField];
-
+    
     self.clearButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(310), KSCALE_WIDTH(227),KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
     self.clearButton.hidden = YES;
-//    [self.clearButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    //    [self.clearButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     [self.clearButton setImage:KHeaderImage forState:UIControlStateNormal];
     [self.clearButton addTarget:self action:@selector(clearAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.clearButton];
@@ -107,12 +107,12 @@
     self.passwordTextField.delegate = self;
     [self.passwordTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.passwordTextField];
-
+    
     self.eyeButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(310), KSCALE_WIDTH(296),KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
-//    [self.eyeButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    //    [self.eyeButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     [self.eyeButton setImage:KHeaderImage forState:UIControlStateNormal];
     [self.eyeButton setImage:KHeaderImage forState:UIControlStateSelected];
-
+    
     [self.eyeButton addTarget:self action:@selector(eyeAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.eyeButton];
     
@@ -121,7 +121,7 @@
     [self.view addSubview:passwordLineView];
     
     
-
+    
     
     self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(365), KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
     self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
@@ -134,7 +134,7 @@
     [self.loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
     [QCClassFunction filletImageView:self.loginButton withRadius:KSCALE_WIDTH(13)];
     [self.view addSubview:self.loginButton];
-
+    
     self.forgetButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(258), KSCALE_WIDTH(432), KSCALE_WIDTH(84), KSCALE_WIDTH(30))];
     self.forgetButton.backgroundColor = KCLEAR_COLOR;
     self.forgetButton.titleLabel.font = K_14_FONT;
@@ -166,7 +166,7 @@
 - (void)resignAction {
     [self.phoneTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
-
+    
 }
 
 - (void)backAction:(UIButton *)sender {
@@ -184,18 +184,18 @@
     self.phoneTextField.text = @"";
     [self.phoneTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
-
+    
 }
 
 - (void)eyeAction:(UIButton *)sender {
     if (sender.selected) {
         sender.selected = NO;
         self.passwordTextField.secureTextEntry = YES;
-
+        
     }else{
         sender.selected = YES;
         self.passwordTextField.secureTextEntry = NO;
-
+        
     }
 }
 - (void)loginAction:(UIButton *)sender {
@@ -206,7 +206,7 @@
         [QCClassFunction showMessage:@"请输入正确的手机号码" toView:self.view];
         return;
     }
-
+    
 }
 
 
@@ -219,7 +219,7 @@
 - (void)agreementAction:(UIButton *)sender {
     [self.phoneTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
-
+    
     //  登录协议
 }
 
@@ -230,19 +230,19 @@
         self.loginButton.selected = YES;
         self.loginButton.userInteractionEnabled = YES;
         self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
-
+        
     }else{
         self.loginButton.selected = NO;
         self.loginButton.userInteractionEnabled = NO;
         self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
-
+        
     }
-
+    
 }
 
 
 - ( BOOL )textField:( UITextField  *)textField shouldChangeCharactersInRange:(NSRange )range replacementString:( NSString  *)string {
-
+    
     self.clearButton.hidden = NO;
     
     if (textField == self.phoneTextField) {
@@ -250,8 +250,8 @@
             return NO;
         }
     }
-
-
+    
+    
     return YES;
 }
 

@@ -31,6 +31,18 @@
 		CC82622A25398402001C3AD9 /* QCWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82622925398402001C3AD9 /* QCWalletViewController.m */; };
 		CC8262312539926C001C3AD9 /* QCPaymentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262302539926C001C3AD9 /* QCPaymentsViewController.m */; };
 		CC82623A2539A190001C3AD9 /* QCPaymentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262392539A190001C3AD9 /* QCPaymentsCell.m */; };
+		CC826241253D2254001C3AD9 /* QCPaymentsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826240253D2254001C3AD9 /* QCPaymentsDetailsViewController.m */; };
+		CC82624B253D2E88001C3AD9 /* QCEnvelopeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82624A253D2E88001C3AD9 /* QCEnvelopeViewController.m */; };
+		CC826254253D348F001C3AD9 /* QCEnvelopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826253253D348F001C3AD9 /* QCEnvelopCell.m */; };
+		CC82625B253D36E7001C3AD9 /* QCBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82625A253D36E7001C3AD9 /* QCBankViewController.m */; };
+		CC826264253D3856001C3AD9 /* QCBankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826263253D3856001C3AD9 /* QCBankCell.m */; };
+		CC82626B253D4119001C3AD9 /* QCAddBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82626A253D4119001C3AD9 /* QCAddBankViewController.m */; };
+		CC826275253D68EA001C3AD9 /* QCCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826274253D68E9001C3AD9 /* QCCertificationViewController.m */; };
+		CC82627C253D71B8001C3AD9 /* QCSetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82627B253D71B8001C3AD9 /* QCSetPasswordViewController.m */; };
+		CC826283253D7A67001C3AD9 /* QCCertificationPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826282253D7A66001C3AD9 /* QCCertificationPasswordViewController.m */; };
+		CC82628D253D82DA001C3AD9 /* QCOpenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82628C253D82DA001C3AD9 /* QCOpenViewController.m */; };
+		CC826297253D89A6001C3AD9 /* QCRealnameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826296253D89A6001C3AD9 /* QCRealnameViewController.m */; };
+		CC82629E253D8C4A001C3AD9 /* QCRealnamedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82629D253D8C4A001C3AD9 /* QCRealnamedViewController.m */; };
 		CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60F92535508A00311269 /* AppDelegate.m */; };
 		CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60FC2535508A00311269 /* SceneDelegate.m */; };
 		CCBE61032535508A00311269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBE61012535508A00311269 /* Main.storyboard */; };
@@ -113,6 +125,30 @@
 		CC8262302539926C001C3AD9 /* QCPaymentsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCPaymentsViewController.m; sourceTree = "<group>"; };
 		CC8262382539A190001C3AD9 /* QCPaymentsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCPaymentsCell.h; sourceTree = "<group>"; };
 		CC8262392539A190001C3AD9 /* QCPaymentsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCPaymentsCell.m; sourceTree = "<group>"; };
+		CC82623F253D2254001C3AD9 /* QCPaymentsDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QCPaymentsDetailsViewController.h; path = QCDemo/QCClasses/QCPaymentsDetailsViewController.h; sourceTree = SOURCE_ROOT; };
+		CC826240253D2254001C3AD9 /* QCPaymentsDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QCPaymentsDetailsViewController.m; path = QCDemo/QCClasses/QCPaymentsDetailsViewController.m; sourceTree = SOURCE_ROOT; };
+		CC826249253D2E88001C3AD9 /* QCEnvelopeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCEnvelopeViewController.h; sourceTree = "<group>"; };
+		CC82624A253D2E88001C3AD9 /* QCEnvelopeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCEnvelopeViewController.m; sourceTree = "<group>"; };
+		CC826252253D348F001C3AD9 /* QCEnvelopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCEnvelopCell.h; sourceTree = "<group>"; };
+		CC826253253D348F001C3AD9 /* QCEnvelopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCEnvelopCell.m; sourceTree = "<group>"; };
+		CC826259253D36E7001C3AD9 /* QCBankViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCBankViewController.h; sourceTree = "<group>"; };
+		CC82625A253D36E7001C3AD9 /* QCBankViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCBankViewController.m; sourceTree = "<group>"; };
+		CC826262253D3856001C3AD9 /* QCBankCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCBankCell.h; sourceTree = "<group>"; };
+		CC826263253D3856001C3AD9 /* QCBankCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCBankCell.m; sourceTree = "<group>"; };
+		CC826269253D4119001C3AD9 /* QCAddBankViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCAddBankViewController.h; sourceTree = "<group>"; };
+		CC82626A253D4119001C3AD9 /* QCAddBankViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCAddBankViewController.m; sourceTree = "<group>"; };
+		CC826273253D68E9001C3AD9 /* QCCertificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCCertificationViewController.h; sourceTree = "<group>"; };
+		CC826274253D68E9001C3AD9 /* QCCertificationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCCertificationViewController.m; sourceTree = "<group>"; };
+		CC82627A253D71B8001C3AD9 /* QCSetPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCSetPasswordViewController.h; sourceTree = "<group>"; };
+		CC82627B253D71B8001C3AD9 /* QCSetPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCSetPasswordViewController.m; sourceTree = "<group>"; };
+		CC826281253D7A66001C3AD9 /* QCCertificationPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCCertificationPasswordViewController.h; sourceTree = "<group>"; };
+		CC826282253D7A66001C3AD9 /* QCCertificationPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCCertificationPasswordViewController.m; sourceTree = "<group>"; };
+		CC82628B253D82DA001C3AD9 /* QCOpenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCOpenViewController.h; sourceTree = "<group>"; };
+		CC82628C253D82DA001C3AD9 /* QCOpenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCOpenViewController.m; sourceTree = "<group>"; };
+		CC826295253D89A6001C3AD9 /* QCRealnameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCRealnameViewController.h; sourceTree = "<group>"; };
+		CC826296253D89A6001C3AD9 /* QCRealnameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCRealnameViewController.m; sourceTree = "<group>"; };
+		CC82629C253D8C4A001C3AD9 /* QCRealnamedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCRealnamedViewController.h; sourceTree = "<group>"; };
+		CC82629D253D8C4A001C3AD9 /* QCRealnamedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCRealnamedViewController.m; sourceTree = "<group>"; };
 		CCBE60F52535508A00311269 /* QCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBE60F82535508A00311269 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CCBE60F92535508A00311269 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -319,6 +355,93 @@
 			path = QCPaymentsViewController;
 			sourceTree = "<group>";
 		};
+		CC82623E253D2236001C3AD9 /* QCPaymentsDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC82623F253D2254001C3AD9 /* QCPaymentsDetailsViewController.h */,
+				CC826240253D2254001C3AD9 /* QCPaymentsDetailsViewController.m */,
+			);
+			path = QCPaymentsDetailsViewController;
+			sourceTree = "<group>";
+		};
+		CC826248253D2E69001C3AD9 /* QCEnvelopeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC826249253D2E88001C3AD9 /* QCEnvelopeViewController.h */,
+				CC82624A253D2E88001C3AD9 /* QCEnvelopeViewController.m */,
+				CC826252253D348F001C3AD9 /* QCEnvelopCell.h */,
+				CC826253253D348F001C3AD9 /* QCEnvelopCell.m */,
+			);
+			path = QCEnvelopeViewController;
+			sourceTree = "<group>";
+		};
+		CC826258253D36CC001C3AD9 /* QCBankViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC826259253D36E7001C3AD9 /* QCBankViewController.h */,
+				CC82625A253D36E7001C3AD9 /* QCBankViewController.m */,
+				CC826262253D3856001C3AD9 /* QCBankCell.h */,
+				CC826263253D3856001C3AD9 /* QCBankCell.m */,
+			);
+			path = QCBankViewController;
+			sourceTree = "<group>";
+		};
+		CC826268253D40FC001C3AD9 /* QCAddBankViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC826269253D4119001C3AD9 /* QCAddBankViewController.h */,
+				CC82626A253D4119001C3AD9 /* QCAddBankViewController.m */,
+			);
+			path = QCAddBankViewController;
+			sourceTree = "<group>";
+		};
+		CC826272253D68C1001C3AD9 /* QCCertificationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC826273253D68E9001C3AD9 /* QCCertificationViewController.h */,
+				CC826274253D68E9001C3AD9 /* QCCertificationViewController.m */,
+			);
+			path = QCCertificationViewController;
+			sourceTree = "<group>";
+		};
+		CC826279253D718A001C3AD9 /* QCSetPasswordViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC82627A253D71B8001C3AD9 /* QCSetPasswordViewController.h */,
+				CC82627B253D71B8001C3AD9 /* QCSetPasswordViewController.m */,
+			);
+			path = QCSetPasswordViewController;
+			sourceTree = "<group>";
+		};
+		CC826280253D7A54001C3AD9 /* QCCertificationPasswordViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC826281253D7A66001C3AD9 /* QCCertificationPasswordViewController.h */,
+				CC826282253D7A66001C3AD9 /* QCCertificationPasswordViewController.m */,
+			);
+			path = QCCertificationPasswordViewController;
+			sourceTree = "<group>";
+		};
+		CC82628A253D82BA001C3AD9 /* QCOpenViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC82628B253D82DA001C3AD9 /* QCOpenViewController.h */,
+				CC82628C253D82DA001C3AD9 /* QCOpenViewController.m */,
+			);
+			path = QCOpenViewController;
+			sourceTree = "<group>";
+		};
+		CC826294253D8987001C3AD9 /* QCRealnameViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC826295253D89A6001C3AD9 /* QCRealnameViewController.h */,
+				CC826296253D89A6001C3AD9 /* QCRealnameViewController.m */,
+				CC82629C253D8C4A001C3AD9 /* QCRealnamedViewController.h */,
+				CC82629D253D8C4A001C3AD9 /* QCRealnamedViewController.m */,
+			);
+			path = QCRealnameViewController;
+			sourceTree = "<group>";
+		};
 		CCBE60EC2535508A00311269 = {
 			isa = PBXGroup;
 			children = (
@@ -465,6 +588,15 @@
 		CCD509B62536A096002CECEF /* 个人 */ = {
 			isa = PBXGroup;
 			children = (
+				CC826294253D8987001C3AD9 /* QCRealnameViewController */,
+				CC82628A253D82BA001C3AD9 /* QCOpenViewController */,
+				CC826280253D7A54001C3AD9 /* QCCertificationPasswordViewController */,
+				CC826279253D718A001C3AD9 /* QCSetPasswordViewController */,
+				CC826272253D68C1001C3AD9 /* QCCertificationViewController */,
+				CC826268253D40FC001C3AD9 /* QCAddBankViewController */,
+				CC826258253D36CC001C3AD9 /* QCBankViewController */,
+				CC826248253D2E69001C3AD9 /* QCEnvelopeViewController */,
+				CC82623E253D2236001C3AD9 /* QCPaymentsDetailsViewController */,
 				CC82622E25399250001C3AD9 /* QCPaymentsViewController */,
 				CC826227253983BD001C3AD9 /* QCWalletViewController */,
 				CCD509C42536A15C002CECEF /* QCPersonViewController */,
@@ -727,32 +859,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC82629E253D8C4A001C3AD9 /* QCRealnamedViewController.m in Sources */,
 				CCBE610E2535508C00311269 /* main.m in Sources */,
 				CCBE61062535508A00311269 /* QCDemo.xcdatamodeld in Sources */,
+				CC82627C253D71B8001C3AD9 /* QCSetPasswordViewController.m in Sources */,
 				CC82621D25394013001C3AD9 /* QCPersonHeaderView.m in Sources */,
 				CCD509AF25369D4E002CECEF /* QCHomeViewController.m in Sources */,
+				CC826283253D7A67001C3AD9 /* QCCertificationPasswordViewController.m in Sources */,
 				CC4E13D625384B3E00337586 /* QCPhoneLoginViewController.m in Sources */,
 				CCBE613D2535515600311269 /* QCTarBarController.m in Sources */,
+				CC82624B253D2E88001C3AD9 /* QCEnvelopeViewController.m in Sources */,
 				CCBE613F2535515600311269 /* QCClassFunction.m in Sources */,
+				CC82625B253D36E7001C3AD9 /* QCBankViewController.m in Sources */,
 				CCD509A425369C21002CECEF /* BaseNavigationController.m in Sources */,
 				CCD509D02536A19E002CECEF /* QCBookViewController.m in Sources */,
 				CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */,
 				CCD509A525369C21002CECEF /* QCNavigationBar.m in Sources */,
 				CC4E12E02536A96500337586 /* XXPageTabView.m in Sources */,
 				CC4E13E42538510A00337586 /* QCDisableViewController.m in Sources */,
+				CC826275253D68EA001C3AD9 /* QCCertificationViewController.m in Sources */,
 				CC4E12DF2536A96500337586 /* XXPageTabItemLable.m in Sources */,
+				CC826241253D2254001C3AD9 /* QCPaymentsDetailsViewController.m in Sources */,
 				CC4E13C825381AC800337586 /* QCCodeViewController.m in Sources */,
 				CC4E12EA2536AB1800337586 /* QCMapInstance.m in Sources */,
 				CCD509D62536A1B3002CECEF /* QCPersonViewController.m in Sources */,
+				CC82626B253D4119001C3AD9 /* QCAddBankViewController.m in Sources */,
+				CC826254253D348F001C3AD9 /* QCEnvelopCell.m in Sources */,
 				CC4E13602536E69400337586 /* QCHtmlUrlViewController.m in Sources */,
 				CCD509C72536A191002CECEF /* QCMessageViewController.m in Sources */,
 				CC82622A25398402001C3AD9 /* QCWalletViewController.m in Sources */,
 				CCBE613E2535515600311269 /* QCAFNetWorking.m in Sources */,
+				CC826264253D3856001C3AD9 /* QCBankCell.m in Sources */,
+				CC82628D253D82DA001C3AD9 /* QCOpenViewController.m in Sources */,
 				CC4E13CF2538445400337586 /* QCAccountViewController.m in Sources */,
 				CC8262312539926C001C3AD9 /* QCPaymentsViewController.m in Sources */,
 				CCD509BD2536A0DC002CECEF /* QCReleaseViewController.m in Sources */,
 				CC4E13DD25384F2A00337586 /* QCBindingViewController.m in Sources */,
 				CC4E13042536C5FC00337586 /* QCLoginViewController.m in Sources */,
+				CC826297253D89A6001C3AD9 /* QCRealnameViewController.m in Sources */,
 				CC82623A2539A190001C3AD9 /* QCPaymentsCell.m in Sources */,
 				CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */,
 				CC4E13EB2538513F00337586 /* QCTitlesViewController.m in Sources */,

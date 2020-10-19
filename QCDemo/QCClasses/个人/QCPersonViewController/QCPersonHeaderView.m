@@ -8,7 +8,7 @@
 
 #import "QCPersonHeaderView.h"
 
-@interface QCPersonHeaderView()
+@interface QCPersonHeaderView()<UIPopoverPresentationControllerDelegate>
 @property (nonatomic, strong) UIImageView * headerImageView;
 @property (nonatomic, strong) UILabel * nickNameLabel;
 @property (nonatomic, strong) UILabel * cardLabel;
@@ -29,7 +29,52 @@
 }
 
 - (void)scanAction:(UIButton *)sender {
+    
     //  扫一扫
+    
+    //  初始化弹出控制器
+    UIViewController *vc = [UIViewController new];
+    
+    //  背景色
+    vc.view.backgroundColor = [UIColor yellowColor];
+    
+    //  弹出视图的显示样式
+    vc.modalPresentationStyle = UIModalPresentationPopover;
+    
+    //  1、弹出视图的大小
+    vc.preferredContentSize = CGSizeMake(150, 300);
+    
+    //  弹出视图的代理
+    vc.popoverPresentationController.delegate = self;
+    
+    //  弹出视图的参照视图、从哪弹出
+    vc.popoverPresentationController.sourceView = sender;
+    
+    //  弹出视图的尖头位置：参照视图底边中间位置
+    vc.popoverPresentationController.sourceRect = sender.bounds;
+    
+    //  弹出视图的箭头方向
+    vc.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    
+    //  弹出
+    [[QCClassFunction parentController:self] presentViewController:vc animated:YES completion:nil];
+}
+
+- (BOOL) popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
+
+   return YES;
+
+}
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller{
+
+    return UIModalPresentationNone;
+
+}
+- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
+
+    NSLog(@"dismissed");
+
 }
 
 - (void)topAction:(UIButton *)sender {

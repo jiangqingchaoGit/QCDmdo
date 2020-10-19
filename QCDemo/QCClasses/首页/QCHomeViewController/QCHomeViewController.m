@@ -22,7 +22,7 @@
     
     UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
     button.backgroundColor = [UIColor greenColor];
-    [button addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     
     [[QCMapInstance shared] startLocationIsNeedCity:YES WithCompletion:^(CLLocationCoordinate2D coor, NSString *city, NSString *cityCode) {
@@ -31,12 +31,16 @@
 
 
 }
-- (void)buttonAction {
-    [self shareWebPageToPlatformType:1];
-
-
+- (void)buttonAction:(UIButton *)sender {
+//    [self shareWebPageToPlatformType:1];
     
+    
+
+
 }
+
+
+
 
 
 

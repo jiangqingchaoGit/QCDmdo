@@ -1,46 +1,38 @@
 //
-//  QCPaymentsViewController.m
+//  QCEnvelopeViewController.m
 //  QCDemo
 //
-//  Created by JQC on 2020/10/16.
+//  Created by JQC on 2020/10/19.
 //  Copyright © 2020 JQC. All rights reserved.
 //
 
-#import "QCPaymentsViewController.h"
-#import "QCPaymentsCell.h"
-#import "QCPaymentsDetailsViewController.h"
-@interface QCPaymentsViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "QCEnvelopeViewController.h"
+#import "QCEnvelopCell.h"
+
+@interface QCEnvelopeViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic, strong) UIButton * backButton;
+@property (nonatomic, strong) UILabel * moneyLabel;
+@property (nonatomic, strong) UILabel * numberLabel;
+
 @property (nonatomic, strong) UIButton * incomeButton;
 @property (nonatomic, strong) UIButton * spendingButton;
 @property (nonatomic, strong) UIButton * withdrawalButton;
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIView * headerView;
 
-
-
 @end
 
-@implementation QCPaymentsViewController
+@implementation QCEnvelopeViewController
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
-}
-
-
-//在页面消失的时候就让navigationbar还原样式
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 
     [self initUI];
     [self createTableView];
@@ -48,6 +40,10 @@
 }
 
 #pragma mark - tapAction
+
+- (void)backAction:(UIButton *)sender {
+    
+}
 - (void)buttonAction:(UIButton *)sender {
     switch (sender.tag) {
         case 1:
@@ -70,15 +66,7 @@
             self.withdrawalButton.backgroundColor = KCLEAR_COLOR;
 
             break;
-        case 3:
-            self.incomeButton.selected = NO;
-            self.spendingButton.selected = NO;
-            self.withdrawalButton.selected = YES;
-            self.incomeButton.backgroundColor = KCLEAR_COLOR;
-            self.spendingButton.backgroundColor = KCLEAR_COLOR;
-            self.withdrawalButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
 
-            break;
             
         default:
             break;
@@ -89,7 +77,7 @@
 - (void)initUI {
     
     self.view.backgroundColor = KBACK_COLOR;
-    self.title = @"收支明细";
+    self.title = @"红包明细";
     
 
     
@@ -105,23 +93,63 @@
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         
     }
-    [self.tableView registerClass:[QCPaymentsCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[QCEnvelopCell class] forCellReuseIdentifier:@"cell"];
     
     [self.view addSubview:self.tableView];
     
     
 }
 - (void)createHeaderView {
-    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(0), KSCALE_WIDTH(0), KSCALE_WIDTH(335), KSCALE_WIDTH(45))];
     
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), 0, KSCALE_WIDTH(335), KSCALE_WIDTH(35))];
-    view.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
-    [QCClassFunction filletImageView:view withRadius:KSCALE_WIDTH(4)];
+    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(375), KSCALE_WIDTH(235) + KTabHight)];
+    self.headerView.backgroundColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
+    [self.view addSubview:self.headerView];
+
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(375), KSCALE_WIDTH(160) + KTabHight)];
+    view.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
     [self.headerView addSubview:view];
     
-    NSArray * titleArr = @[@"收入",@"支出",@"提现"];
-    for (NSInteger i = 0; i < 3; i++) {
-        UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(5) + i * KSCALE_WIDTH(111), KSCALE_WIDTH(3), KSCALE_WIDTH(103), KSCALE_WIDTH(29))];
+    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(100), KStatusHight, KSCALE_WIDTH(175), KSCALE_WIDTH(44))];
+    titleLabel.font = KSCALE_FONT(16);
+    titleLabel.textColor = KBACK_COLOR;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = @"红包明细";
+    titleLabel.backgroundColor = KCLEAR_COLOR;
+    [self.headerView addSubview:titleLabel];
+    
+    
+    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KNavHight - 44, 56, 44)];
+    [self.backButton setImage:[UIImage imageNamed:@"返回"] forState:UIControlStateNormal];
+    [self.backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.headerView addSubview:self.backButton];
+    
+
+    UILabel * balanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KStatusHight + KSCALE_WIDTH(60), KSCALE_WIDTH(200), KSCALE_WIDTH(16))];
+    balanceLabel.text = @"收到红包共计（元）";
+    balanceLabel.font = K_14_FONT;
+    balanceLabel.textColor = [QCClassFunction stringTOColor:@"#FFFFFF"];;
+    [self.headerView addSubview:balanceLabel];
+    
+    self.moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KStatusHight + KSCALE_WIDTH(80), KSCALE_WIDTH(200), KSCALE_WIDTH(40))];
+    self.moneyLabel.text = @"0.00";
+    self.moneyLabel.font = K_40_BFONT;
+    self.moneyLabel.textColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
+    [self.headerView addSubview:self.moneyLabel];
+    
+    self.numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KStatusHight + KSCALE_WIDTH(140), KSCALE_WIDTH(200), KSCALE_WIDTH(16))];
+    self.numberLabel.text = @"红包总数：999个";
+    self.numberLabel.font = K_14_FONT;
+    self.numberLabel.textColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
+    [self.headerView addSubview:self.numberLabel];
+    
+    UIView * chooseView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(190) + KTabHight, KSCALE_WIDTH(335), KSCALE_WIDTH(35))];
+    chooseView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
+    [QCClassFunction filletImageView:chooseView withRadius:KSCALE_WIDTH(4)];
+    [self.headerView addSubview:chooseView];
+    
+    NSArray * titleArr = @[@"我收到的红包",@"我发出的红包"];
+    for (NSInteger i = 0; i < 2; i++) {
+        UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(5) + i * KSCALE_WIDTH(175), KSCALE_WIDTH(3), KSCALE_WIDTH(150), KSCALE_WIDTH(29))];
         button.backgroundColor = [UIColor clearColor];
         button.tag = i + 1;
         button.titleLabel.font = K_14_FONT;
@@ -131,7 +159,7 @@
         [button setTitle:titleArr[i] forState:UIControlStateNormal];
         [QCClassFunction filletImageView:button withRadius:KSCALE_WIDTH(2)];
         
-        [view addSubview:button];
+        [chooseView addSubview:button];
         
         switch (i) {
             case 0:
@@ -142,9 +170,7 @@
             case 1:
                 self.spendingButton = button;
                 break;
-            case 2:
-                self.withdrawalButton = button;
-                break;
+
                 
             default:
                 break;
@@ -170,19 +196,14 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    QCPaymentsCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    QCEnvelopCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    QCPaymentsDetailsViewController * paymentsDetailsViewController = [[QCPaymentsDetailsViewController alloc] init];
-    paymentsDetailsViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:paymentsDetailsViewController animated:YES];
-    
+ 
 }
-
-
 
 @end

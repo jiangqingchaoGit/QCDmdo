@@ -42,8 +42,8 @@
     self.panGestureRecognizer.delegate = self;
     [self.view addGestureRecognizer:self.panGestureRecognizer];
     // 禁用系统的屏幕边缘滑动手势
-//    panGestureRecognizer.enabled = NO;
-//    edgePanGestureRecognizer.enabled = NO;
+//    self.panGestureRecognizer.enabled = NO;
+//    self.edgePanGestureRecognizer.enabled = NO;
 }
 - (void)handleNavigationTransition:(UIPanGestureRecognizer *)sender{
     [self  popViewControllerAnimated:YES];

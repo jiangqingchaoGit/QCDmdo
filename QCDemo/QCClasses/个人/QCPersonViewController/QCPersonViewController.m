@@ -10,8 +10,11 @@
 #import "QCPersonHeaderView.h"
 #import "QCPersonCell.h"
 
+//
+#import "QCOpenViewController.h"
 //  我的钱包
 #import "QCWalletViewController.h"
+
 @interface QCPersonViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) QCPersonHeaderView * headerView;
@@ -90,14 +93,20 @@
     switch (indexPath.row) {
         case 0:
         {
+            
+//            QCOpenViewController * openViewController = [[QCOpenViewController alloc] init];
+//            openViewController.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:openViewController animated:YES];
+            
             QCWalletViewController * walletViewController = [[QCWalletViewController alloc] init];
             walletViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:walletViewController animated:YES];
         }
             break;
-            
         case 1:
-            
+        {
+
+        }
             break;
         case 2:
             
