@@ -130,4 +130,20 @@
 
 +(NSString *)getNowTimeTimestamp;
 
++ (UINavigationController *)currentNC;
+
++ (UINavigationController *)getCurrentNCFrom:(UIViewController *)vc;
+
+
+/*
+ *  AES加密
+ */
++ (NSData *)AES128_Encrypt:(NSString *)key encryptData:(NSData *)data;
+
++ (NSData *)AES128_Decrypt:(NSString *)key encryptData:(NSData *)data;
+
++ (NSString *)AES128_Decrypt:(NSString *)key withStr:(NSString *)str;
+
+
+
 @end

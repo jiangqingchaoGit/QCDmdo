@@ -16,13 +16,17 @@
  *  GET数据请求
  */
 +(void)QCGET:(NSString *)urlStr parameters:(NSDictionary *)dict success:(successBlock)successBlock failure:(failureBlock)failureBlock {
-    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+
+       manager.responseSerializer = [AFHTTPResponseSerializer new];
+
     [manager GET:[NSString stringWithFormat:@"%@",urlStr] parameters:dict headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+       
         id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        
         successBlock(task,result);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(task,error);
@@ -34,6 +38,7 @@
 /*
  *  POST数据请求
  */
+
 +(void)QCPOST:(NSString *)urlStr parameters:(NSDictionary *)dict success:(successBlock)successBlock failure:(failureBlock)failureBlock {
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];

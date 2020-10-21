@@ -43,6 +43,29 @@
 		CC82628D253D82DA001C3AD9 /* QCOpenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82628C253D82DA001C3AD9 /* QCOpenViewController.m */; };
 		CC826297253D89A6001C3AD9 /* QCRealnameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826296253D89A6001C3AD9 /* QCRealnameViewController.m */; };
 		CC82629E253D8C4A001C3AD9 /* QCRealnamedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82629D253D8C4A001C3AD9 /* QCRealnamedViewController.m */; };
+		CC8262AD253E8947001C3AD9 /* QCMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262AC253E8947001C3AD9 /* QCMessageCell.m */; };
+		CC8262B4253E9131001C3AD9 /* QCFunctionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262B3253E9131001C3AD9 /* QCFunctionViewController.m */; };
+		CC8262BA253E951A001C3AD9 /* QCFunctionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262B9253E951A001C3AD9 /* QCFunctionCell.m */; };
+		CC8262C1253EB90D001C3AD9 /* QCAddFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262C0253EB90D001C3AD9 /* QCAddFriendsViewController.m */; };
+		CC8262C8253ED511001C3AD9 /* QCGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262C7253ED511001C3AD9 /* QCGroupViewController.m */; };
+		CC8262D1253ED832001C3AD9 /* QCGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262D0253ED832001C3AD9 /* QCGroupCell.m */; };
+		CC8262D8253EE129001C3AD9 /* QCChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262D7253EE129001C3AD9 /* QCChatViewController.m */; };
+		CC8262DE253EE151001C3AD9 /* QCChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262DD253EE151001C3AD9 /* QCChatCell.m */; };
+		CC8262E6253EE4D3001C3AD9 /* QCSelfTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262E5253EE4D3001C3AD9 /* QCSelfTextCell.m */; };
+		CC8262ED253EE50A001C3AD9 /* QCTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262EC253EE50A001C3AD9 /* QCTimeCell.m */; };
+		CC8262F6253EE55D001C3AD9 /* QCInvitationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262F5253EE55D001C3AD9 /* QCInvitationCell.m */; };
+		CC8262FC253EE57C001C3AD9 /* QCSaveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8262FB253EE57C001C3AD9 /* QCSaveCell.m */; };
+		CC826308253EE65E001C3AD9 /* QCSelfVoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826307253EE65E001C3AD9 /* QCSelfVoiceCell.m */; };
+		CC826311253EE689001C3AD9 /* QCSelfPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826310253EE689001C3AD9 /* QCSelfPictureCell.m */; };
+		CC826317253EE727001C3AD9 /* QCSelfEnvelopeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826316253EE727001C3AD9 /* QCSelfEnvelopeCell.m */; };
+		CC82631D253EE74B001C3AD9 /* QCSelfCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82631C253EE74B001C3AD9 /* QCSelfCardCell.m */; };
+		CC826323253EE768001C3AD9 /* QCOtherTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826322253EE768001C3AD9 /* QCOtherTextCell.m */; };
+		CC82632A253EE786001C3AD9 /* QCOtherVoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826329253EE786001C3AD9 /* QCOtherVoiceCell.m */; };
+		CC826330253EE79A001C3AD9 /* QCOtherPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82632F253EE79A001C3AD9 /* QCOtherPictureCell.m */; };
+		CC826336253EE7AB001C3AD9 /* QCOtherEnvelopeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826335253EE7AB001C3AD9 /* QCOtherEnvelopeCell.m */; };
+		CC82633C253EE7BE001C3AD9 /* QCOtherCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82633B253EE7BE001C3AD9 /* QCOtherCardCell.m */; };
+		CC826359253FE84B001C3AD9 /* QCWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826358253FE84B001C3AD9 /* QCWebSocket.m */; };
+		CC82637225402772001C3AD9 /* QCGroupDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82637125402772001C3AD9 /* QCGroupDataViewController.m */; };
 		CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60F92535508A00311269 /* AppDelegate.m */; };
 		CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60FC2535508A00311269 /* SceneDelegate.m */; };
 		CCBE61032535508A00311269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBE61012535508A00311269 /* Main.storyboard */; };
@@ -149,6 +172,52 @@
 		CC826296253D89A6001C3AD9 /* QCRealnameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCRealnameViewController.m; sourceTree = "<group>"; };
 		CC82629C253D8C4A001C3AD9 /* QCRealnamedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCRealnamedViewController.h; sourceTree = "<group>"; };
 		CC82629D253D8C4A001C3AD9 /* QCRealnamedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCRealnamedViewController.m; sourceTree = "<group>"; };
+		CC8262AB253E8947001C3AD9 /* QCMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCMessageCell.h; sourceTree = "<group>"; };
+		CC8262AC253E8947001C3AD9 /* QCMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCMessageCell.m; sourceTree = "<group>"; };
+		CC8262B2253E9131001C3AD9 /* QCFunctionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCFunctionViewController.h; sourceTree = "<group>"; };
+		CC8262B3253E9131001C3AD9 /* QCFunctionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCFunctionViewController.m; sourceTree = "<group>"; };
+		CC8262B8253E951A001C3AD9 /* QCFunctionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCFunctionCell.h; sourceTree = "<group>"; };
+		CC8262B9253E951A001C3AD9 /* QCFunctionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCFunctionCell.m; sourceTree = "<group>"; };
+		CC8262BF253EB90D001C3AD9 /* QCAddFriendsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCAddFriendsViewController.h; sourceTree = "<group>"; };
+		CC8262C0253EB90D001C3AD9 /* QCAddFriendsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCAddFriendsViewController.m; sourceTree = "<group>"; };
+		CC8262C6253ED511001C3AD9 /* QCGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCGroupViewController.h; sourceTree = "<group>"; };
+		CC8262C7253ED511001C3AD9 /* QCGroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCGroupViewController.m; sourceTree = "<group>"; };
+		CC8262CF253ED832001C3AD9 /* QCGroupCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCGroupCell.h; sourceTree = "<group>"; };
+		CC8262D0253ED832001C3AD9 /* QCGroupCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCGroupCell.m; sourceTree = "<group>"; };
+		CC8262D6253EE129001C3AD9 /* QCChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCChatViewController.h; sourceTree = "<group>"; };
+		CC8262D7253EE129001C3AD9 /* QCChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCChatViewController.m; sourceTree = "<group>"; };
+		CC8262DC253EE151001C3AD9 /* QCChatCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCChatCell.h; sourceTree = "<group>"; };
+		CC8262DD253EE151001C3AD9 /* QCChatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCChatCell.m; sourceTree = "<group>"; };
+		CC8262E4253EE4D3001C3AD9 /* QCSelfTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCSelfTextCell.h; sourceTree = "<group>"; };
+		CC8262E5253EE4D3001C3AD9 /* QCSelfTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCSelfTextCell.m; sourceTree = "<group>"; };
+		CC8262EB253EE50A001C3AD9 /* QCTimeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCTimeCell.h; sourceTree = "<group>"; };
+		CC8262EC253EE50A001C3AD9 /* QCTimeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCTimeCell.m; sourceTree = "<group>"; };
+		CC8262F4253EE55D001C3AD9 /* QCInvitationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCInvitationCell.h; sourceTree = "<group>"; };
+		CC8262F5253EE55D001C3AD9 /* QCInvitationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCInvitationCell.m; sourceTree = "<group>"; };
+		CC8262FA253EE57C001C3AD9 /* QCSaveCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCSaveCell.h; sourceTree = "<group>"; };
+		CC8262FB253EE57C001C3AD9 /* QCSaveCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCSaveCell.m; sourceTree = "<group>"; };
+		CC826306253EE65E001C3AD9 /* QCSelfVoiceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCSelfVoiceCell.h; sourceTree = "<group>"; };
+		CC826307253EE65E001C3AD9 /* QCSelfVoiceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCSelfVoiceCell.m; sourceTree = "<group>"; };
+		CC82630F253EE689001C3AD9 /* QCSelfPictureCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCSelfPictureCell.h; sourceTree = "<group>"; };
+		CC826310253EE689001C3AD9 /* QCSelfPictureCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCSelfPictureCell.m; sourceTree = "<group>"; };
+		CC826315253EE727001C3AD9 /* QCSelfEnvelopeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCSelfEnvelopeCell.h; sourceTree = "<group>"; };
+		CC826316253EE727001C3AD9 /* QCSelfEnvelopeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCSelfEnvelopeCell.m; sourceTree = "<group>"; };
+		CC82631B253EE74B001C3AD9 /* QCSelfCardCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCSelfCardCell.h; sourceTree = "<group>"; };
+		CC82631C253EE74B001C3AD9 /* QCSelfCardCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCSelfCardCell.m; sourceTree = "<group>"; };
+		CC826321253EE768001C3AD9 /* QCOtherTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCOtherTextCell.h; sourceTree = "<group>"; };
+		CC826322253EE768001C3AD9 /* QCOtherTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCOtherTextCell.m; sourceTree = "<group>"; };
+		CC826328253EE786001C3AD9 /* QCOtherVoiceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCOtherVoiceCell.h; sourceTree = "<group>"; };
+		CC826329253EE786001C3AD9 /* QCOtherVoiceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCOtherVoiceCell.m; sourceTree = "<group>"; };
+		CC82632E253EE79A001C3AD9 /* QCOtherPictureCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCOtherPictureCell.h; sourceTree = "<group>"; };
+		CC82632F253EE79A001C3AD9 /* QCOtherPictureCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCOtherPictureCell.m; sourceTree = "<group>"; };
+		CC826334253EE7AB001C3AD9 /* QCOtherEnvelopeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCOtherEnvelopeCell.h; sourceTree = "<group>"; };
+		CC826335253EE7AB001C3AD9 /* QCOtherEnvelopeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCOtherEnvelopeCell.m; sourceTree = "<group>"; };
+		CC82633A253EE7BE001C3AD9 /* QCOtherCardCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCOtherCardCell.h; sourceTree = "<group>"; };
+		CC82633B253EE7BE001C3AD9 /* QCOtherCardCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCOtherCardCell.m; sourceTree = "<group>"; };
+		CC826357253FE84B001C3AD9 /* QCWebSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCWebSocket.h; sourceTree = "<group>"; };
+		CC826358253FE84B001C3AD9 /* QCWebSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCWebSocket.m; sourceTree = "<group>"; };
+		CC82637025402772001C3AD9 /* QCGroupDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCGroupDataViewController.h; sourceTree = "<group>"; };
+		CC82637125402772001C3AD9 /* QCGroupDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCGroupDataViewController.m; sourceTree = "<group>"; };
 		CCBE60F52535508A00311269 /* QCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBE60F82535508A00311269 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CCBE60F92535508A00311269 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -442,6 +511,117 @@
 			path = QCRealnameViewController;
 			sourceTree = "<group>";
 		};
+		CC8262B1253E9118001C3AD9 /* QCFunctionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC8262B2253E9131001C3AD9 /* QCFunctionViewController.h */,
+				CC8262B3253E9131001C3AD9 /* QCFunctionViewController.m */,
+				CC8262B8253E951A001C3AD9 /* QCFunctionCell.h */,
+				CC8262B9253E951A001C3AD9 /* QCFunctionCell.m */,
+			);
+			path = QCFunctionViewController;
+			sourceTree = "<group>";
+		};
+		CC8262BE253EB8EA001C3AD9 /* QCAddFriendsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC8262BF253EB90D001C3AD9 /* QCAddFriendsViewController.h */,
+				CC8262C0253EB90D001C3AD9 /* QCAddFriendsViewController.m */,
+			);
+			path = QCAddFriendsViewController;
+			sourceTree = "<group>";
+		};
+		CC8262C5253ED4FB001C3AD9 /* QCGroupViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC8262C6253ED511001C3AD9 /* QCGroupViewController.h */,
+				CC8262C7253ED511001C3AD9 /* QCGroupViewController.m */,
+				CC8262CF253ED832001C3AD9 /* QCGroupCell.h */,
+				CC8262D0253ED832001C3AD9 /* QCGroupCell.m */,
+			);
+			path = QCGroupViewController;
+			sourceTree = "<group>";
+		};
+		CC8262D5253EE10D001C3AD9 /* QCChatViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC82636F25402755001C3AD9 /* QCGroupDataViewController */,
+				CC8262EA253EE4E1001C3AD9 /* QCPublicView */,
+				CC8262E2253EE47F001C3AD9 /* QCSelfChatView */,
+				CC8262E3253EE4A4001C3AD9 /* QCOtherChatView */,
+				CC8262D6253EE129001C3AD9 /* QCChatViewController.h */,
+				CC8262D7253EE129001C3AD9 /* QCChatViewController.m */,
+				CC8262DC253EE151001C3AD9 /* QCChatCell.h */,
+				CC8262DD253EE151001C3AD9 /* QCChatCell.m */,
+			);
+			path = QCChatViewController;
+			sourceTree = "<group>";
+		};
+		CC8262E2253EE47F001C3AD9 /* QCSelfChatView */ = {
+			isa = PBXGroup;
+			children = (
+				CC8262E4253EE4D3001C3AD9 /* QCSelfTextCell.h */,
+				CC8262E5253EE4D3001C3AD9 /* QCSelfTextCell.m */,
+				CC826306253EE65E001C3AD9 /* QCSelfVoiceCell.h */,
+				CC826307253EE65E001C3AD9 /* QCSelfVoiceCell.m */,
+				CC82630F253EE689001C3AD9 /* QCSelfPictureCell.h */,
+				CC826310253EE689001C3AD9 /* QCSelfPictureCell.m */,
+				CC826315253EE727001C3AD9 /* QCSelfEnvelopeCell.h */,
+				CC826316253EE727001C3AD9 /* QCSelfEnvelopeCell.m */,
+				CC82631B253EE74B001C3AD9 /* QCSelfCardCell.h */,
+				CC82631C253EE74B001C3AD9 /* QCSelfCardCell.m */,
+			);
+			path = QCSelfChatView;
+			sourceTree = "<group>";
+		};
+		CC8262E3253EE4A4001C3AD9 /* QCOtherChatView */ = {
+			isa = PBXGroup;
+			children = (
+				CC826321253EE768001C3AD9 /* QCOtherTextCell.h */,
+				CC826322253EE768001C3AD9 /* QCOtherTextCell.m */,
+				CC826328253EE786001C3AD9 /* QCOtherVoiceCell.h */,
+				CC826329253EE786001C3AD9 /* QCOtherVoiceCell.m */,
+				CC82632E253EE79A001C3AD9 /* QCOtherPictureCell.h */,
+				CC82632F253EE79A001C3AD9 /* QCOtherPictureCell.m */,
+				CC826334253EE7AB001C3AD9 /* QCOtherEnvelopeCell.h */,
+				CC826335253EE7AB001C3AD9 /* QCOtherEnvelopeCell.m */,
+				CC82633A253EE7BE001C3AD9 /* QCOtherCardCell.h */,
+				CC82633B253EE7BE001C3AD9 /* QCOtherCardCell.m */,
+			);
+			path = QCOtherChatView;
+			sourceTree = "<group>";
+		};
+		CC8262EA253EE4E1001C3AD9 /* QCPublicView */ = {
+			isa = PBXGroup;
+			children = (
+				CC8262EB253EE50A001C3AD9 /* QCTimeCell.h */,
+				CC8262EC253EE50A001C3AD9 /* QCTimeCell.m */,
+				CC8262F4253EE55D001C3AD9 /* QCInvitationCell.h */,
+				CC8262F5253EE55D001C3AD9 /* QCInvitationCell.m */,
+				CC8262FA253EE57C001C3AD9 /* QCSaveCell.h */,
+				CC8262FB253EE57C001C3AD9 /* QCSaveCell.m */,
+			);
+			path = QCPublicView;
+			sourceTree = "<group>";
+		};
+		CC82635D253FE856001C3AD9 /* QCWebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				CC826357253FE84B001C3AD9 /* QCWebSocket.h */,
+				CC826358253FE84B001C3AD9 /* QCWebSocket.m */,
+			);
+			path = QCWebSocket;
+			sourceTree = "<group>";
+		};
+		CC82636F25402755001C3AD9 /* QCGroupDataViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC82637025402772001C3AD9 /* QCGroupDataViewController.h */,
+				CC82637125402772001C3AD9 /* QCGroupDataViewController.m */,
+			);
+			path = QCGroupDataViewController;
+			sourceTree = "<group>";
+		};
 		CCBE60EC2535508A00311269 = {
 			isa = PBXGroup;
 			children = (
@@ -537,6 +717,7 @@
 		CCBE61352535515600311269 /* QCTools */ = {
 			isa = PBXGroup;
 			children = (
+				CC82635D253FE856001C3AD9 /* QCWebSocket */,
 				CC4E135E2536E69300337586 /* QCHtmlUrlViewController.h */,
 				CC4E135F2536E69300337586 /* QCHtmlUrlViewController.m */,
 				CCBE61362535515600311269 /* QCHeader.pch */,
@@ -615,6 +796,10 @@
 		CCD509B82536A09D002CECEF /* 消息 */ = {
 			isa = PBXGroup;
 			children = (
+				CC8262D5253EE10D001C3AD9 /* QCChatViewController */,
+				CC8262C5253ED4FB001C3AD9 /* QCGroupViewController */,
+				CC8262BE253EB8EA001C3AD9 /* QCAddFriendsViewController */,
+				CC8262B1253E9118001C3AD9 /* QCFunctionViewController */,
 				CCD509C22536A120002CECEF /* QCMessageViewController */,
 			);
 			path = "消息";
@@ -650,6 +835,8 @@
 			children = (
 				CCD509C52536A191002CECEF /* QCMessageViewController.h */,
 				CCD509C62536A191002CECEF /* QCMessageViewController.m */,
+				CC8262AB253E8947001C3AD9 /* QCMessageCell.h */,
+				CC8262AC253E8947001C3AD9 /* QCMessageCell.m */,
 			);
 			path = QCMessageViewController;
 			sourceTree = "<group>";
@@ -859,28 +1046,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC826308253EE65E001C3AD9 /* QCSelfVoiceCell.m in Sources */,
 				CC82629E253D8C4A001C3AD9 /* QCRealnamedViewController.m in Sources */,
+				CC8262DE253EE151001C3AD9 /* QCChatCell.m in Sources */,
+				CC826359253FE84B001C3AD9 /* QCWebSocket.m in Sources */,
 				CCBE610E2535508C00311269 /* main.m in Sources */,
 				CCBE61062535508A00311269 /* QCDemo.xcdatamodeld in Sources */,
 				CC82627C253D71B8001C3AD9 /* QCSetPasswordViewController.m in Sources */,
 				CC82621D25394013001C3AD9 /* QCPersonHeaderView.m in Sources */,
+				CC8262ED253EE50A001C3AD9 /* QCTimeCell.m in Sources */,
+				CC82637225402772001C3AD9 /* QCGroupDataViewController.m in Sources */,
 				CCD509AF25369D4E002CECEF /* QCHomeViewController.m in Sources */,
 				CC826283253D7A67001C3AD9 /* QCCertificationPasswordViewController.m in Sources */,
 				CC4E13D625384B3E00337586 /* QCPhoneLoginViewController.m in Sources */,
 				CCBE613D2535515600311269 /* QCTarBarController.m in Sources */,
+				CC8262D1253ED832001C3AD9 /* QCGroupCell.m in Sources */,
 				CC82624B253D2E88001C3AD9 /* QCEnvelopeViewController.m in Sources */,
 				CCBE613F2535515600311269 /* QCClassFunction.m in Sources */,
 				CC82625B253D36E7001C3AD9 /* QCBankViewController.m in Sources */,
 				CCD509A425369C21002CECEF /* BaseNavigationController.m in Sources */,
 				CCD509D02536A19E002CECEF /* QCBookViewController.m in Sources */,
 				CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */,
+				CC8262C8253ED511001C3AD9 /* QCGroupViewController.m in Sources */,
 				CCD509A525369C21002CECEF /* QCNavigationBar.m in Sources */,
 				CC4E12E02536A96500337586 /* XXPageTabView.m in Sources */,
 				CC4E13E42538510A00337586 /* QCDisableViewController.m in Sources */,
+				CC82631D253EE74B001C3AD9 /* QCSelfCardCell.m in Sources */,
+				CC8262B4253E9131001C3AD9 /* QCFunctionViewController.m in Sources */,
+				CC826311253EE689001C3AD9 /* QCSelfPictureCell.m in Sources */,
+				CC8262BA253E951A001C3AD9 /* QCFunctionCell.m in Sources */,
+				CC826330253EE79A001C3AD9 /* QCOtherPictureCell.m in Sources */,
+				CC826317253EE727001C3AD9 /* QCSelfEnvelopeCell.m in Sources */,
 				CC826275253D68EA001C3AD9 /* QCCertificationViewController.m in Sources */,
 				CC4E12DF2536A96500337586 /* XXPageTabItemLable.m in Sources */,
 				CC826241253D2254001C3AD9 /* QCPaymentsDetailsViewController.m in Sources */,
 				CC4E13C825381AC800337586 /* QCCodeViewController.m in Sources */,
+				CC8262E6253EE4D3001C3AD9 /* QCSelfTextCell.m in Sources */,
+				CC8262D8253EE129001C3AD9 /* QCChatViewController.m in Sources */,
 				CC4E12EA2536AB1800337586 /* QCMapInstance.m in Sources */,
 				CCD509D62536A1B3002CECEF /* QCPersonViewController.m in Sources */,
 				CC82626B253D4119001C3AD9 /* QCAddBankViewController.m in Sources */,
@@ -889,18 +1091,26 @@
 				CCD509C72536A191002CECEF /* QCMessageViewController.m in Sources */,
 				CC82622A25398402001C3AD9 /* QCWalletViewController.m in Sources */,
 				CCBE613E2535515600311269 /* QCAFNetWorking.m in Sources */,
+				CC8262AD253E8947001C3AD9 /* QCMessageCell.m in Sources */,
 				CC826264253D3856001C3AD9 /* QCBankCell.m in Sources */,
 				CC82628D253D82DA001C3AD9 /* QCOpenViewController.m in Sources */,
+				CC82633C253EE7BE001C3AD9 /* QCOtherCardCell.m in Sources */,
+				CC82632A253EE786001C3AD9 /* QCOtherVoiceCell.m in Sources */,
 				CC4E13CF2538445400337586 /* QCAccountViewController.m in Sources */,
+				CC8262C1253EB90D001C3AD9 /* QCAddFriendsViewController.m in Sources */,
 				CC8262312539926C001C3AD9 /* QCPaymentsViewController.m in Sources */,
+				CC826336253EE7AB001C3AD9 /* QCOtherEnvelopeCell.m in Sources */,
 				CCD509BD2536A0DC002CECEF /* QCReleaseViewController.m in Sources */,
 				CC4E13DD25384F2A00337586 /* QCBindingViewController.m in Sources */,
+				CC826323253EE768001C3AD9 /* QCOtherTextCell.m in Sources */,
 				CC4E13042536C5FC00337586 /* QCLoginViewController.m in Sources */,
 				CC826297253D89A6001C3AD9 /* QCRealnameViewController.m in Sources */,
 				CC82623A2539A190001C3AD9 /* QCPaymentsCell.m in Sources */,
 				CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */,
+				CC8262FC253EE57C001C3AD9 /* QCSaveCell.m in Sources */,
 				CC4E13EB2538513F00337586 /* QCTitlesViewController.m in Sources */,
 				CC82622325397F49001C3AD9 /* QCPersonCell.m in Sources */,
+				CC8262F6253EE55D001C3AD9 /* QCInvitationCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

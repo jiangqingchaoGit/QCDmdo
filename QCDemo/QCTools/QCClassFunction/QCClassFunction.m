@@ -9,6 +9,13 @@
 #import "QCClassFunction.h"
 #import <UIImageView+WebCache.h>
 #import <UIImage+GIF.h>
+#import <UIKit/UIKit.h>
+#import <CommonCrypto/CommonDigest.h>
+#import <CommonCrypto/CommonCryptor.h>
+#import <sys/utsname.h>//要导入头文件
+
+#define gIv @"8227833840494928" //可以自行定义16位，向量，
+
 @implementation QCClassFunction
 
 
@@ -586,5 +593,125 @@
     return timeSp;
 
 }
+
++ (UINavigationController *)currentNC
+{
+    if (![[UIApplication sharedApplication].windows.lastObject isKindOfClass:[UIWindow class]]) {
+        NSAssert(0, @"未获取到导航控制器");
+        return nil;
+    }
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    return [self getCurrentNCFrom:rootViewController];
+}
+
+//递归
++ (UINavigationController *)getCurrentNCFrom:(UIViewController *)vc
+{
+    if ([vc isKindOfClass:[UITabBarController class]]) {
+        UINavigationController *nc = ((UITabBarController *)vc).selectedViewController;
+        return [self getCurrentNCFrom:nc];
+    }
+    else if ([vc isKindOfClass:[UINavigationController class]]) {
+        if (((UINavigationController *)vc).presentedViewController) {
+            return [self getCurrentNCFrom:((UINavigationController *)vc).presentedViewController];
+        }
+        return [self getCurrentNCFrom:((UINavigationController *)vc).topViewController];
+    }
+    else if ([vc isKindOfClass:[UIViewController class]]) {
+        if (vc.presentedViewController) {
+            return [self getCurrentNCFrom:vc.presentedViewController];
+        }
+        else {
+            return vc.navigationController;
+        }
+    }
+    else {
+        NSAssert(0, @"未获取到导航控制器");
+        return nil;
+    }
+}
+
+
+//  AES加密
++ (NSData *)AES128_Encrypt:(NSString *)key encryptData:(NSData *)data{
+    
+    char keyPtr[kCCKeySizeAES128+1];
+    bzero(keyPtr, sizeof(keyPtr));
+    [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
+    
+    char ivPtr[kCCKeySizeAES128+1];
+    memset(ivPtr, 0, sizeof(ivPtr));
+    [gIv getCString:ivPtr maxLength:sizeof(ivPtr) encoding:NSUTF8StringEncoding];
+    
+    NSUInteger dataLength = [data length];
+    size_t bufferSize = dataLength + kCCBlockSizeAES128;
+    void *buffer = malloc(bufferSize);
+    size_t numBytesEncrypted = 0;
+    CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt,
+                                          kCCAlgorithmAES128,
+                                          kCCOptionPKCS7Padding,
+                                          keyPtr,
+                                          kCCBlockSizeAES128,
+                                          ivPtr,
+                                          [data bytes],
+                                          dataLength,
+                                          buffer,
+                                          bufferSize,
+                                          &numBytesEncrypted);
+    if (cryptStatus == kCCSuccess) {
+        return [NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted];
+    }
+    free(buffer);
+    return nil;
+}
+
+
+//AES128解密data(带自定义向量)
++ (NSData *)AES128_Decrypt:(NSString *)key encryptData:(NSData *)data{
+    char keyPtr[kCCKeySizeAES128+1];
+    bzero(keyPtr, sizeof(keyPtr));
+    [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
+    
+    char ivPtr[kCCKeySizeAES128+1];
+    memset(ivPtr, 0, sizeof(ivPtr));
+    [gIv getCString:ivPtr maxLength:sizeof(ivPtr) encoding:NSUTF8StringEncoding];
+    
+    NSUInteger dataLength = [data length];
+    size_t bufferSize = dataLength + kCCBlockSizeAES128;
+    void *buffer = malloc(bufferSize);
+    size_t numBytesDecrypted = 0;
+    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt,
+                                          kCCAlgorithmAES128,
+                                          kCCOptionPKCS7Padding,
+                                          keyPtr,
+                                          kCCBlockSizeAES128,
+                                          ivPtr,
+                                          [data bytes],
+                                          dataLength,
+                                          buffer,
+                                          bufferSize,
+                                          &numBytesDecrypted);
+    if (cryptStatus == kCCSuccess) {
+        return [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
+    }
+    free(buffer);
+    return nil;
+}
+
+
++ (NSString *)AES128_Decrypt:(NSString *)key withStr:(NSString *)str {
+    
+    NSData *data1 = [[NSData alloc] initWithBase64EncodedString:str options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    
+    NSData * data2 = [QCClassFunction AES128_Decrypt:key encryptData:data1];
+    
+    NSString *output1 = [[NSString alloc] initWithData:data2 encoding:NSUTF8StringEncoding];
+    
+    return output1;
+}
+
+
+
+
 
 @end

@@ -12,7 +12,6 @@
 #import "QCMessageViewController.h"
 #import "QCBookViewController.h"
 #import "QCPersonViewController.h"
-
 @interface QCTarBarController ()<UITabBarControllerDelegate>
 
 @end

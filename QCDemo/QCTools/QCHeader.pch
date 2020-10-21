@@ -156,6 +156,8 @@
 // 字体大小 根据屏幕宽度按比例缩放（iPhone6为基准）
 #define KSCALE_FONT(size) [UIFont systemFontOfSize:KSCALE_WIDTH(size)]          // 系统字体（比例缩放）
 #define KSCALE_BFONT(size) [UIFont boldSystemFontOfSize:KSCALE_WIDTH(size)]  // 系统字加粗（比例缩放）
+#define K_8_FONT [UIFont systemFontOfSize:K_X_WIDTH(KSCALE_WIDTH(8))]
+
 #define K_9_FONT [UIFont systemFontOfSize:K_X_WIDTH(KSCALE_WIDTH(9))]
 
 #define K_10_FONT [UIFont systemFontOfSize:K_X_WIDTH(KSCALE_WIDTH(10))]
@@ -165,6 +167,8 @@
 #define K_13_FONT [UIFont systemFontOfSize:K_X_WIDTH(KSCALE_WIDTH(13))]
 
 #define K_14_FONT [UIFont systemFontOfSize:K_X_WIDTH(KSCALE_WIDTH(14))]
+#define K_15_FONT [UIFont systemFontOfSize:K_X_WIDTH(KSCALE_WIDTH(15))]
+
 #define K_16_FONT [UIFont systemFontOfSize:K_X_WIDTH(KSCALE_WIDTH(16))]
 #define K_18_FONT [UIFont systemFontOfSize:K_X_WIDTH(KSCALE_WIDTH(18))]
 #define K_20_FONT [UIFont systemFontOfSize:K_X_WIDTH(KSCALE_WIDTH(20))]
