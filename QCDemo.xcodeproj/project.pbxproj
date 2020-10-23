@@ -66,8 +66,27 @@
 		CC82633C253EE7BE001C3AD9 /* QCOtherCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82633B253EE7BE001C3AD9 /* QCOtherCardCell.m */; };
 		CC826359253FE84B001C3AD9 /* QCWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826358253FE84B001C3AD9 /* QCWebSocket.m */; };
 		CC82637225402772001C3AD9 /* QCGroupDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82637125402772001C3AD9 /* QCGroupDataViewController.m */; };
+		CC82637E254128B2001C3AD9 /* QCGroupItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82637D254128B2001C3AD9 /* QCGroupItem.m */; };
+		CC826384254128C8001C3AD9 /* QCGroupDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC826383254128C8001C3AD9 /* QCGroupDataCell.m */; };
+		CC82638A25416912001C3AD9 /* QCChatFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82638925416912001C3AD9 /* QCChatFooterView.m */; };
+		CC8263962541843E001C3AD9 /* GroupManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263952541843E001C3AD9 /* GroupManagerViewController.m */; };
+		CC82639C25418600001C3AD9 /* GroupManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82639B25418600001C3AD9 /* GroupManagerCell.m */; };
+		CC8263A325427DDB001C3AD9 /* QCAddGroupManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263A225427DDA001C3AD9 /* QCAddGroupManagerViewController.m */; };
+		CC8263AC25427F81001C3AD9 /* QCGroupManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263AB25427F81001C3AD9 /* QCGroupManagerCell.m */; };
+		CC8263B3254285F3001C3AD9 /* QCInactiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263B2254285F3001C3AD9 /* QCInactiveViewController.m */; };
+		CC8263B9254286A6001C3AD9 /* QCInactiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263B8254286A6001C3AD9 /* QCInactiveCell.m */; };
+		CC8263C0254289EC001C3AD9 /* QCDeletInactiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263BF254289EC001C3AD9 /* QCDeletInactiveViewController.m */; };
+		CC8263CA2542A9A8001C3AD9 /* QCNoSpeakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263C92542A9A8001C3AD9 /* QCNoSpeakViewController.m */; };
+		CC8263D32542A9C3001C3AD9 /* QCNoSpeakCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263D22542A9C3001C3AD9 /* QCNoSpeakCell.m */; };
+		CC8263DA2542AB9B001C3AD9 /* QCRefundGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263D92542AB9B001C3AD9 /* QCRefundGroupViewController.m */; };
+		CC8263E32542ACB4001C3AD9 /* QCRefundCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263E22542ACB4001C3AD9 /* QCRefundCell.m */; };
+		CC8263EA2542B155001C3AD9 /* QCNewGroupManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263E92542B155001C3AD9 /* QCNewGroupManagerViewController.m */; };
+		CC8263F02542B212001C3AD9 /* QCNewGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263EF2542B212001C3AD9 /* QCNewGroupCell.m */; };
+		CC8263F72542B45E001C3AD9 /* QCAssistantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263F62542B45E001C3AD9 /* QCAssistantViewController.m */; };
+		CC8263FD2542B530001C3AD9 /* QCAssistantCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263FC2542B530001C3AD9 /* QCAssistantCell.m */; };
+		CCBE36722542CEE0005337C8 /* QCBindWechatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE36712542CEE0005337C8 /* QCBindWechatViewController.m */; };
+		CCBE36872542DC09005337C8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE36852542DC08005337C8 /* SceneDelegate.m */; };
 		CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60F92535508A00311269 /* AppDelegate.m */; };
-		CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60FC2535508A00311269 /* SceneDelegate.m */; };
 		CCBE61032535508A00311269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBE61012535508A00311269 /* Main.storyboard */; };
 		CCBE61062535508A00311269 /* QCDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCBE61042535508A00311269 /* QCDemo.xcdatamodeld */; };
 		CCBE61082535508C00311269 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCBE61072535508C00311269 /* Assets.xcassets */; };
@@ -218,11 +237,49 @@
 		CC826358253FE84B001C3AD9 /* QCWebSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCWebSocket.m; sourceTree = "<group>"; };
 		CC82637025402772001C3AD9 /* QCGroupDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCGroupDataViewController.h; sourceTree = "<group>"; };
 		CC82637125402772001C3AD9 /* QCGroupDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCGroupDataViewController.m; sourceTree = "<group>"; };
+		CC82637C254128B2001C3AD9 /* QCGroupItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCGroupItem.h; sourceTree = "<group>"; };
+		CC82637D254128B2001C3AD9 /* QCGroupItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCGroupItem.m; sourceTree = "<group>"; };
+		CC826382254128C8001C3AD9 /* QCGroupDataCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCGroupDataCell.h; sourceTree = "<group>"; };
+		CC826383254128C8001C3AD9 /* QCGroupDataCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCGroupDataCell.m; sourceTree = "<group>"; };
+		CC82638825416912001C3AD9 /* QCChatFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCChatFooterView.h; sourceTree = "<group>"; };
+		CC82638925416912001C3AD9 /* QCChatFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCChatFooterView.m; sourceTree = "<group>"; };
+		CC8263942541843E001C3AD9 /* GroupManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupManagerViewController.h; sourceTree = "<group>"; };
+		CC8263952541843E001C3AD9 /* GroupManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupManagerViewController.m; sourceTree = "<group>"; };
+		CC82639A25418600001C3AD9 /* GroupManagerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupManagerCell.h; sourceTree = "<group>"; };
+		CC82639B25418600001C3AD9 /* GroupManagerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupManagerCell.m; sourceTree = "<group>"; };
+		CC8263A125427DDA001C3AD9 /* QCAddGroupManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCAddGroupManagerViewController.h; sourceTree = "<group>"; };
+		CC8263A225427DDA001C3AD9 /* QCAddGroupManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCAddGroupManagerViewController.m; sourceTree = "<group>"; };
+		CC8263AA25427F81001C3AD9 /* QCGroupManagerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCGroupManagerCell.h; sourceTree = "<group>"; };
+		CC8263AB25427F81001C3AD9 /* QCGroupManagerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCGroupManagerCell.m; sourceTree = "<group>"; };
+		CC8263B1254285F3001C3AD9 /* QCInactiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCInactiveViewController.h; sourceTree = "<group>"; };
+		CC8263B2254285F3001C3AD9 /* QCInactiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCInactiveViewController.m; sourceTree = "<group>"; };
+		CC8263B7254286A6001C3AD9 /* QCInactiveCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCInactiveCell.h; sourceTree = "<group>"; };
+		CC8263B8254286A6001C3AD9 /* QCInactiveCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCInactiveCell.m; sourceTree = "<group>"; };
+		CC8263BE254289EC001C3AD9 /* QCDeletInactiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCDeletInactiveViewController.h; sourceTree = "<group>"; };
+		CC8263BF254289EC001C3AD9 /* QCDeletInactiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCDeletInactiveViewController.m; sourceTree = "<group>"; };
+		CC8263C82542A9A8001C3AD9 /* QCNoSpeakViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCNoSpeakViewController.h; sourceTree = "<group>"; };
+		CC8263C92542A9A8001C3AD9 /* QCNoSpeakViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCNoSpeakViewController.m; sourceTree = "<group>"; };
+		CC8263D12542A9C3001C3AD9 /* QCNoSpeakCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCNoSpeakCell.h; sourceTree = "<group>"; };
+		CC8263D22542A9C3001C3AD9 /* QCNoSpeakCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCNoSpeakCell.m; sourceTree = "<group>"; };
+		CC8263D82542AB9B001C3AD9 /* QCRefundGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCRefundGroupViewController.h; sourceTree = "<group>"; };
+		CC8263D92542AB9B001C3AD9 /* QCRefundGroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCRefundGroupViewController.m; sourceTree = "<group>"; };
+		CC8263E12542ACB4001C3AD9 /* QCRefundCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCRefundCell.h; sourceTree = "<group>"; };
+		CC8263E22542ACB4001C3AD9 /* QCRefundCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCRefundCell.m; sourceTree = "<group>"; };
+		CC8263E82542B155001C3AD9 /* QCNewGroupManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCNewGroupManagerViewController.h; sourceTree = "<group>"; };
+		CC8263E92542B155001C3AD9 /* QCNewGroupManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCNewGroupManagerViewController.m; sourceTree = "<group>"; };
+		CC8263EE2542B212001C3AD9 /* QCNewGroupCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCNewGroupCell.h; sourceTree = "<group>"; };
+		CC8263EF2542B212001C3AD9 /* QCNewGroupCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCNewGroupCell.m; sourceTree = "<group>"; };
+		CC8263F52542B45E001C3AD9 /* QCAssistantViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCAssistantViewController.h; sourceTree = "<group>"; };
+		CC8263F62542B45E001C3AD9 /* QCAssistantViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCAssistantViewController.m; sourceTree = "<group>"; };
+		CC8263FB2542B530001C3AD9 /* QCAssistantCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCAssistantCell.h; sourceTree = "<group>"; };
+		CC8263FC2542B530001C3AD9 /* QCAssistantCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCAssistantCell.m; sourceTree = "<group>"; };
+		CCBE36702542CEE0005337C8 /* QCBindWechatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCBindWechatViewController.h; sourceTree = "<group>"; };
+		CCBE36712542CEE0005337C8 /* QCBindWechatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCBindWechatViewController.m; sourceTree = "<group>"; };
+		CCBE36852542DC08005337C8 /* SceneDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		CCBE36862542DC09005337C8 /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		CCBE60F52535508A00311269 /* QCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBE60F82535508A00311269 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CCBE60F92535508A00311269 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CCBE60FB2535508A00311269 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		CCBE60FC2535508A00311269 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		CCBE61022535508A00311269 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CCBE61052535508A00311269 /* QCDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QCDemo.xcdatamodel; sourceTree = "<group>"; };
 		CCBE61072535508C00311269 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -330,6 +387,7 @@
 		CC4E13002536C5C800337586 /* 登录 */ = {
 			isa = PBXGroup;
 			children = (
+				CCBE366F2542CEC5005337C8 /* QCBindWechatViewController */,
 				CC4E13E82538511900337586 /* QCTitlesViewController */,
 				CC4E13E1253850F200337586 /* QCDisableViewController */,
 				CC4E13DA25384EFD00337586 /* QCBindingViewController */,
@@ -553,6 +611,8 @@
 				CC8262D7253EE129001C3AD9 /* QCChatViewController.m */,
 				CC8262DC253EE151001C3AD9 /* QCChatCell.h */,
 				CC8262DD253EE151001C3AD9 /* QCChatCell.m */,
+				CC82638825416912001C3AD9 /* QCChatFooterView.h */,
+				CC82638925416912001C3AD9 /* QCChatFooterView.m */,
 			);
 			path = QCChatViewController;
 			sourceTree = "<group>";
@@ -618,8 +678,107 @@
 			children = (
 				CC82637025402772001C3AD9 /* QCGroupDataViewController.h */,
 				CC82637125402772001C3AD9 /* QCGroupDataViewController.m */,
+				CC82637C254128B2001C3AD9 /* QCGroupItem.h */,
+				CC82637D254128B2001C3AD9 /* QCGroupItem.m */,
+				CC826382254128C8001C3AD9 /* QCGroupDataCell.h */,
+				CC826383254128C8001C3AD9 /* QCGroupDataCell.m */,
 			);
 			path = QCGroupDataViewController;
+			sourceTree = "<group>";
+		};
+		CC82639325418412001C3AD9 /* GroupManagerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC8263942541843E001C3AD9 /* GroupManagerViewController.h */,
+				CC8263952541843E001C3AD9 /* GroupManagerViewController.m */,
+				CC82639A25418600001C3AD9 /* GroupManagerCell.h */,
+				CC82639B25418600001C3AD9 /* GroupManagerCell.m */,
+			);
+			path = GroupManagerViewController;
+			sourceTree = "<group>";
+		};
+		CC8263A025427DAF001C3AD9 /* QCAddGroupManagerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC8263A125427DDA001C3AD9 /* QCAddGroupManagerViewController.h */,
+				CC8263A225427DDA001C3AD9 /* QCAddGroupManagerViewController.m */,
+				CC8263AA25427F81001C3AD9 /* QCGroupManagerCell.h */,
+				CC8263AB25427F81001C3AD9 /* QCGroupManagerCell.m */,
+			);
+			path = QCAddGroupManagerViewController;
+			sourceTree = "<group>";
+		};
+		CC8263B0254285D9001C3AD9 /* QCInactiveViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC8263B1254285F3001C3AD9 /* QCInactiveViewController.h */,
+				CC8263B2254285F3001C3AD9 /* QCInactiveViewController.m */,
+				CC8263B7254286A6001C3AD9 /* QCInactiveCell.h */,
+				CC8263B8254286A6001C3AD9 /* QCInactiveCell.m */,
+			);
+			path = QCInactiveViewController;
+			sourceTree = "<group>";
+		};
+		CC8263BD254289CD001C3AD9 /* QCDeletInactiveViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC8263BE254289EC001C3AD9 /* QCDeletInactiveViewController.h */,
+				CC8263BF254289EC001C3AD9 /* QCDeletInactiveViewController.m */,
+			);
+			path = QCDeletInactiveViewController;
+			sourceTree = "<group>";
+		};
+		CC8263C72542A991001C3AD9 /* QCNoSpeakViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC8263C82542A9A8001C3AD9 /* QCNoSpeakViewController.h */,
+				CC8263C92542A9A8001C3AD9 /* QCNoSpeakViewController.m */,
+				CC8263D12542A9C3001C3AD9 /* QCNoSpeakCell.h */,
+				CC8263D22542A9C3001C3AD9 /* QCNoSpeakCell.m */,
+			);
+			path = QCNoSpeakViewController;
+			sourceTree = "<group>";
+		};
+		CC8263D72542AB80001C3AD9 /* QCRefundGroupViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC8263D82542AB9B001C3AD9 /* QCRefundGroupViewController.h */,
+				CC8263D92542AB9B001C3AD9 /* QCRefundGroupViewController.m */,
+				CC8263E12542ACB4001C3AD9 /* QCRefundCell.h */,
+				CC8263E22542ACB4001C3AD9 /* QCRefundCell.m */,
+			);
+			path = QCRefundGroupViewController;
+			sourceTree = "<group>";
+		};
+		CC8263E72542B131001C3AD9 /* QCNewGroupManagerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC8263E82542B155001C3AD9 /* QCNewGroupManagerViewController.h */,
+				CC8263E92542B155001C3AD9 /* QCNewGroupManagerViewController.m */,
+				CC8263EE2542B212001C3AD9 /* QCNewGroupCell.h */,
+				CC8263EF2542B212001C3AD9 /* QCNewGroupCell.m */,
+			);
+			path = QCNewGroupManagerViewController;
+			sourceTree = "<group>";
+		};
+		CC8263F42542B43A001C3AD9 /* QCAssistantViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC8263F52542B45E001C3AD9 /* QCAssistantViewController.h */,
+				CC8263F62542B45E001C3AD9 /* QCAssistantViewController.m */,
+				CC8263FB2542B530001C3AD9 /* QCAssistantCell.h */,
+				CC8263FC2542B530001C3AD9 /* QCAssistantCell.m */,
+			);
+			path = QCAssistantViewController;
+			sourceTree = "<group>";
+		};
+		CCBE366F2542CEC5005337C8 /* QCBindWechatViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CCBE36702542CEE0005337C8 /* QCBindWechatViewController.h */,
+				CCBE36712542CEE0005337C8 /* QCBindWechatViewController.m */,
+			);
+			path = QCBindWechatViewController;
 			sourceTree = "<group>";
 		};
 		CCBE60EC2535508A00311269 = {
@@ -654,8 +813,8 @@
 				CCBE61352535515600311269 /* QCTools */,
 				CCBE60F82535508A00311269 /* AppDelegate.h */,
 				CCBE60F92535508A00311269 /* AppDelegate.m */,
-				CCBE60FB2535508A00311269 /* SceneDelegate.h */,
-				CCBE60FC2535508A00311269 /* SceneDelegate.m */,
+				CCBE36862542DC09005337C8 /* SceneDelegate.h */,
+				CCBE36852542DC08005337C8 /* SceneDelegate.m */,
 				CCBE61012535508A00311269 /* Main.storyboard */,
 				CCBE61072535508C00311269 /* Assets.xcassets */,
 				CCBE61092535508C00311269 /* LaunchScreen.storyboard */,
@@ -731,8 +890,8 @@
 		CCBE61372535515600311269 /* QCAFNetWorking */ = {
 			isa = PBXGroup;
 			children = (
-				CCBE61382535515600311269 /* QCAFNetWorking.m */,
 				CCBE61392535515600311269 /* QCAFNetWorking.h */,
+				CCBE61382535515600311269 /* QCAFNetWorking.m */,
 			);
 			path = QCAFNetWorking;
 			sourceTree = "<group>";
@@ -796,6 +955,14 @@
 		CCD509B82536A09D002CECEF /* 消息 */ = {
 			isa = PBXGroup;
 			children = (
+				CC8263F42542B43A001C3AD9 /* QCAssistantViewController */,
+				CC8263E72542B131001C3AD9 /* QCNewGroupManagerViewController */,
+				CC8263D72542AB80001C3AD9 /* QCRefundGroupViewController */,
+				CC8263C72542A991001C3AD9 /* QCNoSpeakViewController */,
+				CC8263BD254289CD001C3AD9 /* QCDeletInactiveViewController */,
+				CC8263B0254285D9001C3AD9 /* QCInactiveViewController */,
+				CC8263A025427DAF001C3AD9 /* QCAddGroupManagerViewController */,
+				CC82639325418412001C3AD9 /* GroupManagerViewController */,
 				CC8262D5253EE10D001C3AD9 /* QCChatViewController */,
 				CC8262C5253ED4FB001C3AD9 /* QCGroupViewController */,
 				CC8262BE253EB8EA001C3AD9 /* QCAddFriendsViewController */,
@@ -1046,8 +1213,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC826384254128C8001C3AD9 /* QCGroupDataCell.m in Sources */,
 				CC826308253EE65E001C3AD9 /* QCSelfVoiceCell.m in Sources */,
 				CC82629E253D8C4A001C3AD9 /* QCRealnamedViewController.m in Sources */,
+				CC8263AC25427F81001C3AD9 /* QCGroupManagerCell.m in Sources */,
+				CC82638A25416912001C3AD9 /* QCChatFooterView.m in Sources */,
 				CC8262DE253EE151001C3AD9 /* QCChatCell.m in Sources */,
 				CC826359253FE84B001C3AD9 /* QCWebSocket.m in Sources */,
 				CCBE610E2535508C00311269 /* main.m in Sources */,
@@ -1060,8 +1230,11 @@
 				CC826283253D7A67001C3AD9 /* QCCertificationPasswordViewController.m in Sources */,
 				CC4E13D625384B3E00337586 /* QCPhoneLoginViewController.m in Sources */,
 				CCBE613D2535515600311269 /* QCTarBarController.m in Sources */,
+				CC8263A325427DDB001C3AD9 /* QCAddGroupManagerViewController.m in Sources */,
+				CC8263FD2542B530001C3AD9 /* QCAssistantCell.m in Sources */,
 				CC8262D1253ED832001C3AD9 /* QCGroupCell.m in Sources */,
 				CC82624B253D2E88001C3AD9 /* QCEnvelopeViewController.m in Sources */,
+				CC8263F02542B212001C3AD9 /* QCNewGroupCell.m in Sources */,
 				CCBE613F2535515600311269 /* QCClassFunction.m in Sources */,
 				CC82625B253D36E7001C3AD9 /* QCBankViewController.m in Sources */,
 				CCD509A425369C21002CECEF /* BaseNavigationController.m in Sources */,
@@ -1071,46 +1244,59 @@
 				CCD509A525369C21002CECEF /* QCNavigationBar.m in Sources */,
 				CC4E12E02536A96500337586 /* XXPageTabView.m in Sources */,
 				CC4E13E42538510A00337586 /* QCDisableViewController.m in Sources */,
+				CCBE36872542DC09005337C8 /* SceneDelegate.m in Sources */,
 				CC82631D253EE74B001C3AD9 /* QCSelfCardCell.m in Sources */,
 				CC8262B4253E9131001C3AD9 /* QCFunctionViewController.m in Sources */,
 				CC826311253EE689001C3AD9 /* QCSelfPictureCell.m in Sources */,
 				CC8262BA253E951A001C3AD9 /* QCFunctionCell.m in Sources */,
 				CC826330253EE79A001C3AD9 /* QCOtherPictureCell.m in Sources */,
+				CC82637E254128B2001C3AD9 /* QCGroupItem.m in Sources */,
 				CC826317253EE727001C3AD9 /* QCSelfEnvelopeCell.m in Sources */,
 				CC826275253D68EA001C3AD9 /* QCCertificationViewController.m in Sources */,
 				CC4E12DF2536A96500337586 /* XXPageTabItemLable.m in Sources */,
 				CC826241253D2254001C3AD9 /* QCPaymentsDetailsViewController.m in Sources */,
 				CC4E13C825381AC800337586 /* QCCodeViewController.m in Sources */,
 				CC8262E6253EE4D3001C3AD9 /* QCSelfTextCell.m in Sources */,
+				CC8263C0254289EC001C3AD9 /* QCDeletInactiveViewController.m in Sources */,
 				CC8262D8253EE129001C3AD9 /* QCChatViewController.m in Sources */,
 				CC4E12EA2536AB1800337586 /* QCMapInstance.m in Sources */,
 				CCD509D62536A1B3002CECEF /* QCPersonViewController.m in Sources */,
 				CC82626B253D4119001C3AD9 /* QCAddBankViewController.m in Sources */,
 				CC826254253D348F001C3AD9 /* QCEnvelopCell.m in Sources */,
+				CC8263D32542A9C3001C3AD9 /* QCNoSpeakCell.m in Sources */,
 				CC4E13602536E69400337586 /* QCHtmlUrlViewController.m in Sources */,
 				CCD509C72536A191002CECEF /* QCMessageViewController.m in Sources */,
 				CC82622A25398402001C3AD9 /* QCWalletViewController.m in Sources */,
+				CC8263EA2542B155001C3AD9 /* QCNewGroupManagerViewController.m in Sources */,
 				CCBE613E2535515600311269 /* QCAFNetWorking.m in Sources */,
 				CC8262AD253E8947001C3AD9 /* QCMessageCell.m in Sources */,
 				CC826264253D3856001C3AD9 /* QCBankCell.m in Sources */,
 				CC82628D253D82DA001C3AD9 /* QCOpenViewController.m in Sources */,
 				CC82633C253EE7BE001C3AD9 /* QCOtherCardCell.m in Sources */,
+				CCBE36722542CEE0005337C8 /* QCBindWechatViewController.m in Sources */,
 				CC82632A253EE786001C3AD9 /* QCOtherVoiceCell.m in Sources */,
 				CC4E13CF2538445400337586 /* QCAccountViewController.m in Sources */,
+				CC8263B9254286A6001C3AD9 /* QCInactiveCell.m in Sources */,
 				CC8262C1253EB90D001C3AD9 /* QCAddFriendsViewController.m in Sources */,
 				CC8262312539926C001C3AD9 /* QCPaymentsViewController.m in Sources */,
+				CC8263CA2542A9A8001C3AD9 /* QCNoSpeakViewController.m in Sources */,
+				CC8263E32542ACB4001C3AD9 /* QCRefundCell.m in Sources */,
+				CC8263DA2542AB9B001C3AD9 /* QCRefundGroupViewController.m in Sources */,
 				CC826336253EE7AB001C3AD9 /* QCOtherEnvelopeCell.m in Sources */,
 				CCD509BD2536A0DC002CECEF /* QCReleaseViewController.m in Sources */,
 				CC4E13DD25384F2A00337586 /* QCBindingViewController.m in Sources */,
 				CC826323253EE768001C3AD9 /* QCOtherTextCell.m in Sources */,
 				CC4E13042536C5FC00337586 /* QCLoginViewController.m in Sources */,
 				CC826297253D89A6001C3AD9 /* QCRealnameViewController.m in Sources */,
+				CC8263B3254285F3001C3AD9 /* QCInactiveViewController.m in Sources */,
 				CC82623A2539A190001C3AD9 /* QCPaymentsCell.m in Sources */,
-				CCBE60FD2535508A00311269 /* SceneDelegate.m in Sources */,
+				CC8263962541843E001C3AD9 /* GroupManagerViewController.m in Sources */,
 				CC8262FC253EE57C001C3AD9 /* QCSaveCell.m in Sources */,
 				CC4E13EB2538513F00337586 /* QCTitlesViewController.m in Sources */,
 				CC82622325397F49001C3AD9 /* QCPersonCell.m in Sources */,
+				CC8263F72542B45E001C3AD9 /* QCAssistantViewController.m in Sources */,
 				CC8262F6253EE55D001C3AD9 /* QCInvitationCell.m in Sources */,
+				CC82639C25418600001C3AD9 /* GroupManagerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

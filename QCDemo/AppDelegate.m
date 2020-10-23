@@ -22,6 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [self GETURL];
     
     [WXApi registerApp:@"wxee57a3177d3643b4" universalLink:@"https://universal-links.xianduoduo123.com/"];
 
@@ -30,6 +31,7 @@
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxee57a3177d3643b4" appSecret:@"5ae16e3a812bbe1c7051b6ebe8a0da26" redirectURL:@"https://your_domain/app11111/"];
     [UMConfigure initWithAppkey:@"5b92186af29d9806c800021c" channel:@"AppStore"];
 
+    
 
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     QCTarBarController  *tab = [[QCTarBarController alloc]init];
@@ -38,31 +40,52 @@
     self.window.rootViewController.view.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+
     
     return YES;
 }
 
+- (void)GETURL {
+
+    [QCAFNetWorking QCGET:@"https://app-testoss.xianduoduo123.com/oss.txt" parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        [QCClassFunction Save:responseObject[@"aesdatakey"] Key:@"AESKEY"];
+        NSArray * domainArr = responseObject[@"domain"];
+        NSArray * wsArr = responseObject[@"ws"];
+
+        [QCClassFunction Save:responseObject[@"domain"][domainArr.count / 3] Key:@"HTTPURL"];
+        [QCClassFunction Save:responseObject[@"ws"][wsArr.count / 3] Key:@"WBURL"];
+
+
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        
+    }];
+    
+}
 
 // 支持所有iOS系统 URL回调方法
+
+
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
 
     BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url options:options];
-    
+
     if (!result) {
          // 其他如支付等SDK的回调
     }
     return result;
-    
+
 }
 
 
- 
+
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
-    
-    
+
+
     if (![[UMSocialManager defaultManager] handleUniversalLink:userActivity options:nil]) {
           // 其他SDK的回调
-      
+
          return [WXApi handleOpenUniversalLink:userActivity delegate:self];
       }
       return YES;
@@ -93,7 +116,9 @@
 
 - (NSPersistentContainer *)persistentContainer  API_AVAILABLE(ios(10.0)){
     // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
+    
     @synchronized (self) {
+        
         if (_persistentContainer == nil) {
             if (@available(iOS 10.0, *)) {
                 _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"QCDemo"];
@@ -139,5 +164,14 @@
         abort();
     }
 }
+
+-  (void)applicationWillEnterForeground:(UIApplication *)application
+
+{
+
+NSLog(@"应用程序将要进入活动状态，即将进入前台运行");
+
+}
+
 
 @end

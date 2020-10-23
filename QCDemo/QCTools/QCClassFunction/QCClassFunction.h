@@ -144,6 +144,21 @@
 
 + (NSString *)AES128_Decrypt:(NSString *)key withStr:(NSString *)str;
 
+/*
+ *  字符串转json
+ */
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
 
 
+/*
+ *  json转字符串
+ */
++ (NSString *) jsonStringWithDictionary:(NSDictionary *)dic;
+
+/*
+ *  MD5加密
+ */
++ (NSString *)MD5:(NSString *)str;
+
++ (NSString *)iphoneType;
 @end

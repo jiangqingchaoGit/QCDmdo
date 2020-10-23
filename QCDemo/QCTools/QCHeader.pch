@@ -93,6 +93,16 @@
 #define QCHeader_pch
 
 
+// https://blog.csdn.net/bitcser/article/details/53944777?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduend~default-1-53944777.nonecase&utm_term=ios%E8%8E%B7%E5%8F%96%E6%89%8B%E6%9C%BA%E5%9E%8B%E5%8F%B7&spm=1000.2123.3001.4430
+// 系统版本
+#define K_systemVersion [[UIDevice currentDevice] systemVersion]
+// UUID
+#define K_UUID [[UIDevice currentDevice].identifierForVendor UUIDString]
+
+#define K_TYPE [QCClassFunction iphoneType]
+
+
+
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
@@ -110,6 +120,20 @@
  */
 #define KJPUSH_appKey @"c6a3bba38147746c945c2ccb"
 
+/*
+ *  AESKEY
+ */
+#define K_AESKEY ([QCClassFunction Read:@"AESKEY"]?[QCClassFunction Read:@"AESKEY"]:@"")
+
+/*
+ *  HTTPURL
+ */
+#define K_HTTPURL ([QCClassFunction Read:@"HTTPURL"]?[QCClassFunction Read:@"HTTPURL"]:@"")
+
+/*
+ *  WBURL
+ */
+#define K_WBURL ([QCClassFunction Read:@"WBURL"]?[QCClassFunction Read:@"WBURL"]:@"")
 //#define
 //#define
 
@@ -130,6 +154,7 @@
 // 尺寸比例 基于iPhone6
 #define KSCALE_HEIGHT(height)     (height * (KSCREEN_HEIGHT / 667.0))       // 高度比例缩放
 #define KSCALE_WIDTH(width)       (width * (KSCREEN_WIDTH / 375.0))         // 宽度比例缩放
+
 
 
 

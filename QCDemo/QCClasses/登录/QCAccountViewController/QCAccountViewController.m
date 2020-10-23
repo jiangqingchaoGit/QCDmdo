@@ -207,7 +207,24 @@
         return;
     }
     
+    NSString * str = [NSString stringWithFormat:@"mobile=%@&password=%@",self.phoneTextField.text,self.passwordTextField.text];
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"password":self.passwordTextField.text,@"mobile":self.phoneTextField.text};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+
+    [QCAFNetWorking QCPOST:@"/api/login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+
+        NSLog(@"%@",responseObject[@"msg"]);
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
+    
 }
+
+
 
 
 - (void)forgetAction:(UIButton *)sender {

@@ -13,6 +13,7 @@
 #import "QCBindingViewController.h"
 #import "QCDisableViewController.h"
 #import "QCTitlesViewController.h"
+#import "QCBindWechatViewController.h"
 
 @interface QCLoginViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong) UIImageView * backImageView;
@@ -115,6 +116,7 @@
     self.phoneButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(362), KSCALE_WIDTH(100), KSCALE_WIDTH(30))];
     self.phoneButton.backgroundColor = KCLEAR_COLOR;
     self.phoneButton.titleLabel.font = K_14_FONT;
+    self.phoneButton.hidden = YES;
     self.phoneButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [self.phoneButton setTitle:@"本机号码登录" forState:UIControlStateNormal];
     [self.phoneButton setTitleColor:[QCClassFunction stringTOColor:@"#BCBCBC"] forState:UIControlStateNormal];
@@ -217,11 +219,35 @@
 - (void)wechatAction:(UIButton *)sender {
     [self.phoneTextField resignFirstResponder];
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
-            
-        
+
+
         NSLog(@"%@",result);
     }];
     //  微信登录
+    
+//    return;;
+    
+    NSString * str = [NSString stringWithFormat:@"device=%@&device_type=%@&device_version=%@&imei=%@&unionid=%@",K_TYPE,@"iOS",K_systemVersion,K_UUID,@"11112222"];
+
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"device":K_TYPE,@"device_type":@"iOS",@"device_version":K_systemVersion,@"imei":K_UUID,@"unionid":@"11112222"};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+
+    
+    [QCAFNetWorking QCPOST:@"/api/weixin_login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+
+        
+        QCBindWechatViewController * bindWechatViewController = [[QCBindWechatViewController alloc] init];
+        bindWechatViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:bindWechatViewController animated:YES];
+        
+        NSLog(@"%@",responseObject[@"msg"]);
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
 }
 
 - (void)agreementAction:(UIButton *)sender {

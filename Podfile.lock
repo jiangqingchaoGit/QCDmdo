@@ -23,6 +23,7 @@ PODS:
   - SDWebImage (5.8.0):
     - SDWebImage/Core (= 5.8.0)
   - SDWebImage/Core (5.8.0)
+  - SocketRocket (0.5.1)
   - UMCCommon (7.1.3)
   - UMCShare/Core (6.9.10):
     - UMCCommon
@@ -44,6 +45,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - MJRefresh
   - SDCycleScrollView
+  - SocketRocket
   - UMCCommon
   - UMCShare/Social/WeChat
   - UMCShare/UI
@@ -58,6 +60,7 @@ SPEC REPOS:
     - SDCycleScrollView
     - SDWebImage
   trunk:
+    - SocketRocket
     - UMCCommon
     - UMCShare
 
@@ -69,9 +72,10 @@ SPEC CHECKSUMS:
   MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
   SDCycleScrollView: b3c9a5ed840c771c4938978174c7c9d9feefeb96
   SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   UMCCommon: 0cb2629b93884531621100ed66ff2bca8b181f1f
   UMCShare: a4a95fbdd61ecce5b6751d8c9ed9b519e80fcbc9
 
-PODFILE CHECKSUM: 049b4ac2c9dc28a0b51de863fcf9d8b02d4a68cd
+PODFILE CHECKSUM: eeec3fecad824a5cbeadb8b18ba25d564f0d8868
 
 COCOAPODS: 1.9.3

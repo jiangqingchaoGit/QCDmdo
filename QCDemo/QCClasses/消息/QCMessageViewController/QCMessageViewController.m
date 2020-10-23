@@ -10,12 +10,16 @@
 #import "QCMessageCell.h"
 #import "QCFunctionViewController.h"
 
+//  聊天界面
+#import "QCChatViewController.h"
 //  添加朋友
 #import "QCAddFriendsViewController.h"
 //  发起群聊
 #import "QCGroupViewController.h"
 //  扫一扫
 //  帮助
+
+#import "QCGroupDataViewController.h"
 @interface QCMessageViewController ()<UITableViewDataSource,UITableViewDelegate,UIPopoverPresentationControllerDelegate>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIButton * rightButton;
@@ -186,7 +190,11 @@
     
     switch (indexPath.row) {
         case 0:
-            
+        {
+            QCChatViewController * chatViewController = [[QCChatViewController alloc] init];
+            chatViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:chatViewController animated:YES];
+        }
             break;
         case 1:
         {
@@ -194,9 +202,18 @@
             groupViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:groupViewController animated:YES];
         }
-        default:
             break;
-    }
+            
+        case 2:
+        {
+            QCGroupDataViewController * groupDataViewController = [[QCGroupDataViewController alloc] init];
+            groupDataViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:groupDataViewController animated:YES];
+        }
+            break;
+            
+        default:
+            break;    }
     
 }
 

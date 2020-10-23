@@ -17,17 +17,14 @@
  */
 +(void)QCGET:(NSString *)urlStr parameters:(NSDictionary *)dict success:(successBlock)successBlock failure:(failureBlock)failureBlock {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-
-       manager.responseSerializer = [AFHTTPResponseSerializer new];
-
-    [manager GET:[NSString stringWithFormat:@"%@",urlStr] parameters:dict headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-        
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:urlStr parameters:dict headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-       
-        id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         
+        NSString * jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        id result = [QCClassFunction dictionaryWithJsonString:[QCClassFunction AES128_Decrypt:@"6961260090843016" withStr:jsonStr]];
         successBlock(task,result);
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(task,error);
     }];
@@ -40,23 +37,28 @@
  */
 
 +(void)QCPOST:(NSString *)urlStr parameters:(NSDictionary *)dict success:(successBlock)successBlock failure:(failureBlock)failureBlock {
-    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    urlStr = [NSString stringWithFormat:@"%@%@",K_HTTPURL,urlStr];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     //开启系统菊花
+    
+    
     [UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
-    NSString *token = [QCClassFunction Read:@"token"]?[QCClassFunction Read:@"token"]:@"";
-    [manager POST:[NSString stringWithFormat:@"%@",urlStr] parameters:dict headers:@{@"token":token} constructingBodyWithBlock:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-        if([result[@"err_code"] integerValue]==800){
-            //登录
+    [manager POST:urlStr parameters:dict headers:nil constructingBodyWithBlock:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
-        }
+        NSString * jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        id result = [QCClassFunction dictionaryWithJsonString:[QCClassFunction AES128_Decrypt:K_AESKEY withStr:jsonStr]];
         successBlock(task,result);
+
+
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(task,error);
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
     }];
+    
+    
+
     
     
 }
@@ -129,6 +131,8 @@
     }];
     
 }
+
+
 
 
 

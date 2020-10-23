@@ -27,7 +27,7 @@
 
     self.navigationBar.titleTextAttributes=
   @{NSForegroundColorAttributeName:[UIColor blackColor],
-    NSFontAttributeName:K_16_FONT};
+    NSFontAttributeName:K_18_FONT};
 
    // [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navBar"] forBarMetrics:UIBarMetricsDefault];
     if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)) {

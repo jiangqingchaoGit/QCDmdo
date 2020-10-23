@@ -136,6 +136,30 @@
 - (void)GETLogin {
     //  codeTextField.text
     //  self.phoneStr
+    
+    
+    NSString * str = [NSString stringWithFormat:@"code=%@&device=%@&device_type=%@&device_version=%@&imei=%@&mobile=%@",self.codeTextField.text,K_TYPE,@"iOS",K_systemVersion,K_UUID,self.phoneStr];
+
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"code":self.codeTextField.text,@"device":K_TYPE,@"device_type":@"iOS",@"device_version":K_systemVersion,@"imei":K_UUID,@"mobile":self.phoneStr};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+
+    
+    [QCAFNetWorking QCPOST:@"/api/mobile_login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+
+        
+
+        NSLog(@"%@",responseObject[@"msg"]);
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
+    
+    
+    
+    
 
 }
 #pragma mark - tapAction
