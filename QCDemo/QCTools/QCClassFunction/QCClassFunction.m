@@ -144,7 +144,7 @@
 
 
 //NSUserDefaults
-+(void)Save:(NSString*)str Key:(NSString*)key{
++(void)Save:(id)str Key:(NSString*)key{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:str forKey:key];
     [defaults synchronize];
@@ -234,7 +234,7 @@
 
 //获取图片
 +(void)sd_imageView:(UIImageView*)image ImageURL:(NSString*)imageURL AppendingString:(NSString*)string placeholderImage:(NSString*)placeholderImage{
-    //    [image sd_setImageWithURL:[NSURL URLWithString:[imageURL stringByAppendingString:string ? string : @""]] placeholderImage:[UIImage imageNamed:placeholderImage]];
+        [image sd_setImageWithURL:[NSURL URLWithString:[imageURL stringByAppendingString:string ? string : @""]] placeholderImage:[UIImage imageNamed:placeholderImage]];
     
 }
 +(NSMutableAttributedString *)getFontWithString:(NSString *)textStr andTargetString:(NSString *)targetString withFont:(CGFloat )font andTargetFont:(CGFloat )targetFont{

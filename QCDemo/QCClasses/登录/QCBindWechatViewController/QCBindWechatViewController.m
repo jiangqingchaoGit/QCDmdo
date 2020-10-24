@@ -144,6 +144,8 @@
     QCCodeViewController * codeViewController = [[QCCodeViewController alloc] init];
     codeViewController.hidesBottomBarWhenPushed = YES;
     codeViewController.phoneStr = self.phoneTextField.text;
+    codeViewController.unionid = self.unionid;
+
     [self.navigationController pushViewController:codeViewController animated:YES];
 }
 

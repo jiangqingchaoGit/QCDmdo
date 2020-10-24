@@ -106,12 +106,10 @@
     }
 
     
-    self.nameTextField.text = @"蒋庆超";
-    self.cardTextField.text = @"************7033";
-    
+    NSString * cardStr = [QCClassFunction Read:@"cardNum"];
+    self.nameTextField.text = [QCClassFunction Read:@"realName"];
+    self.cardTextField.text = [cardStr stringByReplacingCharactersInRange:NSMakeRange(4, 10) withString:@" **** **** **"];
 
-    
-    
 }
 
 

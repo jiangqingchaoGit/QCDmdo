@@ -115,8 +115,10 @@
     }
 
     
-    self.nameTextField.text = @"蒋庆超";
-    self.cardTextField.text = @"************7033";
+    NSString * cardStr = [QCClassFunction Read:@"cardNum"];
+    self.nameTextField.text = [QCClassFunction Read:@"realName"];
+    self.cardTextField.text = [cardStr stringByReplacingCharactersInRange:NSMakeRange(4, 10) withString:@" **** **** **"];
+
     
     self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(380) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
     self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];

@@ -26,6 +26,11 @@
 @property (nonatomic, strong) UIButton * wechatButton;
 @property (nonatomic, strong) UIButton * agreementButton;
 
+@property(nonatomic, strong) UMSocialUserInfoResponse * resp;
+@property(nonatomic, strong) NSString  * unionid;
+
+
+
 @end
 
 @implementation QCLoginViewController
@@ -89,17 +94,17 @@
     self.phoneTextField.delegate = self;
     [self.phoneTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.phoneTextField];
-
+    
     
     self.clearButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(310), KSCALE_WIDTH(227),KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
     self.clearButton.hidden = YES;
-//    [self.clearButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    //    [self.clearButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     
     [self.clearButton setImage:KHeaderImage forState:UIControlStateNormal];
     [self.clearButton addTarget:self action:@selector(clearAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.clearButton];
     
-
+    
     
     self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(295), KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
     self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
@@ -122,7 +127,7 @@
     [self.phoneButton setTitleColor:[QCClassFunction stringTOColor:@"#BCBCBC"] forState:UIControlStateNormal];
     [self.phoneButton addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.phoneButton];
-
+    
     self.accountButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(258), KSCALE_WIDTH(362), KSCALE_WIDTH(84), KSCALE_WIDTH(30))];
     self.accountButton.backgroundColor = KCLEAR_COLOR;
     self.accountButton.titleLabel.font = K_14_FONT;
@@ -181,12 +186,12 @@
     self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
     self.phoneTextField.text = @"";
     [self.phoneTextField resignFirstResponder];
-
-
+    
+    
 }
 - (void)loginAction:(UIButton *)sender {
     [self.phoneTextField resignFirstResponder];
-
+    
     //  获取验证码
     if ([QCClassFunction isMobile:self.phoneTextField.text]) {
         [QCClassFunction showMessage:@"请输入正确的手机号码" toView:self.view];
@@ -200,17 +205,17 @@
 
 - (void)phoneAction:(UIButton *)sender {
     [self.phoneTextField resignFirstResponder];
-
+    
     //  本机号码登录
     
     QCPhoneLoginViewController * phoneLoginViewController = [[QCPhoneLoginViewController alloc] init];
     phoneLoginViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:phoneLoginViewController animated:YES];
-
+    
 }
 - (void)accountAction:(UIButton *)sender {
     [self.phoneTextField resignFirstResponder];
-
+    
     //  账号密码登录
     QCAccountViewController * accountViewController = [[QCAccountViewController alloc] init];
     accountViewController.hidesBottomBarWhenPushed = YES;
@@ -219,51 +224,81 @@
 - (void)wechatAction:(UIButton *)sender {
     [self.phoneTextField resignFirstResponder];
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
-
-
-        NSLog(@"%@",result);
+        
+        
+        self.resp = result;
+        self.unionid = self.resp.uid;
+        [self POSTDATA];
+        
     }];
-    //  微信登录
     
-//    return;;
     
-    NSString * str = [NSString stringWithFormat:@"device=%@&device_type=%@&device_version=%@&imei=%@&unionid=%@",K_TYPE,@"iOS",K_systemVersion,K_UUID,@"11112222"];
-
-    NSString * signStr = [QCClassFunction MD5:str];
-    NSDictionary * dic = @{@"device":K_TYPE,@"device_type":@"iOS",@"device_version":K_systemVersion,@"imei":K_UUID,@"unionid":@"11112222"};
-    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
-    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
-    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
-
     
-    [QCAFNetWorking QCPOST:@"/api/weixin_login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
-
-        
-        QCBindWechatViewController * bindWechatViewController = [[QCBindWechatViewController alloc] init];
-        bindWechatViewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:bindWechatViewController animated:YES];
-        
-        NSLog(@"%@",responseObject[@"msg"]);
-        
-    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
-        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
-    }];
 }
 
 - (void)agreementAction:(UIButton *)sender {
     [self.phoneTextField resignFirstResponder];
     
-//
-//    QCBindingViewController * bindingViewController = [[QCBindingViewController alloc] init];
-//    bindingViewController.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:bindingViewController animated:YES];
-//    
-    QCTitlesViewController * bindingViewController = [[QCTitlesViewController alloc] init];
-    bindingViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:bindingViewController animated:YES];
-    //  登录协议
+    
+    
+    
+    
 }
 
+- (void)POSTDATA {
+    
+    NSString * str = [NSString stringWithFormat:@"device=%@&device_type=%@&device_version=%@&imei=%@&unionid=%@",K_TYPE,@"iOS",K_systemVersion,K_UUID,self.unionid];
+    
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"device":K_TYPE,@"device_type":@"iOS",@"device_version":K_systemVersion,@"imei":K_UUID,@"unionid":self.unionid};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    
+    
+    [QCAFNetWorking QCPOST:@"/api/weixin_login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        
+        NSDictionary * data = responseObject[@"data"];
+        
+        
+        if ([responseObject[@"msg"] isEqualToString:@"登录成功"]) {
+            
+            [QCClassFunction Save:data[@"uid"] Key:@"uid"];
+            [QCClassFunction Save:data[@"token"] Key:@"token"];
+            [QCClassFunction Save:data[@"mobile"] Key:@"mobile"];
+            
+            
+        }
+        if ([responseObject[@"msg"] isEqualToString:@"用户不存在"]) {
+            QCBindWechatViewController * bindWechatViewController = [[QCBindWechatViewController alloc] init];
+            bindWechatViewController.hidesBottomBarWhenPushed = YES;
+            bindWechatViewController.unionid = data[@"unionid"];
+            [self.navigationController pushViewController:bindWechatViewController animated:YES];
+        }
+        if ([responseObject[@"msg"] isEqualToString:@"用户被冻结"]) {
+            [QCClassFunction Save:data[@"uid"] Key:@"uid"];
+            [QCClassFunction Save:data[@"token"] Key:@"token"];
+            [QCClassFunction Save:data[@"mobile"] Key:@"mobile"];
+            QCDisableViewController * disableViewController = [[QCDisableViewController alloc] init];
+            disableViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:disableViewController animated:YES];
+        }
+        if ([responseObject[@"msg"] isEqualToString:@"登录成功"]) {
+            [QCClassFunction Save:data[@"uid"] Key:@"uid"];
+            [QCClassFunction Save:data[@"token"] Key:@"token"];
+            [QCClassFunction Save:data[@"mobile"] Key:@"mobile"];
+            QCTitlesViewController * titlesViewController = [[QCTitlesViewController alloc] init];
+            titlesViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:titlesViewController animated:YES];
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
+    
+}
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidChange:(UITextField *)sender {
     
@@ -271,24 +306,24 @@
         self.loginButton.selected = YES;
         self.loginButton.userInteractionEnabled = YES;
         self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
-
+        
     }else{
         self.loginButton.selected = NO;
         self.loginButton.userInteractionEnabled = NO;
         self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
-
+        
     }
-
+    
 }
 
 
 - ( BOOL )textField:( UITextField  *)textField shouldChangeCharactersInRange:(NSRange )range replacementString:( NSString  *)string {
-
+    
     self.clearButton.hidden = NO;
     if (range.location > 10) {
         return NO;
     }
-
+    
     return YES;
 }
 

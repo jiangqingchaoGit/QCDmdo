@@ -161,6 +161,39 @@
     }
     
     //  认证成功
+    [self GETDATA];
+    
+    
+}
+
+#pragma mark -GETDATA
+- (void)GETDATA {
+    
+    NSString * str = [NSString stringWithFormat:@"identifyNum=%@&real_name=%@&uid=%@",self.cardTextField.text,self.nameTextField.text,K_UID?K_UID:@""];
+    NSString * signStr = [QCClassFunction MD5:str];
+
+    NSDictionary * dic = @{@"identifyNum":self.cardTextField.text,@"real_name":self.nameTextField.text,@"uid":K_UID?K_UID:@""};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+  
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    [QCAFNetWorking QCPOST:@"/api/user/verified" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        
+        NSDictionary * data = responseObject[@"data"];
+        
+        
+        if ([responseObject[@"msg"] isEqualToString:@"成功"]) {
+
+            
+        }
+
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
+    
 }
 
 

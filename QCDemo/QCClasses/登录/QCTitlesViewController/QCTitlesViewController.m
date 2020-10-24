@@ -7,7 +7,8 @@
 //
 
 #import "QCTitlesViewController.h"
-
+#import "QCRealnameViewController.h"
+#import "QCCertificationViewController.h"
 @interface QCTitlesViewController ()
 
 @property (nonatomic, strong) UIImageView * backImageView;
@@ -35,6 +36,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = KBACK_COLOR;
     [self initUI];
+    [self GETDATA];
 }
 
 
@@ -92,7 +94,6 @@
     [self.view addSubview:limitLabels];
     
     self.limitLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(330), KSCALE_WIDTH(230), KSCALE_WIDTH(22))];
-    self.limitLabel.text = @"永久";
     self.limitLabel.font = K_14_FONT;
     self.limitLabel.textColor = KTEXT_COLOR;
     [self.view addSubview:self.limitLabel];
@@ -104,7 +105,7 @@
     [self.view addSubview:contentLabels];
     
     self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(367), KSCALE_WIDTH(230), KSCALE_WIDTH(22))];
-    self.contentLabel.text = @"涉嫌上传敏感图片！";
+
     self.contentLabel.font = K_14_FONT;
     self.contentLabel.textColor = KTEXT_COLOR;
     [self.view addSubview:self.contentLabel];
@@ -138,6 +139,31 @@
     
 }
 
+- (void)GETDATA{
+    NSString * str = [NSString stringWithFormat:@"uid=%@",K_UID];
+
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"uid":K_UID};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+
+    
+    [QCAFNetWorking QCPOST:@"/api/forbid" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+
+        
+        if ([responseObject[@"status"] intValue] == 1) {
+//            self.limitLabel.text = responseObject[@"data"][@"ban_time"];
+//            self.contentLabel.text = responseObject[@"data"][@"reason"];
+        }
+
+        NSLog(@"%@",responseObject[@"msg"]);
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
+}
+
 
 #pragma mark - tapAction
 
@@ -148,7 +174,15 @@
     
 }
 - (void)withdrawalAction:(UIButton *)sender {
-    
+    if ([[QCClassFunction Read:@"cardNum"] isEqual:@""]) {
+        QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
+        realnameViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:realnameViewController animated:YES];
+    }else{
+        QCCertificationViewController * certificationViewController = [[QCCertificationViewController alloc] init];
+        certificationViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:certificationViewController animated:YES];
+    }
 }
 
 

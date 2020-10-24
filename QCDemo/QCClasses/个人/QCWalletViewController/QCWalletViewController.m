@@ -18,6 +18,7 @@
 //  实名认证
 #import "QCRealnameViewController.h"
 #import "QCRealnamedViewController.h"
+
 @interface QCWalletViewController ()
 @property (nonatomic, strong) UIButton * backButton;
 @property (nonatomic, strong) UIButton * eyeButton;
@@ -38,6 +39,39 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initUI];
+    
+    [self GETDATA];
+}
+
+#pragma mark -GETDATA
+- (void)GETDATA {
+    
+    
+    
+    NSString * str = [NSString stringWithFormat:@"uid=%@",K_UID?K_UID:@""];
+    NSString * signStr = [QCClassFunction MD5:str];
+
+    NSDictionary * dic = @{@"uid":K_UID?K_UID:@""};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+  
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    [QCAFNetWorking QCPOST:@"/api/user/getinfo" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        
+        NSDictionary * data = responseObject[@"data"];
+        
+        
+        if ([responseObject[@"msg"] isEqualToString:@"成功"]) {
+            self.moneyLabel.text = data[@"balance"];
+
+        }
+
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
     
 }
 
@@ -67,9 +101,17 @@
             break;
         case 2:
         {
-            QCCertificationViewController * certificationViewController = [[QCCertificationViewController alloc] init];
-            certificationViewController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:certificationViewController animated:YES];
+
+            
+            if ([[QCClassFunction Read:@"cardNum"] isEqual:@""]) {
+                QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
+                realnameViewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:realnameViewController animated:YES];
+            }else{
+                QCCertificationViewController * certificationViewController = [[QCCertificationViewController alloc] init];
+                certificationViewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:certificationViewController animated:YES];
+            }
         }
             break;
             
@@ -97,13 +139,19 @@
         case 3:
    
         {
-            QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
-            realnameViewController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:realnameViewController animated:YES];
+            if ([[QCClassFunction Read:@"cardNum"] isEqual:@""]) {
+
+                QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
+                realnameViewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:realnameViewController animated:YES];
+            }else{
+                QCRealnamedViewController * realnamedViewController = [[QCRealnamedViewController alloc] init];
+                realnamedViewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:realnamedViewController animated:YES];
+            }
+
             
-//            QCRealnamedViewController * realnamedViewController = [[QCRealnamedViewController alloc] init];
-//            realnamedViewController.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:realnamedViewController animated:YES];
+
         }
             break;
         case 4:

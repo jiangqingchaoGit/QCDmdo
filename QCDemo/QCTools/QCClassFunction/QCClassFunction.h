@@ -35,7 +35,7 @@
 /*
  *  NSUserDefaults
  */
-+(void)Save:(NSString*)str Key:(NSString*)key;
++(void)Save:(id)str Key:(NSString*)key;
 +(id)Read:(NSString*)key;
 
 /*

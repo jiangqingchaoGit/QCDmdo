@@ -9,6 +9,7 @@
 #import "QCPersonViewController.h"
 #import "QCPersonHeaderView.h"
 #import "QCPersonCell.h"
+#import "QCPersonModel.h"
 
 //
 #import "QCOpenViewController.h"
@@ -18,6 +19,7 @@
 @interface QCPersonViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) QCPersonHeaderView * headerView;
+@property (nonatomic, strong) NSMutableArray * dataArr;
 
 @end
 
@@ -25,6 +27,10 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    self.dataArr = [[NSMutableArray alloc] init];
+    [self GETDATA];
+
 }
 
 - (void)viewDidLoad {
@@ -35,6 +41,51 @@
     [self createHeaderView];
 }
 
+- (void)fillView {
+
+    QCPersonModel * personModel = [self.dataArr firstObject];
+    [self.headerView fillViewWithModel:personModel];
+    
+}
+
+#pragma mark - GETDATA
+- (void)GETDATA {
+    
+    NSString * str = [NSString stringWithFormat:@"uid=%@",K_UID?K_UID:@""];
+    NSString * signStr = [QCClassFunction MD5:str];
+
+    NSDictionary * dic = @{@"uid":K_UID?K_UID:@""};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+  
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    [QCAFNetWorking QCPOST:@"/api/user/getinfo" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        
+        NSDictionary * data = responseObject[@"data"];
+        
+        
+        if ([responseObject[@"msg"] isEqualToString:@"成功"]) {
+            QCPersonModel * personModel = [[QCPersonModel alloc] initWithDictionary:data error:nil];
+            
+            [QCClassFunction Save:personModel.nick Key:@"nick"];
+            [QCClassFunction Save:personModel.head_img Key:@"headImage"];
+            [QCClassFunction Save:personModel.sex Key:@"sex"];
+            [QCClassFunction Save:personModel.identifyNum Key:@"cardNum"];
+            [QCClassFunction Save:personModel.real_name Key:@"realName"];
+
+            [self.dataArr removeAllObjects];
+            [self.dataArr addObject:personModel];
+            [self fillView];
+        }
+
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
+    
+}
 #pragma mark - initUI
 - (void)initUI {
     self.view.backgroundColor = KBACK_COLOR;

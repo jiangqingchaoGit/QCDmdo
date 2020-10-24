@@ -85,7 +85,7 @@
 		CC8263F72542B45E001C3AD9 /* QCAssistantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263F62542B45E001C3AD9 /* QCAssistantViewController.m */; };
 		CC8263FD2542B530001C3AD9 /* QCAssistantCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263FC2542B530001C3AD9 /* QCAssistantCell.m */; };
 		CCBE36722542CEE0005337C8 /* QCBindWechatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE36712542CEE0005337C8 /* QCBindWechatViewController.m */; };
-		CCBE36872542DC09005337C8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE36852542DC08005337C8 /* SceneDelegate.m */; };
+		CCBE369B2543FBED005337C8 /* QCPersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE369A2543FBEC005337C8 /* QCPersonModel.m */; };
 		CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60F92535508A00311269 /* AppDelegate.m */; };
 		CCBE61032535508A00311269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBE61012535508A00311269 /* Main.storyboard */; };
 		CCBE61062535508A00311269 /* QCDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCBE61042535508A00311269 /* QCDemo.xcdatamodeld */; };
@@ -275,8 +275,8 @@
 		CC8263FC2542B530001C3AD9 /* QCAssistantCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCAssistantCell.m; sourceTree = "<group>"; };
 		CCBE36702542CEE0005337C8 /* QCBindWechatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCBindWechatViewController.h; sourceTree = "<group>"; };
 		CCBE36712542CEE0005337C8 /* QCBindWechatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCBindWechatViewController.m; sourceTree = "<group>"; };
-		CCBE36852542DC08005337C8 /* SceneDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		CCBE36862542DC09005337C8 /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		CCBE36992543FBEC005337C8 /* QCPersonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCPersonModel.h; sourceTree = "<group>"; };
+		CCBE369A2543FBEC005337C8 /* QCPersonModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCPersonModel.m; sourceTree = "<group>"; };
 		CCBE60F52535508A00311269 /* QCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBE60F82535508A00311269 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CCBE60F92535508A00311269 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -813,8 +813,6 @@
 				CCBE61352535515600311269 /* QCTools */,
 				CCBE60F82535508A00311269 /* AppDelegate.h */,
 				CCBE60F92535508A00311269 /* AppDelegate.m */,
-				CCBE36862542DC09005337C8 /* SceneDelegate.h */,
-				CCBE36852542DC08005337C8 /* SceneDelegate.m */,
 				CCBE61012535508A00311269 /* Main.storyboard */,
 				CCBE61072535508C00311269 /* Assets.xcassets */,
 				CCBE61092535508C00311269 /* LaunchScreen.storyboard */,
@@ -1026,6 +1024,8 @@
 				CC82621C25394013001C3AD9 /* QCPersonHeaderView.m */,
 				CC82622125397F49001C3AD9 /* QCPersonCell.h */,
 				CC82622225397F49001C3AD9 /* QCPersonCell.m */,
+				CCBE36992543FBEC005337C8 /* QCPersonModel.h */,
+				CCBE369A2543FBEC005337C8 /* QCPersonModel.m */,
 			);
 			path = QCPersonViewController;
 			sourceTree = "<group>";
@@ -1219,6 +1219,7 @@
 				CC8263AC25427F81001C3AD9 /* QCGroupManagerCell.m in Sources */,
 				CC82638A25416912001C3AD9 /* QCChatFooterView.m in Sources */,
 				CC8262DE253EE151001C3AD9 /* QCChatCell.m in Sources */,
+				CCBE369B2543FBED005337C8 /* QCPersonModel.m in Sources */,
 				CC826359253FE84B001C3AD9 /* QCWebSocket.m in Sources */,
 				CCBE610E2535508C00311269 /* main.m in Sources */,
 				CCBE61062535508A00311269 /* QCDemo.xcdatamodeld in Sources */,
@@ -1244,7 +1245,6 @@
 				CCD509A525369C21002CECEF /* QCNavigationBar.m in Sources */,
 				CC4E12E02536A96500337586 /* XXPageTabView.m in Sources */,
 				CC4E13E42538510A00337586 /* QCDisableViewController.m in Sources */,
-				CCBE36872542DC09005337C8 /* SceneDelegate.m in Sources */,
 				CC82631D253EE74B001C3AD9 /* QCSelfCardCell.m in Sources */,
 				CC8262B4253E9131001C3AD9 /* QCFunctionViewController.m in Sources */,
 				CC826311253EE689001C3AD9 /* QCSelfPictureCell.m in Sources */,

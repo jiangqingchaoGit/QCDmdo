@@ -103,6 +103,7 @@
 
 
 
+
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
@@ -134,6 +135,22 @@
  *  WBURL
  */
 #define K_WBURL ([QCClassFunction Read:@"WBURL"]?[QCClassFunction Read:@"WBURL"]:@"")
+
+#define K_UID ([QCClassFunction Read:@"uid"]?[QCClassFunction Read:@"uid"]:@"")
+
+
+/*
+ *  用户信息
+ */
+#define K_TOKEN ([QCClassFunction Read:@"token"]?[QCClassFunction Read:@"token"]:@"")
+#define K_PHONE ([QCClassFunction Read:@"mobile"]?[QCClassFunction Read:@"mobile"]:@"")
+#define K_NICK ([QCClassFunction Read:@"nick"]?[QCClassFunction Read:@"nick"]:@"")
+#define K_SEX ([QCClassFunction Read:@"sex"]?[QCClassFunction Read:@"sex"]:@"")
+#define K_HEADIMAGE ([QCClassFunction Read:@"headImage"]?[QCClassFunction Read:@"headImage"]:@"")
+#define K_REALNAME ([QCClassFunction Read:@"realName"]?[QCClassFunction Read:@"realName"]:@"")
+#define K_CARDNUM ([QCClassFunction Read:@"cardNum"]?[QCClassFunction Read:@"cardNum"]:@"")
+
+
 //#define
 //#define
 

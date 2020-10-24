@@ -46,6 +46,7 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
     [manager POST:urlStr parameters:dict headers:nil constructingBodyWithBlock:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
+
         NSString * jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         id result = [QCClassFunction dictionaryWithJsonString:[QCClassFunction AES128_Decrypt:K_AESKEY withStr:jsonStr]];
         successBlock(task,result);

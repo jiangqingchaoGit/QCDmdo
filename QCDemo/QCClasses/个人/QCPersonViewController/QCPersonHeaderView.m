@@ -7,7 +7,9 @@
 //
 
 #import "QCPersonHeaderView.h"
-
+#import "QCPersonModel.h"
+#import "QCRealnameViewController.h"
+#import "QCCertificationViewController.h"
 @interface QCPersonHeaderView()
 @property (nonatomic, strong) UIImageView * headerImageView;
 @property (nonatomic, strong) UILabel * nickNameLabel;
@@ -41,6 +43,15 @@
 
 - (void)withdrawalAction:(UIButton *)sender {
     //  提现
+    if ([[QCClassFunction Read:@"cardNum"] isEqual:@""]) {
+        QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
+        realnameViewController.hidesBottomBarWhenPushed = YES;
+        [[QCClassFunction parentController:self].navigationController pushViewController:realnameViewController animated:YES];
+    }else{
+        QCCertificationViewController * certificationViewController = [[QCCertificationViewController alloc] init];
+        certificationViewController.hidesBottomBarWhenPushed = YES;
+        [[QCClassFunction parentController:self].navigationController pushViewController:certificationViewController animated:YES];
+    }
 }
 - (void)functionAction:(UIButton *)sender {
     
@@ -75,13 +86,11 @@
     [self addSubview:self.headerImageView];
     
     self.nickNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(100), KStatusHight + KSCALE_WIDTH(50), KSCALE_WIDTH(200), KSCALE_WIDTH(20))];
-    self.nickNameLabel.text = @"黑与白";
     self.nickNameLabel.font = K_18_BFONT;
     self.nickNameLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];;
     [self addSubview:self.nickNameLabel];
     
     self.cardLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(100), KStatusHight + KSCALE_WIDTH(70), KSCALE_WIDTH(200), KSCALE_WIDTH(20))];
-    self.cardLabel.text = @"DODO号：uid_234lj23";
     self.cardLabel.font = K_12_FONT;
     self.cardLabel.textColor = [QCClassFunction stringTOColor:@"#434343"];
     [self addSubview:self.cardLabel];
@@ -202,6 +211,16 @@
 }
 
 
-
-
+#pragma mark - fillView
+- (void)fillViewWithModel:(QCPersonModel *)model {
+    
+    [QCClassFunction sd_imageView:self.headerImageView ImageURL:model.head_img AppendingString:nil placeholderImage:@"header"];
+    self.nickNameLabel.text = model.nick;
+    self.cardLabel.text = model.uid;
+    self.moneyLabel.text = model.balance;
+    self.releaseLabel.text = model.fabu;
+    self.orderLabel.text =  model.order;
+    self.getLabel.text = model.buy;
+    self.orderView.hidden = YES;
+}
 @end
