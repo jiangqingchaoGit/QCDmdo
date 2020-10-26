@@ -28,7 +28,7 @@
 
     [UMSocialGlobal shareInstance].isUsingWaterMark = YES;
     [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxee57a3177d3643b4" appSecret:@"5ae16e3a812bbe1c7051b6ebe8a0da26" redirectURL:@"https://your_domain/app11111/"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxee57a3177d3643b4" appSecret:@"5ae16e3a812bbe1c7051b6ebe8a0da26" redirectURL:@"https://universal-links.xianduoduo123.com/"];
     [UMConfigure initWithAppkey:@"5b92186af29d9806c800021c" channel:@"AppStore"];
 
     
@@ -93,21 +93,7 @@
 
 
 
-#pragma mark - UISceneSession lifecycle
 
-
-//- (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options  API_AVAILABLE(ios(13.0)){
-//    // Called when a new scene session is being created.
-//    // Use this method to select a configuration to create the new scene with.
-//    return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
-//}
-//
-//
-//- (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions  API_AVAILABLE(ios(13.0)){
-//    // Called when the user discards a scene session.
-//    // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-//    // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-//}
 
 
 #pragma mark - Core Data stack

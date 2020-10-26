@@ -132,7 +132,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QCPersonCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
     NSArray * titleArr = @[@"钱包",@"帮助",@"客服",@"设置"];
     cell.headerImageView.image = [UIImage imageNamed:titleArr[indexPath.row]];
     cell.titleLabel.text = titleArr[indexPath.row];

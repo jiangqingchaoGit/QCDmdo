@@ -21,8 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupChildControllers];
-
-
+    
+    
 }
 
 
@@ -30,27 +30,27 @@
 
 //这里设置两个视图控制器的代码是重复的，为了便于观察理解，我没有抽取，大家日常写代码的时候请注意养成良好的代码习惯。
 - (void)setupChildControllers {
-
+    
     if (@available(iOS 10.0, *)) {
         //  没有被选中的颜色
         self.tabBar.unselectedItemTintColor = [QCClassFunction stringTOColor:@"#999999"];
     } else {
-
+        
     }
-        //  选中时的颜色
+    //  选中时的颜色
     self.tabBar.tintColor = KTEXT_COLOR;
     self.delegate = self;
     QCHomeViewController * homeViewController = [[QCHomeViewController alloc] init];
     BaseNavigationController * homeViewNav = [[BaseNavigationController alloc] initWithRootViewController:homeViewController];
-    homeViewNav.tabBarItem.title = @"集市";
+    homeViewNav.tabBarItem.title = @"多多";
     homeViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
     homeViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
     
-    QCReleaseViewController * releaseViewController = [[QCReleaseViewController alloc] init];
-    BaseNavigationController * releaseViewNav = [[BaseNavigationController alloc] initWithRootViewController:releaseViewController];
-    releaseViewNav.tabBarItem.title = @"发布";
-    releaseViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
-    releaseViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
+//    QCReleaseViewController * releaseViewController = [[QCReleaseViewController alloc] init];
+//    BaseNavigationController * releaseViewNav = [[BaseNavigationController alloc] initWithRootViewController:releaseViewController];
+//    releaseViewNav.tabBarItem.title = @"发布";
+//    releaseViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
+//    releaseViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
     
     QCMessageViewController * messageViewController = [[QCMessageViewController alloc] init];
     BaseNavigationController * messageViewNav = [[BaseNavigationController alloc] initWithRootViewController:messageViewController];
@@ -69,7 +69,7 @@
     personViewNav.tabBarItem.title = @"我";
     personViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
     personViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
-    self.viewControllers = @[homeViewNav,releaseViewNav,messageViewNav,bookViewNav,personViewNav];
+    self.viewControllers = @[homeViewNav,messageViewNav,bookViewNav,personViewNav];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,31 +79,24 @@
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     
     
-//    if ([kFetchNSUserDefaults(@"token") isEqualToString:@"0"] || kFetchNSUserDefaults(@"token") == nil) {
-//
-//    }
     
-    if ( [viewController.tabBarItem.title isEqualToString:@"收入"] || [viewController.tabBarItem.title isEqualToString:@"发布"]) {
-        QCLoginViewController * loginViewController = [QCLoginViewController new];
-        BaseNavigationController * loginNav = [[BaseNavigationController alloc] initWithRootViewController:loginViewController];
-        loginNav.modalPresentationStyle=UIModalPresentationCustom;
-        [self presentViewController:loginNav animated:YES completion:nil];
-        return NO;
+    if ( [viewController.tabBarItem.title isEqualToString:@"消息"] || [viewController.tabBarItem.title isEqualToString:@"通讯录"]  || [viewController.tabBarItem.title isEqualToString:@"我"]) {
+        
+        if ([QCClassFunction Read:@"token"] == nil) {
+            QCLoginViewController * loginViewController = [QCLoginViewController new];
+            BaseNavigationController * loginNav = [[BaseNavigationController alloc] initWithRootViewController:loginViewController];
+            loginNav.modalPresentationStyle=UIModalPresentationCustom;
+            [self presentViewController:loginNav animated:YES completion:nil];
+            return NO;
+        }
+        
+        
         
     }
     
     return  YES;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
 

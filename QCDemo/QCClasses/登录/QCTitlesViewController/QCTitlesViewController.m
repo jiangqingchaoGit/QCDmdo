@@ -52,70 +52,70 @@
     [self.backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.backButton];
     
-    UILabel * loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(125), KSCALE_WIDTH(200), KSCALE_WIDTH(30))];
+    UILabel * loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(105) + KStatusHight, KSCALE_WIDTH(200), KSCALE_WIDTH(30))];
     loginLabel.text = @"账号禁用警告";
     loginLabel.font = K_24_BFONT;
     loginLabel.textColor = KTEXT_COLOR;
     loginLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:loginLabel];
     
-    UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(160), KSCALE_WIDTH(300), KSCALE_WIDTH(18))];
+    UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(140) + KStatusHight, KSCALE_WIDTH(300), KSCALE_WIDTH(18))];
     tipLabel.text = @"您的账户存在较高安全风险，dodo已采取封号措施！";
     tipLabel.font = K_14_FONT;
     tipLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     tipLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:tipLabel];
     
-    self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(230), KSCALE_WIDTH(60), KSCALE_WIDTH(60))];
+    self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(210) + KStatusHight, KSCALE_WIDTH(60), KSCALE_WIDTH(60))];
     self.headerImageView.image = KHeaderImage;
     [QCClassFunction filletImageView:self.headerImageView withRadius:KSCALE_WIDTH(30)];
     [self.view addSubview:self.headerImageView];
     
-    self.nickNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(235), KSCALE_WIDTH(200), KSCALE_WIDTH(25))];
+    self.nickNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(215) + KStatusHight, KSCALE_WIDTH(200), KSCALE_WIDTH(25))];
     self.nickNameLabel.text = @"PAJERO";
     self.nickNameLabel.font = K_22_BFONT;
     self.nickNameLabel.textColor = [QCClassFunction stringTOColor:@"#FFCC00"];;
     [self.view addSubview:self.nickNameLabel];
     
-    self.cardLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(260), KSCALE_WIDTH(200), KSCALE_WIDTH(25))];
+    self.cardLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(240) + KStatusHight, KSCALE_WIDTH(200), KSCALE_WIDTH(25))];
     self.cardLabel.text = @"DODO号： uid_234lj23";
     self.cardLabel.font = K_14_FONT;
     self.cardLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     [self.view addSubview:self.cardLabel];
     
-    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(315), KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
+    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(295) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
     lineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     [self.view addSubview:lineView];
     
-    UILabel * limitLabels = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(330), KSCALE_WIDTH(80), KSCALE_WIDTH(22))];
+    UILabel * limitLabels = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(310) + KStatusHight, KSCALE_WIDTH(80), KSCALE_WIDTH(22))];
     limitLabels.text = @"封禁期限：";
     limitLabels.font = K_14_FONT;
     limitLabels.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];;
     [self.view addSubview:limitLabels];
     
-    self.limitLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(330), KSCALE_WIDTH(230), KSCALE_WIDTH(22))];
+    self.limitLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(310) + KStatusHight, KSCALE_WIDTH(230), KSCALE_WIDTH(22))];
     self.limitLabel.font = K_14_FONT;
     self.limitLabel.textColor = KTEXT_COLOR;
     [self.view addSubview:self.limitLabel];
     
-    UILabel * contentLabels = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(367), KSCALE_WIDTH(80), KSCALE_WIDTH(22))];
+    UILabel * contentLabels = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(347) + KStatusHight, KSCALE_WIDTH(80), KSCALE_WIDTH(22))];
     contentLabels.text = @"封禁原因：";
     contentLabels.font = K_14_FONT;
     contentLabels.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];;
     [self.view addSubview:contentLabels];
     
-    self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(367), KSCALE_WIDTH(230), KSCALE_WIDTH(22))];
+    self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(347) + KStatusHight, KSCALE_WIDTH(230), KSCALE_WIDTH(22))];
 
     self.contentLabel.font = K_14_FONT;
     self.contentLabel.textColor = KTEXT_COLOR;
     [self.view addSubview:self.contentLabel];
     
-    UIView * lineViews = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(405), KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
+    UIView * lineViews = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(485) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
     lineViews.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     [self.view addSubview:lineViews];
     
     
-    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(440), KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
+    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(420) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
     self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
     self.loginButton.titleLabel.font = K_18_FONT;
     [self.loginButton setTitle:@"电话申述" forState:UIControlStateNormal];
@@ -168,7 +168,8 @@
 #pragma mark - tapAction
 
 - (void)backAction:(UIButton *)sender {
-    
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 - (void)loginAction:(UIButton *)sender {
     

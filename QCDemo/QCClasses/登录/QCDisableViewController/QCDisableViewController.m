@@ -40,14 +40,14 @@
     [self.backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.backButton];
     
-    UILabel * loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(125), KSCALE_WIDTH(200), KSCALE_WIDTH(30))];
+    UILabel * loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(105) + KStatusHight, KSCALE_WIDTH(200), KSCALE_WIDTH(30))];
     loginLabel.text = @"风险控制";
     loginLabel.font = K_24_BFONT;
     loginLabel.textColor = KTEXT_COLOR;
     loginLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:loginLabel];
     
-    UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(160), KSCALE_WIDTH(300), KSCALE_WIDTH(18))];
+    UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(140) + KStatusHight, KSCALE_WIDTH(300), KSCALE_WIDTH(18))];
     tipLabel.text = @"您的账户存在较高安全风险，dodo已采取冻结措施！";
     tipLabel.font = K_14_FONT;
     tipLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
@@ -55,7 +55,7 @@
     [self.view addSubview:tipLabel];
     
     
-    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(420), KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
+    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(400) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
     self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
     self.loginButton.titleLabel.font = K_18_FONT;
     [self.loginButton setTitle:@"电话申述" forState:UIControlStateNormal];
@@ -66,12 +66,12 @@
     
     
     
-    UIImageView * disableImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(150), KSCALE_WIDTH(250), KSCALE_WIDTH(75), KSCALE_WIDTH(75))];
+    UIImageView * disableImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(150), KSCALE_WIDTH(230) + KStatusHight, KSCALE_WIDTH(75), KSCALE_WIDTH(75))];
     disableImageView.image = KHeaderImage;
     [QCClassFunction filletImageView:disableImageView withRadius:KSCALE_WIDTH(37.5)];
     [self.view addSubview:disableImageView];
     
-    UILabel * disableLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(0), KSCALE_WIDTH(330), KSCALE_WIDTH(375), KSCALE_WIDTH(28))];
+    UILabel * disableLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(0), KSCALE_WIDTH(310) + KStatusHight, KSCALE_WIDTH(375), KSCALE_WIDTH(28))];
     disableLabel.text = @"冻结中";
     disableLabel.font = K_16_FONT;
     disableLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];;
@@ -86,7 +86,8 @@
 #pragma mark - tapAction
 
 - (void)backAction:(UIButton *)sender {
-    
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 - (void)loginAction:(UIButton *)sender {
     

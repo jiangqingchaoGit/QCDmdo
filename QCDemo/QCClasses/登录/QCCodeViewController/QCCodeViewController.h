@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QCCodeViewController : UIViewController
 @property (nonatomic, strong) NSString * phoneStr;
 @property (nonatomic, strong) NSString * unionid;
+@property (nonatomic, strong) NSString * typeStr;
+
+
 
 @end
 

@@ -78,7 +78,8 @@
 #pragma mark - tapAction
 
 - (void)backAction:(UIButton *)sender {
-    
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 - (void)eyeAction:(UIButton *)sender {
@@ -182,7 +183,7 @@
     [self.view addSubview:backView];
     
     self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KNavHight - 44, 56, 44)];
-    [self.backButton setImage:[UIImage imageNamed:@"返回"] forState:UIControlStateNormal];
+    [self.backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     [self.backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.backButton];
     

@@ -7,6 +7,9 @@
 //
 
 #import "QCCodeViewController.h"
+#import "QCBindWechatViewController.h"
+#import "QCDisableViewController.h"
+#import "QCTitlesViewController.h"
 
 @interface QCCodeViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong) UIImageView * backImageView;
@@ -43,26 +46,26 @@
     self.backImageView.image = [UIImage imageNamed:@"底图"];
     [self.view addSubview:self.backImageView];
     
-    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(10), KSCALE_WIDTH(10),KSCALE_WIDTH(10), KSCALE_WIDTH(10))];
+    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KNavHight - 44, 56, 44)];
     [self.backButton setImage:[UIImage imageNamed:@"back_s"] forState:UIControlStateNormal];
     [self.backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.backButton];
     
-    UILabel * loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(125), KSCALE_WIDTH(200), KSCALE_WIDTH(30))];
+    UILabel * loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(105) + KStatusHight, KSCALE_WIDTH(200), KSCALE_WIDTH(30))];
     loginLabel.text = @"验证码已发送";
     loginLabel.font = K_24_BFONT;
     loginLabel.textColor = KTEXT_COLOR;
     loginLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:loginLabel];
     
-    self.phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(160), KSCALE_WIDTH(300), KSCALE_WIDTH(18))];
+    self.phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(140) + KStatusHight, KSCALE_WIDTH(300), KSCALE_WIDTH(18))];
     self.phoneLabel.text = [NSString stringWithFormat:@"+86 %@",self.phoneStr];
     self.phoneLabel.font = K_14_FONT;
     self.phoneLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     self.phoneLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:self.phoneLabel];
     
-    self.codeLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(50), KSCALE_WIDTH(223), KSCALE_WIDTH(200), KSCALE_WIDTH(20))];
+    self.codeLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(50), KSCALE_WIDTH(203) + KStatusHight, KSCALE_WIDTH(200), KSCALE_WIDTH(20))];
     self.codeLabel.font = K_14_FONT;
     self.codeLabel.textColor = [QCClassFunction stringTOColor:@"#FF9852"];
     self.codeLabel.textAlignment = NSTextAlignmentLeft;
@@ -72,7 +75,7 @@
     
     for (NSInteger i = 0; i <= 3; i++) {
 
-        self.codeLabels = [[UILabel alloc] initWithFrame:CGRectMake(i * KSCALE_WIDTH(73) + KSCALE_WIDTH(50), KSCALE_WIDTH(256), KSCALE_WIDTH(55), KSCALE_WIDTH(62))];
+        self.codeLabels = [[UILabel alloc] initWithFrame:CGRectMake(i * KSCALE_WIDTH(73) + KSCALE_WIDTH(50), KSCALE_WIDTH(236) + KStatusHight, KSCALE_WIDTH(55), KSCALE_WIDTH(62))];
         self.codeLabels.font = K_20_BFONT;
         self.codeLabels.textColor = KTEXT_COLOR;
         self.codeLabels.textAlignment = NSTextAlignmentCenter;
@@ -106,7 +109,7 @@
         
     }
     
-    self.codeTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(73), KSCALE_WIDTH(256), KSCALE_WIDTH(232), KSCALE_WIDTH(62))];
+    self.codeTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(73), KSCALE_WIDTH(236) + KStatusHight, KSCALE_WIDTH(232), KSCALE_WIDTH(62))];
     self.codeTextField.backgroundColor = KCLEAR_COLOR;
     self.codeTextField.textColor = KCLEAR_COLOR;
     self.codeTextField.tintColor= KCLEAR_COLOR;
@@ -116,7 +119,7 @@
     [self.view addSubview:self.codeTextField];
     
     
-    self.codeButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(0), KSCALE_WIDTH(340), KSCALE_WIDTH(375), KSCALE_WIDTH(30))];
+    self.codeButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(0), KSCALE_WIDTH(320) + KStatusHight, KSCALE_WIDTH(375), KSCALE_WIDTH(30))];
     self.codeButton.backgroundColor = KCLEAR_COLOR;
     self.codeButton.titleLabel.font = K_14_FONT;
     self.codeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -130,18 +133,41 @@
 
 #pragma mark - GETDATA
 - (void)GETCODE {
+    NSString * str = [NSString stringWithFormat:@"mobile=%@&type=%@",self.phoneStr,self.typeStr];
+
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"mobile":self.phoneStr,@"type":self.typeStr};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+
+    
+    [QCAFNetWorking QCPOST:@"/api/send" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+
+        NSDictionary * data = responseObject[@"data"];
+        
+        if ([responseObject[@"status"] intValue] == 1) {
+            
+        }else{
+            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
+    
+    
     
 }
 
 - (void)GETLogin {
-    //  codeTextField.text
-    //  self.phoneStr
     
-    
-    NSString * str = [NSString stringWithFormat:@"code=%@&device=%@&device_type=%@&device_version=%@&imei=%@&mobile=%@&unionid=%@",self.codeTextField.text,K_TYPE,@"iOS",K_systemVersion,K_UUID,self.phoneStr,self.unionid?self.unionid:@""];
+    NSString * str = [NSString stringWithFormat:@"code=%@&device=%@&device_type=%@&device_version=%@&imei=%@&mobile=%@&type=%@&unionid=%@",self.codeTextField.text,K_TYPE,@"iOS",K_systemVersion,K_UUID,self.phoneStr,self.typeStr,self.unionid?self.unionid:@""];
 
     NSString * signStr = [QCClassFunction MD5:str];
-    NSDictionary * dic = @{@"code":self.codeTextField.text,@"device":K_TYPE,@"device_type":@"iOS",@"device_version":K_systemVersion,@"imei":K_UUID,@"mobile":self.phoneStr,@"unionid":self.unionid?self.unionid:@""};
+    NSDictionary * dic = @{@"code":self.codeTextField.text,@"device":K_TYPE,@"device_type":@"iOS",@"device_version":K_systemVersion,@"imei":K_UUID,@"mobile":self.phoneStr,@"unionid":self.unionid?self.unionid:@"",@"type":self.typeStr};
     NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
@@ -149,9 +175,38 @@
     
     [QCAFNetWorking QCPOST:@"/api/mobile_login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
 
+        NSDictionary * data = responseObject[@"data"];
         
-
-        NSLog(@"%@",responseObject[@"msg"]);
+        
+        if ([responseObject[@"msg"] isEqualToString:@"登录成功"]) {
+            
+            [QCClassFunction Save:data[@"uid"] Key:@"uid"];
+            [QCClassFunction Save:data[@"token"] Key:@"token"];
+            [QCClassFunction Save:data[@"mobile"] Key:@"mobile"];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        if ([responseObject[@"msg"] isEqualToString:@"用户不存在"]) {
+            QCBindWechatViewController * bindWechatViewController = [[QCBindWechatViewController alloc] init];
+            bindWechatViewController.hidesBottomBarWhenPushed = YES;
+            bindWechatViewController.unionid = data[@"unionid"];
+            [self.navigationController pushViewController:bindWechatViewController animated:YES];
+        }
+        if ([responseObject[@"msg"] isEqualToString:@"用户被冻结"]) {
+            [QCClassFunction Save:data[@"uid"] Key:@"uid"];
+            [QCClassFunction Save:data[@"token"] Key:@"token"];
+            [QCClassFunction Save:data[@"mobile"] Key:@"mobile"];
+            QCDisableViewController * disableViewController = [[QCDisableViewController alloc] init];
+            disableViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:disableViewController animated:YES];
+        }
+        if ([responseObject[@"msg"] isEqualToString:@"用户被封"]) {
+            [QCClassFunction Save:data[@"uid"] Key:@"uid"];
+            [QCClassFunction Save:data[@"token"] Key:@"token"];
+            [QCClassFunction Save:data[@"mobile"] Key:@"mobile"];
+            QCTitlesViewController * titlesViewController = [[QCTitlesViewController alloc] init];
+            titlesViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:titlesViewController animated:YES];
+        }
         
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];

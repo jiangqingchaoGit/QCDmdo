@@ -11,7 +11,8 @@
 
 //  添加好友
 #import "QCAddFriendsViewController.h"
-
+#import "SWQRCodeConfig.h"
+#import "SWQRCodeViewController.h"
 @interface QCFunctionViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
@@ -44,10 +45,43 @@
 
 - (void)functionAction:(UIButton *)sender {
     
+    NSLog(@"%ld",sender.tag);
+    
     [self dismissViewControllerAnimated:NO completion:^{
-        QCAddFriendsViewController * addFriendsViewController = [[QCAddFriendsViewController alloc] init];
-        addFriendsViewController.hidesBottomBarWhenPushed = YES;
-        [self.messageViewController.navigationController pushViewController:addFriendsViewController animated:YES];
+
+        
+        switch (sender.tag) {
+            case 1:
+            {
+                QCAddFriendsViewController * addFriendsViewController = [[QCAddFriendsViewController alloc] init];
+                addFriendsViewController.hidesBottomBarWhenPushed = YES;
+                [self.messageViewController.navigationController pushViewController:addFriendsViewController animated:YES];
+            }
+                break;
+            case 2:
+            {
+                //  发起群聊
+            }
+                break;
+            case 3:
+            {
+                SWQRCodeConfig *config = [[SWQRCodeConfig alloc]init];
+                config.scannerType = SWScannerTypeBoth;
+                            
+                SWQRCodeViewController *qrcodeVC = [[SWQRCodeViewController alloc]init];
+                qrcodeVC.codeConfig = config;
+                [self.messageViewController.navigationController pushViewController:qrcodeVC animated:YES];
+            }
+                break;
+            case 4:
+            {
+                //  帮助
+            }
+                break;
+                
+            default:
+                break;
+        }
     }];
 }
 
@@ -100,6 +134,7 @@
     }
     cell.contentLabel.text = titleArr[indexPath.row];
     [cell.functionButton addTarget:self action:@selector(functionAction:) forControlEvents:UIControlEventTouchUpInside];
+    cell.functionButton.tag = indexPath.row + 1;
     return cell;
     
 }
@@ -108,32 +143,6 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 
-    NSLog(@"%ld",indexPath.row);
-    switch (indexPath.row) {
-        case 0:
-        {
-            
-        }
-            break;
-        case 1:
-        {
-            
-        }
-            break;
-        case 2:
-        {
-            
-        }
-            break;
-        case 3:
-        {
-            
-        }
-            break;
-            
-        default:
-            break;
-    }
     
 }
 

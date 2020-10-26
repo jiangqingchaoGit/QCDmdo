@@ -140,13 +140,38 @@
 
 
 - (void)backAction:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
 
 - (void)loginAction:(UIButton *)sender {
     //  人脸识别
+    NSString *appcode = @"你自己的AppCode";
+    NSString *host = @"https://rlsfzdb.market.alicloudapi.com";
+    NSString *path = @"/face_id/check";
+    NSString *method = @"POST";
+    NSString *querys = @"";
+    NSString *url = [NSString stringWithFormat:@"%@%@%@",  host,  path , querys];
+    NSString *bodys = @"idcard=230103196104153314&image=%2F9ai45bd****&name=%E5%BC%A0%E4%B8%89";
+
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: url]  cachePolicy:1  timeoutInterval:  5];
+    request.HTTPMethod  =  method;
+    [request addValue:  [NSString  stringWithFormat:@"APPCODE %@" ,  appcode]  forHTTPHeaderField:  @"Authorization"];
+    [request addValue: @"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField: @"Content-Type"];
+    NSData *data = [bodys dataUsingEncoding: NSUTF8StringEncoding];
+    [request setHTTPBody: data];
+    NSURLSession *requestSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSURLSessionDataTask *task = [requestSession dataTaskWithRequest:request
+        completionHandler:^(NSData * _Nullable body , NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"Response object: %@" , response);
+        NSString *bodyString = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
+
+        //打印应答中的body
+        NSLog(@"Response body: %@" , bodyString);
+        }];
+
+    [task resume];
     
 }
 

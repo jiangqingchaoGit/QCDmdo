@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton * headerButton;
 @property (nonatomic, strong) UILabel * nameLabel;
 @property (nonatomic, strong) UILabel * contentLabel;
+@property (nonatomic, strong) UILabel * timeLabel;
+@property (nonatomic, strong) UIButton * deletButton;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

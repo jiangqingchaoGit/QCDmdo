@@ -20,6 +20,9 @@
 //  帮助
 
 #import "QCGroupDataViewController.h"
+
+//  搜索界面
+#import "QCMessageSearchViewController.h"
 @interface QCMessageViewController ()<UITableViewDataSource,UITableViewDelegate,UIPopoverPresentationControllerDelegate>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIButton * rightButton;
@@ -94,6 +97,9 @@
 
 - (void)searchAction:(UIButton *)sender {
     //  搜索
+    QCMessageSearchViewController * messageSearchViewController = [[QCMessageSearchViewController alloc] init];
+    messageSearchViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:messageSearchViewController animated:YES];
 }
 
 #pragma mark - initUI

@@ -117,7 +117,7 @@
 
 
 - (void)backAction:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

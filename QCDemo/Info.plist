@@ -167,5 +167,11 @@
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>APP需要访问你的相册来上传图片</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>APP需要访问你的相册来保存图片</string>
+	<key>NSCameraUsageDescription</key>
+	<string>是否允许APP访问你的相机进行扫描/拍照/直播？</string>
 </dict>
 </plist>

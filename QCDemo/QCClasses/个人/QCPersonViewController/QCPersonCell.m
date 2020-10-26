@@ -36,10 +36,7 @@
         UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(54), KSCALE_WIDTH(335), KSCALE_WIDTH(1))];
         lineView.backgroundColor = [QCClassFunction stringTOColor:@"#D7D7D7"];
         [self.contentView addSubview:lineView];
-        
-        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(340), KSCALE_WIDTH(22), KSCALE_WIDTH(10), KSCALE_WIDTH(10))];
-        imageView.image = [UIImage imageNamed:@"向右箭头"];
-        [self.contentView addSubview:imageView];
+
     }
     return self;;
 }

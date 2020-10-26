@@ -1,8 +1,8 @@
 //
-//  QCNoSpeakViewController.h
+//  QCMessageSearchViewController.h
 //  QCDemo
 //
-//  Created by JQC on 2020/10/23.
+//  Created by JQC on 2020/10/26.
 //  Copyright © 2020 JQC. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QCNoSpeakViewController : UIViewController
+@interface QCMessageSearchViewController : UIViewController
 
 @end
 

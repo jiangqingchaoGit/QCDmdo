@@ -26,8 +26,8 @@
 @property (nonatomic, strong) UIButton * wechatButton;
 @property (nonatomic, strong) UIButton * agreementButton;
 
-@property(nonatomic, strong) UMSocialUserInfoResponse * resp;
-@property(nonatomic, strong) NSString  * unionid;
+@property (nonatomic, strong) UMSocialUserInfoResponse * resp;
+@property (nonatomic, strong) NSString  * unionid;
 
 
 
@@ -60,32 +60,32 @@
     [self.backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.backButton];
     
-    UILabel * loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(125), KSCALE_WIDTH(200), KSCALE_WIDTH(30))];
+    UILabel * loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(105) + KStatusHight, KSCALE_WIDTH(200), KSCALE_WIDTH(30))];
     loginLabel.text = @"登录多多";
     loginLabel.font = K_24_BFONT;
     loginLabel.textColor = KTEXT_COLOR;
     loginLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:loginLabel];
     
-    UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(160), KSCALE_WIDTH(300), KSCALE_WIDTH(18))];
+    UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(140) + KStatusHight, KSCALE_WIDTH(300), KSCALE_WIDTH(18))];
     tipLabel.text = @"如未注册账号，手机验证码即自动注册";
     tipLabel.font = K_14_FONT;
     tipLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     tipLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:tipLabel];
     
-    UILabel * phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(231), KSCALE_WIDTH(40), KSCALE_WIDTH(24))];
+    UILabel * phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(211) + KStatusHight, KSCALE_WIDTH(40), KSCALE_WIDTH(24))];
     phoneLabel.text = @"+86";
     phoneLabel.font = K_18_FONT;
     phoneLabel.textColor = KTEXT_COLOR;
     phoneLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:phoneLabel];
     
-    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(266), KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
+    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(246) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
     lineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     [self.view addSubview:lineView];
     
-    self.phoneTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(90), KSCALE_WIDTH(227), KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
+    self.phoneTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(90), KSCALE_WIDTH(207) + KStatusHight, KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
     self.phoneTextField.placeholder = @"请输入您的手机号码";
     self.phoneTextField.keyboardType = UIKeyboardTypeNumberPad;
     self.phoneTextField.font = K_20_BFONT;
@@ -96,7 +96,7 @@
     [self.view addSubview:self.phoneTextField];
     
     
-    self.clearButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(310), KSCALE_WIDTH(227),KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
+    self.clearButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(310), KSCALE_WIDTH(207) + KStatusHight,KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
     self.clearButton.hidden = YES;
     //    [self.clearButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     
@@ -106,7 +106,7 @@
     
     
     
-    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(295), KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
+    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(275) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
     self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
     self.loginButton.titleLabel.font = K_18_FONT;
     self.loginButton.selected = NO;
@@ -118,7 +118,7 @@
     [QCClassFunction filletImageView:self.loginButton withRadius:KSCALE_WIDTH(13)];
     [self.view addSubview:self.loginButton];
     
-    self.phoneButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(362), KSCALE_WIDTH(100), KSCALE_WIDTH(30))];
+    self.phoneButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(342) + KStatusHight, KSCALE_WIDTH(100), KSCALE_WIDTH(30))];
     self.phoneButton.backgroundColor = KCLEAR_COLOR;
     self.phoneButton.titleLabel.font = K_14_FONT;
     self.phoneButton.hidden = YES;
@@ -128,7 +128,7 @@
     [self.phoneButton addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.phoneButton];
     
-    self.accountButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(258), KSCALE_WIDTH(362), KSCALE_WIDTH(84), KSCALE_WIDTH(30))];
+    self.accountButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(258), KSCALE_WIDTH(342) + KStatusHight, KSCALE_WIDTH(84), KSCALE_WIDTH(30))];
     self.accountButton.backgroundColor = KCLEAR_COLOR;
     self.accountButton.titleLabel.font = K_14_FONT;
     self.accountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
@@ -200,6 +200,8 @@
     QCCodeViewController * codeViewController = [[QCCodeViewController alloc] init];
     codeViewController.hidesBottomBarWhenPushed = YES;
     codeViewController.phoneStr = self.phoneTextField.text;
+    codeViewController.typeStr = @"6";
+
     [self.navigationController pushViewController:codeViewController animated:YES];
 }
 
@@ -267,6 +269,7 @@
             [QCClassFunction Save:data[@"uid"] Key:@"uid"];
             [QCClassFunction Save:data[@"token"] Key:@"token"];
             [QCClassFunction Save:data[@"mobile"] Key:@"mobile"];
+            [self dismissViewControllerAnimated:YES completion:nil];
             
             
         }
@@ -284,7 +287,7 @@
             disableViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:disableViewController animated:YES];
         }
-        if ([responseObject[@"msg"] isEqualToString:@"登录成功"]) {
+        if ([responseObject[@"msg"] isEqualToString:@"用户被封"]) {
             [QCClassFunction Save:data[@"uid"] Key:@"uid"];
             [QCClassFunction Save:data[@"token"] Key:@"token"];
             [QCClassFunction Save:data[@"mobile"] Key:@"mobile"];

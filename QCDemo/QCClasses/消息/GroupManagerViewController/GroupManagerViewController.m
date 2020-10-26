@@ -13,8 +13,6 @@
 #import "QCAddGroupManagerViewController.h"
 //  不活跃成员
 #import "QCInactiveViewController.h"
-//  禁止发言成员
-#import "QCNoSpeakViewController.h"
 //  退群成员
 #import "QCRefundGroupViewController.h"
 //  新群管理
@@ -77,17 +75,20 @@
     
     switch (section) {
         case 0:
-            return 5;
+            return 3;
             break;
         case 1:
-            return 3;
+            return 1;
 
             break;
         case 2:
-            return 2;
+            return 3;
 
             break;
+        case 3:
+            return 1;
 
+            break;
             
         default:
             break;
@@ -96,7 +97,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section {
@@ -107,7 +108,7 @@
     UIView * view = [[UIView alloc] init];
     view.backgroundColor = KCLEAR_COLOR;
     
-    if (section != 2) {
+    if (section != 3) {
         UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(5), KSCALE_WIDTH(345), KSCALE_WIDTH(1))];
         lineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
         [view addSubview:lineView];
@@ -118,7 +119,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (indexPath.section == 1) {
+    if (indexPath.section == 2) {
         
         return KSCALE_WIDTH(60);
 
@@ -132,11 +133,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSArray * arr = @[@[@"设置管理员",@"不活跃群成员",@"禁止发言成员",@"禁止领红包成员",@"退群成员"],@[@"群成员保护模式",@"加群验证",@"风控拦截"],@[@"群主管理权转让",@"群助手"]];
+    NSArray * arr = @[@[@"设置管理员",@"群成员管理",@"退群成员"],@[@"营销助手"],@[@"群成员保护模式",@"加群验证",@"风控拦截"],@[@"群主管理权转让"]];
     NSArray * titleArr = @[@"开启后，群成员不是好友不可互看资料",@"开启后，需群主或管理员同意后才可加入群聊",@"开启后，成员不能发送网址、电话与二维码图片"];
 
     
-    if (indexPath.section == 1) {
+    if (indexPath.section == 2) {
         
         GroupManagerCell * cell = [tableView dequeueReusableCellWithIdentifier:@"managerCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -161,11 +162,16 @@
                 break;
             case 1:
 
- 
-
+                cell.contentLabel.hidden = YES;
+                cell.headerImageView.hidden = YES;
+                cell.chooseSwitch.hidden = YES;
+                cell.titleLabel.textColor = [QCClassFunction stringTOColor:@"#F42011"];
 
                 break;
             case 2:
+
+                break;
+            case 3:
                 cell.contentLabel.hidden = YES;
                 cell.headerImageView.hidden = YES;
                 cell.chooseSwitch.hidden = YES;
@@ -206,27 +212,13 @@
                     break;
                 case 2:
                 {
-                    //  禁止发言
-                    QCNoSpeakViewController * noSpeakViewController = [[QCNoSpeakViewController alloc] init];
-                    noSpeakViewController.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:noSpeakViewController animated:YES];
-                }
-                    break;
-                case 3:
-                {
-                    //  禁止领红包成员
-                    QCNoSpeakViewController * noSpeakViewController = [[QCNoSpeakViewController alloc] init];
-                    noSpeakViewController.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:noSpeakViewController animated:YES];
-                }
-                    break;
-                case 4:
-                {
+
                     QCRefundGroupViewController * refundGroupViewController = [[QCRefundGroupViewController alloc] init];
                     refundGroupViewController.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:refundGroupViewController animated:YES];
                 }
                     break;
+
                     
                 default:
                     break;
@@ -234,37 +226,25 @@
         }
             break;
         case 1:
-        
+        {
+            QCAssistantViewController * assistantViewController = [[QCAssistantViewController alloc] init];
+            assistantViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:assistantViewController animated:YES];
+        }
             break;
         case 2:
-        {
+
             
-            switch (indexPath.row) {
-                case 0:
-                {
-                    
-                    QCNewGroupManagerViewController * newGroupManagerViewController = [[QCNewGroupManagerViewController alloc] init];
-                    newGroupManagerViewController.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:newGroupManagerViewController animated:YES];
-                }
-                    break;
-                    
-                    
-                case 1:
-                {
-                    QCAssistantViewController * assistantViewController = [[QCAssistantViewController alloc] init];
-                    assistantViewController.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:assistantViewController animated:YES];
-                }
-                    break;
-                    
-                    
-                default:
-                    break;
-            }
+            break;
+        case 3:
+        {
+            QCNewGroupManagerViewController * newGroupManagerViewController = [[QCNewGroupManagerViewController alloc] init];
+            newGroupManagerViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:newGroupManagerViewController animated:YES];
         }
             
             break;
+
         default:
             break;
     }

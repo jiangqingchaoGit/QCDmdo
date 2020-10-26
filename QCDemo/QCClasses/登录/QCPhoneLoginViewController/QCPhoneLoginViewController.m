@@ -44,21 +44,21 @@
     [self.backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.backButton];
     
-    UILabel * loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(125), KSCALE_WIDTH(300), KSCALE_WIDTH(30))];
+    UILabel * loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(105) + KStatusHight, KSCALE_WIDTH(300), KSCALE_WIDTH(30))];
     loginLabel.text = @"本机号码一键登录";
     loginLabel.font = K_24_BFONT;
     loginLabel.textColor = KTEXT_COLOR;
     loginLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:loginLabel];
     
-    UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(160), KSCALE_WIDTH(300), KSCALE_WIDTH(18))];
+    UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(140) + KStatusHight, KSCALE_WIDTH(300), KSCALE_WIDTH(18))];
     tipLabel.text = @"本机号码，一键登录";
     tipLabel.font = K_14_FONT;
     tipLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     tipLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:tipLabel];
     
-    self.phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(235), KSCALE_WIDTH(300), KSCALE_WIDTH(30))];
+    self.phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(215) + KStatusHight, KSCALE_WIDTH(300), KSCALE_WIDTH(30))];
     self.phoneLabel.text = [NSString stringWithFormat:@"%@",@"186****0380"];
     self.phoneLabel.font = K_28_BFONT;
     self.phoneLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];
@@ -67,7 +67,7 @@
     
 
     
-    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(295), KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
+    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(275) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
     self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
     self.loginButton.titleLabel.font = K_18_FONT;
     [self.loginButton setTitle:@"确认登录" forState:UIControlStateNormal];
@@ -77,7 +77,7 @@
     [self.view addSubview:self.loginButton];
     
 
-    self.accountButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(208), KSCALE_WIDTH(362), KSCALE_WIDTH(134), KSCALE_WIDTH(30))];
+    self.accountButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(208), KSCALE_WIDTH(342) + KStatusHight, KSCALE_WIDTH(134), KSCALE_WIDTH(30))];
     self.accountButton.backgroundColor = KCLEAR_COLOR;
     self.accountButton.titleLabel.font = K_14_FONT;
     self.accountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;

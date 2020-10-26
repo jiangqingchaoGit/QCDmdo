@@ -112,7 +112,7 @@
     [self addSubview:balanceLabel];
     
     self.moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KStatusHight + KSCALE_WIDTH(160), KSCALE_WIDTH(200), KSCALE_WIDTH(30))];
-    self.moneyLabel.text = @"955.05";
+    self.moneyLabel.text = @"0.00";
     self.moneyLabel.font = K_30_BFONT;
     self.moneyLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];
     [self addSubview:self.moneyLabel];

@@ -53,7 +53,40 @@
 #pragma mark - GETDATA
 - (void)GETCODE {
     
+    if ([QCClassFunction isMobile:self.phoneTextField.text]) {
+        [QCClassFunction showMessage:@"请输入正确的手机号码" toView:self.view];
+        return;
+    }
+    NSString * str = [NSString stringWithFormat:@"mobile=%@&type=%@",self.phoneTextField.text,@"3"];
+
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"mobile":self.phoneTextField.text,@"type":@"3"};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+
+    
+    [QCAFNetWorking QCPOST:@"/api/send" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+
+        NSDictionary * data = responseObject[@"data"];
+        
+        if ([responseObject[@"status"] intValue] == 1) {
+            
+        
+        }else{
+            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
+    
+    
+    
 }
+
 #pragma mark - tapAction
 - (void)resignAction {
     [self.nameTextField resignFirstResponder];

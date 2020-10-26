@@ -48,28 +48,28 @@
     [self.backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.backButton];
     
-    UILabel * loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(125), KSCALE_WIDTH(200), KSCALE_WIDTH(30))];
+    UILabel * loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(105) + KStatusHight, KSCALE_WIDTH(200), KSCALE_WIDTH(30))];
     loginLabel.text = @"密码登录";
     loginLabel.font = K_24_BFONT;
     loginLabel.textColor = KTEXT_COLOR;
     loginLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:loginLabel];
     
-    UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(160), KSCALE_WIDTH(300), KSCALE_WIDTH(18))];
+    UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(140) + KStatusHight, KSCALE_WIDTH(300), KSCALE_WIDTH(18))];
     tipLabel.text = @"牢记密码，欢乐多多";
     tipLabel.font = K_14_FONT;
     tipLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     tipLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:tipLabel];
     
-    UILabel * phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(231), KSCALE_WIDTH(40), KSCALE_WIDTH(24))];
+    UILabel * phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(211) + KStatusHight, KSCALE_WIDTH(40), KSCALE_WIDTH(24))];
     phoneLabel.text = @"+86";
     phoneLabel.font = K_18_FONT;
     phoneLabel.textColor = KTEXT_COLOR;
     phoneLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:phoneLabel];
     
-    self.phoneTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(90), KSCALE_WIDTH(227), KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
+    self.phoneTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(90), KSCALE_WIDTH(207) + KStatusHight, KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
     self.phoneTextField.placeholder = @"请输入您的手机号码";
     self.phoneTextField.keyboardType = UIKeyboardTypeNumberPad;
     self.phoneTextField.font = K_20_BFONT;
@@ -79,25 +79,25 @@
     [self.phoneTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.phoneTextField];
     
-    self.clearButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(310), KSCALE_WIDTH(227),KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
+    self.clearButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(310), KSCALE_WIDTH(207) + KStatusHight,KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
     self.clearButton.hidden = YES;
     //    [self.clearButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     [self.clearButton setImage:KHeaderImage forState:UIControlStateNormal];
     [self.clearButton addTarget:self action:@selector(clearAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.clearButton];
     
-    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(266), KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
+    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(246) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
     lineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     [self.view addSubview:lineView];
     
-    UILabel * passwordLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(300), KSCALE_WIDTH(50), KSCALE_WIDTH(24))];
+    UILabel * passwordLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(280) + KStatusHight, KSCALE_WIDTH(50), KSCALE_WIDTH(24))];
     passwordLabel.text = @"密码";
     passwordLabel.font = K_18_FONT;
     passwordLabel.textColor = KTEXT_COLOR;
     passwordLabel.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:passwordLabel];
     
-    self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(90), KSCALE_WIDTH(296), KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
+    self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(90), KSCALE_WIDTH(276) + KStatusHight, KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
     self.passwordTextField.placeholder = @"请输入密码";
     self.passwordTextField.keyboardType = UIKeyboardTypeASCIICapable;
     self.passwordTextField.secureTextEntry = YES;
@@ -108,7 +108,7 @@
     [self.passwordTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.passwordTextField];
     
-    self.eyeButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(310), KSCALE_WIDTH(296),KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
+    self.eyeButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(310), KSCALE_WIDTH(276) + KStatusHight,KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
     //    [self.eyeButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     [self.eyeButton setImage:KHeaderImage forState:UIControlStateNormal];
     [self.eyeButton setImage:KHeaderImage forState:UIControlStateSelected];
@@ -116,14 +116,14 @@
     [self.eyeButton addTarget:self action:@selector(eyeAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.eyeButton];
     
-    UIView * passwordLineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(335), KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
+    UIView * passwordLineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(315) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
     passwordLineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     [self.view addSubview:passwordLineView];
     
     
     
     
-    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(365), KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
+    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(345) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
     self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
     self.loginButton.titleLabel.font = K_18_FONT;
     self.loginButton.selected = NO;
@@ -135,7 +135,7 @@
     [QCClassFunction filletImageView:self.loginButton withRadius:KSCALE_WIDTH(13)];
     [self.view addSubview:self.loginButton];
     
-    self.forgetButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(258), KSCALE_WIDTH(432), KSCALE_WIDTH(84), KSCALE_WIDTH(30))];
+    self.forgetButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(258), KSCALE_WIDTH(412) + KStatusHight, KSCALE_WIDTH(84), KSCALE_WIDTH(30))];
     self.forgetButton.backgroundColor = KCLEAR_COLOR;
     self.forgetButton.titleLabel.font = K_14_FONT;
     self.forgetButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;

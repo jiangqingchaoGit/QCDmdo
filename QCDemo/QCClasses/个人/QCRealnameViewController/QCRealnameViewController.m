@@ -136,7 +136,7 @@
     //  关闭
     [self.nameTextField resignFirstResponder];
     [self.cardTextField resignFirstResponder];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

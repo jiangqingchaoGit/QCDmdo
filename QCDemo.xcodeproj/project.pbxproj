@@ -75,9 +75,6 @@
 		CC8263AC25427F81001C3AD9 /* QCGroupManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263AB25427F81001C3AD9 /* QCGroupManagerCell.m */; };
 		CC8263B3254285F3001C3AD9 /* QCInactiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263B2254285F3001C3AD9 /* QCInactiveViewController.m */; };
 		CC8263B9254286A6001C3AD9 /* QCInactiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263B8254286A6001C3AD9 /* QCInactiveCell.m */; };
-		CC8263C0254289EC001C3AD9 /* QCDeletInactiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263BF254289EC001C3AD9 /* QCDeletInactiveViewController.m */; };
-		CC8263CA2542A9A8001C3AD9 /* QCNoSpeakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263C92542A9A8001C3AD9 /* QCNoSpeakViewController.m */; };
-		CC8263D32542A9C3001C3AD9 /* QCNoSpeakCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263D22542A9C3001C3AD9 /* QCNoSpeakCell.m */; };
 		CC8263DA2542AB9B001C3AD9 /* QCRefundGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263D92542AB9B001C3AD9 /* QCRefundGroupViewController.m */; };
 		CC8263E32542ACB4001C3AD9 /* QCRefundCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263E22542ACB4001C3AD9 /* QCRefundCell.m */; };
 		CC8263EA2542B155001C3AD9 /* QCNewGroupManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263E92542B155001C3AD9 /* QCNewGroupManagerViewController.m */; };
@@ -86,6 +83,14 @@
 		CC8263FD2542B530001C3AD9 /* QCAssistantCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8263FC2542B530001C3AD9 /* QCAssistantCell.m */; };
 		CCBE36722542CEE0005337C8 /* QCBindWechatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE36712542CEE0005337C8 /* QCBindWechatViewController.m */; };
 		CCBE369B2543FBED005337C8 /* QCPersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE369A2543FBEC005337C8 /* QCPersonModel.m */; };
+		CCBE36B12546A77B005337C8 /* SWQRCodeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE36A62546A77B005337C8 /* SWQRCodeConfig.m */; };
+		CCBE36B22546A77B005337C8 /* SWQRCodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE36A72546A77B005337C8 /* SWQRCodeManager.m */; };
+		CCBE36B32546A77B005337C8 /* SWQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE36AB2546A77B005337C8 /* SWQRCodeViewController.m */; };
+		CCBE36B42546A77B005337C8 /* SWQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CCBE36AC2546A77B005337C8 /* SWQRCode.bundle */; };
+		CCBE36B52546A77B005337C8 /* SWScannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE36AE2546A77B005337C8 /* SWScannerView.m */; };
+		CCBE36C32546AF7F005337C8 /* QCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE36C22546AF7F005337C8 /* QCSearchViewController.m */; };
+		CCBE36C92546B597005337C8 /* QCMessageSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE36C82546B597005337C8 /* QCMessageSearchViewController.m */; };
+		CCBE36EF2546C20B005337C8 /* QCSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE36EE2546C20B005337C8 /* QCSearchCell.m */; };
 		CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBE60F92535508A00311269 /* AppDelegate.m */; };
 		CCBE61032535508A00311269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBE61012535508A00311269 /* Main.storyboard */; };
 		CCBE61062535508A00311269 /* QCDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCBE61042535508A00311269 /* QCDemo.xcdatamodeld */; };
@@ -255,12 +260,6 @@
 		CC8263B2254285F3001C3AD9 /* QCInactiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCInactiveViewController.m; sourceTree = "<group>"; };
 		CC8263B7254286A6001C3AD9 /* QCInactiveCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCInactiveCell.h; sourceTree = "<group>"; };
 		CC8263B8254286A6001C3AD9 /* QCInactiveCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCInactiveCell.m; sourceTree = "<group>"; };
-		CC8263BE254289EC001C3AD9 /* QCDeletInactiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCDeletInactiveViewController.h; sourceTree = "<group>"; };
-		CC8263BF254289EC001C3AD9 /* QCDeletInactiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCDeletInactiveViewController.m; sourceTree = "<group>"; };
-		CC8263C82542A9A8001C3AD9 /* QCNoSpeakViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCNoSpeakViewController.h; sourceTree = "<group>"; };
-		CC8263C92542A9A8001C3AD9 /* QCNoSpeakViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCNoSpeakViewController.m; sourceTree = "<group>"; };
-		CC8263D12542A9C3001C3AD9 /* QCNoSpeakCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCNoSpeakCell.h; sourceTree = "<group>"; };
-		CC8263D22542A9C3001C3AD9 /* QCNoSpeakCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCNoSpeakCell.m; sourceTree = "<group>"; };
 		CC8263D82542AB9B001C3AD9 /* QCRefundGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCRefundGroupViewController.h; sourceTree = "<group>"; };
 		CC8263D92542AB9B001C3AD9 /* QCRefundGroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCRefundGroupViewController.m; sourceTree = "<group>"; };
 		CC8263E12542ACB4001C3AD9 /* QCRefundCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCRefundCell.h; sourceTree = "<group>"; };
@@ -277,6 +276,22 @@
 		CCBE36712542CEE0005337C8 /* QCBindWechatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCBindWechatViewController.m; sourceTree = "<group>"; };
 		CCBE36992543FBEC005337C8 /* QCPersonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCPersonModel.h; sourceTree = "<group>"; };
 		CCBE369A2543FBEC005337C8 /* QCPersonModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCPersonModel.m; sourceTree = "<group>"; };
+		CCBE36A62546A77B005337C8 /* SWQRCodeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWQRCodeConfig.m; sourceTree = "<group>"; };
+		CCBE36A72546A77B005337C8 /* SWQRCodeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWQRCodeManager.m; sourceTree = "<group>"; };
+		CCBE36A82546A77B005337C8 /* SWQRCodeConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCodeConfig.h; sourceTree = "<group>"; };
+		CCBE36A92546A77B005337C8 /* SWQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCode.h; sourceTree = "<group>"; };
+		CCBE36AA2546A77B005337C8 /* SWQRCodeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCodeManager.h; sourceTree = "<group>"; };
+		CCBE36AB2546A77B005337C8 /* SWQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWQRCodeViewController.m; sourceTree = "<group>"; };
+		CCBE36AC2546A77B005337C8 /* SWQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SWQRCode.bundle; sourceTree = "<group>"; };
+		CCBE36AE2546A77B005337C8 /* SWScannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWScannerView.m; sourceTree = "<group>"; };
+		CCBE36AF2546A77B005337C8 /* SWScannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWScannerView.h; sourceTree = "<group>"; };
+		CCBE36B02546A77B005337C8 /* SWQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCodeViewController.h; sourceTree = "<group>"; };
+		CCBE36C12546AF7F005337C8 /* QCSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCSearchViewController.h; sourceTree = "<group>"; };
+		CCBE36C22546AF7F005337C8 /* QCSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCSearchViewController.m; sourceTree = "<group>"; };
+		CCBE36C72546B597005337C8 /* QCMessageSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCMessageSearchViewController.h; sourceTree = "<group>"; };
+		CCBE36C82546B597005337C8 /* QCMessageSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCMessageSearchViewController.m; sourceTree = "<group>"; };
+		CCBE36ED2546C20B005337C8 /* QCSearchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCSearchCell.h; sourceTree = "<group>"; };
+		CCBE36EE2546C20B005337C8 /* QCSearchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCSearchCell.m; sourceTree = "<group>"; };
 		CCBE60F52535508A00311269 /* QCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBE60F82535508A00311269 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CCBE60F92535508A00311269 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -719,26 +734,6 @@
 			path = QCInactiveViewController;
 			sourceTree = "<group>";
 		};
-		CC8263BD254289CD001C3AD9 /* QCDeletInactiveViewController */ = {
-			isa = PBXGroup;
-			children = (
-				CC8263BE254289EC001C3AD9 /* QCDeletInactiveViewController.h */,
-				CC8263BF254289EC001C3AD9 /* QCDeletInactiveViewController.m */,
-			);
-			path = QCDeletInactiveViewController;
-			sourceTree = "<group>";
-		};
-		CC8263C72542A991001C3AD9 /* QCNoSpeakViewController */ = {
-			isa = PBXGroup;
-			children = (
-				CC8263C82542A9A8001C3AD9 /* QCNoSpeakViewController.h */,
-				CC8263C92542A9A8001C3AD9 /* QCNoSpeakViewController.m */,
-				CC8263D12542A9C3001C3AD9 /* QCNoSpeakCell.h */,
-				CC8263D22542A9C3001C3AD9 /* QCNoSpeakCell.m */,
-			);
-			path = QCNoSpeakViewController;
-			sourceTree = "<group>";
-		};
 		CC8263D72542AB80001C3AD9 /* QCRefundGroupViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -779,6 +774,59 @@
 				CCBE36712542CEE0005337C8 /* QCBindWechatViewController.m */,
 			);
 			path = QCBindWechatViewController;
+			sourceTree = "<group>";
+		};
+		CCBE36A42546A77B005337C8 /* SWQRCode */ = {
+			isa = PBXGroup;
+			children = (
+				CCBE36B02546A77B005337C8 /* SWQRCodeViewController.h */,
+				CCBE36AB2546A77B005337C8 /* SWQRCodeViewController.m */,
+				CCBE36A52546A77B005337C8 /* Config */,
+				CCBE36AC2546A77B005337C8 /* SWQRCode.bundle */,
+				CCBE36AD2546A77B005337C8 /* View */,
+			);
+			path = SWQRCode;
+			sourceTree = "<group>";
+		};
+		CCBE36A52546A77B005337C8 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				CCBE36A62546A77B005337C8 /* SWQRCodeConfig.m */,
+				CCBE36A72546A77B005337C8 /* SWQRCodeManager.m */,
+				CCBE36A82546A77B005337C8 /* SWQRCodeConfig.h */,
+				CCBE36A92546A77B005337C8 /* SWQRCode.h */,
+				CCBE36AA2546A77B005337C8 /* SWQRCodeManager.h */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		CCBE36AD2546A77B005337C8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CCBE36AE2546A77B005337C8 /* SWScannerView.m */,
+				CCBE36AF2546A77B005337C8 /* SWScannerView.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CCBE36C02546AF63005337C8 /* QCSearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CCBE36C12546AF7F005337C8 /* QCSearchViewController.h */,
+				CCBE36C22546AF7F005337C8 /* QCSearchViewController.m */,
+			);
+			path = QCSearchViewController;
+			sourceTree = "<group>";
+		};
+		CCBE36CD2546B5A2005337C8 /* QCMessageSearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CCBE36C72546B597005337C8 /* QCMessageSearchViewController.h */,
+				CCBE36C82546B597005337C8 /* QCMessageSearchViewController.m */,
+				CCBE36ED2546C20B005337C8 /* QCSearchCell.h */,
+				CCBE36EE2546C20B005337C8 /* QCSearchCell.m */,
+			);
+			path = QCMessageSearchViewController;
 			sourceTree = "<group>";
 		};
 		CCBE60EC2535508A00311269 = {
@@ -844,6 +892,7 @@
 		CCBE61302535515600311269 /* QCThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				CCBE36A42546A77B005337C8 /* SWQRCode */,
 				CC4E12DA2536A96500337586 /* XXPageTab */,
 			);
 			path = QCThirdParty;
@@ -953,11 +1002,11 @@
 		CCD509B82536A09D002CECEF /* 消息 */ = {
 			isa = PBXGroup;
 			children = (
+				CCBE36CD2546B5A2005337C8 /* QCMessageSearchViewController */,
+				CCBE36C02546AF63005337C8 /* QCSearchViewController */,
 				CC8263F42542B43A001C3AD9 /* QCAssistantViewController */,
 				CC8263E72542B131001C3AD9 /* QCNewGroupManagerViewController */,
 				CC8263D72542AB80001C3AD9 /* QCRefundGroupViewController */,
-				CC8263C72542A991001C3AD9 /* QCNoSpeakViewController */,
-				CC8263BD254289CD001C3AD9 /* QCDeletInactiveViewController */,
 				CC8263B0254285D9001C3AD9 /* QCInactiveViewController */,
 				CC8263A025427DAF001C3AD9 /* QCAddGroupManagerViewController */,
 				CC82639325418412001C3AD9 /* GroupManagerViewController */,
@@ -1147,6 +1196,7 @@
 				CCBE610B2535508C00311269 /* LaunchScreen.storyboard in Resources */,
 				CCBE61082535508C00311269 /* Assets.xcassets in Resources */,
 				CCBE61032535508A00311269 /* Main.storyboard in Resources */,
+				CCBE36B42546A77B005337C8 /* SWQRCode.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1216,6 +1266,7 @@
 				CC826384254128C8001C3AD9 /* QCGroupDataCell.m in Sources */,
 				CC826308253EE65E001C3AD9 /* QCSelfVoiceCell.m in Sources */,
 				CC82629E253D8C4A001C3AD9 /* QCRealnamedViewController.m in Sources */,
+				CCBE36B52546A77B005337C8 /* SWScannerView.m in Sources */,
 				CC8263AC25427F81001C3AD9 /* QCGroupManagerCell.m in Sources */,
 				CC82638A25416912001C3AD9 /* QCChatFooterView.m in Sources */,
 				CC8262DE253EE151001C3AD9 /* QCChatCell.m in Sources */,
@@ -1223,6 +1274,7 @@
 				CC826359253FE84B001C3AD9 /* QCWebSocket.m in Sources */,
 				CCBE610E2535508C00311269 /* main.m in Sources */,
 				CCBE61062535508A00311269 /* QCDemo.xcdatamodeld in Sources */,
+				CCBE36B32546A77B005337C8 /* SWQRCodeViewController.m in Sources */,
 				CC82627C253D71B8001C3AD9 /* QCSetPasswordViewController.m in Sources */,
 				CC82621D25394013001C3AD9 /* QCPersonHeaderView.m in Sources */,
 				CC8262ED253EE50A001C3AD9 /* QCTimeCell.m in Sources */,
@@ -1241,10 +1293,12 @@
 				CCD509A425369C21002CECEF /* BaseNavigationController.m in Sources */,
 				CCD509D02536A19E002CECEF /* QCBookViewController.m in Sources */,
 				CCBE60FA2535508A00311269 /* AppDelegate.m in Sources */,
+				CCBE36B22546A77B005337C8 /* SWQRCodeManager.m in Sources */,
 				CC8262C8253ED511001C3AD9 /* QCGroupViewController.m in Sources */,
 				CCD509A525369C21002CECEF /* QCNavigationBar.m in Sources */,
 				CC4E12E02536A96500337586 /* XXPageTabView.m in Sources */,
 				CC4E13E42538510A00337586 /* QCDisableViewController.m in Sources */,
+				CCBE36EF2546C20B005337C8 /* QCSearchCell.m in Sources */,
 				CC82631D253EE74B001C3AD9 /* QCSelfCardCell.m in Sources */,
 				CC8262B4253E9131001C3AD9 /* QCFunctionViewController.m in Sources */,
 				CC826311253EE689001C3AD9 /* QCSelfPictureCell.m in Sources */,
@@ -1257,13 +1311,13 @@
 				CC826241253D2254001C3AD9 /* QCPaymentsDetailsViewController.m in Sources */,
 				CC4E13C825381AC800337586 /* QCCodeViewController.m in Sources */,
 				CC8262E6253EE4D3001C3AD9 /* QCSelfTextCell.m in Sources */,
-				CC8263C0254289EC001C3AD9 /* QCDeletInactiveViewController.m in Sources */,
 				CC8262D8253EE129001C3AD9 /* QCChatViewController.m in Sources */,
+				CCBE36B12546A77B005337C8 /* SWQRCodeConfig.m in Sources */,
 				CC4E12EA2536AB1800337586 /* QCMapInstance.m in Sources */,
 				CCD509D62536A1B3002CECEF /* QCPersonViewController.m in Sources */,
 				CC82626B253D4119001C3AD9 /* QCAddBankViewController.m in Sources */,
 				CC826254253D348F001C3AD9 /* QCEnvelopCell.m in Sources */,
-				CC8263D32542A9C3001C3AD9 /* QCNoSpeakCell.m in Sources */,
+				CCBE36C92546B597005337C8 /* QCMessageSearchViewController.m in Sources */,
 				CC4E13602536E69400337586 /* QCHtmlUrlViewController.m in Sources */,
 				CCD509C72536A191002CECEF /* QCMessageViewController.m in Sources */,
 				CC82622A25398402001C3AD9 /* QCWalletViewController.m in Sources */,
@@ -1271,6 +1325,7 @@
 				CCBE613E2535515600311269 /* QCAFNetWorking.m in Sources */,
 				CC8262AD253E8947001C3AD9 /* QCMessageCell.m in Sources */,
 				CC826264253D3856001C3AD9 /* QCBankCell.m in Sources */,
+				CCBE36C32546AF7F005337C8 /* QCSearchViewController.m in Sources */,
 				CC82628D253D82DA001C3AD9 /* QCOpenViewController.m in Sources */,
 				CC82633C253EE7BE001C3AD9 /* QCOtherCardCell.m in Sources */,
 				CCBE36722542CEE0005337C8 /* QCBindWechatViewController.m in Sources */,
@@ -1279,7 +1334,6 @@
 				CC8263B9254286A6001C3AD9 /* QCInactiveCell.m in Sources */,
 				CC8262C1253EB90D001C3AD9 /* QCAddFriendsViewController.m in Sources */,
 				CC8262312539926C001C3AD9 /* QCPaymentsViewController.m in Sources */,
-				CC8263CA2542A9A8001C3AD9 /* QCNoSpeakViewController.m in Sources */,
 				CC8263E32542ACB4001C3AD9 /* QCRefundCell.m in Sources */,
 				CC8263DA2542AB9B001C3AD9 /* QCRefundGroupViewController.m in Sources */,
 				CC826336253EE7AB001C3AD9 /* QCOtherEnvelopeCell.m in Sources */,

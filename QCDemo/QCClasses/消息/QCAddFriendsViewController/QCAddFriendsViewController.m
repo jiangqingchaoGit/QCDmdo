@@ -7,9 +7,13 @@
 //
 
 #import "QCAddFriendsViewController.h"
+#import "SWQRCodeConfig.h"
+#import "SWQRCodeViewController.h"
 
+//  搜索列表
+#import "QCSearchViewController.h"
 @interface QCAddFriendsViewController ()
-
+@property (nonatomic, strong) UIView * searchView;
 @end
 
 @implementation QCAddFriendsViewController
@@ -17,23 +21,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initUI];
+    [self createSearchView];
     
 }
 - (void)initUI {
     self.title = @"添加好友";
     self.view.backgroundColor = KBACK_COLOR;
     
-    UIView * searchView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(15), KSCALE_WIDTH(6), KSCALE_WIDTH(345) , KSCALE_WIDTH(38))];
-    searchView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
-    searchView.layer.masksToBounds = YES;
-    searchView.layer.cornerRadius = KSCALE_WIDTH(3);
-    [self.view addSubview:searchView];
+    self.searchView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(15), KSCALE_WIDTH(6), KSCALE_WIDTH(345) , KSCALE_WIDTH(38))];
+    self.searchView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
+    self.searchView.layer.masksToBounds = YES;
+    self.searchView.layer.cornerRadius = KSCALE_WIDTH(3);
+    [self.view addSubview:self.searchView];
     
     UIImageView * searchImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(35), KSCALE_WIDTH(18), KSCALE_WIDTH(14) , KSCALE_WIDTH(14))];
     searchImageView.image = KHeaderImage;
     [self.view addSubview:searchImageView];
     
-    UILabel * searchLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(55), KSCALE_WIDTH(6), KSCALE_WIDTH(50) , KSCALE_WIDTH(38))];
+    UILabel * searchLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(55), KSCALE_WIDTH(6), KSCALE_WIDTH(200) , KSCALE_WIDTH(38))];
     searchLabel.text = @"多多好/手机号";
     searchLabel.font = K_14_BFONT;
     searchLabel.textColor = [QCClassFunction stringTOColor:@"#D7D7D7"];
@@ -72,19 +77,73 @@
 #pragma mark - tapAction
 - (void)searchAction:(UIButton *)sender {
     
+    QCSearchViewController * searchViewController = [[QCSearchViewController alloc] init];
+    searchViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:searchViewController animated:YES];
+
 }
 - (void)buttonAction:(UIButton *)sender {
+    
+    
     switch (sender.tag) {
-        case 0:
-            //  微信邀请好友
-            break;
         case 1:
-            //  s扫一扫
+            //  微信邀请好友
+            [self shareWebPageToPlatformType:UMSocialPlatformType_WechatSession];
             break;
+        case 2:
+            //  扫一扫
+        {
+            SWQRCodeConfig *config = [[SWQRCodeConfig alloc]init];
+            config.scannerType = SWScannerTypeBoth;
+                        
+            SWQRCodeViewController *qrcodeVC = [[SWQRCodeViewController alloc]init];
+            qrcodeVC.codeConfig = config;
+            [self.navigationController pushViewController:qrcodeVC animated:YES];
+        }
+            break;
+
             
         default:
             break;
     }
 }
+
+- (void)createSearchView {
+    
+}
+
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+
+    //创建网页内容对象
+    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"欢迎使用【友盟+】社会化组件U-Share" descr:@"欢迎使用【友盟+】社会化组件U-Share，SDK包最小，集成成本最低，助力您的产品开发、运营与推广！" thumImage:thumbURL];
+    //设置网页地址
+    shareObject.webpageUrl = @"http://mobile.umeng.com/social";
+
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+        }else{
+            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                UMSocialShareResponse *resp = data;
+                //分享结果消息
+                UMSocialLogInfo(@"response message is %@",resp.message);
+                //第三方原始返回的数据
+                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+
+            }else{
+                UMSocialLogInfo(@"response data is %@",data);
+            }
+        }
+    }];
+}
+
 
 @end
