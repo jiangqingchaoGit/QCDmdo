@@ -23,12 +23,43 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initUI];
+    [self GETDATA];
 }
 
+//  89047
+//
 
 #pragma mark - tapAction
 - (void)addAction:(UIButton *)sender {
     //  添加好友
+    NSString * msgid = [NSString stringWithFormat:@"%@%@",K_UID,[QCClassFunction getNowTimeTimestamp]];
+    NSString * str = [NSString stringWithFormat:@"message=添加好友&msgid=%@&touid=%@&type=apply&uid=%@",msgid,K_TUID,K_UID];
+    NSString * signStr = [QCClassFunction MD5:str];
+    
+    NSDictionary * dic = @{@"message":@"添加好友",@"msgid":msgid ,@"touid":K_TUID,@"type":@"apply",@"uid":K_UID};
+    NSString * jsonDic = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonDic dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [[QCWebSocket shared] sendDataToServer:jsonString];
+
+}
+
+- (void)agreeAction:(UIButton *)sender {
+    //  添加好友
+    NSString * msgid = [NSString stringWithFormat:@"%@%@",K_UID,[QCClassFunction getNowTimeTimestamp]];
+    NSString * str = [NSString stringWithFormat:@"message=添加好友&msgid=%@&touid=%@&type=agree&uid=%@",msgid,K_TUID,K_UID];
+    NSString * signStr = [QCClassFunction MD5:str];
+    
+    NSDictionary * dic = @{@"message":@"添加好友",@"msgid":msgid ,@"touid":K_TUID,@"type":@"apply",@"uid":K_UID};
+    NSString * jsonDic = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonDic dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [[QCWebSocket shared] sendDataToServer:jsonString];
+
 }
 #pragma mark - initUI
 - (void)initUI {
@@ -57,6 +88,40 @@
     [QCClassFunction filletImageView:self.addButton withRadius:KSCALE_WIDTH(13)];
     [self.view addSubview:self.addButton];
 
+    
+}
+
+
+
+#pragma mark - GETDATA
+- (void)GETDATA {
+    
+    NSString * str = [NSString stringWithFormat:@"keyword=%@&token=%@&uid=%@",self.searchStr,K_TOKEN,K_UID?K_UID:@""];
+    NSString * signStr = [QCClassFunction MD5:str];
+    
+    NSDictionary * dic = @{@"keyword":self.searchStr,@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    [QCAFNetWorking QCPOST:@"/api/user/search" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        
+        NSDictionary * data = responseObject[@"data"];
+        
+        NSLog(@"%@",data);
+        if ([responseObject[@"msg"] isEqualToString:@"成功"]) {
+
+        }else{
+            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+            
+        }
+        
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
     
 }
 

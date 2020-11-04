@@ -68,7 +68,6 @@
     
     [QCAFNetWorking QCPOST:@"/api/send" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
 
-        NSDictionary * data = responseObject[@"data"];
         
         if ([responseObject[@"status"] intValue] == 1) {
             

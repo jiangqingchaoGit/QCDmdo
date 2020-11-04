@@ -32,7 +32,6 @@
         [self.contentView addSubview:self.headerButton];
         
         self.numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(57), KSCALE_WIDTH(10), KSCALE_WIDTH(20), KSCALE_WIDTH(20))];
-        self.numberLabel.text = @"99";
         self.numberLabel.font = K_10_FONT;
         self.numberLabel.backgroundColor = [QCClassFunction stringTOColor:@"#FF5E5E"];
         self.numberLabel.textColor = KBACK_COLOR;
@@ -41,7 +40,6 @@
         [self.contentView addSubview:self.numberLabel];
         
         self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(85), KSCALE_WIDTH(15), KSCALE_WIDTH(90), KSCALE_WIDTH(21))];
-        self.nameLabel.text = @"思绪云骞";
         self.nameLabel.font = K_16_FONT;
         self.nameLabel.textColor = KTEXT_COLOR;
         [self.contentView addSubview:self.nameLabel];
@@ -65,7 +63,6 @@
         [self.contentView addSubview:self.contentLabel];
         
         self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(300), KSCALE_WIDTH(15), KSCALE_WIDTH(60), KSCALE_WIDTH(21))];
-        self.timeLabel.text = @"13:36";
         self.timeLabel.font = K_10_FONT;
         self.timeLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
         self.timeLabel.textAlignment = NSTextAlignmentRight;
@@ -74,6 +71,25 @@
         
     }
     return self;
+}
+
+- (void)fillCellWithModel:(QCListModel *)model {
+    
+    
+    if ([model.count isEqualToString:@"0"]) {
+        self.numberLabel.hidden = YES;
+    }else{
+        self.numberLabel.hidden = NO;
+    }
+    
+    self.numberLabel.text = model.count;
+    if ([model.count intValue] > 99) {
+        self.numberLabel.text = @"99";
+    }else{
+    }
+    self.nameLabel.text = model.message;
+    self.timeLabel.text = model.time;
+
 }
 
 @end

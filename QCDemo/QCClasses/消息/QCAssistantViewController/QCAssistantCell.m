@@ -26,37 +26,36 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         self.contentView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
-        UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), 0, KSCALE_WIDTH(345), KSCALE_WIDTH(90))];
+        UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), 0, KSCALE_WIDTH(335), KSCALE_WIDTH(103))];
         lineView.backgroundColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
         [QCClassFunction filletImageView:lineView withRadius:KSCALE_WIDTH(8)];
         [self.contentView addSubview:lineView];
         
-        self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(40), KSCALE_WIDTH(12), KSCALE_WIDTH(66), KSCALE_WIDTH(66))];
+        self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(35), KSCALE_WIDTH(18), KSCALE_WIDTH(67), KSCALE_WIDTH(67))];
         self.headerImageView.image = KHeaderImage;
         [self.contentView addSubview:self.headerImageView];
         
         
 
-        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(120), KSCALE_WIDTH(0), KSCALE_WIDTH(200), KSCALE_WIDTH(90))];
-        self.nameLabel.text = @"思绪云骞";
+        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(120), KSCALE_WIDTH(20), KSCALE_WIDTH(200), KSCALE_WIDTH(20))];
+        self.nameLabel.text = @"群员扩容";
         self.nameLabel.font = K_16_FONT;
         self.nameLabel.textColor = KTEXT_COLOR;
         [self.contentView addSubview:self.nameLabel];
         
         
-        self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(0), KSCALE_WIDTH(345), KSCALE_WIDTH(90))];
-        self.contentLabel.text = @"未添加任何助手";
-        self.contentLabel.hidden = YES;
+        self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(120), KSCALE_WIDTH(50), KSCALE_WIDTH(140), KSCALE_WIDTH(35))];
+        self.contentLabel.text = @"超级客户容量，管理更集中，最大1000人/群";
+        self.contentLabel.numberOfLines = 0;
         self.contentLabel.font = K_12_FONT;
-        self.contentLabel.textColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
-        self.contentLabel.textAlignment = NSTextAlignmentCenter;
+        self.contentLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
         [QCClassFunction filletImageView:self.contentLabel withRadius:KSCALE_WIDTH(4)];
         [self.contentView addSubview:self.contentLabel];
         
-        self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(279), KSCALE_WIDTH(29), KSCALE_WIDTH(66), KSCALE_WIDTH(32))];
+        self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(270), KSCALE_WIDTH(36), KSCALE_WIDTH(72), KSCALE_WIDTH(32))];
         self.addButton.backgroundColor = [QCClassFunction stringTOColor:@"#FF3300"];
         self.addButton.titleLabel.font = K_16_FONT;
-        [self.addButton setTitle:@"添加" forState:UIControlStateNormal];
+        [self.addButton setTitle:@"VIP专享" forState:UIControlStateNormal];
         [self.addButton setTitleColor:KBACK_COLOR forState:UIControlStateNormal];
         [QCClassFunction filletImageView:self.addButton withRadius:KSCALE_WIDTH(6)];
         [self.contentView addSubview:self.addButton];

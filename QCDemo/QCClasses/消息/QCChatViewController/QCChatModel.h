@@ -1,0 +1,29 @@
+//
+//  QCChatModel.h
+//  QCDemo
+//
+//  Created by JQC on 2020/10/30.
+//  Copyright © 2020 JQC. All rights reserved.
+//
+
+#import "JSONModel.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface QCChatModel : JSONModel
+
+@property (nonatomic, strong) NSString<Optional>*chatId;
+@property (nonatomic, strong) NSString<Optional>*type;
+@property (nonatomic, strong) NSString<Optional>*uid;
+@property (nonatomic, strong) NSString<Optional>*rid;
+@property (nonatomic, strong) NSString<Optional>*msgid;
+@property (nonatomic, strong) NSString<Optional>*message;
+@property (nonatomic, strong) NSString<Optional>*time;
+@property (nonatomic, strong) NSString<Optional>*ctype;
+@property (nonatomic, strong) NSString<Optional>*smsid;
+@property (nonatomic, strong) NSString<Optional>*gid;
+@property (nonatomic, strong) NSString<Optional>*cellH;
+
+@end
+
+NS_ASSUME_NONNULL_END

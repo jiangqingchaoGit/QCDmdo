@@ -49,6 +49,16 @@
  */
 #import "QCMapInstance.h"
 /*
+ *  数据库单例
+ */
+#import "QCDataBase.h"
+
+/*
+ *  websocket 单例
+ */
+
+#import "QCWebSocket.h"
+/*
  *  选择城市
  */
 //#import "QCSelectCityViewController.h"
@@ -137,6 +147,7 @@
 #define K_WBURL ([QCClassFunction Read:@"WBURL"]?[QCClassFunction Read:@"WBURL"]:@"")
 
 #define K_UID ([QCClassFunction Read:@"uid"]?[QCClassFunction Read:@"uid"]:@"")
+#define K_TUID @"89055"
 
 
 /*
@@ -228,6 +239,8 @@
 #define K_28_BFONT [UIFont fontWithName:@"Helvetica-Bold" size:K_X_WIDTH(KSCALE_WIDTH(28))]
 
 #define K_30_BFONT [UIFont fontWithName:@"Helvetica-Bold" size:K_X_WIDTH(KSCALE_WIDTH(30))]
+#define K_36_BFONT [UIFont fontWithName:@"Helvetica-Bold" size:K_X_WIDTH(KSCALE_WIDTH(36))]
+
 #define K_40_BFONT [UIFont fontWithName:@"Helvetica-Bold" size:K_X_WIDTH(KSCALE_WIDTH(40))]
 
 

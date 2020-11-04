@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QCSearchViewController : UIViewController
-
+@property (nonatomic, strong) NSString * searchStr;
 @end
 
 NS_ASSUME_NONNULL_END

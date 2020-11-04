@@ -14,6 +14,9 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - JSONModel (1.8.0)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
@@ -40,6 +43,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - FMDB
   - JSONModel
   - Masonry
   - MBProgressHUD
@@ -60,12 +64,14 @@ SPEC REPOS:
     - SDCycleScrollView
     - SDWebImage
   trunk:
+    - FMDB
     - SocketRocket
     - UMCCommon
     - UMCShare
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
@@ -76,6 +82,6 @@ SPEC CHECKSUMS:
   UMCCommon: 0cb2629b93884531621100ed66ff2bca8b181f1f
   UMCShare: a4a95fbdd61ecce5b6751d8c9ed9b519e80fcbc9
 
-PODFILE CHECKSUM: eeec3fecad824a5cbeadb8b18ba25d564f0d8868
+PODFILE CHECKSUM: 65d000f511ad8a5bb5b97d022a244889f62cbeb6
 
 COCOAPODS: 1.9.3

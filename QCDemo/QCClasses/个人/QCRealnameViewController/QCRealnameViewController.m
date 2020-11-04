@@ -169,10 +169,14 @@
 #pragma mark -GETDATA
 - (void)GETDATA {
     
-    NSString * str = [NSString stringWithFormat:@"identifyNum=%@&real_name=%@&uid=%@",self.cardTextField.text,self.nameTextField.text,K_UID?K_UID:@""];
+    
+
+    
+    
+    NSString * str = [NSString stringWithFormat:@"token=%@&identifyNum=%@&real_name=%@&uid=%@",K_TOKEN,self.cardTextField.text,self.nameTextField.text,K_UID?K_UID:@""];
     NSString * signStr = [QCClassFunction MD5:str];
 
-    NSDictionary * dic = @{@"identifyNum":self.cardTextField.text,@"real_name":self.nameTextField.text,@"uid":K_UID?K_UID:@""};
+    NSDictionary * dic = @{@"token":K_TOKEN,@"identifyNum":self.cardTextField.text,@"real_name":self.nameTextField.text,@"uid":K_UID?K_UID:@""};
     NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
   

@@ -20,5 +20,12 @@
 
     // Configure the view for the selected state
 }
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 200, 40)];
+        [self.contentView addSubview:self.contentLabel];
+    }
+    return self;
+}
 
 @end

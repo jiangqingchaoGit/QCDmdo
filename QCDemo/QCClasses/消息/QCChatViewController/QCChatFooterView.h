@@ -11,6 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QCChatFooterView : UIView
+@property (nonatomic, strong) UITextView * contentTextView;
+- (void)packUp;
+- (void)getParent;
 
 @end
 

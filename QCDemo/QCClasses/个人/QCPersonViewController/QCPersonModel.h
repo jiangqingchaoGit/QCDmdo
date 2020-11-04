@@ -23,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString<Optional> *buy;
 @property (nonatomic, strong) NSString<Optional> *real_name;
 @property (nonatomic, strong) NSString<Optional> *identifyNum;
+@property (nonatomic, strong) NSString<Optional> *is_pay_wallet;
+
+
 
 
 

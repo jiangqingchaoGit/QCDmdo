@@ -10,6 +10,7 @@
 
 //  声明全局变量关键字
 static QCMapInstance * _mapInstance = nil;
+
 @implementation QCMapInstance
 
 

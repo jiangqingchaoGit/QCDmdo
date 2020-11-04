@@ -48,10 +48,10 @@
     
     
     
-    NSString * str = [NSString stringWithFormat:@"uid=%@",K_UID?K_UID:@""];
+    NSString * str = [NSString stringWithFormat:@"token=%@&uid=%@",K_TOKEN,K_UID?K_UID:@""];
     NSString * signStr = [QCClassFunction MD5:str];
-
-    NSDictionary * dic = @{@"uid":K_UID?K_UID:@""};
+    
+    NSDictionary * dic = @{@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
     NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
   

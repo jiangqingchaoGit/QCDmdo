@@ -25,6 +25,11 @@
         id result = [QCClassFunction dictionaryWithJsonString:[QCClassFunction AES128_Decrypt:@"6961260090843016" withStr:jsonStr]];
         successBlock(task,result);
         
+
+        
+
+        
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(task,error);
     }];
@@ -45,11 +50,20 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
     [manager POST:urlStr parameters:dict headers:nil constructingBodyWithBlock:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary * jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
 
+        if ([jsonDic[@"code"] intValue] == 200) {
+            id result = [QCClassFunction dictionaryWithJsonString:[QCClassFunction AES128_Decrypt:K_AESKEY withStr:jsonDic[@"data"]]];
+            
+            NSLog(@"%@",result);
 
-        NSString * jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        id result = [QCClassFunction dictionaryWithJsonString:[QCClassFunction AES128_Decrypt:K_AESKEY withStr:jsonStr]];
-        successBlock(task,result);
+            NSLog(@"%@",result[@"msg"]);
+            successBlock(task,result);
+            
+            
+        }
+
 
 
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;

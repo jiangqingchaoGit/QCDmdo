@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QCListModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QCMessageCell : UITableViewCell
@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel * contentLabel;
 @property (nonatomic, strong) UILabel * timeLabel;
 
+- (void)fillCellWithModel:(QCListModel *)model;
 
 @end
 

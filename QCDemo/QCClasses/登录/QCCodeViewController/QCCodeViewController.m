@@ -172,7 +172,8 @@
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
 
-    
+    [[QCWebSocket shared] connectServer];
+
     [QCAFNetWorking QCPOST:@"/api/mobile_login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
 
         NSDictionary * data = responseObject[@"data"];
@@ -183,6 +184,8 @@
             [QCClassFunction Save:data[@"uid"] Key:@"uid"];
             [QCClassFunction Save:data[@"token"] Key:@"token"];
             [QCClassFunction Save:data[@"mobile"] Key:@"mobile"];
+            [QCClassFunction loginWithWebsocket];
+            
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         if ([responseObject[@"msg"] isEqualToString:@"用户不存在"]) {

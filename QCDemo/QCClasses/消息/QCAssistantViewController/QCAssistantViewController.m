@@ -9,6 +9,7 @@
 #import "QCAssistantViewController.h"
 #import "QCAssistantCell.h"
 //  群助手列表
+#import "QCChangeGroupViewController.h"
 
 @interface QCAssistantViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
@@ -44,7 +45,7 @@
 
 
 - (void)createTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:KSCREEN_BOUNDS style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:KSCREEN_BOUNDS style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
 
     self.tableView.delegate = self;
@@ -77,7 +78,13 @@
     return 1;
 }
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section {
-    return KSCALE_WIDTH(50);
+    if (section == 0) {
+            return KSCALE_WIDTH(50);
+
+    }else{
+            return KSCALE_WIDTH(33);
+
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -85,14 +92,22 @@
     view.backgroundColor = KCLEAR_COLOR;
     
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(10), KSCALE_WIDTH(200), KSCALE_WIDTH(40))];
-    label.text = @"已添加：0/5";
+    if (section == 0) {
+        label.text = @"已添加：0/5";
+        label.frame = CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(10), KSCALE_WIDTH(200), KSCALE_WIDTH(40));
+    }else{
+        label.text = @"营销助手列表";
+        label.frame = CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(0), KSCALE_WIDTH(200), KSCALE_WIDTH(23));
+
+
+    }
     label.font = K_16_FONT;
     label.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     [view addSubview:label];
     return view;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return KSCALE_WIDTH(88);
+    return KSCALE_WIDTH(120);
 }
 
 
@@ -105,7 +120,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    QCChangeGroupViewController * changeGroupViewController = [[QCChangeGroupViewController alloc] init];
+    changeGroupViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:changeGroupViewController animated:YES];
 
     
 }

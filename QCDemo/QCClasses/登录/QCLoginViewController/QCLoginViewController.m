@@ -217,6 +217,7 @@
 }
 - (void)accountAction:(UIButton *)sender {
     [self.phoneTextField resignFirstResponder];
+
     
     //  账号密码登录
     QCAccountViewController * accountViewController = [[QCAccountViewController alloc] init];
@@ -250,7 +251,6 @@
 - (void)POSTDATA {
     
     NSString * str = [NSString stringWithFormat:@"device=%@&device_type=%@&device_version=%@&imei=%@&unionid=%@",K_TYPE,@"iOS",K_systemVersion,K_UUID,self.unionid];
-    
     NSString * signStr = [QCClassFunction MD5:str];
     NSDictionary * dic = @{@"device":K_TYPE,@"device_type":@"iOS",@"device_version":K_systemVersion,@"imei":K_UUID,@"unionid":self.unionid};
     NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
@@ -258,6 +258,8 @@
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
     
     
+    [[QCWebSocket shared] connectServer];
+
     [QCAFNetWorking QCPOST:@"/api/weixin_login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         
         
@@ -269,6 +271,9 @@
             [QCClassFunction Save:data[@"uid"] Key:@"uid"];
             [QCClassFunction Save:data[@"token"] Key:@"token"];
             [QCClassFunction Save:data[@"mobile"] Key:@"mobile"];
+
+            [QCClassFunction loginWithWebsocket];
+
             [self dismissViewControllerAnimated:YES completion:nil];
             
             

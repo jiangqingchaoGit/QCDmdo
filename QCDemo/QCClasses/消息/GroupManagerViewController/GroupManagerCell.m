@@ -44,6 +44,8 @@
 
         [self.contentView addSubview:self.chooseSwitch];
         
+        
+        
     }
     return self;
 }

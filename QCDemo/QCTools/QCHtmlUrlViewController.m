@@ -23,7 +23,7 @@
     self.title = @"详情";
     _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCREEN_HEIGHT - (KNavHight))];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://wap.ddmoney2020.com/"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://i.meituan.com/awp/hfe/block/a945391288b790d558b7/78716/index.html?utm_term=80298.cps.26710505&utm_campaign=AffProg&utm_medium=wandie&urpid=80298.160439379748.26710505.0&appkey=9c5a0683c2b77738a1d24cfbd445aa88%3A1&source=wandie&_rdt=1&utm_source=&utm_content=&noguide=1"]];
     
     
     [_webView loadRequest:request];

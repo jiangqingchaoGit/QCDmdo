@@ -14,12 +14,34 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import <sys/utsname.h>//要导入头文件
 #import <sys/utsname.h>
+#import "AppDelegate.h"
 
 
 #define gIv @"8227833840494928" //可以自行定义16位，向量，
 
+@interface QCClassFunction ()
+@property (nonatomic, strong) UIView * backView;
+@end
+
+//  声明全局变量关键字
+static QCClassFunction * _classFunction = nil;
+
+
+
+
+
+
+
 @implementation QCClassFunction
 
++ (QCClassFunction *)shared {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _classFunction = [[QCClassFunction alloc] init];
+    });
+    return _classFunction;
+    
+}
 
 /*
  *  三元素获取颜色的类方法
@@ -154,6 +176,10 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     return [defaults objectForKey:key];
 }
++ (void)removeAllInfo {
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    NSUserDefaults * defautls = [NSUserDefaults standardUserDefaults];  [defautls removePersistentDomainForName:appDomain];
+}
 
 //身份证号
 + (BOOL) validateIdentityCard: (NSString *)cardNo
@@ -234,7 +260,7 @@
 
 //获取图片
 +(void)sd_imageView:(UIImageView*)image ImageURL:(NSString*)imageURL AppendingString:(NSString*)string placeholderImage:(NSString*)placeholderImage{
-        [image sd_setImageWithURL:[NSURL URLWithString:[imageURL stringByAppendingString:string ? string : @""]] placeholderImage:[UIImage imageNamed:placeholderImage]];
+    [image sd_setImageWithURL:[NSURL URLWithString:[imageURL stringByAppendingString:string ? string : @""]] placeholderImage:[UIImage imageNamed:placeholderImage]];
     
 }
 +(NSMutableAttributedString *)getFontWithString:(NSString *)textStr andTargetString:(NSString *)targetString withFont:(CGFloat )font andTargetFont:(CGFloat )targetFont{
@@ -776,110 +802,179 @@
 
 
 + (NSString *)iphoneType {
-
-
-struct utsname systemInfo;
-
-uname(&systemInfo);
-
-NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSASCIIStringEncoding];
-
-if ([platform isEqualToString:@"iPhone1,1"]) return @"iPhone 2G";
-
-if ([platform isEqualToString:@"iPhone1,2"]) return @"iPhone 3G";
-
-if ([platform isEqualToString:@"iPhone2,1"]) return @"iPhone 3GS";
-
-if ([platform isEqualToString:@"iPhone3,1"]) return @"iPhone 4";
-
-if ([platform isEqualToString:@"iPhone3,2"]) return @"iPhone 4";
-
-if ([platform isEqualToString:@"iPhone3,3"]) return @"iPhone 4";
-
-if ([platform isEqualToString:@"iPhone4,1"]) return @"iPhone 4S";
-
-if ([platform isEqualToString:@"iPhone5,1"]) return @"iPhone 5";
-
-if ([platform isEqualToString:@"iPhone5,2"]) return @"iPhone 5";
-
-if ([platform isEqualToString:@"iPhone5,3"]) return @"iPhone 5c";
-
-if ([platform isEqualToString:@"iPhone5,4"]) return @"iPhone 5c";
-
-if ([platform isEqualToString:@"iPhone6,1"]) return @"iPhone 5s";
-
-if ([platform isEqualToString:@"iPhone6,2"]) return @"iPhone 5s";
-
-if ([platform isEqualToString:@"iPhone7,1"]) return @"iPhone 6 Plus";
-
-if ([platform isEqualToString:@"iPhone7,2"]) return @"iPhone 6";
-
-if ([platform isEqualToString:@"iPhone8,1"]) return @"iPhone 6s";
-
-if ([platform isEqualToString:@"iPhone8,2"]) return @"iPhone 6s Plus";
-
-if ([platform isEqualToString:@"iPhone8,4"]) return @"iPhone SE";
-
-if ([platform isEqualToString:@"iPhone9,1"]) return @"iPhone 7";
-
-if ([platform isEqualToString:@"iPhone9,2"]) return @"iPhone 7 Plus";
-
-if ([platform isEqualToString:@"iPod1,1"])   return @"iPod Touch 1G";
-
-if ([platform isEqualToString:@"iPod2,1"])   return @"iPod Touch 2G";
-
-if ([platform isEqualToString:@"iPod3,1"])   return @"iPod Touch 3G";
-
-if ([platform isEqualToString:@"iPod4,1"])   return @"iPod Touch 4G";
-
-if ([platform isEqualToString:@"iPod5,1"])   return @"iPod Touch 5G";
-
-if ([platform isEqualToString:@"iPad1,1"])   return @"iPad 1G";
-
-if ([platform isEqualToString:@"iPad2,1"])   return @"iPad 2";
-
-if ([platform isEqualToString:@"iPad2,2"])   return @"iPad 2";
-
-if ([platform isEqualToString:@"iPad2,3"])   return @"iPad 2";
-
-if ([platform isEqualToString:@"iPad2,4"])   return @"iPad 2";
-
-if ([platform isEqualToString:@"iPad2,5"])   return @"iPad Mini 1G";
-
-if ([platform isEqualToString:@"iPad2,6"])   return @"iPad Mini 1G";
-
-if ([platform isEqualToString:@"iPad2,7"])   return @"iPad Mini 1G";
-
-if ([platform isEqualToString:@"iPad3,1"])   return @"iPad 3";
-
-if ([platform isEqualToString:@"iPad3,2"])   return @"iPad 3";
-
-if ([platform isEqualToString:@"iPad3,3"])   return @"iPad 3";
-
-if ([platform isEqualToString:@"iPad3,4"])   return @"iPad 4";
-
-if ([platform isEqualToString:@"iPad3,5"])   return @"iPad 4";
-
-if ([platform isEqualToString:@"iPad3,6"])   return @"iPad 4";
-
-if ([platform isEqualToString:@"iPad4,1"])   return @"iPad Air";
-
-if ([platform isEqualToString:@"iPad4,2"])   return @"iPad Air";
-
-if ([platform isEqualToString:@"iPad4,3"])   return @"iPad Air";
-
-if ([platform isEqualToString:@"iPad4,4"])   return @"iPad Mini 2G";
-
-if ([platform isEqualToString:@"iPad4,5"])   return @"iPad Mini 2G";
-
-if ([platform isEqualToString:@"iPad4,6"])   return @"iPad Mini 2G";
-
-if ([platform isEqualToString:@"i386"])      return @"iPhone Simulator";
-
-if ([platform isEqualToString:@"x86_64"])    return @"iPhone Simulator";
-
-return platform;
-
+    
+    
+    struct utsname systemInfo;
+    
+    uname(&systemInfo);
+    
+    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSASCIIStringEncoding];
+    
+    if ([platform isEqualToString:@"iPhone1,1"]) return @"iPhone 2G";
+    
+    if ([platform isEqualToString:@"iPhone1,2"]) return @"iPhone 3G";
+    
+    if ([platform isEqualToString:@"iPhone2,1"]) return @"iPhone 3GS";
+    
+    if ([platform isEqualToString:@"iPhone3,1"]) return @"iPhone 4";
+    
+    if ([platform isEqualToString:@"iPhone3,2"]) return @"iPhone 4";
+    
+    if ([platform isEqualToString:@"iPhone3,3"]) return @"iPhone 4";
+    
+    if ([platform isEqualToString:@"iPhone4,1"]) return @"iPhone 4S";
+    
+    if ([platform isEqualToString:@"iPhone5,1"]) return @"iPhone 5";
+    
+    if ([platform isEqualToString:@"iPhone5,2"]) return @"iPhone 5";
+    
+    if ([platform isEqualToString:@"iPhone5,3"]) return @"iPhone 5c";
+    
+    if ([platform isEqualToString:@"iPhone5,4"]) return @"iPhone 5c";
+    
+    if ([platform isEqualToString:@"iPhone6,1"]) return @"iPhone 5s";
+    
+    if ([platform isEqualToString:@"iPhone6,2"]) return @"iPhone 5s";
+    
+    if ([platform isEqualToString:@"iPhone7,1"]) return @"iPhone 6 Plus";
+    
+    if ([platform isEqualToString:@"iPhone7,2"]) return @"iPhone 6";
+    
+    if ([platform isEqualToString:@"iPhone8,1"]) return @"iPhone 6s";
+    
+    if ([platform isEqualToString:@"iPhone8,2"]) return @"iPhone 6s Plus";
+    
+    if ([platform isEqualToString:@"iPhone8,4"]) return @"iPhone SE";
+    
+    if ([platform isEqualToString:@"iPhone9,1"]) return @"iPhone 7";
+    
+    if ([platform isEqualToString:@"iPhone9,2"]) return @"iPhone 7 Plus";
+    
+    if ([platform isEqualToString:@"iPod1,1"])   return @"iPod Touch 1G";
+    
+    if ([platform isEqualToString:@"iPod2,1"])   return @"iPod Touch 2G";
+    
+    if ([platform isEqualToString:@"iPod3,1"])   return @"iPod Touch 3G";
+    
+    if ([platform isEqualToString:@"iPod4,1"])   return @"iPod Touch 4G";
+    
+    if ([platform isEqualToString:@"iPod5,1"])   return @"iPod Touch 5G";
+    
+    if ([platform isEqualToString:@"iPad1,1"])   return @"iPad 1G";
+    
+    if ([platform isEqualToString:@"iPad2,1"])   return @"iPad 2";
+    
+    if ([platform isEqualToString:@"iPad2,2"])   return @"iPad 2";
+    
+    if ([platform isEqualToString:@"iPad2,3"])   return @"iPad 2";
+    
+    if ([platform isEqualToString:@"iPad2,4"])   return @"iPad 2";
+    
+    if ([platform isEqualToString:@"iPad2,5"])   return @"iPad Mini 1G";
+    
+    if ([platform isEqualToString:@"iPad2,6"])   return @"iPad Mini 1G";
+    
+    if ([platform isEqualToString:@"iPad2,7"])   return @"iPad Mini 1G";
+    
+    if ([platform isEqualToString:@"iPad3,1"])   return @"iPad 3";
+    
+    if ([platform isEqualToString:@"iPad3,2"])   return @"iPad 3";
+    
+    if ([platform isEqualToString:@"iPad3,3"])   return @"iPad 3";
+    
+    if ([platform isEqualToString:@"iPad3,4"])   return @"iPad 4";
+    
+    if ([platform isEqualToString:@"iPad3,5"])   return @"iPad 4";
+    
+    if ([platform isEqualToString:@"iPad3,6"])   return @"iPad 4";
+    
+    if ([platform isEqualToString:@"iPad4,1"])   return @"iPad Air";
+    
+    if ([platform isEqualToString:@"iPad4,2"])   return @"iPad Air";
+    
+    if ([platform isEqualToString:@"iPad4,3"])   return @"iPad Air";
+    
+    if ([platform isEqualToString:@"iPad4,4"])   return @"iPad Mini 2G";
+    
+    if ([platform isEqualToString:@"iPad4,5"])   return @"iPad Mini 2G";
+    
+    if ([platform isEqualToString:@"iPad4,6"])   return @"iPad Mini 2G";
+    
+    if ([platform isEqualToString:@"i386"])      return @"iPhone Simulator";
+    
+    if ([platform isEqualToString:@"x86_64"])    return @"iPhone Simulator";
+    
+    return platform;
+    
 }
 
+
+- (UIView *)createBackView {
+    self.backView = [[UIView alloc] initWithFrame:KSCREEN_BOUNDS];
+    self.backView.backgroundColor = KTEXT_COLOR;
+    self.backView.backgroundColor = [KTEXT_COLOR colorWithAlphaComponent:0.5];
+    UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignAction)];
+    [self.backView addGestureRecognizer:tapGestureRecognizer];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.backView];
+    return self.backView;;
+}
+
+- (void)resignAction {
+    [self removeBackView];
+}
+
+
+- (void)removeBackView {
+    [self.backView removeFromSuperview];
+    
+}
+
++ (QCTarBarController *)getSelectTabViewControllerWithSelected:(NSInteger)seleted {
+    QCTarBarController * tarBarController = [[QCTarBarController alloc] init];
+    tarBarController.selectedIndex = seleted;
+    if (@available(iOS 10.0, *)) {
+        AppDelegate * appDelegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
+        appDelegate.window.rootViewController = tarBarController;
+        
+    } else {
+        
+    }
+    return tarBarController;
+}
+
+
++ (void)loginWithWebsocket {
+    //  连接登录 websocket
+    NSString * str = [NSString stringWithFormat:@"token=%@&type=login&uid=%@",K_TOKEN,K_UID];
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"token":K_TOKEN,@"type":@"login",@"uid":K_UID};
+    NSString * jsonDic = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonDic dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [[QCWebSocket shared] sendDataToServer:jsonString];
+}
+
++ (void)noticeWithmsgId:(NSString *)migId {
+    //  连接登录 websocket
+    NSString * str = [NSString stringWithFormat:@"msgid=%@&token=%@&type=notice&uid=%@",migId,K_TOKEN,K_UID];
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"msgid":migId,@"token":K_TOKEN,@"type":@"notice",@"uid":K_UID};
+    NSString * jsonDic = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonDic dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [[QCWebSocket shared] sendDataToServer:jsonString];
+}
+
+//获取当前时间戳  （以毫秒为单位）
+
++(NSString *)getNowTimeTimestamp3{
+    NSDate* date = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[date timeIntervalSince1970]*1000; // *1000 是精确到毫秒，不乘就是精确到秒
+    NSString *timeString = [NSString stringWithFormat:@"%.0f", a]; //转为字符型
+    return timeString;
+}
 @end

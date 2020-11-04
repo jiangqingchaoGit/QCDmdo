@@ -22,6 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    
     [self GETURL];
     
     [WXApi registerApp:@"wxee57a3177d3643b4" universalLink:@"https://universal-links.xianduoduo123.com/"];
@@ -40,12 +41,15 @@
     self.window.rootViewController.view.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+    [[QCDataBase shared] createFMDB];
 
     
     return YES;
 }
 
 - (void)GETURL {
+    
+    
 
     [QCAFNetWorking QCGET:@"https://app-testoss.xianduoduo123.com/oss.txt" parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         
@@ -55,6 +59,7 @@
 
         [QCClassFunction Save:responseObject[@"domain"][domainArr.count / 3] Key:@"HTTPURL"];
         [QCClassFunction Save:responseObject[@"ws"][wsArr.count / 3] Key:@"WBURL"];
+
 
 
         

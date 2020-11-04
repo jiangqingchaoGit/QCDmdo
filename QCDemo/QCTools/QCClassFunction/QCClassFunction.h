@@ -12,6 +12,7 @@
 
 @interface QCClassFunction : NSObject
 
++ (QCClassFunction *)shared;
 /*
  *  设置颜色
  */
@@ -37,6 +38,8 @@
  */
 +(void)Save:(id)str Key:(NSString*)key;
 +(id)Read:(NSString*)key;
++ (void)removeAllInfo;
+
 
 /*
  *  身份证号验证
@@ -161,4 +164,17 @@
 + (NSString *)MD5:(NSString *)str;
 
 + (NSString *)iphoneType;
+
+- (UIView *)createBackView;
+- (void)removeBackView;
++ (QCTarBarController *)getSelectTabViewControllerWithSelected:(NSInteger )seleted;
+
+/*
+ *  登录websocket
+ */
++ (void)loginWithWebsocket;
++ (void)noticeWithmsgId:(NSString *)migId;
+
++(NSString *)getNowTimeTimestamp3;
+
 @end

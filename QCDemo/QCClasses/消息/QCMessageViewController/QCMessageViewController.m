@@ -8,6 +8,7 @@
 
 #import "QCMessageViewController.h"
 #import "QCMessageCell.h"
+#import "QCChatModel.h"
 #import "QCFunctionViewController.h"
 
 //  聊天界面
@@ -23,8 +24,10 @@
 
 //  搜索界面
 #import "QCMessageSearchViewController.h"
+
 @interface QCMessageViewController ()<UITableViewDataSource,UITableViewDelegate,UIPopoverPresentationControllerDelegate>
 @property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) NSMutableArray * dataArr;
 @property (nonatomic, strong) UIButton * rightButton;
 @property (nonatomic, strong) UIView * headerView;
 @property (nonatomic, strong) QCFunctionViewController * functionViewController;
@@ -36,6 +39,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self GETDATA];
     
 }
 
@@ -54,11 +58,26 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     
+
+
+
+
+    
+    self.dataArr = [[NSMutableArray alloc] init];
+
     [self initUI];
     [self createTableView];
     [self createHeaderView];
+    [self GETDATA];
 }
 
+#pragma mark - GETDATA
+- (void)GETDATA {
+    [self.dataArr removeAllObjects];
+    QCListModel * model = [[QCListModel alloc] init];
+    self.dataArr = [[QCDataBase shared] queryListModel:model];
+    [self.tableView reloadData];
+}
 #pragma mark - tapAction
 - (void)rightAction:(UITapGestureRecognizer *)sender {
     
@@ -176,7 +195,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return self.dataArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -188,17 +207,22 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QCMessageCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    QCListModel * model = self.dataArr[indexPath.row];
+    [cell fillCellWithModel:model];
     return cell;
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    QCListModel * model = self.dataArr[indexPath.row];
+
     switch (indexPath.row) {
         case 0:
         {
             QCChatViewController * chatViewController = [[QCChatViewController alloc] init];
             chatViewController.hidesBottomBarWhenPushed = YES;
+            chatViewController.model = model;
             [self.navigationController pushViewController:chatViewController animated:YES];
         }
             break;
@@ -219,7 +243,9 @@
             break;
             
         default:
-            break;    }
+            break;
+            
+    }
     
 }
 

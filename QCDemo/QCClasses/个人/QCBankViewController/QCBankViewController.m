@@ -41,6 +41,7 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 
+    [self GETDATA];
     [self initUI];
     [self createTableView];
     [self createHeaderView];
@@ -57,6 +58,39 @@
 - (void)showAction:(UIButton *)sender {
     
 }
+
+#pragma mark - GETDATA
+- (void)GETDATA {
+    
+    NSString * str = [NSString stringWithFormat:@"token=%@&uid=%@",K_TOKEN,K_UID?K_UID:@""];
+    NSString * signStr = [QCClassFunction MD5:str];
+    
+    NSDictionary * dic = @{@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    [QCAFNetWorking QCPOST:@"/api/user/card_list" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        
+        
+        
+        if ([responseObject[@"msg"] isEqualToString:@"成功"]) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+        }else{
+            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+            
+        }
+        
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
+    
+}
+
 #pragma mark - initUI
 
 - (void)initUI {

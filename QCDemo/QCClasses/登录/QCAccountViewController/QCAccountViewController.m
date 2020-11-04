@@ -7,7 +7,7 @@
 //
 
 #import "QCAccountViewController.h"
-
+#import "QCForgetPasswordViewController.h"
 @interface QCAccountViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong) UIImageView * backImageView;
 @property (nonatomic, strong) UIButton * backButton;
@@ -180,7 +180,7 @@
     self.clearButton.hidden = YES;
     self.loginButton.selected = NO;
     self.loginButton.userInteractionEnabled = NO;
-    self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
+    self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
     self.phoneTextField.text = @"";
     [self.phoneTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
@@ -214,10 +214,23 @@
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
 
+    [[QCWebSocket shared] connectServer];
+
+    
     [QCAFNetWorking QCPOST:@"/api/login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
 
+        NSDictionary * data = responseObject[@"data"];
+        if ([responseObject[@"status"] intValue] == 1) {
+            [QCClassFunction Save:data[@"uid"] Key:@"uid"];
+            [QCClassFunction Save:data[@"token"] Key:@"token"];
+            [QCClassFunction Save:data[@"mobile"] Key:@"mobile"];
+            [QCClassFunction loginWithWebsocket];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }else{
+            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+
+        }
         
-        NSLog(@"%@",responseObject[@"msg"]);
         
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
@@ -232,6 +245,14 @@
     [self.phoneTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
     //  账号密码登录
+    if ([QCClassFunction isMobile:self.phoneTextField.text]) {
+        [QCClassFunction showMessage:@"请输入正确的手机号码" toView:self.view];
+        return;
+    }
+    QCForgetPasswordViewController * forgetPasswordViewController = [[QCForgetPasswordViewController alloc] init];
+    forgetPasswordViewController.hidesBottomBarWhenPushed = YES;
+    forgetPasswordViewController.phoneStr = self.phoneTextField.text;
+    [self.navigationController pushViewController:forgetPasswordViewController animated:YES];
 }
 
 - (void)agreementAction:(UIButton *)sender {
@@ -252,7 +273,7 @@
     }else{
         self.loginButton.selected = NO;
         self.loginButton.userInteractionEnabled = NO;
-        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
+        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
         
     }
     

@@ -10,8 +10,22 @@
 #import "QCPersonModel.h"
 #import "QCRealnameViewController.h"
 #import "QCCertificationViewController.h"
+//  充值
+#import "QCTopupViewController.h"
+//  提现
+#import "QCWithdrawalViewController.h"
+
+//  个人资料
+#import "QCPersonDataViewController.h"
+//  二维码
+#import "QCPersonCodeViewController.h"
+//  个人发布
+#import "QCPersonReleaseViewController.h"
+
 @interface QCPersonHeaderView()
 @property (nonatomic, strong) UIImageView * headerImageView;
+@property (nonatomic, strong) UIButton * headerButton;
+
 @property (nonatomic, strong) UILabel * nickNameLabel;
 @property (nonatomic, strong) UILabel * cardLabel;
 @property (nonatomic, strong) UILabel * moneyLabel;
@@ -26,32 +40,53 @@
 @implementation QCPersonHeaderView
 
 #pragma mark - tapAction
+- (void)headerAction:(UIButton *)sender {
+    QCPersonDataViewController * personDataViewController = [[QCPersonDataViewController alloc] init];
+    personDataViewController.hidesBottomBarWhenPushed = YES;
+    [[QCClassFunction parentController:self].navigationController pushViewController:personDataViewController animated:YES];
+}
 - (void)setAction:(UIButton *)sender {
     //  设置
 }
 
 - (void)scanAction:(UIButton *)sender {
     
-
+    QCPersonCodeViewController *personCodeViewController = [[QCPersonCodeViewController alloc] init];
+    personCodeViewController.hidesBottomBarWhenPushed = YES;
+    [[QCClassFunction parentController:self].navigationController pushViewController:personCodeViewController animated:YES];
 }
 
 
 
 - (void)topAction:(UIButton *)sender {
     //  充值
+    QCTopupViewController * topupViewController = [[QCTopupViewController alloc] init];
+    topupViewController.hidesBottomBarWhenPushed = YES;
+    [[QCClassFunction parentController:self].navigationController pushViewController:topupViewController animated:YES];
+
 }
 
 - (void)withdrawalAction:(UIButton *)sender {
+    
+    
     //  提现
-    if ([[QCClassFunction Read:@"cardNum"] isEqual:@""]) {
-        QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
-        realnameViewController.hidesBottomBarWhenPushed = YES;
-        [[QCClassFunction parentController:self].navigationController pushViewController:realnameViewController animated:YES];
-    }else{
-        QCCertificationViewController * certificationViewController = [[QCCertificationViewController alloc] init];
-        certificationViewController.hidesBottomBarWhenPushed = YES;
-        [[QCClassFunction parentController:self].navigationController pushViewController:certificationViewController animated:YES];
-    }
+//    if ([[QCClassFunction Read:@"cardNum"] isEqual:@""]) {
+    //  实名认证
+//        QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
+//        realnameViewController.hidesBottomBarWhenPushed = YES;
+//        [[QCClassFunction parentController:self].navigationController pushViewController:realnameViewController animated:YES];
+//    }else{
+    
+    //  人脸识别
+    
+//        QCCertificationViewController * certificationViewController = [[QCCertificationViewController alloc] init];
+//        certificationViewController.hidesBottomBarWhenPushed = YES;
+//        [[QCClassFunction parentController:self].navigationController pushViewController:certificationViewController animated:YES];
+//    }
+    
+    QCWithdrawalViewController * withdrawalViewController = [[QCWithdrawalViewController alloc] init];
+    withdrawalViewController.hidesBottomBarWhenPushed = YES;
+    [[QCClassFunction parentController:self].navigationController pushViewController:withdrawalViewController animated:YES];
 }
 - (void)functionAction:(UIButton *)sender {
     
@@ -59,6 +94,11 @@
     switch (sender.tag) {
         case 1:
             //  我的发布
+        {
+            QCPersonReleaseViewController * personReleaseViewController = [[QCPersonReleaseViewController alloc] init];
+            personReleaseViewController.hidesBottomBarWhenPushed = YES;
+            [[QCClassFunction parentController:self].navigationController pushViewController:personReleaseViewController animated:YES];
+        }
             break;
         case 2:
             //  我的订单
@@ -85,6 +125,12 @@
     [QCClassFunction filletImageView:self.headerImageView withRadius:KSCALE_WIDTH(35)];
     [self addSubview:self.headerImageView];
     
+    self.headerButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(20) + KStatusHight, KSCALE_WIDTH(70), KSCALE_WIDTH(70))];
+    self.headerButton.backgroundColor = KCLEAR_COLOR;
+    [self.headerButton addTarget:self action:@selector(headerAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.headerButton];
+
+    
     self.nickNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(100), KStatusHight + KSCALE_WIDTH(50), KSCALE_WIDTH(200), KSCALE_WIDTH(20))];
     self.nickNameLabel.font = K_18_BFONT;
     self.nickNameLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];;
@@ -101,6 +147,7 @@
     [self addSubview:scanButton];
     
     UIButton * setButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(250), KStatusHight + KSCALE_WIDTH(65), KSCALE_WIDTH(30), KSCALE_WIDTH(30))];
+    setButton.hidden = YES;
     [setButton setImage:[UIImage imageNamed:@"set"] forState:UIControlStateNormal];
     [setButton addTarget: self action:@selector(setAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:setButton];

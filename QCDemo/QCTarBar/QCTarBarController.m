@@ -80,7 +80,7 @@
     
     
     
-    if ( [viewController.tabBarItem.title isEqualToString:@"消息"] || [viewController.tabBarItem.title isEqualToString:@"通讯录"]  || [viewController.tabBarItem.title isEqualToString:@"我"]) {
+    if ( [viewController.tabBarItem.title isEqualToString:@"消"] || [viewController.tabBarItem.title isEqualToString:@"通讯录"]  || [viewController.tabBarItem.title isEqualToString:@"我"]) {
         
         if ([QCClassFunction Read:@"token"] == nil) {
             QCLoginViewController * loginViewController = [QCLoginViewController new];

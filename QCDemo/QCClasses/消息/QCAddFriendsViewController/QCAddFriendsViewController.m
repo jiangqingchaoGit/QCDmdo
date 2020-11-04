@@ -12,8 +12,10 @@
 
 //  搜索列表
 #import "QCSearchViewController.h"
-@interface QCAddFriendsViewController ()
+@interface QCAddFriendsViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong) UIView * searchView;
+@property (nonatomic, strong) UITextField * searchTextField;
+
 @end
 
 @implementation QCAddFriendsViewController
@@ -38,18 +40,15 @@
     searchImageView.image = KHeaderImage;
     [self.view addSubview:searchImageView];
     
-    UILabel * searchLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(55), KSCALE_WIDTH(6), KSCALE_WIDTH(200) , KSCALE_WIDTH(38))];
-    searchLabel.text = @"多多好/手机号";
-    searchLabel.font = K_14_BFONT;
-    searchLabel.textColor = [QCClassFunction stringTOColor:@"#D7D7D7"];
-    searchLabel.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:searchLabel];
     
-    
-    UIButton * searchButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, 50)];
-    searchButton.backgroundColor = [UIColor clearColor];
-    [searchButton addTarget:self action:@selector(searchAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:searchButton];
+    self.searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(55), KSCALE_WIDTH(6), KSCALE_WIDTH(300) , KSCALE_WIDTH(38))];
+    self.searchTextField.placeholder = @"多多好/手机号";
+    self.searchTextField.font = K_14_FONT;
+    self.searchTextField.textColor = [QCClassFunction stringTOColor:@"#333333"];
+    self.searchTextField.backgroundColor = [UIColor clearColor];
+    self.searchTextField.returnKeyType = UIReturnKeyDone;
+    self.searchTextField.delegate = self;
+    [self.view addSubview:self.searchTextField];
     
     NSArray * titleArr = @[@"微信邀请好友",@"扫一扫"];
     for (NSInteger i = 0; i < 2; i++) {
@@ -89,6 +88,7 @@
         case 1:
             //  微信邀请好友
             [self shareWebPageToPlatformType:UMSocialPlatformType_WechatSession];
+
             break;
         case 2:
             //  扫一扫
@@ -145,5 +145,19 @@
     }];
 }
 
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if ([string isEqualToString:@"\n"]){
+        //在这里做你响应return键的代码
+        [self.searchTextField resignFirstResponder];
+        QCSearchViewController * searchViewController = [[QCSearchViewController alloc] init];
+        searchViewController.hidesBottomBarWhenPushed = YES;
+        searchViewController.searchStr = self.searchTextField.text;
+        [self.navigationController pushViewController:searchViewController animated:YES];
+        return NO;
+    }
+    return YES;
+}
 
 @end
