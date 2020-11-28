@@ -11,6 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^recive_Success_Block)(NSString * msgid);
+
+
 typedef NS_ENUM(NSUInteger,WebSocketConnectType){
     WebSocketDefault = 0, //初始状态,未连接
     WebSocketConnect,      //已连接
@@ -33,12 +36,17 @@ typedef NS_ENUM(NSUInteger,WebSocketConnectType){
 @property (nonatomic, assign)   BOOL isConnect;  //是否连接
 @property (nonatomic, assign)   WebSocketConnectType connectType;
 
+@property(nonatomic,copy) recive_Success_Block reciveBlock;
+
+
 + (instancetype)shared;
 - (void)connectServer;//建立长连接
 - (void)reConnectServer;//重新连接
 - (void)RMWebSocketClose;//关闭长连接
 - (void)sendDataToServer:(NSString *)data;//发送数据给服务器
 
+//  接收消息的回调
+- (void) reciveData:(recive_Success_Block)reciveBlock;
 
 
 @end

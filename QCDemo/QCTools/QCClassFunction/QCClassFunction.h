@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <MBProgressHUD.h>
+//  数据请求成功的block的回调
+typedef void(^successChange)(NSString * responseObject);
+
+//  数据请求失败的block的回调
+typedef void(^failureChange)(NSString * error);
 
 @interface QCClassFunction : NSObject
 
@@ -176,5 +181,16 @@
 + (void)noticeWithmsgId:(NSString *)migId;
 
 +(NSString *)getNowTimeTimestamp3;
+/*
+ *  urlDecode解密
+ */
++ (NSString *)URLDecodedString:(NSString *)str;
 
+
++ (void)chatPermissions:(NSDictionary *)info success:(successChange)successBlock failure:(failureChange)failureBlock;
+
++(NSString *)getDateDisplayString:(long long) miliSeconds;
+
+/**表情**/
++ (NSMutableAttributedString *)stringToAttributeString:(NSString *)text;
 @end

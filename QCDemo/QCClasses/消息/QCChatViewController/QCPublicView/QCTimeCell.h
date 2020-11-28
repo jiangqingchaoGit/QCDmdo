@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QCTimeCell : UITableViewCell
 @property (nonatomic, strong) UILabel * timeLabel;
+
+- (void)fillCellWithModel:(QCChatModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -41,7 +41,7 @@
         [self.contentView addSubview:self.contentLabel];
         
         self.picImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(316), KSCALE_WIDTH(13), KSCALE_WIDTH(24), KSCALE_WIDTH(24))];
-        self.picImageView.image = KHeaderImage;
+        self.picImageView.image = [UIImage imageNamed:@"code"];
         [self.contentView addSubview:self.picImageView];
         
     }

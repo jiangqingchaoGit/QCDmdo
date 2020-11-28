@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UIButton * eyeButton;
 
 @property (nonatomic, strong) UILabel * moneyLabel;
+@property (nonatomic, strong) NSString * moneyStr;
 
 @end
 
@@ -63,7 +64,7 @@
         
         
         if ([responseObject[@"msg"] isEqualToString:@"成功"]) {
-            self.moneyLabel.text = data[@"balance"];
+            self.moneyStr = data[@"balance"];
 
         }
 
@@ -89,7 +90,7 @@
 
     }else{
         sender.selected = YES;
-        self.moneyLabel.text = @"0.00";
+        self.moneyLabel.text = self.moneyStr;
 
 
     }
@@ -104,7 +105,7 @@
         {
 
             
-            if ([[QCClassFunction Read:@"cardNum"] isEqual:@""]) {
+            if ([[QCClassFunction Read:@"cardNum"] isEqual:@""] || [QCClassFunction Read:@"cardNum"] == nil) {
                 QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
                 realnameViewController.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:realnameViewController animated:YES];
@@ -140,7 +141,7 @@
         case 3:
    
         {
-            if ([[QCClassFunction Read:@"cardNum"] isEqual:@""]) {
+            if ([[QCClassFunction Read:@"cardNum"] isEqual:@""] || [QCClassFunction Read:@"cardNum"] == nil) {
 
                 QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
                 realnameViewController.hidesBottomBarWhenPushed = YES;
@@ -189,7 +190,7 @@
     
     self.eyeButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(375) - 56, KNavHight - 44, 56, 44)];
     [self.eyeButton setImage:[UIImage imageNamed:@"查看"] forState:UIControlStateNormal];
-    [self.eyeButton setImage:[UIImage imageNamed:@"隐藏"] forState:UIControlStateSelected];
+    [self.eyeButton setImage:[UIImage imageNamed:@"影藏"] forState:UIControlStateSelected];
     [self.eyeButton addTarget:self action:@selector(eyeAction:) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:self.eyeButton];
     
@@ -200,7 +201,7 @@
     [backView addSubview:balanceLabel];
     
     self.moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KStatusHight + KSCALE_WIDTH(80), KSCALE_WIDTH(200), KSCALE_WIDTH(40))];
-    self.moneyLabel.text = @"0.00";
+    self.moneyLabel.text = @"******";
     self.moneyLabel.font = K_40_BFONT;
     self.moneyLabel.textColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
     [backView addSubview:self.moneyLabel];
@@ -239,6 +240,7 @@
         
         UIImageView * headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(27), KSCALE_WIDTH(20) + i * KSCALE_WIDTH(65), KSCALE_WIDTH(24), KSCALE_WIDTH(24))];
         headerImageView.image = [UIImage imageNamed:imageArr[i]];
+//        headerImageView.contentMode = UIViewContentModeCenter;
         [view addSubview:headerImageView];
         
         UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(65), KSCALE_WIDTH(20) + i * KSCALE_WIDTH(65), KSCALE_WIDTH(100), KSCALE_WIDTH(24))];
@@ -248,14 +250,14 @@
         [view addSubview:label];
         
         if (i < 4) {
-            UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(12.5), KSCALE_WIDTH(64) + i * KSCALE_WIDTH(65), KSCALE_WIDTH(290), KSCALE_WIDTH(1))];
-            lineView.backgroundColor = [QCClassFunction stringTOColor:@"#D7D7D7"];
+            UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(65), KSCALE_WIDTH(64) + i * KSCALE_WIDTH(65), KSCALE_WIDTH(237.5), KSCALE_WIDTH(1))];
+            lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
             [view addSubview:lineView];
         }
  
         
-        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(280), KSCALE_WIDTH(27) + i * KSCALE_WIDTH(65), KSCALE_WIDTH(10), KSCALE_WIDTH(10))];
-        imageView.image = [UIImage imageNamed:@"向右箭头"];
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(280), KSCALE_WIDTH(22) + i * KSCALE_WIDTH(65), KSCALE_WIDTH(20), KSCALE_WIDTH(20))];
+        imageView.image = [UIImage imageNamed:@"leftarrow"];
         [view addSubview:imageView];
     }
     

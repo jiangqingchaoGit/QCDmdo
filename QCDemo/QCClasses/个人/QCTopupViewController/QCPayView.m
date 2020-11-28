@@ -7,7 +7,12 @@
 //
 
 #import "QCPayView.h"
+// zhuanzhang
+#import "QCTransferViewController.h"
 
+#import "QCSetPasswordViewController.h"
+//  fahongbao
+#import "QCSendEnvelopeViewController.h"
 @interface QCPayView()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UIButton * downButton;
@@ -29,7 +34,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self initUI];
+
     }
     return self;
 }
@@ -40,7 +45,10 @@
 }
 
 - (void)forgetAction:(UIButton *)sender {
-    
+    self.hidden = YES;
+    QCSetPasswordViewController * setPasswordViewController = [[QCSetPasswordViewController alloc] init];
+    setPasswordViewController.hidesBottomBarWhenPushed = YES;
+    [[QCClassFunction getCurrentViewController].navigationController pushViewController:setPasswordViewController animated:YES];
 }
 
 #pragma mark - initUI
@@ -60,14 +68,22 @@
     [self addSubview:self.downButton];
     
     UILabel * moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(0), KSCALE_WIDTH(70), KSCALE_WIDTH(315), KSCALE_WIDTH(40))];
-    moneyLabel.text = [NSString stringWithFormat:@"¥%@",self.moneyStr];
+    moneyLabel.text = [NSString stringWithFormat:@"¥%@",self.messageDic[@"red_price"]];
     moneyLabel.font = K_36_BFONT;
     moneyLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];
     moneyLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:moneyLabel];
     
     UILabel * contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(0), KSCALE_WIDTH(110), KSCALE_WIDTH(315), KSCALE_WIDTH(30))];
-    contentLabel.text = @"充值到dodo钱包";
+    if ([self.type isEqualToString:@"0"]) {
+        contentLabel.text = @"充值到dodo钱包";
+    }
+    if ([self.type isEqualToString:@"1"]) {
+        contentLabel.text = @"转账";
+    }
+    if ([self.type isEqualToString:@"2"]) {
+        contentLabel.text = @"发红包";
+    }
     contentLabel.font = K_14_FONT;
     contentLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
     contentLabel.textAlignment = NSTextAlignmentCenter;
@@ -147,21 +163,59 @@
 - (void)textFieldDidChange:(UITextField *)sender {
     if (sender.text.length == 6) {
         
-        if (1) {
-            [self.payTextField resignFirstResponder];
-            [QCClassFunction showMessage:@"输入密码正确" toView:self];
-            //  完成绑定
+        [sender resignFirstResponder];
+        NSString * str = [NSString stringWithFormat:@"pwd=%@&token=%@&type=%@&uid=%@",sender.text,K_TOKEN,self.type,K_UID?K_UID:@""];
+        
+        NSString * signStr = [QCClassFunction MD5:str];
+        NSDictionary * dic = @{@"pwd":sender.text,@"token":K_TOKEN,@"type":self.type,@"uid":K_UID?K_UID:@""};
+        
+        NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+        NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+        
+        NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+        [QCAFNetWorking QCPOST:@"/api/user/verify_pwd" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
             
-        }else{
-            [QCClassFunction showMessage:@"输入密码错误，请重新输入" toView:self];
-            self.payTextField.text = @"";
-            self.codeLabelOne.text = @"";
-            self.codeLabelTwo.text = @"";
-            self.codeLabelThree.text = @"";
-            self.codeLabelFour.text = @"";
-            self.codeLabelFive.text = @"";
-            self.codeLabelSix.text = @"";
-        }
+            if ([responseObject[@"msg"] isEqualToString:@"成功"]) {
+                [[[sender superview] superview] removeFromSuperview];
+                
+                if ([self.type isEqualToString:@"1"]) {
+                    QCTransferViewController * transferViewController = (QCTransferViewController *)[QCClassFunction getCurrentViewController];
+                    
+                    
+                    [self.messageDic setValue:responseObject[@"data"][@"key"] forKey:@"key"];
+                    transferViewController.myBlock(self.messageDic);
+                    [transferViewController.navigationController popViewControllerAnimated:YES];
+                }
+                
+                if ([self.type isEqualToString:@"2"]) {
+                    QCSendEnvelopeViewController * sendEnvelopeViewController = (QCSendEnvelopeViewController *)[QCClassFunction getCurrentViewController];
+                    
+                    [self.messageDic setValue:responseObject[@"data"][@"key"] forKey:@"key"];
+                                        
+                    sendEnvelopeViewController.myBlock(self.messageDic);
+                    [sendEnvelopeViewController.navigationController popViewControllerAnimated:YES];
+                }
+                
+
+            }else{
+
+                [QCClassFunction showMessage:@"输入密码错误，请重新输入" toView:self];
+                self.payTextField.text = @"";
+                self.codeLabelOne.text = @"";
+                self.codeLabelTwo.text = @"";
+                self.codeLabelThree.text = @"";
+                self.codeLabelFour.text = @"";
+                self.codeLabelFive.text = @"";
+                self.codeLabelSix.text = @"";
+            }
+            
+            
+            
+        } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+            [[[sender superview] superview] removeFromSuperview];
+            [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:[QCClassFunction getCurrentViewController].view];
+        }];
+        
     }
     
 }

@@ -160,6 +160,7 @@
 #define K_HEADIMAGE ([QCClassFunction Read:@"headImage"]?[QCClassFunction Read:@"headImage"]:@"")
 #define K_REALNAME ([QCClassFunction Read:@"realName"]?[QCClassFunction Read:@"realName"]:@"")
 #define K_CARDNUM ([QCClassFunction Read:@"cardNum"]?[QCClassFunction Read:@"cardNum"]:@"")
+#define K_ACCOUNT ([QCClassFunction Read:@"account"]?[QCClassFunction Read:@"account"]:@"")
 
 
 //#define
@@ -247,7 +248,7 @@
 
 
 #define K_X_HEIGHT(height)     (height * (KSCREEN_WIDTH / 667.0))       // 高度比例缩放
-#define K_X_WIDTH(width)       (width * (KSCREEN_WIDTH / 375.0))         // 宽度比例缩放
+#define K_X_WIDTH(width)       (width * (375.0 / 375.0))         // 宽度比例缩放
 
 /*
  *  block弱引用

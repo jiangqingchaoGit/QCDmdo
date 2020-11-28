@@ -93,7 +93,7 @@
     [self.view addSubview:self.codeButton];
     
     UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(246) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
-    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
+    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
     [self.view addSubview:lineView];
     
     UILabel * passLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(280) + KStatusHight, KSCALE_WIDTH(80), KSCALE_WIDTH(24))];
@@ -115,7 +115,8 @@
     [self.view addSubview:self.passwordTextField];
     
     UIView * passwordLineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(315) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
-    passwordLineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
+    passwordLineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
+
     [self.view addSubview:passwordLineView];
     
     UILabel * surepassLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(349) + KStatusHight, KSCALE_WIDTH(80), KSCALE_WIDTH(24))];
@@ -137,7 +138,7 @@
     [self.view addSubview:self.surePasswordTextField];
     
     UIView * surepasswordLineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(384) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
-    surepasswordLineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
+    surepasswordLineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
     [self.view addSubview:surepasswordLineView];
 
     UILabel * markLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, KSCALE_WIDTH(384) + KStatusHight, KSCALE_WIDTH(375), KSCALE_WIDTH(40))];

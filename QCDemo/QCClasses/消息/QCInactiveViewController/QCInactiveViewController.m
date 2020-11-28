@@ -8,7 +8,7 @@
 
 #import "QCInactiveViewController.h"
 #import "QCInactiveCell.h"
-#import "QCGroupViewController.h"
+#import "QCAddInactiveViewController.h"
 @interface QCInactiveViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIButton * rightButton;
@@ -16,28 +16,123 @@
 @property (nonatomic, strong) UIButton * incomeButton;
 @property (nonatomic, strong) UIButton * spendingButton;
 @property (nonatomic, strong) UIButton * withdrawalButton;
+
+@property (nonatomic, strong) NSMutableArray * dataArr;
+@property (nonatomic, strong) NSString * typeStr;
 @end
 
 @implementation QCInactiveViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self GETDATA];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.typeStr = @"active";
+    self.dataArr = [NSMutableArray new];
     [self initUI];
     [self createTableView];
     [self createHeaderView];
-
+    
 }
 
 #pragma mark - tapAction
 #pragma mark - tapAction
 - (void)rightAction:(UITapGestureRecognizer *)sender {
-    QCGroupViewController * groupViewController = [[QCGroupViewController alloc] init];
-    groupViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:groupViewController animated:YES];
+    QCAddInactiveViewController * addInactiveViewController = [[QCAddInactiveViewController alloc] init];
+    addInactiveViewController.hidesBottomBarWhenPushed = YES;
+    addInactiveViewController.group_id = self.group_id;
+    addInactiveViewController.typeStr = self.typeStr;
+    
+    [self.navigationController pushViewController:addInactiveViewController animated:YES];
+}
+
+- (void)deleteAction:(UIButton *)sender {
+    QCInactiveCell * cell = (QCInactiveCell *)[[sender superview]superview];
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    QCInactiveModel * model = self.dataArr[indexPath.row];
+    
+    
+    if ([self.typeStr isEqualToString:@"active"]) {
+        
+        NSString * out_uid = [NSString stringWithFormat:@"%@,",model.uid];
+        
+        //  移除群聊
+        NSString * str = [NSString stringWithFormat:@"group_id=%@&out_uid=%@&token=%@&uid=%@",self.group_id,out_uid,K_TOKEN,K_UID];
+        NSString * signStr = [QCClassFunction MD5:str];
+        NSDictionary * dic = @{@"group_id":self.group_id,@"out_uid":out_uid,@"token":K_TOKEN,@"uid":K_UID};
+        NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+        NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+        NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+        
+        
+        
+        [QCAFNetWorking QCPOST:@"/api/chat/abort" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+            
+            if ([responseObject[@"status"] intValue] == 1) {
+                [self GETDATA];
+                
+                
+            }else{
+                [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+                
+            }
+            
+            
+            
+        } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+            [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+        }];
+        
+        return;;
+    }
+    
+    
+    NSString * type;
+    
+    if ([self.typeStr isEqualToString:@"mute"]) {
+        type = @"is_mute";
+    }else{
+        type = @"is_take";
+        
+    }
+    //  移除群聊
+    NSString * str = [NSString stringWithFormat:@"fuid=%@&group_id=%@&%@=%@&token=%@&uid=%@",[NSString stringWithFormat:@"%@,",model.uid],self.group_id,type,@"0",K_TOKEN,K_UID];
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"fuid":[NSString stringWithFormat:@"%@,",model.uid],@"group_id":self.group_id,type:@"0",@"token":K_TOKEN,@"uid":K_UID};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    
+    [QCAFNetWorking QCPOST:[NSString stringWithFormat:@"/api/chat/%@",type] parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        if ([responseObject[@"status"] intValue] == 1) {
+            [self GETDATA];
+
+            
+            
+        }else{
+            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+            
+        }
+        
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
+    
+    
+    
+    
+    
+    
 }
 
 - (void)buttonAction:(UIButton *)sender {
-
+    
     
     switch (sender.tag) {
         case 1:
@@ -48,9 +143,10 @@
             self.spendingButton.backgroundColor = KCLEAR_COLOR;
             self.withdrawalButton.backgroundColor = KCLEAR_COLOR;
             self.rightButton.hidden = YES;
-
-
-
+            
+            self.typeStr = @"active";
+            
+            
             break;
         case 2:
             self.incomeButton.selected = NO;
@@ -60,7 +156,8 @@
             self.spendingButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
             self.withdrawalButton.backgroundColor = KCLEAR_COLOR;
             self.rightButton.hidden = NO;
-
+            self.typeStr = @"mute";
+            
             break;
         case 3:
             self.incomeButton.selected = NO;
@@ -70,7 +167,8 @@
             self.spendingButton.backgroundColor = KCLEAR_COLOR;
             self.withdrawalButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
             self.rightButton.hidden = NO;
-
+            self.typeStr = @"take";
+            
             break;
             
         default:
@@ -83,6 +181,38 @@
 
 #pragma mark - GETDATA
 - (void)GETDATA {
+    
+    
+    NSString * str = [NSString stringWithFormat:@"group_id=%@&token=%@&uid=%@",self.group_id,K_TOKEN,K_UID];
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"group_id":self.group_id,@"token":K_TOKEN,@"uid":K_UID};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    
+    
+    
+    [QCAFNetWorking QCPOST:[NSString stringWithFormat:@"/api/chat/%@",self.typeStr] parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        if ([responseObject[@"status"] intValue] == 1) {
+            [self.dataArr removeAllObjects];
+            for (NSDictionary * dic in responseObject[@"data"]) {
+                
+                QCInactiveModel * model = [[QCInactiveModel alloc] initWithDictionary:dic error:nil];
+                [self.dataArr addObject:model];
+            }
+            [self.tableView reloadData];
+            
+        }else{
+            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+            
+        }
+        
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
     
 }
 #pragma mark - initUI
@@ -115,7 +245,7 @@
         
     }
     [self.tableView registerClass:[QCInactiveCell class] forCellReuseIdentifier:@"cell"];
-
+    
     
     [self.view addSubview:self.tableView];
     
@@ -160,7 +290,7 @@
             default:
                 break;
         }
-
+        
     }
     self.tableView.tableHeaderView = self.headerView;
 }
@@ -172,7 +302,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 2;
+    return self.dataArr.count;
 }
 
 
@@ -180,9 +310,9 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     return KSCALE_WIDTH(72);
-
+    
 }
 
 
@@ -192,12 +322,22 @@
     QCInactiveCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
-    return cell;
+    QCInactiveModel * model = self.dataArr[indexPath.row];
 
+    [cell fillCellWithModel:model];
+    [cell.deletButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+    if ([self.typeStr isEqualToString:@"mute"]) {
+        cell.deletButton.hidden = YES;
+    }else{
+        cell.deletButton.hidden = NO;
+
+    }
+    return cell;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     
 }
 

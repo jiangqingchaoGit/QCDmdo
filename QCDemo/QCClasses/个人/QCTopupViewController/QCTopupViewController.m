@@ -144,7 +144,7 @@
     [self.view addSubview:self.moneyTextField];
     
     UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KSCALE_WIDTH(200), KSCALE_WIDTH(315), KSCALE_WIDTH(1))];
-    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#999999"];
+    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
     [self.view addSubview:lineView];
     
     

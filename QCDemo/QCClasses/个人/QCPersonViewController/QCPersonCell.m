@@ -33,8 +33,8 @@
         self.titleLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];
         [self.contentView addSubview:self.titleLabel];
         
-        UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(54), KSCALE_WIDTH(335), KSCALE_WIDTH(1))];
-        lineView.backgroundColor = [QCClassFunction stringTOColor:@"#D7D7D7"];
+        UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(65), KSCALE_WIDTH(54), KSCALE_WIDTH(290), KSCALE_WIDTH(1))];
+        lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
         [self.contentView addSubview:lineView];
 
     }

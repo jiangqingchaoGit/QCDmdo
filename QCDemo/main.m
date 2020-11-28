@@ -13,7 +13,11 @@ int main(int argc, char * argv[]) {
     NSString * appDelegateClassName;
     @autoreleasepool {
         // Setup code that might create autoreleased objects goes here.
-        appDelegateClassName = NSStringFromClass([AppDelegate class]);
+        if (@available(iOS 10.0, *)) {
+            appDelegateClassName = NSStringFromClass([AppDelegate class]);
+        } else {
+            // Fallback on earlier versions
+        }
     }
-//    return UIApplicationMain(argc, argv, nil, appDelegateClassName);
+    return UIApplicationMain(argc, argv, nil, appDelegateClassName);
 }

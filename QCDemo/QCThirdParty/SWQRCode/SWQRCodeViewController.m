@@ -8,6 +8,8 @@
 
 #import "SWQRCodeViewController.h"
 #import "SWScannerView.h"
+//  详细资料
+#import "QCSearchViewController.h"
 
 @interface SWQRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -222,6 +224,11 @@
  */
 - (void)sw_handleWithValue:(NSString *)value {
     NSLog(@"sw_handleWithValue === %@", value);
+    
+    QCSearchViewController * searchViewController = [[QCSearchViewController alloc] init];
+    searchViewController.codeStr = value;
+    searchViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:searchViewController animated:YES];
 }
 
 /**

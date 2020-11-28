@@ -68,7 +68,7 @@
     [self.view addSubview:self.paymentsLabel];
     
     UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(89), KSCALE_WIDTH(335), KSCALE_WIDTH(1))];
-    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
+    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
     [self.view addSubview:lineView];
     
     self.typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(105), KSCALE_WIDTH(100), KSCALE_WIDTH(20))];

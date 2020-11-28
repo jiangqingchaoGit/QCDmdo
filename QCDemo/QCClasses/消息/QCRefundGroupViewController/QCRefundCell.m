@@ -54,4 +54,10 @@
 }
 
 
+- (void)fillCellWithModel:(QCRefundModel *)model {
+    self.nameLabel.text = model.nick;
+    self.timeLabel.text = model.create_time;
+
+
+}
 @end

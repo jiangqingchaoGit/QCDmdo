@@ -121,7 +121,6 @@
     [self addSubview:view];
     
     self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(20) + KStatusHight, KSCALE_WIDTH(70), KSCALE_WIDTH(70))];
-    self.headerImageView.image = KHeaderImage;
     [QCClassFunction filletImageView:self.headerImageView withRadius:KSCALE_WIDTH(35)];
     [self addSubview:self.headerImageView];
     
@@ -144,6 +143,7 @@
     UIButton * scanButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(315), KSCALE_WIDTH(15) + KStatusHight, KSCALE_WIDTH(30), KSCALE_WIDTH(30))];
     [scanButton setImage:[UIImage imageNamed:@"二维码"] forState:UIControlStateNormal];
     [scanButton addTarget: self action:@selector(scanAction:) forControlEvents:UIControlEventTouchUpInside];
+    scanButton.hidden = YES;
     [self addSubview:scanButton];
     
     UIButton * setButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(250), KStatusHight + KSCALE_WIDTH(65), KSCALE_WIDTH(30), KSCALE_WIDTH(30))];
@@ -233,7 +233,7 @@
     }
     
     UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(250), KSCALE_WIDTH(20), KSCALE_WIDTH(1), KSCALE_WIDTH(45))];
-    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
+    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
     [functionView addSubview:lineView];
     
     
@@ -261,9 +261,10 @@
 #pragma mark - fillView
 - (void)fillViewWithModel:(QCPersonModel *)model {
     
-    [QCClassFunction sd_imageView:self.headerImageView ImageURL:model.head_img AppendingString:nil placeholderImage:@"header"];
+    [QCClassFunction Save:model.head_img Key:@"headImage"];
+    [QCClassFunction sd_imageView:self.headerImageView ImageURL:K_HEADIMAGE AppendingString:nil placeholderImage:@"header"];
     self.nickNameLabel.text = model.nick;
-    self.cardLabel.text = model.uid;
+    self.cardLabel.text = model.account;
     self.moneyLabel.text = model.balance;
     self.releaseLabel.text = model.fabu;
     self.orderLabel.text =  model.order;

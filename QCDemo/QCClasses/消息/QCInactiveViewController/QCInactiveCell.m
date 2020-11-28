@@ -34,7 +34,6 @@
         
 
         self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(85), KSCALE_WIDTH(15), KSCALE_WIDTH(90), KSCALE_WIDTH(21))];
-        self.nameLabel.text = @"思绪云骞";
         self.nameLabel.font = K_16_FONT;
         self.nameLabel.textColor = KTEXT_COLOR;
         [self.contentView addSubview:self.nameLabel];
@@ -68,4 +67,16 @@
     return self;
 }
 
+- (void)fillCellWithModel:(QCInactiveModel *)model {
+    self.nameLabel.text = model.nick_name;
+    if (model.mute_time) {
+        self.timeLabel.text = model.mute_time;
+    }
+    if (model.last_time) {
+        self.timeLabel.text = model.last_time;
+    }
+    if (model.take_time) {
+        self.timeLabel.text = model.take_time;
+    }
+}
 @end

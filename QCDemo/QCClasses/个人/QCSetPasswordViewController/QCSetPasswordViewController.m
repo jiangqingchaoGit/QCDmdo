@@ -7,7 +7,7 @@
 //
 
 #import "QCSetPasswordViewController.h"
-
+#import "QCCodeViewController.h"
 @interface QCSetPasswordViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong) UILabel * codeLabels;
 @property (nonatomic, strong) UILabel * codeLabelOne;
@@ -165,7 +165,15 @@
             if ([self.passWordStr isEqual:self.passWordStrs]) {
                 [self.codeTextField resignFirstResponder];
                 //  设置密码接口
-                [QCClassFunction showMessage:@"设置密码成功" toView:self.view];
+
+                QCCodeViewController * codeViewController = [[QCCodeViewController alloc] init];
+                codeViewController.hidesBottomBarWhenPushed = YES;
+                codeViewController.phoneStr = K_PHONE;
+                codeViewController.typeStr = @"1";
+                codeViewController.passwordStr = self.passWordStr;
+
+                [self.navigationController pushViewController:codeViewController animated:YES];
+                
 
                 
             }else{

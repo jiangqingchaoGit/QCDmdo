@@ -23,7 +23,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(15), KSCALE_WIDTH(10), KSCALE_WIDTH(52), KSCALE_WIDTH(52))];
-        self.headerImageView.image = KHeaderImage;
         [QCClassFunction filletImageView:self.headerImageView withRadius:KSCALE_WIDTH(26)];
         [self.contentView addSubview:self.headerImageView];
         
@@ -44,20 +43,20 @@
         self.nameLabel.textColor = KTEXT_COLOR;
         [self.contentView addSubview:self.nameLabel];
         
-        self.tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(160), KSCALE_WIDTH(17.5), KSCALE_WIDTH(25), KSCALE_WIDTH(16))];
-        self.tipLabel.text = @"官方";
-        self.tipLabel.font = K_8_FONT;
-        self.tipLabel.textColor = [QCClassFunction stringTOColor:@"#282828"];
-        self.tipLabel.textAlignment = NSTextAlignmentCenter;
-        self.tipLabel.layer.borderWidth = KSCALE_WIDTH(1);
-        self.tipLabel.layer.borderColor = [QCClassFunction stringTOColor:@"#282828"].CGColor;
+//        self.tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(160), KSCALE_WIDTH(17.5), KSCALE_WIDTH(25), KSCALE_WIDTH(16))];
+//        self.tipLabel.text = @"官方";
+//        self.tipLabel.font = K_8_FONT;
+//        self.tipLabel.textColor = [QCClassFunction stringTOColor:@"#282828"];
+//        self.tipLabel.textAlignment = NSTextAlignmentCenter;
+//        self.tipLabel.layer.borderWidth = KSCALE_WIDTH(1);
+//        self.tipLabel.layer.borderColor = [QCClassFunction stringTOColor:@"#282828"].CGColor;
 
         [QCClassFunction filletImageView:self.tipLabel withRadius:KSCALE_WIDTH(4)];
         [self.contentView addSubview:self.tipLabel];
         
         
         self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(85), KSCALE_WIDTH(36), KSCALE_WIDTH(290), KSCALE_WIDTH(26))];
-        self.contentLabel.text = @"请问你的水果什么时候发货？";
+//        self.contentLabel.text = @"请问你的水果什么时候发货？";
         self.contentLabel.font = K_12_FONT;
         self.contentLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
         [self.contentView addSubview:self.contentLabel];
@@ -87,8 +86,75 @@
         self.numberLabel.text = @"99";
     }else{
     }
-    self.nameLabel.text = model.message;
-    self.timeLabel.text = model.time;
+    
+    self.timeLabel.text = [QCClassFunction getDateDisplayString:[model.time integerValue]];
+    
+    if ([model.cType isEqualToString:@"0"]) {
+        [QCClassFunction sd_imageView:self.headerImageView ImageURL:model.uhead AppendingString:nil placeholderImage:K_HEADIMAGE];
+        self.nameLabel.text = model.unick;
+
+    }else {
+        [QCClassFunction sd_imageView:self.headerImageView ImageURL:model.ghead AppendingString:nil placeholderImage:K_HEADIMAGE];
+        self.nameLabel.text = model.gname;
+
+    }
+    
+    
+    
+    switch ([model.mtype integerValue]) {
+        case 0:
+            
+        {
+            NSDictionary * dic = [QCClassFunction dictionaryWithJsonString:model.message];
+            self.contentLabel.text = dic[@"message"];
+        }
+
+
+            break;
+        case 1:
+            self.contentLabel.text = @"[图片]";
+
+            break;
+        case 2:
+            self.contentLabel.text = @"[语音]";
+
+            break;
+        case 3:
+            self.contentLabel.text = @"[红包]";
+
+            break;
+        case 4:
+            self.contentLabel.text = @"[视频]";
+
+            break;
+        case 5:
+            self.contentLabel.text = @"[视频]";
+
+            break;
+        case 6:
+            self.contentLabel.text = @"[名片]";
+            break;
+
+        case 13:
+            self.contentLabel.text = @"[转账]";
+            break;
+
+        case 14:
+            self.contentLabel.text = @"[转账]";
+            break;
+        case 15:
+            self.contentLabel.text = @"[转账]";
+            break;
+            
+
+        case 20:
+            self.contentLabel.text = model.message;
+
+            break;
+            
+        default:
+            break;
+    }
 
 }
 

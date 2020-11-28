@@ -12,6 +12,8 @@
 #import <UMCommon/UMCommon.h>
 #import <WXApi.h>
 
+#import "QCBookViewController.h"
+#import "QCMessageViewController.h"
 @interface AppDelegate ()<WXApiDelegate>
 
 @end
@@ -156,12 +158,63 @@
     }
 }
 
--  (void)applicationWillEnterForeground:(UIApplication *)application
+-  (void)applicationWillEnterForeground:(UIApplication *)application {
 
-{
+    NSLog(@"应用程序将要进入活动状态，即将进入前台运行");
+    [QCClassFunction loginWithWebsocket];
+    
+    QCAssociatedModel * model = [[QCAssociatedModel alloc] init];
+    NSArray * arr = [[QCDataBase shared] queryAssociatedModel:model];
+    
+    UITabBarItem * item = [[QCClassFunction getCurrentViewController].tabBarController.tabBar.items objectAtIndex:2];
+    if (arr.count == 0) {
+        item.badgeValue = nil;
 
-NSLog(@"应用程序将要进入活动状态，即将进入前台运行");
+    }else{
+        [item setBadgeValue:[NSString stringWithFormat:@"%ld",arr.count]];
+        
+        if ([[QCClassFunction getCurrentViewController] isKindOfClass:[QCBookViewController class]]) {
+            QCBookViewController * bookViewController = (QCBookViewController *)[QCClassFunction getCurrentViewController];
+            
+            
+            [bookViewController GETDATA];
+            
+        }else{
 
+        }
+        
+    }
+    
+    
+    QCListModel * listModel = [[QCListModel alloc] init];
+    NSMutableArray * dataArr = [[QCDataBase shared] queryListModel:listModel];
+
+    NSInteger count = 0;
+    for (QCListModel * model in dataArr) {
+        count = count + [model.count integerValue];
+    }
+    
+    UITabBarItem * item1 = [[QCClassFunction getCurrentViewController].tabBarController.tabBar.items objectAtIndex:1];
+    if (count == 0) {
+        item1.badgeValue = nil;
+
+    }else{
+        item1.badgeValue = [NSString stringWithFormat:@"%ld",count];
+
+    }
+    
+    if ([[QCClassFunction getCurrentViewController] isKindOfClass:[QCMessageViewController class]]) {
+        QCMessageViewController * messageViewController = (QCMessageViewController *)[QCClassFunction getCurrentViewController];
+        
+        
+        [messageViewController GETDATA];
+        
+    }else{
+
+    }
+    
+
+    
 }
 
 

@@ -35,7 +35,6 @@
         
 
         self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(85), KSCALE_WIDTH(15), KSCALE_WIDTH(90), KSCALE_WIDTH(21))];
-        self.nameLabel.text = @"思绪云骞";
         self.nameLabel.font = K_16_FONT;
         self.nameLabel.textColor = KTEXT_COLOR;
         [self.contentView addSubview:self.nameLabel];
@@ -62,6 +61,9 @@
     }
     return self;
 }
+- (void)fillCellWithModel:(QCGroupDataModel *)model {
+    self.nameLabel.text = model.nick_name;
 
+}
 
 @end

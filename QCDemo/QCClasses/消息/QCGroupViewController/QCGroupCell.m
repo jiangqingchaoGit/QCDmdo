@@ -35,8 +35,9 @@
         
         self.chooseButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(11.5), KSCALE_WIDTH(20), KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
         self.chooseButton.backgroundColor = KCLEAR_COLOR;
-        [self.chooseButton setImage:KHeaderImage forState:UIControlStateNormal];
-        [self.chooseButton setImage:KHeaderImage forState:UIControlStateSelected];
+
+        [self.chooseButton setImage:[UIImage imageNamed:@"num_unselect"] forState:UIControlStateNormal];
+        [self.chooseButton setImage:[UIImage imageNamed:@"num_select"] forState:UIControlStateSelected];
         [self.contentView addSubview:self.chooseButton];
         
 
@@ -52,6 +53,16 @@
     return self;
 }
 
+- (void)fillCellWithModel:(QCBookModel *)model {
+    self.nameLabel.text = model.nick;
+    [QCClassFunction sd_imageView:self.headerImageView ImageURL:model.head AppendingString:nil placeholderImage:@"header"];
+}
 
+
+- (void)fillCellWithgroupModel:(QCGroupDataModel *)model {
+    self.nameLabel.text = model.nick_name;
+    [QCClassFunction sd_imageView:self.headerImageView ImageURL:model.head AppendingString:nil placeholderImage:@"header"];
+
+}
 
 @end

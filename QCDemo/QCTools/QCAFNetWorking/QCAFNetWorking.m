@@ -18,6 +18,7 @@
 +(void)QCGET:(NSString *)urlStr parameters:(NSDictionary *)dict success:(successBlock)successBlock failure:(failureBlock)failureBlock {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = NO;
     [manager GET:urlStr parameters:dict headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -25,9 +26,9 @@
         id result = [QCClassFunction dictionaryWithJsonString:[QCClassFunction AES128_Decrypt:@"6961260090843016" withStr:jsonStr]];
         successBlock(task,result);
         
-
         
-
+        
+        
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -46,25 +47,35 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     //开启系统菊花
-    
-    
     [UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
     [manager POST:urlStr parameters:dict headers:nil constructingBodyWithBlock:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary * jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-
+        
         if ([jsonDic[@"code"] intValue] == 200) {
             id result = [QCClassFunction dictionaryWithJsonString:[QCClassFunction AES128_Decrypt:K_AESKEY withStr:jsonDic[@"data"]]];
             
             NSLog(@"%@",result);
+            if ([result[@"status"] intValue] == -1) {
+                
+                [[QCWebSocket shared] RMWebSocketClose];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"token"];
 
-            NSLog(@"%@",result[@"msg"]);
+                QCTarBarController * tab = [QCClassFunction getSelectTabViewControllerWithSelected:0];
+                QCLoginViewController * loginViewController = [QCLoginViewController new];
+                BaseNavigationController * loginNav = [[BaseNavigationController alloc] initWithRootViewController:loginViewController];
+                loginNav.modalPresentationStyle=UIModalPresentationCustom;
+                
+                [tab presentViewController:loginNav animated:YES completion:nil];
+                return;
+            }
+            
             successBlock(task,result);
             
             
+        }else {
+
         }
-
-
 
         [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -73,7 +84,7 @@
     }];
     
     
-
+    
     
     
 }
@@ -116,19 +127,34 @@
 
 +(void)QCUpload:(NSString *)urlStr parameters:(NSDictionary *)dict
        formData:(formDataBlock)formDataBlock success:(successBlock)successBlock failure:(failureBlock)failureBlock{
-    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    
+    urlStr = [NSString stringWithFormat:@"%@%@",K_HTTPURL,urlStr];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    //
-    //    [manager POST:[NSString stringWithFormat:@"%@%@",HOST,urlStr] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-    //        formDataBlock(formData);
-    //    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-    //        id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-    //        successBlock(task,result);
-    //
-    //    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-    //        failureBlock(task,error);
-    //
-    //    }];
+    [manager POST:urlStr parameters:dict headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        formDataBlock(formData);
+
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary * jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        
+        if ([jsonDic[@"code"] intValue] == 200) {
+            id result = [QCClassFunction dictionaryWithJsonString:[QCClassFunction AES128_Decrypt:K_AESKEY withStr:jsonDic[@"data"]]];
+            
+            NSLog(@"%@",result);
+            
+            successBlock(task,result);
+            
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(task,error);
+        
+        
+        
+    }];
+
 }
 
 

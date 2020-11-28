@@ -87,7 +87,7 @@
     [self.view addSubview:self.clearButton];
     
     UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(246) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
-    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
+    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
     [self.view addSubview:lineView];
     
     UILabel * passwordLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(280) + KStatusHight, KSCALE_WIDTH(50), KSCALE_WIDTH(24))];
@@ -117,7 +117,7 @@
     [self.view addSubview:self.eyeButton];
     
     UIView * passwordLineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(315) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
-    passwordLineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
+    passwordLineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
     [self.view addSubview:passwordLineView];
     
     
@@ -214,7 +214,7 @@
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
 
-    [[QCWebSocket shared] connectServer];
+      [[QCWebSocket shared] connectServer];
 
     
     [QCAFNetWorking QCPOST:@"/api/login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {

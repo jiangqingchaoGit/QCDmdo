@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QCBookModel.h"
+#import "QCGroupDataModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton * headerButton;
 @property (nonatomic, strong) UIButton * chooseButton;
 @property (nonatomic, strong) UILabel * nameLabel;
+- (void)fillCellWithModel:(QCBookModel *)model;
+- (void)fillCellWithgroupModel:(QCGroupDataModel *)model;
 
 @end
 

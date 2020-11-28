@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QCBookViewController : UIViewController
 
+- (void)GETDATA;
 @end
 
 NS_ASSUME_NONNULL_END

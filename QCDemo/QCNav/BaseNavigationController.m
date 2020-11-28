@@ -7,6 +7,9 @@
 //
 
 #import "BaseNavigationController.h"
+#import "QCChatViewController.h"
+#import "QCGroupChatViewController.h"
+#import "AppDelegate.h"
 
 @interface BaseNavigationController ()<UIGestureRecognizerDelegate>
 
@@ -17,12 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //  https://www.jianshu.com/p/ba88a4309003
-    // Do any additional setup after loading the view.
-    
-//    self.navigationBar.barStyle = UIBarStyleBlack;
-//    self.navigationBar.translucent = YES;
+
     self.navigationBar.tintColor = [UIColor blackColor];
-//    [QCClassFunction setStatusBarBackgroundColor:[UIColor clearColor]];
 
 
     self.navigationBar.titleTextAttributes=
@@ -46,7 +45,7 @@
     self.edgePanGestureRecognizer.enabled = YES;
 }
 - (void)handleNavigationTransition:(UIPanGestureRecognizer *)sender{
-    [self  popViewControllerAnimated:YES];
+    [self popViewControllerAnimated:YES];
 
 }
 // 是否允许触发手势，如果是根视图控制器则不需要

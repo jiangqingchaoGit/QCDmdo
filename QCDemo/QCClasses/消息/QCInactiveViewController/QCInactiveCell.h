@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QCInactiveModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QCInactiveCell : UITableViewCell
@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel * timeLabel;
 @property (nonatomic, strong) UIButton * deletButton;
 
+- (void)fillCellWithModel:(QCInactiveModel *)model;
 
 @end
 

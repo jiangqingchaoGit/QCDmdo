@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QCPayView : UIView
-@property (nonatomic, strong) NSString * moneyStr;
+@property (nonatomic, strong) NSMutableDictionary * messageDic;
+@property (nonatomic, strong) NSString * type;
+- (void)initUI;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -63,7 +63,7 @@
     
     
     UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(209) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
-    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
+    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
     [self.view addSubview:lineView];
     
     NSArray * titleArr = @[@"姓名",@"身份证"];
@@ -89,7 +89,7 @@
         
         
         UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(268) + KStatusHight + i * KSCALE_WIDTH(59), KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
-        lineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
+        lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
         [self.view addSubview:lineView];
         
         switch (i) {
@@ -171,30 +171,24 @@
     
     
 
-    
-    
-    NSString * str = [NSString stringWithFormat:@"token=%@&identifyNum=%@&real_name=%@&uid=%@",K_TOKEN,self.cardTextField.text,self.nameTextField.text,K_UID?K_UID:@""];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString * str = [NSString stringWithFormat:@"identifyNum=%@&real_name=%@&token=%@&uid=%@",self.cardTextField.text,self.nameTextField.text,K_TOKEN,K_UID?K_UID:@""];
     NSString * signStr = [QCClassFunction MD5:str];
-
     NSDictionary * dic = @{@"token":K_TOKEN,@"identifyNum":self.cardTextField.text,@"real_name":self.nameTextField.text,@"uid":K_UID?K_UID:@""};
     NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
   
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
     [QCAFNetWorking QCPOST:@"/api/user/verified" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
-        
-        
-        NSDictionary * data = responseObject[@"data"];
-        
-        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([responseObject[@"msg"] isEqualToString:@"成功"]) {
-
-            
+            [QCClassFunction showMessage:@"实名认证成功" toView:self.view];
+        }else{
+            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
         }
 
-        
-        
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
     }];
     

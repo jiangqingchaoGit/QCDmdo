@@ -8,9 +8,11 @@
 
 #import "QCMessageSearchViewController.h"
 #import "QCSearchCell.h"
-@interface QCMessageSearchViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "QCGroupChatViewController.h"
+@interface QCMessageSearchViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UITextField * searchTextField;
 @property (nonatomic, strong) UIButton * cancelButton;
+@property (nonatomic, strong) NSMutableArray * dataArr;
 
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIView * headerView;
@@ -36,13 +38,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignAction)];
+    tapGestureRecognizer.delegate = self;
     [self.view addGestureRecognizer:tapGestureRecognizer];
+    
+    self.dataArr = [[NSMutableArray alloc] init];
     [self initUI];
     [self createTableView];
     [self createHeaderView];
 }
 
-
+- (void)GETDATA {
+    
+}
 
 #pragma mark - tapAction
 
@@ -67,14 +74,18 @@
     [self.view addSubview:searchView];
     
     UIImageView * searchImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(35), KSCALE_WIDTH(18) + KStatusHight, KSCALE_WIDTH(14) , KSCALE_WIDTH(14))];
-    searchImageView.image = KHeaderImage;
+    searchImageView.image = [UIImage imageNamed:@"search"];
     [self.view addSubview:searchImageView];
     
     self.searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(55), KSCALE_WIDTH(6) + KStatusHight, KSCALE_WIDTH(200) , KSCALE_WIDTH(38))];
     self.searchTextField.placeholder = @"请输入搜索关键字";
-    self.searchTextField.font = K_14_BFONT;
+    self.searchTextField.font = K_16_FONT;
     self.searchTextField.textColor = [QCClassFunction stringTOColor:@"#333333"];
     self.searchTextField.backgroundColor = [UIColor clearColor];
+    self.searchTextField.delegate = self;
+    self.searchTextField.returnKeyType = UIReturnKeySend;
+    [self.searchTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+
     [self.view addSubview:self.searchTextField];
     
     self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(320), KSCALE_WIDTH(6) + KStatusHight, KSCALE_WIDTH(55), KSCALE_WIDTH(38))];
@@ -106,13 +117,9 @@
 }
 
 - (void)createHeaderView {
-    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(375), KSCALE_WIDTH(50))];
+    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(375), KSCALE_WIDTH(20))];
     self.headerView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
-    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(5), KSCALE_WIDTH(300), KSCALE_WIDTH(40))];
-    label.text = @"联系人";
-    label.font = K_14_FONT;
-    label.textColor = KTEXT_COLOR;
-    [self.headerView addSubview:label];
+
     self.tableView.tableHeaderView = self.headerView;
     
 }
@@ -123,16 +130,8 @@
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 4;
-    }else{
-        return 1;
-    }
+    return self.dataArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -144,16 +143,99 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QCSearchCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    QCChatModel * model = self.dataArr[indexPath.row];
+    cell.nameLabel.text =  model.unick;
+    cell.idLabel.text =  model.message;
+    cell.timeLabel.text =  [QCClassFunction getDateDisplayString:[model.time integerValue]];
+    [QCClassFunction sd_imageView:cell.headerImageView ImageURL:model.uhead AppendingString:@"" placeholderImage:@"header"];
     return cell;
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    [self.searchTextField resignFirstResponder];
+    QCChatModel * model = self.dataArr[indexPath.row];
+//    model.chatId;
+//
+    
+    //  进入聊天界面
+    QCGroupChatViewController * chatViewController = [[QCGroupChatViewController alloc] init];
+    chatViewController.hidesBottomBarWhenPushed = YES;
+    NSMutableArray * dataArr = [[QCDataBase shared] querywithListId:[NSString stringWithFormat:@"%@|000000|%@",K_UID,@"20"]];
+    QCListModel * listModel = [dataArr firstObject];
+    
+    
+    NSMutableArray * chatArr = [[QCDataBase shared] queryChatModel:listModel.listId];
 
+    for (NSInteger i = 0; i <chatArr.count; i++) {
+        QCChatModel * chatModel= chatArr[i];
+        if ([model.msgid isEqualToString:chatModel.msgid]) {
+            chatViewController.currentIndex = i;
+            
+            
+            break;
+        }
+    }
+    
+    listModel.isRead = @"1";
+    NSArray * arr = [listModel.listId componentsSeparatedByString:@"|"];
+    chatViewController.groupId = [arr lastObject];
+    chatViewController.model = listModel;
+    [self.navigationController pushViewController:chatViewController animated:YES];
     
 }
 
 
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidChange:(UITextField *)sender {
+    
+    if (sender.text == nil ||  [sender.text isEqualToString:@""]){
+        [self.dataArr removeAllObjects];
+        [self.tableView reloadData];
+
+    }
+    
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if ([string isEqualToString:@"\n"]){
+        [self.dataArr removeAllObjects];
+
+        if (textField.text == nil || [textField.text isEqualToString:@""]) {
+            [self.dataArr removeAllObjects];
+            [self.tableView reloadData];
+
+        }else{
+            self.dataArr  = [[QCDataBase shared] GETARRWithListId:[NSString stringWithFormat:@"%@|000000|%@",K_UID,@"20"] withContent:textField.text];
+            if (self.dataArr.count != 0) {
+                [self.tableView reloadData];
+            }
+            
+        }
+        
+       
+        
+        return NO;
+
+    }
+    return YES;
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch {
+
+    
+  if([NSStringFromClass([touch.view class])isEqual:@"UITableViewCellContentView"]){
+
+      return NO;
+
+   }
+
+   return YES;
+
+}
 
 @end

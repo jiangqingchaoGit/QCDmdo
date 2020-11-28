@@ -67,7 +67,7 @@
     [self.view addSubview:contentLabel];
     
     self.phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(170), KSCALE_WIDTH(345), KSCALE_WIDTH(32))];
-    self.phoneLabel.text = @"18672910380";
+    self.phoneLabel.text = K_PHONE;
     self.phoneLabel.font = K_30_BFONT;
     self.phoneLabel.textAlignment = NSTextAlignmentCenter;
     self.phoneLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];

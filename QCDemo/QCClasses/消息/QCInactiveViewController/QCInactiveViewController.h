@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QCInactiveViewController : UIViewController
-
+@property (nonatomic, strong) NSString * group_id;
 @end
 
 NS_ASSUME_NONNULL_END

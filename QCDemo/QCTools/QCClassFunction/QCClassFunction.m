@@ -958,9 +958,9 @@ static QCClassFunction * _classFunction = nil;
 
 + (void)noticeWithmsgId:(NSString *)migId {
     //  连接登录 websocket
-    NSString * str = [NSString stringWithFormat:@"msgid=%@&token=%@&type=notice&uid=%@",migId,K_TOKEN,K_UID];
+    NSString * str = [NSString stringWithFormat:@"smsid=%@&token=%@&type=notice&uid=%@",migId,K_TOKEN,K_UID];
     NSString * signStr = [QCClassFunction MD5:str];
-    NSDictionary * dic = @{@"msgid":migId,@"token":K_TOKEN,@"type":@"notice",@"uid":K_UID};
+    NSDictionary * dic = @{@"smsid":migId,@"token":K_TOKEN,@"type":@"notice",@"uid":K_UID};
     NSString * jsonDic = [QCClassFunction jsonStringWithDictionary:dic];
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonDic dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
@@ -969,6 +969,40 @@ static QCClassFunction * _classFunction = nil;
     [[QCWebSocket shared] sendDataToServer:jsonString];
 }
 
+
++ (void)chatPermissions:(NSDictionary *)info success:(successChange)successBlock failure:(failureChange)failureBlock{
+    //  连接登录 websocket
+    NSString * str = [NSString stringWithFormat:@"fuid=%@&token=%@&type=%@&uid=%@",info[@"fuid"],K_TOKEN,info[@"type"],K_UID];
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"fuid":info[@"fuid"],@"token":K_TOKEN,@"type":info[@"type"],@"uid":K_UID};
+    
+    
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    
+    [QCAFNetWorking QCPOST:@"/api/chat/verify_chat" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+
+        
+        
+        if ([responseObject[@"status"] intValue] == 1) {
+            successBlock(@"1");
+            
+        }else{
+            failureBlock(responseObject[@"msg"]);
+            
+        }
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        
+        successBlock(@"1");
+
+    }];
+    
+
+}
+
+
 //获取当前时间戳  （以毫秒为单位）
 
 +(NSString *)getNowTimeTimestamp3{
@@ -976,5 +1010,199 @@ static QCClassFunction * _classFunction = nil;
     NSTimeInterval a=[date timeIntervalSince1970]*1000; // *1000 是精确到毫秒，不乘就是精确到秒
     NSString *timeString = [NSString stringWithFormat:@"%.0f", a]; //转为字符型
     return timeString;
+}
+
+
++ (NSString *)URLDecodedString:(NSString *)str
+{
+    NSString *decodedString=(__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL, (__bridge CFStringRef)str, CFSTR(""), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+    
+    return decodedString;
+}
+
+
+
+
+//时间显示内容
+//+(NSString *)getDateDisplayString:(long long) miliSeconds{
+//    NSLog(@"-时间戳---%lld_----",miliSeconds);
+//
+//    NSTimeInterval tempMilli = miliSeconds;
+//    NSTimeInterval seconds = tempMilli/1000.0;
+//    NSDate *myDate = [NSDate dateWithTimeIntervalSince1970:seconds];
+//
+//    NSCalendar *calendar = [ NSCalendar currentCalendar ];
+//    int unit = NSCalendarUnitDay | NSCalendarUnitMonth |  NSCalendarUnitYear ;
+//    NSDateComponents *nowCmps = [calendar components:unit fromDate:[ NSDate date ]];
+//    NSDateComponents *myCmps = [calendar components:unit fromDate:myDate];
+//
+//    NSDateFormatter *dateFmt = [[NSDateFormatter alloc ] init ];
+//
+//    //2. 指定日历对象,要去取日期对象的那些部分.
+//    NSDateComponents *comp =  [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday fromDate:myDate];
+//
+//    if (nowCmps.year != myCmps.year) {
+//        dateFmt.dateFormat = @"yyyy-MM-dd HH:mm";
+//    } else {
+//        if (nowCmps.day==myCmps.day) {
+//            dateFmt.AMSymbol = @"上午";
+//            dateFmt.PMSymbol = @"下午";
+//            dateFmt.dateFormat = @"aaa hh:mm";
+//
+//        } else if((nowCmps.day-myCmps.day)==1) {
+//            dateFmt.dateFormat = @"昨天";
+//        } else {
+//            if ((nowCmps.day-myCmps.day) <=7) {
+//                switch (comp.weekday) {
+//                    case 1:
+//                        dateFmt.dateFormat = @"星期日";
+//                        break;
+//                    case 2:
+//                        dateFmt.dateFormat = @"星期一";
+//                        break;
+//                    case 3:
+//                        dateFmt.dateFormat = @"星期二";
+//                        break;
+//                    case 4:
+//                        dateFmt.dateFormat = @"星期三";
+//                        break;
+//                    case 5:
+//                        dateFmt.dateFormat = @"星期四";
+//                        break;
+//                    case 6:
+//                        dateFmt.dateFormat = @"星期五";
+//                        break;
+//                    case 7:
+//                        dateFmt.dateFormat = @"星期六";
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }else {
+//                dateFmt.dateFormat = @"MM-dd HH:mm";
+//            }
+//        }
+//    }
+//    return [dateFmt stringFromDate:myDate];
+//}
+
+
+//时间显示内容
++(NSString *)getDateDisplayString:(long long) miliSeconds{
+    
+    NSTimeInterval tempMilli = miliSeconds;
+    NSTimeInterval seconds = tempMilli/1000.0;
+    NSDate *myDate = [NSDate dateWithTimeIntervalSince1970:seconds];
+    
+    NSCalendar *calendar = [ NSCalendar currentCalendar ];
+    int unit = NSCalendarUnitDay | NSCalendarUnitMonth |  NSCalendarUnitYear ;
+    NSDateComponents *nowCmps = [calendar components:unit fromDate:[ NSDate date ]];
+    NSDateComponents *myCmps = [calendar components:unit fromDate:myDate];
+    
+    NSDateFormatter *dateFmt = [[NSDateFormatter alloc ] init ];
+    
+    //2. 指定日历对象,要去取日期对象的那些部分.
+    NSDateComponents *comp =  [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday fromDate:myDate];
+    
+    if (nowCmps.year != myCmps.year) {
+        dateFmt.dateFormat = @"yyyy-MM-dd HH:mm";
+    } else {
+        if (nowCmps.day==myCmps.day) {
+            dateFmt.AMSymbol = @"上午";
+            dateFmt.PMSymbol = @"下午";
+            dateFmt.dateFormat = @"aaa hh:mm";
+            
+        } else if((nowCmps.day-myCmps.day)==1) {
+            dateFmt.AMSymbol = @"上午";
+            dateFmt.PMSymbol = @"下午";
+            dateFmt.dateFormat = @"昨天 aaahh:mm";
+
+        } else {
+            if ((nowCmps.day-myCmps.day) <=7) {
+                
+                dateFmt.AMSymbol = @"上午";
+                dateFmt.PMSymbol = @"下午";
+                
+                switch (comp.weekday) {
+                    case 1:
+                        dateFmt.dateFormat = @"星期日 aaahh:mm";
+                        break;
+                    case 2:
+                        dateFmt.dateFormat = @"星期一 aaahh:mm";
+                        break;
+                    case 3:
+                        dateFmt.dateFormat = @"星期二 aaahh:mm";
+                        break;
+                    case 4:
+                        dateFmt.dateFormat = @"星期三 aaahh:mm";
+                        break;
+                    case 5:
+                        dateFmt.dateFormat = @"星期四 aaahh:mm";
+                        break;
+                    case 6:
+                        dateFmt.dateFormat = @"星期五 aaahh:mm";
+                        break;
+                    case 7:
+                        dateFmt.dateFormat = @"星期六 aaahh:mm";
+                        break;
+                    default:
+                        break;
+                }
+            }else {
+                dateFmt.dateFormat = @"MM-dd HH:mm";
+            }
+        }
+    }
+    return [dateFmt stringFromDate:myDate];
+}
+
+
++ (NSMutableAttributedString *)stringToAttributeString:(NSString *)text{
+    //先把普通的字符串text转化生成Attributed类型的字符串
+    NSMutableAttributedString * attStr = [[NSMutableAttributedString alloc]initWithString:text];
+    //正则表达式 ,例如  [(呵呵)] = 😑
+    NSString * zhengze = @"\\[[a-zA-Z0-9\u4e00-\u9fa5]+\\]";
+    NSError * error;
+    NSRegularExpression * re = [NSRegularExpression regularExpressionWithPattern:zhengze options:NSRegularExpressionCaseInsensitive error:&error];
+    if (!re)
+    {
+        //打印错误😓
+        NSLog(@"error😓=%@",[error localizedDescription]);
+    }
+    NSArray * arr = [re matchesInString:text options:0 range:NSMakeRange(0, text.length)];
+    NSDictionary *emotions = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"ChatEmotions" ofType:@"plist"]];
+    NSArray * face = [emotions allValues];
+
+
+    [attStr addAttribute:NSFontAttributeName
+                     value:K_15_FONT
+                     range:[text rangeOfString:text]];
+
+    
+    //如果有多个表情图，必须从后往前替换，因为替换后Range就不准确了
+    for (int j =(int) arr.count - 1; j >= 0; j--) {
+        //NSTextCheckingResult里面包含range
+        NSTextCheckingResult * result = arr[j];
+        for (int i = 0; i < face.count; i++) {
+            
+            
+            
+            if ([[text substringWithRange:result.range] isEqualToString:face[i]])//从数组中的字典中取元素
+            {
+                NSString * imageName = [NSString stringWithString:face[i]];
+                //添加附件,图片
+                NSTextAttachment * textAttachment = [[NSTextAttachment alloc]init];
+                //调节表情大小
+                textAttachment.bounds=CGRectMake(0, 0, KSCALE_WIDTH(20), KSCALE_WIDTH(20));
+                textAttachment.image = [UIImage imageNamed:imageName];
+                NSAttributedString * imageStr = [NSAttributedString attributedStringWithAttachment:textAttachment];
+                //替换未图片附件
+                [attStr replaceCharactersInRange:result.range withAttributedString:imageStr];
+                break;
+            }
+        }
+    }
+
+    return attStr;
 }
 @end

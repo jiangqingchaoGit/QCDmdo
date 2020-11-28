@@ -17,6 +17,10 @@ target "QCDemo" do
     pod 'UMCShare/Social/WeChat'
     pod 'SocketRocket'
     
+    # 上传图片
+    pod 'TZImagePickerController'
+
+    
     
     # FMDB
     pod 'FMDB'

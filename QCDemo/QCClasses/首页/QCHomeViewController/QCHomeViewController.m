@@ -103,7 +103,7 @@
     [self.navView addSubview:searchView];
     
     UIImageView * searchImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(12), 12, 14 , 14)];
-    searchImageView.image = KHeaderImage;
+    searchImageView.image = [UIImage imageNamed:@"search"];
     [searchView addSubview:searchImageView];
     
     UILabel * searchLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(38), KSCALE_WIDTH(0), KSCALE_WIDTH(100) , 38)];

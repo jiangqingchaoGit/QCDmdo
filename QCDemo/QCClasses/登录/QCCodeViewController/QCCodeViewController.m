@@ -132,6 +132,8 @@
 }
 
 #pragma mark - GETDATA
+
+
 - (void)GETCODE {
     NSString * str = [NSString stringWithFormat:@"mobile=%@&type=%@",self.phoneStr,self.typeStr];
 
@@ -162,6 +164,34 @@
     
 }
 
+- (void)setPass {
+    
+    NSString * str = [NSString stringWithFormat:@"code=%@&password=%@&token=%@&uid=%@",self.codeTextField.text,self.passwordStr,K_TOKEN,K_UID?K_UID:@""];
+    NSString * signStr = [QCClassFunction MD5:str];
+NSDictionary * dic = @{@"code":self.codeTextField.text,@"password":self.passwordStr,@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
+
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    [QCAFNetWorking QCPOST:@"/api/user/pay_pwd" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+
+
+
+        if ([responseObject[@"msg"] isEqualToString:@"成功"]) {
+
+        }else{
+            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+
+        }
+
+
+
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
+    
+}
 - (void)GETLogin {
     
     NSString * str = [NSString stringWithFormat:@"code=%@&device=%@&device_type=%@&device_version=%@&imei=%@&mobile=%@&type=%@&unionid=%@",self.codeTextField.text,K_TYPE,@"iOS",K_systemVersion,K_UUID,self.phoneStr,self.typeStr,self.unionid?self.unionid:@""];
@@ -172,7 +202,7 @@
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
 
-    [[QCWebSocket shared] connectServer];
+      [[QCWebSocket shared] connectServer];
 
     [QCAFNetWorking QCPOST:@"/api/mobile_login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
 
@@ -282,6 +312,12 @@
     if (sender.text.length == 4) {
         //  登录接口
         [self.codeTextField resignFirstResponder];
+        if ([self.typeStr isEqualToString:@"1"]) {
+            //  设置交易密码
+            [self setPass];
+            
+                
+        }
         [self GETLogin];
     }
 

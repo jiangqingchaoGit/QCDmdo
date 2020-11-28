@@ -36,10 +36,9 @@
         [self.contentView addSubview:self.contentLabel];
         
 
-        self.chooseSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(300), KSCALE_WIDTH(14.5), KSCALE_WIDTH(0), KSCALE_WIDTH(0))];
+        self.chooseSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(300), KSCALE_WIDTH(14.5), KSCALE_WIDTH(20), KSCALE_WIDTH(20))];
         self.chooseSwitch.onTintColor = [QCClassFunction stringTOColor:@"#FFCC00"];
-        self.chooseSwitch.tintColor = [UIColor greenColor];
-        self.chooseSwitch.on = YES;
+        self.chooseSwitch.on = NO;
         self.chooseSwitch.thumbTintColor = [UIColor whiteColor];
 
         [self.contentView addSubview:self.chooseSwitch];
@@ -49,5 +48,6 @@
     }
     return self;
 }
+
 
 @end

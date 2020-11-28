@@ -42,6 +42,12 @@
         self.idLabel.textColor = [QCClassFunction stringTOColor:@"#D7D7D7"];
         [self.contentView addSubview:self.idLabel];
         
+        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(150), KSCALE_WIDTH(30), KSCALE_WIDTH(210), KSCALE_WIDTH(22))];
+        self.timeLabel.font = K_12_FONT;
+        self.timeLabel.textAlignment = NSTextAlignmentRight;
+        self.timeLabel.textColor = [QCClassFunction stringTOColor:@"#D7D7D7"];
+        [self.contentView addSubview:self.timeLabel];
+        
         UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, KSCALE_WIDTH(72), KSCALE_WIDTH(375), KSCALE_WIDTH(10))];
         lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
         [self.contentView addSubview:lineView];

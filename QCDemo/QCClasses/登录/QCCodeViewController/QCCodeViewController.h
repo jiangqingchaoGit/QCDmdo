@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * phoneStr;
 @property (nonatomic, strong) NSString * unionid;
 @property (nonatomic, strong) NSString * typeStr;
+@property (nonatomic, strong) NSString * passwordStr;
+
 
 
 

@@ -13,12 +13,16 @@
 @property (nonatomic, strong) UIButton * backButton;
 @property (nonatomic, strong) UILabel * moneyLabel;
 @property (nonatomic, strong) UILabel * numberLabel;
+@property (nonatomic, assign) NSInteger i;
+@property (nonatomic, strong) NSMutableArray * dataArr;
+@property (nonatomic, strong) NSDictionary * dataDic;
 
 @property (nonatomic, strong) UIButton * incomeButton;
 @property (nonatomic, strong) UIButton * spendingButton;
 @property (nonatomic, strong) UIButton * withdrawalButton;
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIView * headerView;
+@property (nonatomic, strong) NSString * typeStr;
 
 @end
 
@@ -34,9 +38,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.typeStr = @"userreceivered";
+    self.i = 1;
+    self.dataArr = [[NSMutableArray alloc] init];
     [self initUI];
     [self createTableView];
     [self createHeaderView];
+    [self GETDATA];
+    [self refreshData];
+
 }
 
 #pragma mark - tapAction
@@ -46,6 +56,9 @@
 
 }
 - (void)buttonAction:(UIButton *)sender {
+    [self.dataArr removeAllObjects];
+    self.i = 1;
+
     switch (sender.tag) {
         case 1:
             self.incomeButton.selected = YES;
@@ -54,8 +67,7 @@
             self.incomeButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
             self.spendingButton.backgroundColor = KCLEAR_COLOR;
             self.withdrawalButton.backgroundColor = KCLEAR_COLOR;
-
-
+            self.typeStr = @"userreceivered";
 
             break;
         case 2:
@@ -65,6 +77,7 @@
             self.incomeButton.backgroundColor = KCLEAR_COLOR;
             self.spendingButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
             self.withdrawalButton.backgroundColor = KCLEAR_COLOR;
+            self.typeStr = @"usersendred";
 
             break;
 
@@ -72,6 +85,7 @@
         default:
             break;
     }
+    [self GETDATA];
 }
 #pragma mark - initUI
 
@@ -80,6 +94,80 @@
     self.view.backgroundColor = KBACK_COLOR;
     self.title = @"红包明细";
     
+
+    
+}
+
+- (void)GETDATA {
+  
+    NSString * str = [NSString stringWithFormat:@"limit=20&page=%ld&token=%@&uid=%@",self.i,K_TOKEN,K_UID?K_UID:@""];
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"limit":@"20",@"page":[NSString stringWithFormat:@"%ld",self.i],@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
+    
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    [QCAFNetWorking QCPOST:[NSString stringWithFormat:@"/api/finance/%@",self.typeStr] parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        if ([responseObject[@"status"] intValue] == 1) {
+        
+            self.dataDic = responseObject[@"data"];
+            for (NSDictionary * dic in responseObject[@"data"][@"rs"]) {
+                QCEnvelopModel * model = [[QCEnvelopModel alloc] initWithDictionary:dic error:nil];
+                [self.dataArr addObject:model];
+            }
+            [self fillView];
+            if (self.dataArr.count == 0) {
+                self.tableView.mj_footer.hidden = YES;
+            }else{
+                self.tableView.mj_footer.hidden = NO;
+            }
+            [self.tableView reloadData];
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+    }];
+    
+}
+
+- (void)refreshData {
+    
+//    MJRefreshNormalHeader * header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        [self.dataArr removeAllObjects];
+//        self.i = 0;
+//        [self GETDATA];
+//    }];
+    MJRefreshAutoNormalFooter * footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        self.i++;
+        [self GETDATA];
+        
+    }];
+    self.tableView.mj_footer = footer;
+//    _tableView.mj_header = header;
+    
+    
+}
+
+
+- (void)fillView {
+    
+    
+    if ([self.dataDic[@"sum"] isKindOfClass:[NSString class]]) {
+        self.moneyLabel.text = self.dataDic[@"sum"];
+
+    }else{
+        self.moneyLabel.text = [self.dataDic[@"sum"] stringValue];
+
+    }
+    self.numberLabel.text = [NSString stringWithFormat:@"红包总数：%@个",[self.dataDic[@"num"] stringValue]];
+
 
     
 }
@@ -138,7 +226,7 @@
     [self.headerView addSubview:self.moneyLabel];
     
     self.numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KStatusHight + KSCALE_WIDTH(140), KSCALE_WIDTH(200), KSCALE_WIDTH(16))];
-    self.numberLabel.text = @"红包总数：999个";
+    self.numberLabel.text = @"红包总数：0个";
     self.numberLabel.font = K_14_FONT;
     self.numberLabel.textColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
     [self.headerView addSubview:self.numberLabel];
@@ -187,7 +275,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return self.dataArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -198,6 +286,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QCEnvelopCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    QCEnvelopModel * model = self.dataArr[indexPath.row];
+    [cell fillCellWithModel:model];
+    if ([self.typeStr isEqualToString: @"usersendred"]) {
+        cell.contentLabel.text = @"【红包】我发出的";
+        cell.paymentsLabel.text = [NSString stringWithFormat:@"-%@元",model.red_price];
+        cell.timeLabel.text = [QCClassFunction ConvertStrToTime:model.pay_time withType:@"yyyy-MM-dd"];
+        cell.restLabel.hidden = NO;
+        
+
+    }else{
+        cell.contentLabel.text = [NSString stringWithFormat:@"%@的【红包】",model.nick];
+        cell.paymentsLabel.text = [NSString stringWithFormat:@"%@元",model.price];
+        cell.timeLabel.text = [QCClassFunction ConvertStrToTime:model.addtime withType:@"yyyy-MM-dd"];
+        cell.restLabel.hidden = YES;
+
+    }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     

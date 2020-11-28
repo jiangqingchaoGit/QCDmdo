@@ -13,6 +13,7 @@
 
 //  聊天界面
 #import "QCChatViewController.h"
+#import "QCGroupChatViewController.h"
 //  添加朋友
 #import "QCAddFriendsViewController.h"
 //  发起群聊
@@ -20,7 +21,7 @@
 //  扫一扫
 //  帮助
 
-#import "QCGroupDataViewController.h"
+
 
 //  搜索界面
 #import "QCMessageSearchViewController.h"
@@ -76,6 +77,9 @@
     [self.dataArr removeAllObjects];
     QCListModel * model = [[QCListModel alloc] init];
     self.dataArr = [[QCDataBase shared] queryListModel:model];
+    
+
+    
     [self.tableView reloadData];
 }
 #pragma mark - tapAction
@@ -129,9 +133,9 @@
     
 
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-    UIImageView * imageView = [[UIImageView alloc] initWithImage:KHeaderImage];
+    UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"add"]];
     imageView.frame = CGRectMake(0, 0, 44, 44);
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.contentMode = UIViewContentModeCenter;
     [view addSubview:imageView];
     UITapGestureRecognizer * rightTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rightAction:)];
     [view addGestureRecognizer:rightTap];
@@ -168,8 +172,9 @@
     searchView.layer.cornerRadius = KSCALE_WIDTH(3);
     [self.headerView addSubview:searchView];
     
-    UIImageView * searchImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(35), KSCALE_WIDTH(18), KSCALE_WIDTH(14) , KSCALE_WIDTH(14))];
-    searchImageView.image = KHeaderImage;
+    UIImageView * searchImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(35), KSCALE_WIDTH(17), KSCALE_WIDTH(16) , KSCALE_WIDTH(16))];
+    searchImageView.image = [UIImage imageNamed:@"search"];
+
     [self.headerView addSubview:searchImageView];
     
     UILabel * searchLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(55), KSCALE_WIDTH(6), KSCALE_WIDTH(50) , KSCALE_WIDTH(38))];
@@ -209,6 +214,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     QCListModel * model = self.dataArr[indexPath.row];
     [cell fillCellWithModel:model];
+    
     return cell;
     
 }
@@ -217,35 +223,30 @@
     
     QCListModel * model = self.dataArr[indexPath.row];
 
-    switch (indexPath.row) {
-        case 0:
-        {
-            QCChatViewController * chatViewController = [[QCChatViewController alloc] init];
-            chatViewController.hidesBottomBarWhenPushed = YES;
-            chatViewController.model = model;
-            [self.navigationController pushViewController:chatViewController animated:YES];
-        }
-            break;
-        case 1:
-        {
-            QCGroupViewController * groupViewController = [[QCGroupViewController alloc] init];
-            groupViewController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:groupViewController animated:YES];
-        }
-            break;
-            
-        case 2:
-        {
-            QCGroupDataViewController * groupDataViewController = [[QCGroupDataViewController alloc] init];
-            groupDataViewController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:groupDataViewController animated:YES];
-        }
-            break;
-            
-        default:
-            break;
-            
+    
+    if ([model.cType isEqualToString:@"0"]) {
+        QCChatViewController * chatViewController = [[QCChatViewController alloc] init];
+        chatViewController.hidesBottomBarWhenPushed = YES;
+        model.isRead = @"1";
+        chatViewController.model = model;
+        
+        
+        [self.navigationController pushViewController:chatViewController animated:YES];
+    }else {
+        QCGroupChatViewController * chatViewController = [[QCGroupChatViewController alloc] init];
+        chatViewController.hidesBottomBarWhenPushed = YES;
+        model.isRead = @"1";
+        
+        NSArray * arr = [model.listId componentsSeparatedByString:@"|"];
+        chatViewController.groupId = [arr lastObject];
+        chatViewController.model = model;
+        
+        
+        [self.navigationController pushViewController:chatViewController animated:YES];
     }
+
+
+
     
 }
 

@@ -36,8 +36,8 @@
     self.searchView.layer.cornerRadius = KSCALE_WIDTH(3);
     [self.view addSubview:self.searchView];
     
-    UIImageView * searchImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(35), KSCALE_WIDTH(18), KSCALE_WIDTH(14) , KSCALE_WIDTH(14))];
-    searchImageView.image = KHeaderImage;
+    UIImageView * searchImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(35), KSCALE_WIDTH(17), KSCALE_WIDTH(16) , KSCALE_WIDTH(16))];
+    searchImageView.image = [UIImage imageNamed:@"search"];
     [self.view addSubview:searchImageView];
     
     
@@ -47,10 +47,13 @@
     self.searchTextField.textColor = [QCClassFunction stringTOColor:@"#333333"];
     self.searchTextField.backgroundColor = [UIColor clearColor];
     self.searchTextField.returnKeyType = UIReturnKeyDone;
+    self.searchTextField.keyboardType =  UIKeyboardTypeASCIICapable;
     self.searchTextField.delegate = self;
     [self.view addSubview:self.searchTextField];
     
     NSArray * titleArr = @[@"微信邀请好友",@"扫一扫"];
+    NSArray * imageArr = @[@"wechat",@"saoyisao"];
+
     for (NSInteger i = 0; i < 2; i++) {
         
         UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(0, KSCALE_WIDTH(62) + i * KSCALE_WIDTH(72), KSCALE_WIDTH(375), KSCALE_WIDTH(62))];
@@ -60,7 +63,7 @@
         [self.view addSubview:button];
         
         UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(62) + i * KSCALE_WIDTH(72), KSCALE_WIDTH(52), KSCALE_WIDTH(52))];
-        imageView.image =KHeaderImage;
+        imageView.image = [UIImage imageNamed:imageArr[i]];
         [QCClassFunction filletImageView:imageView withRadius:KSCALE_WIDTH(26)];
         [self.view addSubview:imageView];
         
@@ -154,7 +157,9 @@
         QCSearchViewController * searchViewController = [[QCSearchViewController alloc] init];
         searchViewController.hidesBottomBarWhenPushed = YES;
         searchViewController.searchStr = self.searchTextField.text;
+        
         [self.navigationController pushViewController:searchViewController animated:YES];
+        self.searchTextField.text = nil;
         return NO;
     }
     return YES;

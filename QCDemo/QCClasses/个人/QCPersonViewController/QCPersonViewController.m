@@ -57,8 +57,8 @@
     
     NSString * str = [NSString stringWithFormat:@"token=%@&uid=%@",K_TOKEN,K_UID?K_UID:@""];
     NSString * signStr = [QCClassFunction MD5:str];
-    
     NSDictionary * dic = @{@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
+    
     NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     
@@ -68,7 +68,6 @@
         
         NSDictionary * data = responseObject[@"data"];
         
-        NSLog(@"%@",data);
         if ([responseObject[@"msg"] isEqualToString:@"成功"]) {
             QCPersonModel * personModel = [[QCPersonModel alloc] initWithDictionary:data error:nil];
             
@@ -78,6 +77,9 @@
             [QCClassFunction Save:personModel.identifyNum Key:@"cardNum"];
             [QCClassFunction Save:personModel.real_name Key:@"realName"];
             [QCClassFunction Save:personModel.is_pay_wallet Key:@"wallet"];
+            [QCClassFunction Save:personModel.account Key:@"account"];
+
+            
             
             [self.dataArr removeAllObjects];
             [self.dataArr addObject:personModel];

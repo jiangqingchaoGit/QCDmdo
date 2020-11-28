@@ -84,7 +84,7 @@
     [self.view addSubview:self.cardLabel];
     
     UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(295) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
-    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
+    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
     [self.view addSubview:lineView];
     
     UILabel * limitLabels = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(310) + KStatusHight, KSCALE_WIDTH(80), KSCALE_WIDTH(22))];

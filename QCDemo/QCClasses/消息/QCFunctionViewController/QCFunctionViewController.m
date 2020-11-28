@@ -11,6 +11,8 @@
 
 //  添加好友
 #import "QCAddFriendsViewController.h"
+//  发起群聊
+#import "QCGroupViewController.h"
 #import "SWQRCodeConfig.h"
 #import "SWQRCodeViewController.h"
 @interface QCFunctionViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -61,6 +63,9 @@
             case 2:
             {
                 //  发起群聊
+                QCGroupViewController * groupViewController = [[QCGroupViewController alloc] init];
+                groupViewController.hidesBottomBarWhenPushed = YES;
+                [self.messageViewController.navigationController pushViewController:groupViewController animated:YES];
             }
                 break;
             case 3:
@@ -127,12 +132,16 @@
     QCFunctionCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSArray * titleArr = @[@"添加朋友",@"发起群聊",@"扫一扫",@"帮助"];
+    NSArray * imageArr = @[@"addf",@"chat",@"scan",@"help"];
+
     if (indexPath.row == 3) {
         cell.lineView.hidden = YES;
     }else{
         cell.lineView.hidden = NO;
     }
     cell.contentLabel.text = titleArr[indexPath.row];
+    cell.headerImageView.image = [UIImage imageNamed:imageArr[indexPath.row]];
+
     [cell.functionButton addTarget:self action:@selector(functionAction:) forControlEvents:UIControlEventTouchUpInside];
     cell.functionButton.tag = indexPath.row + 1;
     return cell;

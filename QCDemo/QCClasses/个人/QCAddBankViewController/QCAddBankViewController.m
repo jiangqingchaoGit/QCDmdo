@@ -71,6 +71,7 @@
         
         if ([responseObject[@"status"] intValue] == 1) {
             
+            
         
         }else{
             [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
@@ -121,6 +122,7 @@
     }
     
     //  进行绑定操作
+    
     
 }
 
@@ -186,7 +188,7 @@
     [self.view addSubview:titleLabel];
     
     UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KSCALE_WIDTH(174), KSCALE_WIDTH(315), KSCALE_WIDTH(1))];
-    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#D7D7D7"];
+    lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
     [self.view addSubview:lineView];
     
     
@@ -202,7 +204,7 @@
         [self.view addSubview:label];
         
         UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KSCALE_WIDTH(59) * i + KSCALE_WIDTH(233), KSCALE_WIDTH(315), KSCALE_WIDTH(1))];
-        lineView.backgroundColor = [QCClassFunction stringTOColor:@"#D7D7D7"];
+        lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
         [self.view addSubview:lineView];
         
         UITextField * textField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(100), KSCALE_WIDTH(175) + KSCALE_WIDTH(59) * i , KSCALE_WIDTH(200), KSCALE_WIDTH(58))];

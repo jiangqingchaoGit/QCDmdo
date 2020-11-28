@@ -8,20 +8,62 @@
 
 #import "QCAddGroupManagerViewController.h"
 #import "QCGroupManagerCell.h"
-#import "QCGroupViewController.h"
+#import "QCGroupManagerViewController.h"
 @interface QCAddGroupManagerViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIView * footerView;
-
+@property (nonatomic, strong) NSMutableArray * dataArr;
 @end
 
 @implementation QCAddGroupManagerViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self GETDATA];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.dataArr = [[NSMutableArray alloc] init];
     [self initUI];
     [self createTableView];
     [self createFooterView];
+    
+}
 
+- (void)GETDATA {
+    
+    
+    NSString * str = [NSString stringWithFormat:@"group_id=%@&token=%@&uid=%@&user_type=%@",self.group_id,K_TOKEN,K_UID,@"2"];
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"group_id":self.group_id,@"token":K_TOKEN,@"uid":K_UID,@"user_type":@"2"};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    
+    
+    
+    [QCAFNetWorking QCPOST:@"/api/chat/group_member" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        if ([responseObject[@"status"] intValue] == 1) {
+            [self.dataArr removeAllObjects];
+            for (NSDictionary * dic in responseObject[@"data"]) {
+                QCGroupDataModel * model = [[QCGroupDataModel alloc] initWithDictionary:dic error:nil];
+                [self.dataArr addObject:model];
+            }
+            [self.tableView reloadData];
+            
+        }else{
+            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+            
+        }
+        
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
+    
 }
 
 #pragma mark - tapAction
@@ -31,9 +73,12 @@
 }
 
 - (void)addAction:(UIButton *)sender {
-    QCGroupViewController * groupViewController = [[QCGroupViewController alloc] init];
-    groupViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:groupViewController animated:YES];
+    QCGroupManagerViewController * groupManagerViewController = [[QCGroupManagerViewController alloc] init];
+    groupManagerViewController.numberArr = self.numberArr;
+    groupManagerViewController.group_id = self.group_id;
+
+    groupManagerViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:groupManagerViewController animated:YES];
 }
 #pragma mark - initUI
 - (void)initUI {
@@ -48,8 +93,8 @@
     [view addSubview:imageView];
     UITapGestureRecognizer * rightTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rightAction:)];
     [view addGestureRecognizer:rightTap];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:view];
-
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:view];
+    
 }
 
 - (void)createTableView {
@@ -65,7 +110,7 @@
         
     }
     [self.tableView registerClass:[QCGroupManagerCell class] forCellReuseIdentifier:@"cell"];
-
+    
     
     [self.view addSubview:self.tableView];
     
@@ -88,6 +133,46 @@
     [self.footerView addSubview:addButton];
     
 }
+
+- (void)deletAction:(UIButton *)sender {
+    
+    
+    QCGroupManagerCell * cell = (QCGroupManagerCell *)[[sender superview]superview];
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    QCGroupDataModel * model = self.dataArr[indexPath.row];
+    
+    
+
+    //  移除群聊
+    NSString * str = [NSString stringWithFormat:@"group_id=%@&muid=%@&token=%@&uid=%@&user_type=%@",self.group_id,[NSString stringWithFormat:@"%@,",model.uid],K_TOKEN,K_UID,@"1"];
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"group_id":self.group_id,@"muid":[NSString stringWithFormat:@"%@,",model.uid],@"token":K_TOKEN,@"uid":K_UID,@"user_type":@"1"};
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    
+    
+    
+    [QCAFNetWorking QCPOST:@"/api/chat/group_manage" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        if ([responseObject[@"status"] intValue] == 1) {
+            [self GETDATA];
+            
+            
+        }else{
+            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+            
+        }
+        
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+    }];
+    
+    
+    
+}
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 
 
@@ -95,7 +180,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 2;
+    return self.dataArr.count;
 }
 
 
@@ -103,24 +188,28 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     return KSCALE_WIDTH(72);
-
+    
 }
 
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    QCGroupDataModel * model = self.dataArr[indexPath.row];
     QCGroupManagerCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
+    [cell.deletButton addTarget:self action:@selector(deletAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cell fillCellWithModel:model];
+    
     return cell;
-
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     
 }
 

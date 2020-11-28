@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImageView * headerImageView;
 @property (nonatomic, strong) UILabel * nameLabel;
 @property (nonatomic, strong) UILabel * idLabel;
+@property (nonatomic, strong) UILabel * timeLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

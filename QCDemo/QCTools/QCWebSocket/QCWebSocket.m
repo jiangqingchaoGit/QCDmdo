@@ -127,68 +127,140 @@
     }
 }
 
+- (void) reciveData:(recive_Success_Block)reciveBlock {
+    
+    self.reciveBlock = reciveBlock;
+}
 ///ping
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)pongData{
     
     
-    
-    
+
     NSDictionary * jsonDic = [QCClassFunction dictionaryWithJsonString:pongData];
     
     if ([jsonDic[@"code"] intValue] == 200) {
         id result = [QCClassFunction dictionaryWithJsonString:[QCClassFunction AES128_Decrypt:K_AESKEY withStr:jsonDic[@"data"]]];
         
-        
-        
+        NSLog(@"%@",result);
 
-        if ([result[@"type"] isEqualToString:@"chat"]) {
-            //  存数据库操作
-            NSLog(@"%@",result[@"msgid"]);
-            [QCClassFunction  noticeWithmsgId:result[@"smsid"]];
-            
-            
-            NSDictionary * chatDic = @{@"chatId":result[@"msgid"],@"type":result[@"type"],@"uid":result[@"uid"],@"rid":result[@"touid"],@"msgid":result[@"msgid"],@"message":result[@"message"],@"time":result[@"time"],@"ctype":result[@"ctype"],@"smsid":result[@"smsid"],@"gid":result[@"gid"]};
-            
-            
-            
-            
-            QCChatModel * chatModel = [[QCChatModel alloc] initWithDictionary:chatDic error:nil];
-            [[QCDataBase shared] insertChatModel:chatModel];
-
-
-//            NSDictionary * listDic = @{@"listId":@"0000001",@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"999999",@"message":@"聊天信息",@"time":@"2020-10-10",@"count":@"1",@"headImage":@"headImageUrl"};
-//            QCListModel * listModel = [[QCListModel alloc] initWithDictionary:listDic error:nil];
-//            [[QCDataBase shared] insertListModel:listModel];
-
-
-
-        }
-        
         if ([result[@"type"] isEqualToString:@"notice"]) {
-            //  存数据库操作
-            NSLog(@"%@",result);
-//
-//            NSDictionary * dic = result[@"data"];
-//            NSDictionary * associatedDic = @{@"associatedId":@"",@"type":@"",@"uid":@"",@"rid":@"",@"msgid":@"",@"message":@"",@"time":@"",@"status":@""};
-//
-//            QCAssociatedModel * associatedModel = [[QCAssociatedModel alloc] initWithDictionary:associatedDic error:nil];
-//            [[QCDataBase shared] insertAssociatedModel:associatedModel];
-//
-//
+            
+            if (self.reciveBlock ) {
+                self.reciveBlock(result[@"msgid"]);
+            }
+            [[QCDataBase shared] updateChatModel:result[@"msgid"]];
 
         }
-        
-        
 
-        if ([result[@"type"] isEqualToString:@"repply"]) {
+
+        if ([result[@"type"] isEqualToString:@"chat"] || [result[@"atype"] isEqualToString:@"agree"]) {
             //  存数据库操作
             NSLog(@"%@",result);
+            [QCClassFunction  noticeWithmsgId:result[@"smsid"]];
 
-            NSDictionary * dic = result[@"data"];
-            NSDictionary * associatedDic = @{@"associatedId":@"",@"type":@"",@"uid":@"",@"rid":@"",@"msgid":@"",@"message":@"",@"time":@"",@"status":@""};
+            
+            
+            if ([result[@"atype"] isEqualToString:@"agree"]) {
+                [result setValue:@"" forKey:@"ghead"];
+                [result setValue:@"" forKey:@"gname"];
+                [result setValue:@"0" forKey:@"mtype"];
+                
+                NSString * listId;
+                listId = [NSString stringWithFormat:@"%@|000000|%@",result[@"touid"],result[@"uid"]];
+                NSDictionary * chatDic = @{@"chatId":result[@"msgid"],@"listId":listId,@"type":result[@"type"],@"uid":result[@"uid"],@"rid":result[@"touid"],@"msgid":result[@"msgid"],@"message":result[@"message"],@"time":[NSString stringWithFormat:@"%ld",[result[@"time"] integerValue] * 1000],@"ctype":@"0",@"smsid":result[@"smsid"],@"gid":@"0",@"mtype":@"0",@"tohead":result[@"tohead"],@"tonick":result[@"tonick"],@"uhead":result[@"uhead"],@"unick":result[@"unick"],@"ghead":result[@"ghead"],@"gname":result[@"gname"]};
+
+                QCChatModel * chatModel = [[QCChatModel alloc] initWithDictionary:chatDic error:nil];
+                [[QCDataBase shared] insertChatModel:chatModel];
+
+                NSDictionary * listDic = @{@"listId":listId,@"type":result[@"type"],@"uid":result[@"uid"],@"rid":result[@"touid"],@"msgid":result[@"msgid"],@"message":result[@"message"],@"time":[NSString stringWithFormat:@"%ld",[result[@"time"] integerValue] * 1000],@"count":@"1",@"headImage":@"headImageUrl",@"isTop":@"0",@"isRead":@"0",@"isChat":@"2",@"cType":@"0",@"mtype":@"0",@"tohead":result[@"tohead"],@"tonick":result[@"tonick"],@"uhead":result[@"uhead"],@"unick":result[@"unick"],@"ghead":result[@"ghead"],@"gname":result[@"gname"],@"disturb":@"0"};
+                QCListModel * listModel = [[QCListModel alloc] initWithDictionary:listDic error:nil];
+                [[QCDataBase shared] queryByListId:listModel];
+                
+            }else{
+                NSString * listId;
+
+
+                if ([[result[@"ctype"] stringValue] isEqualToString:@"0"]) {
+                    listId = [NSString stringWithFormat:@"%@|000000|%@",result[@"touid"],result[@"uid"]];
+
+                }else if ([[result[@"ctype"] stringValue] isEqualToString:@"1"]){
+                    listId = [NSString stringWithFormat:@"%@|000000|%@",result[@"touid"],result[@"gid"]];
+
+                }else {
+                    listId = [NSString stringWithFormat:@"%@|000000|%@",K_UID,@"000000"];
+
+                }
+                NSString * messageStr = result[@"message"];
+                NSString * timeStr;
+
+                if ([[result[@"mtype"] stringValue] isEqualToString:@"0"]) {
+                    NSDictionary * dic = [QCClassFunction dictionaryWithJsonString:result[@"message"]];
+                    messageStr = dic[@"message"];
+                    
+                    if ([dic[@"isfive"] isKindOfClass:[NSString class]]) {
+                        timeStr = dic[@"isfive"];
+
+                    }else{
+                        timeStr = [dic[@"isfive"] stringValue];
+
+                    }
+                }else{
+                    NSArray * arr = [messageStr componentsSeparatedByString:@"|"];
+                    timeStr = [arr lastObject];
+                }
+                
+                
+                if ([[result[@"ctype"] stringValue] isEqualToString:@"0"]) {
+                    [result setValue:@"" forKey:@"ghead"];
+                    [result setValue:@"" forKey:@"gname"];
+
+                }
+ 
+                if ([timeStr isEqualToString:@"1"]) {
+                    
+                    NSDictionary * chatDic = @{@"chatId":[NSString stringWithFormat:@"&@|%@",result[@"msgid"]],@"listId":listId,@"type":result[@"type"],@"uid":result[@"uid"],@"rid":result[@"touid"],@"msgid":result[@"msgid"],@"message":result[@"time"],@"time":[NSString stringWithFormat:@"%ld",[result[@"time"] integerValue] * 1000],@"ctype":[result[@"ctype"] stringValue],@"smsid":result[@"smsid"],@"gid":result[@"gid"],@"mtype":@"10",@"tohead":result[@"tohead"],@"tonick":result[@"tonick"],@"uhead":result[@"uhead"],@"unick":result[@"unick"],@"ghead":result[@"ghead"],@"gname":result[@"gname"]};
+
+                    QCChatModel * chatModel = [[QCChatModel alloc] initWithDictionary:chatDic error:nil];
+                    [[QCDataBase shared] insertChatModel:chatModel];
+
+                }
+                
+                
+
+     
+                
+                NSDictionary * chatDic = @{@"chatId":result[@"msgid"],@"listId":listId,@"type":result[@"type"],@"uid":result[@"uid"],@"rid":result[@"touid"],@"msgid":result[@"msgid"],@"message":result[@"message"],@"time":[NSString stringWithFormat:@"%ld",[result[@"time"] integerValue] * 1000],@"ctype":[result[@"ctype"] stringValue],@"smsid":result[@"smsid"],@"gid":result[@"gid"],@"mtype":[result[@"mtype"] stringValue],@"tohead":result[@"tohead"],@"tonick":result[@"tonick"],@"uhead":result[@"uhead"],@"unick":result[@"unick"],@"ghead":result[@"ghead"],@"gname":result[@"gname"]};
+
+                QCChatModel * chatModel = [[QCChatModel alloc] initWithDictionary:chatDic error:nil];
+                [[QCDataBase shared] insertChatModel:chatModel];
+
+                NSDictionary * listDic = @{@"listId":listId,@"type":result[@"type"],@"uid":result[@"uid"],@"rid":result[@"touid"],@"msgid":result[@"msgid"],@"message":result[@"message"],@"time":[NSString stringWithFormat:@"%ld",[result[@"time"] integerValue] * 1000],@"count":@"1",@"headImage":@"headImageUrl",@"isTop":@"0",@"isRead":@"0",@"isChat":@"2",@"cType":[result[@"ctype"] stringValue],@"mtype":[result[@"mtype"] stringValue],@"tohead":result[@"tohead"],@"tonick":result[@"tonick"],@"uhead":result[@"uhead"],@"unick":result[@"unick"],@"ghead":result[@"ghead"],@"gname":result[@"gname"],@"disturb":@"0"};
+                QCListModel * listModel = [[QCListModel alloc] initWithDictionary:listDic error:nil];
+                [[QCDataBase shared] queryByListId:listModel];
+            }
+            
+            
+            
+
+
+        }
+
+        
+        
+
+        if ([result[@"atype"] isEqualToString:@"apply"]) {
+            //  存数据库操作
+            [QCClassFunction  noticeWithmsgId:result[@"smsid"]];
+
+            NSLog(@"%@",result);
+
+            NSDictionary * dic = result;
+            NSString * associatedId = [NSString stringWithFormat:@"%@|000000|%@",result[@"touid"],result[@"uid"]];
+
+            NSDictionary * associatedDic = @{@"associatedId":associatedId,@"type":dic[@"type"],@"uid":dic[@"uid"],@"rid":dic[@"touid"],@"msgid":dic[@"msgid"],@"message":dic[@"message"],@"time":dic[@"time"],@"status":@"0",@"applyid":dic[@"applyid"],@"smsid":dic[@"smsid"]};
 
             QCAssociatedModel * associatedModel = [[QCAssociatedModel alloc] initWithDictionary:associatedDic error:nil];
-            [[QCDataBase shared] insertAssociatedModel:associatedModel];
+            [[QCDataBase shared] queryByAssociatedId:associatedModel];
 
 
 
@@ -200,13 +272,7 @@
     }
     
     
-//    NSDictionary * listDic = @{@"listId":@"0000001",@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"999999",@"message":@"聊天信息",@"time":@"2020-10-10",@"count":@"1",@"headImage":@"headImageUrl"};
-//    QCListModel * listModel = [[QCListModel alloc] initWithDictionary:listDic error:nil];
-//    [[QCDataBase shared] insertListModel:listModel];
-    
-    
 
-    
 
     
 }
@@ -383,25 +449,15 @@
         if(self.webSocket != nil)
         {
             // 只有长连接OPEN开启状态才能调 send 方法，不然会Crash
-            if(self.webSocket.readyState == SR_OPEN)
-            {
-                //                if (self.sendDataArray.count > 0)
-                //                {
-                //                    NSString *data = self.sendDataArray[0];
-                //                    [_webSocket sendString:data error:NULL]; //发送数据
-                
+            if(self.webSocket.readyState == SR_OPEN) {
                 [self.webSocket send:data];
-                //                    [self.sendDataArray removeObjectAtIndex:0];
-                //
-                //                }
+
             }
             else if (self.webSocket.readyState == SR_CONNECTING) //正在连接
             {
                 NSLog(@"正在连接中，重连后会去自动同步数据");
             }
-            else if (self.webSocket.readyState == SR_CLOSING || self.webSocket.readyState == SR_CLOSED) //断开连接
-            {
-                //调用 reConnectServer 方法重连,连接成功后 继续发送数据
+            else if (self.webSocket.readyState == SR_CLOSING || self.webSocket.readyState == SR_CLOSED) {
                 [self reConnectServer];
             }
         }
@@ -417,9 +473,9 @@
 
 - (NSString *)getJsonData{
     
-    NSString * str = @"type=pong&uid=iOS";
+    NSString * str = [NSString stringWithFormat:@"token=%@&type=pong&uid=%@",K_TOKEN,K_UID];
     NSString * signStr = [QCClassFunction MD5:str];
-    NSDictionary * dic = @{@"type":@"pong",@"uid":@"iOS"};
+    NSDictionary * dic = @{@"token":K_TOKEN,@"type":@"pong",@"uid":K_UID};
     NSString * jsonDic = [QCClassFunction jsonStringWithDictionary:dic];
 
     NSString *output = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonDic dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
@@ -436,28 +492,4 @@
 }
 
 
-
-/*
- *
- NSString * msgid = [NSString stringWithFormat:@"%@%@",K_UID,[QCClassFunction getNowTimeTimestamp]];
- NSString * str = [NSString stringWithFormat:@"ctype=0&gid=0message=123&mtype=0&msgid=%@&touid=%@&type=chat&uid=%@",msgid,K_TUID,K_UID];
- NSDictionary * dic = @{@"ctype":@"0",@"gid":@"0",@"message":@"123",@"mtype":@"0",@"msgid":msgid ,@"touid":K_UID,@"type":@"chat",@"uid":K_UID};
-
-
- NSString * signStr = [QCClassFunction MD5:str];
-//    NSDictionary * dic = @{@"token":K_TOKEN,@"type":@"login",@"uid":K_UID};
- 
- 
- NSString * jsonDic = [QCClassFunction jsonStringWithDictionary:dic];
- NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonDic dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
- NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
- NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:nil];
- NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
- NSLog(@"%@",K_AESKEY);
- 
-//
- 
- 
- [[QCWebSocket shared] sendDataToServer:jsonString];
- */
 @end

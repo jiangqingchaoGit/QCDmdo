@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString<Optional>*message;
 @property (nonatomic, strong) NSString<Optional>*time;
 @property (nonatomic, strong) NSString<Optional>*status;
+@property (nonatomic, strong) NSString<Optional>*applyid;
+@property (nonatomic, strong) NSString<Optional>*smsid;
+
 @end
 
 NS_ASSUME_NONNULL_END

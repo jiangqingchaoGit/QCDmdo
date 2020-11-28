@@ -29,32 +29,7 @@
 }
 
 - (void)recommendedAction:(UIButton *)sender {
-    
-    //    NSString * str = [NSString stringWithFormat:@"token=%@&type=login&uid=%@",K_TOKEN,K_UID];
-    //    NSDictionary * dic = @{@"token":K_TOKEN,@"type":@"login",@"uid":K_UID};
-    //
-    //    NSString * signStr = [QCClassFunction MD5:str];
-    //    NSString * jsonDic = [QCClassFunction jsonStringWithDictionary:dic];
-    //    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonDic dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
-    //    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
-    //    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:nil];
-    //    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    //    NSLog(@"%@",K_AESKEY);
-    //
-    //   //
-    //
-    //
-    //    [[QCWebSocket shared] sendDataToServer:jsonString];
-    
-    
-    //    [[QCDataBase shared] removeAllListModel:nil];
-    
-    NSDictionary * dic = @{@"listId":@"10002",@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"999999",@"message":@"邹单大帅哥",@"time":@"2020-10-12",@"count":@"1",@"headImage":@"headImageUrl"};
-    
-    QCListModel * model = [[QCListModel alloc] initWithDictionary:dic error:nil];
-    [[QCDataBase shared] queryByListId:model];
-    
-    
+
     
     
     
@@ -64,96 +39,7 @@
 
 - (void)limitAction:(UIButton *)sender {
     
-    
-    [[QCDataBase shared] removeAllListModel:nil];
-    
-    [[QCDataBase shared] removeAllChatModel:nil];
 
-    NSDictionary * listDic = @{@"listId":[QCClassFunction getNowTimeTimestamp3],@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"888888",@"message":@"置顶2",@"time":@"33",@"count":@"1",@"headImage":@"headImageUrl",@"isTop":@"2",@"isRead":@"0"};
-    QCListModel * listModel = [[QCListModel alloc] initWithDictionary:listDic error:nil];
-    [[QCDataBase shared] insertListModel:listModel];
-    
-    NSDictionary * chatDic = @{@"chatId":[QCClassFunction getNowTimeTimestamp3],@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"888888",@"message":@"聊天信息2",@"time":@"33",@"ctype":@"2",@"smsid":@"999999999999",@"gid":@"0"};
-    
-    QCChatModel * chatModel = [[QCChatModel alloc] initWithDictionary:chatDic error:nil];
-    [[QCDataBase shared] insertChatModel:chatModel];
-    
-    
-    NSDictionary * listDic1 = @{@"listId":[QCClassFunction getNowTimeTimestamp3],@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"999999",@"message":@"置顶1",@"time":@"55",@"count":@"1",@"headImage":@"headImageUrl",@"isTop":@"2",@"isRead":@"0"};
-    QCListModel * listModel1 = [[QCListModel alloc] initWithDictionary:listDic1 error:nil];
-    [[QCDataBase shared] insertListModel:listModel1];
-    
-    NSDictionary * chatDic1 = @{@"chatId":[QCClassFunction getNowTimeTimestamp3],@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"999999",@"message":@"聊天信息1",@"time":@"55",@"ctype":@"2",@"smsid":@"999999999999",@"gid":@"0"};
-    
-    QCChatModel * chatModel1 = [[QCChatModel alloc] initWithDictionary:chatDic1 error:nil];
-    [[QCDataBase shared] insertChatModel:chatModel1];
-    
-    
-    
-    NSDictionary * listDic2 = @{@"listId":[QCClassFunction getNowTimeTimestamp3],@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"888888",@"message":@"置顶3",@"time":@"22",@"count":@"1",@"headImage":@"headImageUrl",@"isTop":@"2",@"isRead":@"0"};
-    QCListModel * listModel2 = [[QCListModel alloc] initWithDictionary:listDic2 error:nil];
-    [[QCDataBase shared] insertListModel:listModel2];
-    
-    NSDictionary * chatDic2 = @{@"chatId":[QCClassFunction getNowTimeTimestamp3],@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"888888",@"message":@"聊天信息3",@"time":@"22",@"ctype":@"2",@"smsid":@"999999999999",@"gid":@"0"};
-    
-    QCChatModel * chatModel2 = [[QCChatModel alloc] initWithDictionary:chatDic2 error:nil];
-    [[QCDataBase shared] insertChatModel:chatModel2];
-    
-    
-    
-    
-    NSDictionary * listDic3 = @{@"listId":[QCClassFunction getNowTimeTimestamp3],@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"999999",@"message":@"不置顶3",@"time":@"44",@"count":@"1",@"headImage":@"headImageUrl",@"isTop":@"1",@"isRead":@"0"};
-    QCListModel * listModel3 = [[QCListModel alloc] initWithDictionary:listDic3 error:nil];
-    [[QCDataBase shared] insertListModel:listModel3];
-    
-    NSDictionary * chatDic3 = @{@"chatId":[QCClassFunction getNowTimeTimestamp3],@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"999999",@"message":@"其他信息3",@"time":@"44",@"ctype":@"2",@"smsid":@"999999999999",@"gid":@"0"};
-    
-    QCChatModel * chatModel3 = [[QCChatModel alloc] initWithDictionary:chatDic3 error:nil];
-    [[QCDataBase shared] insertChatModel:chatModel3];
-    
-    NSDictionary * listDic4 = @{@"listId":[QCClassFunction getNowTimeTimestamp3],@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"888888",@"message":@"不置顶1",@"time":@"88",@"count":@"1",@"headImage":@"headImageUrl",@"isTop":@"1",@"isRead":@"0"};
-    QCListModel * listModel4 = [[QCListModel alloc] initWithDictionary:listDic4 error:nil];
-    [[QCDataBase shared] insertListModel:listModel4];
-    
-    NSDictionary * chatDic4 = @{@"chatId":[QCClassFunction getNowTimeTimestamp3],@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"888888",@"message":@"其他信息1",@"time":@"88",@"ctype":@"2",@"smsid":@"999999999999",@"gid":@"0"};
-    
-    QCChatModel * chatModel4 = [[QCChatModel alloc] initWithDictionary:chatDic4 error:nil];
-    [[QCDataBase shared] insertChatModel:chatModel4];
-    
-    NSDictionary * listDic5 = @{@"listId":[QCClassFunction getNowTimeTimestamp3],@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"999999",@"message":@"不置顶2",@"time":@"77",@"count":@"1",@"headImage":@"headImageUrl",@"isTop":@"1",@"isRead":@"0"};
-    QCListModel * listModel5 = [[QCListModel alloc] initWithDictionary:listDic5 error:nil];
-    [[QCDataBase shared] insertListModel:listModel5];
-    
-    NSDictionary * chatDic5 = @{@"chatId":[QCClassFunction getNowTimeTimestamp3],@"type":@"chat",@"uid":@"001",@"rid":@"002",@"msgid":@"999999",@"message":@"其他信息2",@"time":@"77",@"ctype":@"2",@"smsid":@"999999999999",@"gid":@"0"};
-    
-    QCChatModel * chatModel5 = [[QCChatModel alloc] initWithDictionary:chatDic5 error:nil];
-    [[QCDataBase shared] insertChatModel:chatModel5];
-    
-    
-    
-    
-    
-    //    NSString * msgid = [NSString stringWithFormat:@"%@%@",K_UID,[QCClassFunction getNowTimeTimestamp]];
-    //    NSString * str = [NSString stringWithFormat:@"ctype=0&gid=0message=123&mtype=0&msgid=%@&touid=%@&type=chat&uid=%@",msgid,K_TUID,K_UID];
-    //    NSDictionary * dic = @{@"ctype":@"0",@"gid":@"0",@"message":@"123",@"mtype":@"0",@"msgid":msgid ,@"touid":K_UID,@"type":@"chat",@"uid":K_UID};
-    //
-    //
-    //    NSString * signStr = [QCClassFunction MD5:str];
-    //
-    
-    //    NSString * jsonDic = [QCClassFunction jsonStringWithDictionary:dic];
-    //    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonDic dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
-    //    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
-    //    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:nil];
-    //    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    //    NSLog(@"%@",K_AESKEY);
-    
-    //
-    
-    
-    //    [[QCWebSocket shared] sendDataToServer:jsonString];
-    
-    
 }
 
 #pragma mark - initUI

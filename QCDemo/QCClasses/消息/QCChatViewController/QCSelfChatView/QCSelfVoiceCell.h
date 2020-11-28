@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QCChatModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImageView * headerImageView;
 @property (nonatomic, strong) UIButton * imageViewButton;
 @property (nonatomic, strong) UIButton * voiceButton;
+@property (nonatomic, strong) UIButton * canButton;
+@property (nonatomic, strong) UIImageView * loadingImageView;
+@property (nonatomic, strong) UIImageView * voiceImageView;
+@property (nonatomic, strong) UILabel * voiceLabel;
+
+- (void)fillCellWithModel:(QCChatModel *)model;
 
 @end
 

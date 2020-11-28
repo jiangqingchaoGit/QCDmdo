@@ -37,7 +37,8 @@
         
 
         self.lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KSCALE_WIDTH(49), KSCALE_WIDTH(110), KSCALE_WIDTH(1))];
-        self.lineView.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
+        self.lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
+
         [self.contentView addSubview:self.lineView];
         
         self.functionButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(170), KSCALE_WIDTH(50))];

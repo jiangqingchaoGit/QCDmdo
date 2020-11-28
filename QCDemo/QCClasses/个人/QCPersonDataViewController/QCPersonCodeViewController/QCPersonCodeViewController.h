@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QCPersonCodeViewController : UIViewController
 
+
+@property (nonatomic, strong) NSMutableArray * groupDataArr;
 @end
 
 NS_ASSUME_NONNULL_END

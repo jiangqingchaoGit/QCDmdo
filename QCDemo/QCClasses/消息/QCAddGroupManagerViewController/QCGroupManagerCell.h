@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QCGroupDataModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel * nameLabel;
 @property (nonatomic, strong) UILabel * contentLabel;
 @property (nonatomic, strong) UIButton * deletButton;
+- (void)fillCellWithModel:(QCGroupDataModel *)model;
 
 @end
 

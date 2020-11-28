@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QCAddGroupManagerViewController : UIViewController
+@property (nonatomic, strong) NSString * group_id;
+@property (nonatomic, strong) NSMutableArray * numberArr;
 
 @end
 

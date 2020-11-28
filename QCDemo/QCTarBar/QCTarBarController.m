@@ -33,42 +33,41 @@
     
     if (@available(iOS 10.0, *)) {
         //  没有被选中的颜色
-        self.tabBar.unselectedItemTintColor = [QCClassFunction stringTOColor:@"#999999"];
+        self.tabBar.unselectedItemTintColor = [QCClassFunction stringTOColor:@"#404040"];
     } else {
         
     }
     //  选中时的颜色
-    self.tabBar.tintColor = KTEXT_COLOR;
+    self.tabBar.tintColor = [QCClassFunction stringTOColor:@"#FFCC00"];
     self.delegate = self;
     QCHomeViewController * homeViewController = [[QCHomeViewController alloc] init];
     BaseNavigationController * homeViewNav = [[BaseNavigationController alloc] initWithRootViewController:homeViewController];
     homeViewNav.tabBarItem.title = @"多多";
-    homeViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
-    homeViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
-    
-//    QCReleaseViewController * releaseViewController = [[QCReleaseViewController alloc] init];
-//    BaseNavigationController * releaseViewNav = [[BaseNavigationController alloc] initWithRootViewController:releaseViewController];
-//    releaseViewNav.tabBarItem.title = @"发布";
-//    releaseViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
-//    releaseViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
+    homeViewNav.tabBarItem.image = [UIImage imageNamed:@"t_home"];
+    homeViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"t_home_s"];
     
     QCMessageViewController * messageViewController = [[QCMessageViewController alloc] init];
     BaseNavigationController * messageViewNav = [[BaseNavigationController alloc] initWithRootViewController:messageViewController];
     messageViewNav.tabBarItem.title = @"消息";
-    messageViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
-    messageViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
+    messageViewNav.tabBarItem.image = [UIImage imageNamed:@"t_message"];
+    messageViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"t_message_s"];
+    
+    UITabBarItem * item = [[UITabBarItem alloc] initWithTitle:@"消息" image:nil tag:1];
+    [item setBadgeValue:@""];
     
     QCBookViewController * bookViewController = [[QCBookViewController alloc] init];
     BaseNavigationController * bookViewNav = [[BaseNavigationController alloc] initWithRootViewController:bookViewController];
     bookViewNav.tabBarItem.title = @"通讯录";
-    bookViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
-    bookViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
+    bookViewNav.tabBarItem.image = [UIImage imageNamed:@"t_box"];
+    bookViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"t_ box_s"];
+    
+
     
     QCPersonViewController * personViewController = [[QCPersonViewController alloc] init];
     BaseNavigationController * personViewNav = [[BaseNavigationController alloc] initWithRootViewController:personViewController];
     personViewNav.tabBarItem.title = @"我";
-    personViewNav.tabBarItem.image = [UIImage imageNamed:@"select"];
-    personViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"select_s"];
+    personViewNav.tabBarItem.image = [UIImage imageNamed:@"t_me"];
+    personViewNav.tabBarItem.selectedImage = [UIImage imageNamed:@"t_me_s"];
     self.viewControllers = @[homeViewNav,messageViewNav,bookViewNav,personViewNav];
 }
 
@@ -80,7 +79,7 @@
     
     
     
-    if ( [viewController.tabBarItem.title isEqualToString:@"消"] || [viewController.tabBarItem.title isEqualToString:@"通讯录"]  || [viewController.tabBarItem.title isEqualToString:@"我"]) {
+    if ( [viewController.tabBarItem.title isEqualToString:@"消息"] || [viewController.tabBarItem.title isEqualToString:@"通讯录"]  || [viewController.tabBarItem.title isEqualToString:@"我"]) {
         
         if ([QCClassFunction Read:@"token"] == nil) {
             QCLoginViewController * loginViewController = [QCLoginViewController new];

@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIImageView * headerImageView;
 @property (nonatomic, strong) UIButton * imageViewButton;
+
+@property (nonatomic, strong) UIButton * canButton;
+@property (nonatomic, strong) UIImageView * loadingImageView;
+
 @property (nonatomic, strong) UIView * labelView;
 @property (nonatomic, strong) UILabel * contentLabel;
 @property (nonatomic, strong) UILabel * unreadLabel;
@@ -23,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)fillCellWithModel:(QCChatModel *)model;
+- (CGFloat)GETLabelH;
 @end
 
 NS_ASSUME_NONNULL_END
