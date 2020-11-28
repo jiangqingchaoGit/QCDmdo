@@ -340,7 +340,8 @@
         {
             QCSendEnvelopeViewController * sendEnvelopeViewController = [[QCSendEnvelopeViewController alloc] init];
             sendEnvelopeViewController.hidesBottomBarWhenPushed = YES;
-            
+            sendEnvelopeViewController.target_type = @"2";
+
             
             sendEnvelopeViewController.myBlock = ^(NSMutableDictionary * _Nonnull envelopeDic) {
                 //  先http请求

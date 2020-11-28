@@ -47,8 +47,9 @@
 }
 
 - (void)fillCellWithModel:(QCChatModel *)model {
+    [QCClassFunction sd_imageView:self.headerImageView ImageURL:model.uhead AppendingString:nil placeholderImage:@"header"];
     NSArray * arr = [model.message componentsSeparatedByString:@"|"];
-    
+    self.pictureImageView.image = [self getVideoFirstViewImage:[NSURL URLWithString:arr[0]]];
     
     if ([arr[1] floatValue] > [arr[2] floatValue]) {
         

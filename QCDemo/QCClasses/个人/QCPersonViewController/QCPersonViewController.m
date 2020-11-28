@@ -19,11 +19,11 @@
 #import "QCHelpViewController.h"
 //  设置
 #import "QCSetViewController.h"
+#import "QCRealnameViewController.h"
 
 @interface QCPersonViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) QCPersonHeaderView * headerView;
-@property (nonatomic, strong) NSMutableArray * dataArr;
 
 @end
 
@@ -152,21 +152,36 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    QCPersonModel * model = [self.dataArr firstObject];
     switch (indexPath.row) {
         case 0:
         {
             
-            if ([[QCClassFunction Read:@"wallet"] isEqualToString:@"0"]) {
+            if ([model.is_pay_wallet isEqualToString:@"0"]) {
+
+                //  开通说明
                 QCOpenViewController * openViewController = [[QCOpenViewController alloc] init];
-                openViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-                [self presentViewController:openViewController animated:YES completion:nil];
+                openViewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:openViewController animated:YES];
+                
+            }else if([model.identifyNum isEqualToString:@""] || model.identifyNum == nil) {
+                
+                //  开通说明
+                QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
+                realnameViewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:realnameViewController animated:YES];
+                
             }else{
                 QCWalletViewController * walletViewController = [[QCWalletViewController alloc] init];
                 walletViewController.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:walletViewController animated:YES];
+                
             }
             
             
+
+
             
         }
             break;

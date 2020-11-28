@@ -83,7 +83,6 @@
 
     
     [QCClassFunction sd_imageView:self.headerImageView ImageURL:model.uhead AppendingString:nil placeholderImage:@"header"];
-    
     [QCClassFunction sd_imageView:self.fHeaderImageView ImageURL:arr[0] AppendingString:nil placeholderImage:@"header"];
     self.contentLabel.text = arr[1];
     self.getLabel.text = arr[2];

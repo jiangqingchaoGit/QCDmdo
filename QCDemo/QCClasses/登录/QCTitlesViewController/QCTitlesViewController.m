@@ -74,7 +74,7 @@
     self.nickNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(215) + KStatusHight, KSCALE_WIDTH(200), KSCALE_WIDTH(25))];
     self.nickNameLabel.text = @"PAJERO";
     self.nickNameLabel.font = K_22_BFONT;
-    self.nickNameLabel.textColor = [QCClassFunction stringTOColor:@"#FFCC00"];;
+    self.nickNameLabel.textColor = [QCClassFunction stringTOColor:@"#ffba00"];;
     [self.view addSubview:self.nickNameLabel];
     
     self.cardLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(240) + KStatusHight, KSCALE_WIDTH(200), KSCALE_WIDTH(25))];
@@ -116,7 +116,7 @@
     
     
     self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(420) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
-    self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     self.loginButton.titleLabel.font = K_18_FONT;
     [self.loginButton setTitle:@"电话申述" forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[QCClassFunction stringTOColor:@"#000000"] forState:UIControlStateNormal];

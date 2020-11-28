@@ -10,6 +10,8 @@
 #import "QCPersonModel.h"
 #import "QCRealnameViewController.h"
 #import "QCCertificationViewController.h"
+#import "QCOpenViewController.h"
+#import "QCPersonViewController.h"
 //  充值
 #import "QCTopupViewController.h"
 //  提现
@@ -59,34 +61,60 @@
 
 
 - (void)topAction:(UIButton *)sender {
-    //  充值
-    QCTopupViewController * topupViewController = [[QCTopupViewController alloc] init];
-    topupViewController.hidesBottomBarWhenPushed = YES;
-    [[QCClassFunction parentController:self].navigationController pushViewController:topupViewController animated:YES];
+    
+    QCPersonViewController * personViewController = (QCPersonViewController *)[QCClassFunction parentController:self];
+    QCPersonModel * model = [personViewController.dataArr firstObject];
 
+    if ([model.is_pay_wallet isEqualToString:@"0"]) {
+
+        //  开通说明
+        QCOpenViewController * openViewController = [[QCOpenViewController alloc] init];
+        openViewController.hidesBottomBarWhenPushed = YES;
+        [[QCClassFunction parentController:self].navigationController pushViewController:openViewController animated:YES];
+        
+    }else if([model.identifyNum isEqualToString:@""] || model.identifyNum == nil) {
+        
+        //  开通说明
+        QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
+        realnameViewController.hidesBottomBarWhenPushed = YES;
+        [[QCClassFunction parentController:self].navigationController pushViewController:realnameViewController animated:YES];
+        
+    }else{
+        //  充值
+        QCTopupViewController * topupViewController = [[QCTopupViewController alloc] init];
+        topupViewController.hidesBottomBarWhenPushed = YES;
+        [[QCClassFunction parentController:self].navigationController pushViewController:topupViewController animated:YES];
+
+
+    }
+    
 }
 
 - (void)withdrawalAction:(UIButton *)sender {
+    QCPersonViewController * personViewController = (QCPersonViewController *)[QCClassFunction parentController:self];
+    QCPersonModel * model = [personViewController.dataArr firstObject];
     
+    if ([model.is_pay_wallet isEqualToString:@"0"]) {
+
+        //  开通说明
+        QCOpenViewController * openViewController = [[QCOpenViewController alloc] init];
+        openViewController.hidesBottomBarWhenPushed = YES;
+        [[QCClassFunction parentController:self].navigationController pushViewController:openViewController animated:YES];
+        
+    }else if([model.identifyNum isEqualToString:@""] || model.identifyNum == nil) {
+        
+        //  开通说明
+        QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
+        realnameViewController.hidesBottomBarWhenPushed = YES;
+        [[QCClassFunction parentController:self].navigationController pushViewController:realnameViewController animated:YES];
+        
+    }else{
+        QCWithdrawalViewController * withdrawalViewController = [[QCWithdrawalViewController alloc] init];
+        withdrawalViewController.hidesBottomBarWhenPushed = YES;
+        [[QCClassFunction parentController:self].navigationController pushViewController:withdrawalViewController animated:YES];
+    }
     
-    //  提现
-//    if ([[QCClassFunction Read:@"cardNum"] isEqual:@""]) {
-    //  实名认证
-//        QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
-//        realnameViewController.hidesBottomBarWhenPushed = YES;
-//        [[QCClassFunction parentController:self].navigationController pushViewController:realnameViewController animated:YES];
-//    }else{
-    
-    //  人脸识别
-    
-//        QCCertificationViewController * certificationViewController = [[QCCertificationViewController alloc] init];
-//        certificationViewController.hidesBottomBarWhenPushed = YES;
-//        [[QCClassFunction parentController:self].navigationController pushViewController:certificationViewController animated:YES];
-//    }
-    
-    QCWithdrawalViewController * withdrawalViewController = [[QCWithdrawalViewController alloc] init];
-    withdrawalViewController.hidesBottomBarWhenPushed = YES;
-    [[QCClassFunction parentController:self].navigationController pushViewController:withdrawalViewController animated:YES];
+
 }
 - (void)functionAction:(UIButton *)sender {
     
@@ -117,7 +145,7 @@
 #pragma mark - initUI
 - (void)initUI {
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH, KSCALE_WIDTH(105) + KStatusHight)];
-    view.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    view.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     [self addSubview:view];
     
     self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(20) + KStatusHight, KSCALE_WIDTH(70), KSCALE_WIDTH(70))];
@@ -165,7 +193,7 @@
     [self addSubview:self.moneyLabel];
     
     UIButton * topButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(200), KSCALE_WIDTH(150) + KStatusHight, KSCALE_WIDTH(72), KSCALE_WIDTH(35))];
-    topButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    topButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     topButton.titleLabel.font = K_16_FONT;
     [QCClassFunction filletImageView:topButton withRadius:KSCALE_WIDTH(17.5)];
     [topButton addTarget:self action:@selector(topAction:) forControlEvents:UIControlEventTouchUpInside];

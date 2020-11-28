@@ -123,12 +123,15 @@
         if ([[responseObject[@"status"] stringValue] isEqualToString:@"1"]) {
             
             //  添加好友
+            NSDictionary * messageDic = @{@"message":[NSString stringWithFormat:@"%@把你添加为好友",K_NICK],@"isfive":@"1"};
+            NSString * messageStr = [QCClassFunction jsonStringWithDictionary:messageDic];
             
             NSString * msgid = [NSString stringWithFormat:@"%@｜%@｜%@",K_UID,[QCClassFunction getNowTimeTimestamp],model.uid];
-            NSString * str = [NSString stringWithFormat:@"atype=agree&message=添加好友&msgid=%@&touid=%@&type=friend&uid=%@",msgid,model.uid,K_UID];
+            NSString * str = [NSString stringWithFormat:@"atype=agree&message=%@&msgid=%@&touid=%@&type=friend&uid=%@",messageStr,msgid,model.uid,K_UID];
             NSString * signStr = [QCClassFunction MD5:str];
 
-            NSDictionary * dic = @{@"atype":@"agree",@"message":@"添加好友",@"msgid":msgid ,@"touid":model.uid,@"type":@"friend",@"uid":K_UID};
+
+            NSDictionary * dic = @{@"atype":@"agree",@"message":messageStr,@"msgid":msgid ,@"touid":model.uid,@"type":@"friend",@"uid":K_UID};
 
 
             NSString * jsonDic = [QCClassFunction jsonStringWithDictionary:dic];

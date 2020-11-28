@@ -88,7 +88,7 @@
     self.codeButton.titleLabel.font = K_14_FONT;
     self.codeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [self.codeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [self.codeButton setTitleColor:[QCClassFunction stringTOColor:@"#FFCC00"] forState:UIControlStateNormal];
+    [self.codeButton setTitleColor:[QCClassFunction stringTOColor:@"#ffba00"] forState:UIControlStateNormal];
     [self.codeButton addTarget:self action:@selector(codeAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.codeButton];
     
@@ -309,7 +309,7 @@
         
         self.loginButton.selected = YES;
         self.loginButton.userInteractionEnabled = YES;
-        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
         
     }
     

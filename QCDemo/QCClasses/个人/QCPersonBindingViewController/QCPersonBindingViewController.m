@@ -75,7 +75,7 @@
     
     
     self.sureButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(275) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
-    self.sureButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    self.sureButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     self.sureButton.titleLabel.font = K_18_FONT;
     [self.sureButton setTitle:@"更换手机号" forState:UIControlStateNormal];
     [self.sureButton setTitleColor:KTEXT_COLOR forState:UIControlStateNormal];

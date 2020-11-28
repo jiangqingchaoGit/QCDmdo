@@ -9,6 +9,8 @@
 #import "QCEnvelopeView.h"
 #import "QCGetEnvelopeViewController.h"
 #import "QCChatViewController.h"
+#import "QCGroupChatViewController.h"
+
 
 @interface QCEnvelopeView()
 
@@ -102,6 +104,20 @@
     }
     
     if ([envelopeStatus isEqualToString:@"1"]) {
+        
+        [[QCDataBase shared] changeChatModel:self.model];
+
+        if ([[QCClassFunction getCurrentViewController] isKindOfClass:[QCGroupChatViewController class]]) {
+            QCGroupChatViewController * chatViewController = (QCGroupChatViewController *)[QCClassFunction  getCurrentViewController];
+            [chatViewController GETDATA];
+
+        }else{
+            QCChatViewController * chatViewController = (QCChatViewController *)[QCClassFunction  getCurrentViewController];
+            [chatViewController GETDATA];
+
+        }
+        
+        
 
         self.backImageView.image = [UIImage imageNamed:@"hongbao"];
         self.statuLabel.text = @"手慢了,红包已经抢完了";
@@ -113,7 +129,16 @@
     
     if ([envelopeStatus isEqualToString:@"2"]) {
         //  已经抢过了直接进入详情
-        
+        [[QCDataBase shared] changeChatModel:self.model];
+        if ([[QCClassFunction getCurrentViewController] isKindOfClass:[QCGroupChatViewController class]]) {
+            QCGroupChatViewController * chatViewController = (QCGroupChatViewController *)[QCClassFunction  getCurrentViewController];
+            [chatViewController GETDATA];
+
+        }else{
+            QCChatViewController * chatViewController = (QCChatViewController *)[QCClassFunction  getCurrentViewController];
+            [chatViewController GETDATA];
+
+        }
         QCGetEnvelopeViewController * grabEnvelopeViewController = [[QCGetEnvelopeViewController alloc] init];
         grabEnvelopeViewController.hidesBottomBarWhenPushed = YES;
         NSMutableArray * arr = [[NSMutableArray alloc] init];
@@ -129,6 +154,16 @@
     if ([envelopeStatus isEqualToString:@"3"]) {
         
         //  1.1.2 查看红包详情
+        [[QCDataBase shared] changeChatModel:self.model];
+        if ([[QCClassFunction getCurrentViewController] isKindOfClass:[QCGroupChatViewController class]]) {
+            QCGroupChatViewController * chatViewController = (QCGroupChatViewController *)[QCClassFunction  getCurrentViewController];
+            [chatViewController GETDATA];
+
+        }else{
+            QCChatViewController * chatViewController = (QCChatViewController *)[QCClassFunction  getCurrentViewController];
+            [chatViewController GETDATA];
+
+        }
         self.statuLabel.text = @"红包已过期";
         self.robBUtton.userInteractionEnabled = NO;
         self.detailButton.hidden = NO;
@@ -142,6 +177,16 @@
     if ([envelopeStatus isEqualToString:@"4"]) {
         //  自己的红包不可以抢
         //  获取红包信息进入详情页
+        [[QCDataBase shared] changeChatModel:self.model];
+        if ([[QCClassFunction getCurrentViewController] isKindOfClass:[QCGroupChatViewController class]]) {
+            QCGroupChatViewController * chatViewController = (QCGroupChatViewController *)[QCClassFunction  getCurrentViewController];
+            [chatViewController GETDATA];
+
+        }else{
+            QCChatViewController * chatViewController = (QCChatViewController *)[QCClassFunction  getCurrentViewController];
+            [chatViewController GETDATA];
+
+        }
         
         NSMutableArray * arr = [[NSMutableArray alloc] init];
         [arr addObjectsFromArray:[self.model.message componentsSeparatedByString:@"|"]];
@@ -159,136 +204,312 @@
 - (void)robAction:(UIButton *)sender {
     //  抢红包
     
-    QCChatViewController * chatViewController = (QCChatViewController *)[QCClassFunction getCurrentViewController];
-    NSMutableArray * arr = [[NSMutableArray alloc] init];
-    [arr addObjectsFromArray:[self.model.message componentsSeparatedByString:@"|"]];
+    
+    if ([[QCClassFunction getCurrentViewController] isKindOfClass:[QCChatViewController class]]) {
+        QCChatViewController * chatViewController = (QCChatViewController *)[QCClassFunction getCurrentViewController];
 
-    NSString * str = [NSString stringWithFormat:@"red_id=%@&token=%@&uid=%@",arr[1],K_TOKEN,K_UID?K_UID:@""];
-    NSString * signStr = [QCClassFunction MD5:str];
-    NSDictionary * dic = @{@"red_id":arr[1],@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
+        NSMutableArray * arr = [[NSMutableArray alloc] init];
+        [arr addObjectsFromArray:[self.model.message componentsSeparatedByString:@"|"]];
 
-    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
-    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+        NSString * str = [NSString stringWithFormat:@"red_id=%@&token=%@&uid=%@",arr[1],K_TOKEN,K_UID?K_UID:@""];
+        NSString * signStr = [QCClassFunction MD5:str];
+        NSDictionary * dic = @{@"red_id":arr[1],@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
 
-    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
-    [QCAFNetWorking QCPOST:@"/api/finance/redreceive" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+        NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+
+        NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+        [QCAFNetWorking QCPOST:@"/api/finance/redreceive" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
 
 
-        [self.player1 play];
-        
-        if ([responseObject[@"status"]  intValue] == 1) {
-            NSMutableDictionary * dataDic = [[NSMutableDictionary alloc] init];
-
-            //  改变数据库
             [[QCDataBase shared] changeChatModel:self.model];
 
-            [dataDic setValue:@"0" forKey:@"ctype"];
-            [dataDic setValue:[NSString stringWithFormat:@"%@领取了你的红包",self.model.unick] forKey:@"message"];
-            [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包",self.model.unick] forKey:@"selfMessage"];
+            if ([responseObject[@"status"]  intValue] == 1) {
+                NSMutableDictionary * dataDic = [[NSMutableDictionary alloc] init];
 
-            [dataDic setValue:@"18" forKey:@"mtype"];
-            [dataDic setValue:[NSString stringWithFormat:@"%@｜%@｜%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.model.uid] forKey:@"msgid"];
-            [dataDic setValue:@"0" forKey:@"gid"];
-            [dataDic setValue:self.model.uid forKey:@"touid"];
-            [dataDic setValue:K_UID forKey:@"uid"];
-            [dataDic setValue:self.model.listId forKey:@"listId"];
-            [dataDic setValue:@"0" forKey:@"isSend"];
-            [dataDic setValue:@"0" forKey:@"disturb"];
+                //  改变数据库
+                [self.player1 play];
 
-            [dataDic setValue:self.model.gname forKey:@"gname"];
-            [dataDic setValue:self.model.ghead forKey:@"ghead"];
-            [dataDic setValue:self.model.tonick forKey:@"tnick"];
-            [dataDic setValue:self.model.tohead forKey:@"thead"];
-            [dataDic setValue:self.model.unick forKey:@"unick"];
-            [dataDic setValue:self.model.uhead forKey:@"uhead"];
+                
+                
+                [dataDic setValue:@"1" forKey:@"ctype"];
+                
+                if ([self.model.uid isEqualToString:K_UID]) {
+                    [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包",@"自己"] forKey:@"selfMessage"];
 
+                }else{
+                    [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包",self.model.unick] forKey:@"selfMessage"];
+                    [dataDic setValue:[NSString stringWithFormat:@"%@领取了你的红包",K_NICK] forKey:@"message"];
 
+                }
 
-            NSDictionary * info = @{@"fuid":self.model.uid,@"type":@"1"};
+                [dataDic setValue:@"18" forKey:@"mtype"];
+                [dataDic setValue:[NSString stringWithFormat:@"%@｜%@｜%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.model.uid] forKey:@"msgid"];
+                [dataDic setValue:self.model.gid forKey:@"gid"];
+                [dataDic setValue:self.model.uid forKey:@"touid"];
+                [dataDic setValue:K_UID forKey:@"uid"];
+                [dataDic setValue:self.model.listId forKey:@"listId"];
+                [dataDic setValue:@"0" forKey:@"isSend"];
+                [dataDic setValue:@"0" forKey:@"disturb"];
 
-
-
-            [QCClassFunction chatPermissions:info success:^(NSString *responseObject) {
-
-                //  获取发送状态 1
-
-                [dataDic setValue:@"1" forKey:@"canSend"];
-                [dataDic setValue:@"" forKey:@"canMessage"];
-
-                NSMutableArray * dataArr = [[QCDataBase shared] queryChatModel:dataDic[@"listId"]];
-
-
-                if (dataArr.count > 0) {
-                    QCChatModel * model = [dataArr lastObject];
+                [dataDic setValue:self.model.gname forKey:@"gname"];
+                [dataDic setValue:self.model.ghead forKey:@"ghead"];
+                [dataDic setValue:self.model.tonick forKey:@"tnick"];
+                [dataDic setValue:self.model.tohead forKey:@"thead"];
+                [dataDic setValue:self.model.unick forKey:@"unick"];
+                [dataDic setValue:self.model.uhead forKey:@"uhead"];
 
 
 
-                    if ([[QCClassFunction getNowTimeTimestamp3] integerValue] - [model.time integerValue] > 300000) {
-                        
-                        [chatViewController.footerView sendTime];
+                NSDictionary * info = @{@"fuid":self.model.gid,@"type":@"2"};
+
+
+
+                [QCClassFunction chatPermissions:info success:^(NSString *responseObject) {
+
+                    //  获取发送状态 1
+
+                    [dataDic setValue:@"1" forKey:@"canSend"];
+                    [dataDic setValue:@"" forKey:@"canMessage"];
+
+                    NSMutableArray * dataArr = [[QCDataBase shared] queryChatModel:dataDic[@"listId"]];
+
+
+                    if (dataArr.count > 0) {
+                        QCChatModel * model = [dataArr lastObject];
+
+
+
+                        if ([[QCClassFunction getNowTimeTimestamp3] integerValue] - [model.time integerValue] > 300000) {
+                            
+                            [chatViewController.footerView sendTime];
+
+                        }else{
+
+
+                        }
 
                     }else{
-
-
-                    }
-
-                }else{
-                    [chatViewController.footerView sendTime];
-
-                }
-                [chatViewController.footerView storeMessageWithModel:dataDic];
-                
-                QCGetEnvelopeViewController * grabEnvelopeViewController = [[QCGetEnvelopeViewController alloc] init];
-                grabEnvelopeViewController.hidesBottomBarWhenPushed = YES;
-                grabEnvelopeViewController.envelopeId = arr[1];
-                [[QCClassFunction parentController:self].navigationController pushViewController:grabEnvelopeViewController animated:YES];
-                
-                chatViewController.backView.hidden = YES;
-                self.hidden = YES;
-                
-
-            } failure:^(NSString *error) {
-                //  获取发送状态 保存错误信息 执行当前聊天的数据进行更改
-                [dataDic setValue:@"0" forKey:@"canSend"];
-                [dataDic setValue:error forKey:@"canMessage"];
-
-                NSMutableArray * dataArr = [[QCDataBase shared] queryChatModel:dataDic[@"listId"]];
-
-
-                if (dataArr.count > 0) {
-                    QCChatModel * model = [dataArr lastObject];
-                    if ([[QCClassFunction getNowTimeTimestamp3] intValue] - [model.time intValue] > 0) {
                         [chatViewController.footerView sendTime];
 
                     }
-                }else{
-                    [chatViewController.footerView sendTime];
+                    [chatViewController.footerView storeMessageWithModel:dataDic];
+                    
+                    QCGetEnvelopeViewController * grabEnvelopeViewController = [[QCGetEnvelopeViewController alloc] init];
+                    grabEnvelopeViewController.hidesBottomBarWhenPushed = YES;
+                    grabEnvelopeViewController.envelopeId = arr[1];
+                    [[QCClassFunction parentController:self].navigationController pushViewController:grabEnvelopeViewController animated:YES];
+                    
+                    chatViewController.backView.hidden = YES;
+                    self.hidden = YES;
+                    
 
-                }
-                [chatViewController.footerView storeMessageWithModel:dataDic];
+                } failure:^(NSString *error) {
+                    //  获取发送状态 保存错误信息 执行当前聊天的数据进行更改
+                    [dataDic setValue:@"0" forKey:@"canSend"];
+                    [dataDic setValue:error forKey:@"canMessage"];
 
+                    NSMutableArray * dataArr = [[QCDataBase shared] queryChatModel:dataDic[@"listId"]];
+
+
+                    if (dataArr.count > 0) {
+                        QCChatModel * model = [dataArr lastObject];
+                        if ([[QCClassFunction getNowTimeTimestamp3] intValue] - [model.time intValue] > 0) {
+                            [chatViewController.footerView sendTime];
+
+                        }
+                    }else{
+                        [chatViewController.footerView sendTime];
+
+                    }
+                    [chatViewController.footerView storeMessageWithModel:dataDic];
+
+
+                    
+                }];
+
+
+            }else{
 
                 
-            }];
+                if ([responseObject[@"act"] intValue] == 1) {
+                    //  已经领完
+                    [self grabEnvelopeWithStatus:@"1" withModel:self.model];
+                    
+                }
+                
+                if ([responseObject[@"act"] intValue] == 2) {
+                    //  已过期
+                    [self grabEnvelopeWithStatus:@"3" withModel:self.model];
+                    
+                }
+                
+            }
 
 
-        }else{
 
-//            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+        } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+    //        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+
+
+        }];
+
+    }else{
+        QCGroupChatViewController * chatViewController = (QCGroupChatViewController *)[QCClassFunction getCurrentViewController];
+
+        NSMutableArray * arr = [[NSMutableArray alloc] init];
+        [arr addObjectsFromArray:[self.model.message componentsSeparatedByString:@"|"]];
+
+        NSString * str = [NSString stringWithFormat:@"red_id=%@&token=%@&uid=%@",arr[1],K_TOKEN,K_UID?K_UID:@""];
+        NSString * signStr = [QCClassFunction MD5:str];
+        NSDictionary * dic = @{@"red_id":arr[1],@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
+
+        NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+        NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+
+        NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+        [QCAFNetWorking QCPOST:@"/api/finance/redreceive" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
 
             
             
-            
-        }
+
+            [[QCDataBase shared] changeChatModel:self.model];
+
+            if ([responseObject[@"status"]  intValue] == 1) {
+                NSMutableDictionary * dataDic = [[NSMutableDictionary alloc] init];
+
+                //  改变数据库
+                [self.player1 play];
+
+                
+                
+                [dataDic setValue:@"1" forKey:@"ctype"];
+                
+
+                
+                if ([self.model.uid isEqualToString:[K_UID stringValue]]) {
+                    [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包",@"自己"] forKey:@"selfMessage"];
+
+                }else{
+                    [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包",self.model.unick] forKey:@"selfMessage"];
+                    [dataDic setValue:[NSString stringWithFormat:@"%@领取了你的红包",K_NICK] forKey:@"message"];
+
+                }
+
+                [dataDic setValue:@"18" forKey:@"mtype"];
+                [dataDic setValue:[NSString stringWithFormat:@"%@｜%@｜%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.model.uid] forKey:@"msgid"];
+                [dataDic setValue:self.model.gid forKey:@"gid"];
+                [dataDic setValue:self.model.uid forKey:@"touid"];
+                [dataDic setValue:K_UID forKey:@"uid"];
+                [dataDic setValue:self.model.listId forKey:@"listId"];
+                [dataDic setValue:@"0" forKey:@"isSend"];
+                [dataDic setValue:@"0" forKey:@"disturb"];
+
+                [dataDic setValue:self.model.gname forKey:@"gname"];
+                [dataDic setValue:self.model.ghead forKey:@"ghead"];
+                [dataDic setValue:self.model.tonick forKey:@"tnick"];
+                [dataDic setValue:self.model.tohead forKey:@"thead"];
+                [dataDic setValue:self.model.unick forKey:@"unick"];
+                [dataDic setValue:self.model.uhead forKey:@"uhead"];
 
 
 
-    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
-//        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+                NSDictionary * info = @{@"fuid":self.model.gid,@"type":@"2"};
 
 
-    }];
 
+                [QCClassFunction chatPermissions:info success:^(NSString *responseObject) {
+
+                    //  获取发送状态 1
+
+                    [dataDic setValue:@"1" forKey:@"canSend"];
+                    [dataDic setValue:@"" forKey:@"canMessage"];
+
+                    NSMutableArray * dataArr = [[QCDataBase shared] queryChatModel:dataDic[@"listId"]];
+
+
+                    if (dataArr.count > 0) {
+                        QCChatModel * model = [dataArr lastObject];
+
+
+
+                        if ([[QCClassFunction getNowTimeTimestamp3] integerValue] - [model.time integerValue] > 300000) {
+                            
+                            [chatViewController.footerView sendTime];
+
+                        }else{
+
+
+                        }
+
+                    }else{
+                        [chatViewController.footerView sendTime];
+
+                    }
+                    [chatViewController.footerView storeMessageWithModel:dataDic];
+                    
+                    QCGetEnvelopeViewController * grabEnvelopeViewController = [[QCGetEnvelopeViewController alloc] init];
+                    grabEnvelopeViewController.hidesBottomBarWhenPushed = YES;
+                    grabEnvelopeViewController.envelopeId = arr[1];
+                    [[QCClassFunction parentController:self].navigationController pushViewController:grabEnvelopeViewController animated:YES];
+                    
+                    chatViewController.backView.hidden = YES;
+                    self.hidden = YES;
+                    
+
+                } failure:^(NSString *error) {
+                    //  获取发送状态 保存错误信息 执行当前聊天的数据进行更改
+                    [dataDic setValue:@"0" forKey:@"canSend"];
+                    [dataDic setValue:error forKey:@"canMessage"];
+
+                    NSMutableArray * dataArr = [[QCDataBase shared] queryChatModel:dataDic[@"listId"]];
+
+
+                    if (dataArr.count > 0) {
+                        QCChatModel * model = [dataArr lastObject];
+                        if ([[QCClassFunction getNowTimeTimestamp3] intValue] - [model.time intValue] > 0) {
+                            [chatViewController.footerView sendTime];
+
+                        }
+                    }else{
+                        [chatViewController.footerView sendTime];
+
+                    }
+                    [chatViewController.footerView storeMessageWithModel:dataDic];
+
+
+                    
+                }];
+
+
+            }else{
+
+                
+                if ([responseObject[@"act"] intValue] == 1) {
+                    //  已经领完
+                    [self grabEnvelopeWithStatus:@"1" withModel:self.model];
+                    
+                }
+                
+                if ([responseObject[@"act"] intValue] == 2) {
+                    //  已过期
+                    [self grabEnvelopeWithStatus:@"3" withModel:self.model];
+                    
+                }
+                
+            }
+
+
+
+        } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+    //        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+
+
+        }];
+
+    }
+    
+  
     
     
 
@@ -305,6 +526,8 @@
     [[QCClassFunction parentController:self].navigationController pushViewController:grabEnvelopeViewController animated:YES];
     
 }
+
+
 
 
 

@@ -58,6 +58,8 @@
 }
 
 - (void)fillCellWithModel:(QCChatModel *)model {
+    [QCClassFunction sd_imageView:self.headerImageView ImageURL:K_HEADIMAGE AppendingString:nil placeholderImage:@"header"];
+    
     self.loadingImageView.hidden = YES;
     if ([model.canSend isEqualToString:@"0"]) {
         
@@ -72,6 +74,13 @@
 
         }
     }
+    
+    NSString *filepath = [[NSBundle bundleWithPath:[[NSBundle mainBundle] bundlePath]] pathForResource:@"加载修改.gif" ofType:nil];
+    NSData *imagedata = [NSData dataWithContentsOfFile:filepath];
+    UIImage * image = [UIImage sd_imageWithGIFData:imagedata];
+    self.loadingImageView.image = image;
+    self.canButton.frame = CGRectMake(KSCALE_WIDTH(223), KSCALE_WIDTH(15), KSCALE_WIDTH(32), KSCALE_WIDTH(32));
+    self.loadingImageView.frame = CGRectMake(KSCALE_WIDTH(223), KSCALE_WIDTH(15), KSCALE_WIDTH(32), KSCALE_WIDTH(32));
 }
 
 

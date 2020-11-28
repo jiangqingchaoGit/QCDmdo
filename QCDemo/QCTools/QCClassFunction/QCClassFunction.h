@@ -193,4 +193,10 @@ typedef void(^failureChange)(NSString * error);
 
 /**表情**/
 + (NSMutableAttributedString *)stringToAttributeString:(NSString *)text;
+
+
+/*
+ *  base64转image
+ */
++(UIImage *)Base64StrToUIImage:(NSString *)encodedImageStr;
 @end

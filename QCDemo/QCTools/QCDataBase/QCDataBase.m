@@ -391,7 +391,7 @@ static QCDataBase * dataBase = nil;
                 
                 CGSize attSize = [attributedString boundingRectWithSize:CGSizeMake(KSCALE_WIDTH(221), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
                 
-                if (attSize.height <= 24) {
+                if (attSize.height <= 30) {
 
                     model.cellH = [NSString stringWithFormat:@"%f",KSCALE_WIDTH(72)];
 

@@ -107,8 +107,8 @@
     
     self.functionView = [[UIView alloc] init];
     
-    NSArray * titleArr = @[@"相册",@"相机",@"红包",@"转账",@"宝贝",@"名片",@"戳一戳",@"收藏"];
-    NSArray * imageArr = @[@"xiangce",@"paishe",@"hongbao-1",@"zhuanzhang",@"baobei",@"mingpian",@"chuoyichuo",@"collection"];
+    NSArray * titleArr = @[@"相册",@"相机",@"红包",@"宝贝",@"名片",@"收藏",@"",@""];
+    NSArray * imageArr = @[@"xiangce",@"paishe",@"hongbao-1",@"baobei",@"mingpian",@"collection",@"",@""];
     
     for (NSInteger i = 0; i < 2; i++) {
         for (NSInteger j = 0; j < 4; j++) {
@@ -147,7 +147,10 @@
     self.contentTextView.backgroundColor = KBACK_COLOR;
     self.contentTextView.delegate = self;
     self.contentTextView.returnKeyType = UIReturnKeySend;
-    self.contentTextView.userInteractionEnabled = YES; [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAction:) name:UIKeyboardWillShowNotification object:nil];
+    self.contentTextView.enablesReturnKeyAutomatically = YES;
+
+    self.contentTextView.userInteractionEnabled = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAction:) name:UIKeyboardWillShowNotification object:nil];
     [self addSubview:self.contentTextView];
     
     
@@ -335,7 +338,7 @@
         {
             QCSendEnvelopeViewController * sendEnvelopeViewController = [[QCSendEnvelopeViewController alloc] init];
             sendEnvelopeViewController.hidesBottomBarWhenPushed = YES;
-            
+            sendEnvelopeViewController.target_type = @"1";
             
             sendEnvelopeViewController.myBlock = ^(NSMutableDictionary * _Nonnull envelopeDic) {
                 //  先http请求
@@ -465,133 +468,6 @@
             break;
         case 4:
         {
-            QCTransferViewController * transferViewController = [[QCTransferViewController alloc] init];
-            transferViewController.hidesBottomBarWhenPushed = YES;
-            transferViewController.myBlock = ^(NSMutableDictionary * _Nonnull messageDic) {
-                //  先http请求
-                
-                NSString * str = [NSString stringWithFormat:@"amount=%@&key=%@&method=%@&token=%@&touid=%@&uid=%@",messageDic[@"red_price"],messageDic[@"key"],messageDic[@"method"],K_TOKEN,self.chatViewController.model.uid,K_UID?K_UID:@""];
-                NSString * signStr = [QCClassFunction MD5:str];
-                NSDictionary * dic = @{@"amount":messageDic[@"red_price"],@"key":messageDic[@"key"],@"method":messageDic[@"method"],@"touid":self.chatViewController.model.uid,@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
-                
-                NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
-                NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
-                
-                NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
-                [QCAFNetWorking QCPOST:@"/api/finance/transfer" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
-                    
-                    
-                    
-                    if ([responseObject[@"status"]  intValue] == 1) {
-                        NSMutableDictionary * dataDic = [[NSMutableDictionary alloc] init];
-                        [dataDic setValue:@"1" forKey:@"ctype"];
-                        [dataDic setValue:[NSString stringWithFormat:@"0|%@|%@",responseObject[@"data"][@"tran_id"],messageDic[@"red_price"]] forKey:@"message"];
-                        [dataDic setValue:[NSString stringWithFormat:@"0|%@|%@",responseObject[@"data"][@"tran_id"],messageDic[@"red_price"]] forKey:@"selfMessage"];
-
-                        [dataDic setValue:@"13" forKey:@"mtype"];
-                        [dataDic setValue:[NSString stringWithFormat:@"%@｜%@｜%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.chatViewController.model.uid] forKey:@"msgid"];
-                        [dataDic setValue:self.chatViewController.model.uid forKey:@"gid"];
-                        [dataDic setValue:@"0" forKey:@"touid"];
-                        [dataDic setValue:K_UID forKey:@"uid"];
-                        [dataDic setValue:self.chatViewController.model.listId forKey:@"listId"];
-                        [dataDic setValue:@"0" forKey:@"isSend"];
-                        [dataDic setValue:@"0" forKey:@"disturb"];
-                        
-                        [dataDic setValue:self.chatViewController.model.gname forKey:@"gname"];
-                        [dataDic setValue:self.chatViewController.model.ghead forKey:@"ghead"];
-                        [dataDic setValue:self.chatViewController.model.tonick forKey:@"tnick"];
-                        [dataDic setValue:self.chatViewController.model.tohead forKey:@"thead"];
-                        [dataDic setValue:self.chatViewController.model.unick forKey:@"unick"];
-                        [dataDic setValue:self.chatViewController.model.uhead forKey:@"uhead"];
-                        
-                        
-                        
-                        NSDictionary * info = @{@"fuid":self.chatViewController.model.uid,@"type":@"2"};
-                        
-                        
-                        
-                        [QCClassFunction chatPermissions:info success:^(NSString *responseObject) {
-                            
-                            //  获取发送状态 1
-                            
-                            [dataDic setValue:@"1" forKey:@"canSend"];
-                            [dataDic setValue:@"" forKey:@"canMessage"];
-                            
-                            NSMutableArray * dataArr = [[QCDataBase shared] queryChatModel:dataDic[@"listId"]];
-                            
-                            
-                            if (dataArr.count > 0) {
-                                QCChatModel * model = [dataArr lastObject];
-                                
-                                
-                                
-                                if ([[QCClassFunction getNowTimeTimestamp3] integerValue] - [model.time integerValue] > 300000) {
-                                    [self sendTime];
-                                    
-                                }else{
-                                    
-                                    
-                                }
-                                
-                            }else{
-                                [self sendTime];
-                                
-                            }
-                            [self storeMessageWithModel:dataDic];
-                            
-                        } failure:^(NSString *error) {
-                            //  获取发送状态 保存错误信息 执行当前聊天的数据进行更改
-                            [dataDic setValue:@"0" forKey:@"canSend"];
-                            [dataDic setValue:error forKey:@"canMessage"];
-                            
-                            NSMutableArray * dataArr = [[QCDataBase shared] queryChatModel:dataDic[@"listId"]];
-                            
-                            
-                            if (dataArr.count > 0) {
-                                QCChatModel * model = [dataArr lastObject];
-                                if ([[QCClassFunction getNowTimeTimestamp3] intValue] - [model.time intValue] > 300000) {
-                                    [self sendTime];
-                                    
-                                }
-                            }else{
-                                [self sendTime];
-                                
-                            }
-                            [self storeMessageWithModel:dataDic];
-                            
-                            
-                        }];
-                        
-                        
-                    }else{
-                        
-                        [QCClassFunction showMessage:responseObject[@"msg"] toView:[QCClassFunction parentController:self].view];
-                        
-                    }
-                    
-                    
-                    
-                } failure:^(NSURLSessionDataTask *operation, NSError *error) {
-                    [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:[QCClassFunction parentController:self].view];
-                    
-                    
-                }];
-                
-                
-                
-                
-                
-            };
-            [[QCClassFunction parentController:self].navigationController pushViewController:transferViewController animated:YES];
-        }
-            
-            break;
-        case 5:
-            
-            break;
-        case 6:
-        {
-            
             QCSendCardViewController * sendCardViewController = [[QCSendCardViewController alloc] init];
             sendCardViewController.hidesBottomBarWhenPushed = YES;
             
@@ -676,88 +552,21 @@
             };
             
             [[QCClassFunction parentController:self].navigationController pushViewController:sendCardViewController animated:YES];
+        }
             
+            break;
+        case 5:
             
+            break;
+        case 6:
+        {
+                 
         }
             break;
         case 7:
         {
             
-            
-            NSMutableDictionary * dataDic = [[NSMutableDictionary alloc] init];
-            [dataDic setValue:@"1" forKey:@"ctype"];
-            [dataDic setValue:@"0" forKey:@"message"];
-            [dataDic setValue:@"0" forKey:@"selfMessage"];
-            [dataDic setValue:@"5" forKey:@"mtype"];
-            [dataDic setValue:[NSString stringWithFormat:@"%@｜%@｜%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.chatViewController.model.uid] forKey:@"msgid"];
-            [dataDic setValue:self.chatViewController.model.uid forKey:@"gid"];
-            [dataDic setValue:@"0" forKey:@"touid"];
-            [dataDic setValue:K_UID forKey:@"uid"];
-            [dataDic setValue:self.chatViewController.model.listId forKey:@"listId"];
-            [dataDic setValue:@"0" forKey:@"isSend"];
-            [dataDic setValue:@"0" forKey:@"disturb"];
-            
-            [dataDic setValue:self.chatViewController.model.gname forKey:@"gname"];
-            [dataDic setValue:self.chatViewController.model.ghead forKey:@"ghead"];
-            [dataDic setValue:self.chatViewController.model.tonick forKey:@"tnick"];
-            [dataDic setValue:self.chatViewController.model.tohead forKey:@"thead"];
-            [dataDic setValue:self.chatViewController.model.unick forKey:@"unick"];
-            [dataDic setValue:self.chatViewController.model.uhead forKey:@"uhead"];
-            
-            
-            
-            NSDictionary * info = @{@"fuid":self.chatViewController.model.uid,@"type":@"2"};
-            [QCClassFunction chatPermissions:info success:^(NSString *responseObject) {
-                
-                //  获取发送状态 1
-                
-                [dataDic setValue:@"1" forKey:@"canSend"];
-                [dataDic setValue:@"" forKey:@"canMessage"];
-                
-                NSMutableArray * dataArr = [[QCDataBase shared] queryChatModel:dataDic[@"listId"]];
-                
-                
-                if (dataArr.count > 0) {
-                    QCChatModel * model = [dataArr lastObject];
-                    
-                    
-                    
-                    if ([[QCClassFunction getNowTimeTimestamp3] integerValue] - [model.time integerValue] > 300000) {
-                        [self sendTime];
-                        
-                    }else{
-                        
-                        
-                    }
-                    
-                }else{
-                    [self sendTime];
-                    
-                }
-                [self storeMessageWithModel:dataDic];
-                
-            } failure:^(NSString *error) {
-                //  获取发送状态 保存错误信息 执行当前聊天的数据进行更改
-                [dataDic setValue:@"0" forKey:@"canSend"];
-                [dataDic setValue:error forKey:@"canMessage"];
-                
-                NSMutableArray * dataArr = [[QCDataBase shared] queryChatModel:dataDic[@"listId"]];
-                
-                
-                if (dataArr.count > 0) {
-                    QCChatModel * model = [dataArr lastObject];
-                    if ([[QCClassFunction getNowTimeTimestamp3] intValue] - [model.time intValue] > 300000) {
-                        [self sendTime];
-                        
-                    }
-                }else{
-                    [self sendTime];
-                    
-                }
-                [self storeMessageWithModel:dataDic];
-                
-                
-            }];
+          
         }
             break;
         case 8:
@@ -1758,6 +1567,8 @@
     NSDictionary * listDic = @{@"listId":listId,@"type":type,@"uid":touid,@"rid":uid,@"msgid":msgid,@"message":selfMessage,@"time":time,@"count":count,@"isTop":isTop,@"isRead":isRead,@"isChat":isChat,@"cType":ctype,@"mtype":mtype,@"disturb":disturb,@"gname":gname,@"ghead":ghead,@"tnick":tnick,@"thead":thead,@"unick":unick,@"uhead":uhead};
     QCListModel * model = [[QCListModel alloc] initWithDictionary:listDic error:nil];
     [[QCDataBase shared] queryByListId:model];
+    
+    
     
     if ([mtype isEqualToString:@"0"] || [mtype isEqualToString:@"3"] || [mtype isEqualToString:@"6"] || [mtype isEqualToString:@"5"] || [mtype isEqualToString:@"13"] || [mtype isEqualToString:@"14"] || [mtype isEqualToString:@"18"]) {
         [self sendTextMessageWithDic:dataDic];

@@ -142,7 +142,7 @@
     self.personLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, KNavHight + KSCALE_WIDTH(60), KSCALE_WIDTH(375), KSCALE_WIDTH(30))];
     self.personLabel.font = K_20_BFONT;
     self.personLabel.textAlignment = NSTextAlignmentCenter;
-    self.personLabel.textColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    self.personLabel.textColor = [QCClassFunction stringTOColor:@"#ffba00"];
     [self.headerView addSubview:_personLabel];
 
 

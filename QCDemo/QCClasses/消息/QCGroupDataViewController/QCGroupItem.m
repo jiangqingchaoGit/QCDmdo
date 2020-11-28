@@ -21,7 +21,7 @@
         self.identityLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(0), KSCALE_WIDTH(0), KSCALE_WIDTH(40), KSCALE_WIDTH(18))];
         self.identityLabel.font = K_12_FONT;
         self.identityLabel.textColor = KBACK_COLOR;
-        self.identityLabel.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+        self.identityLabel.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
         self.identityLabel.textAlignment = NSTextAlignmentCenter;
         [QCClassFunction filletImageView:self.identityLabel withRadius:KSCALE_WIDTH(4)];
         [self.contentView addSubview:self.identityLabel];

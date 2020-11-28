@@ -57,6 +57,8 @@
     self.contentLabel.text = @"【红包】我发出的";
     self.timeLabel.text = [QCClassFunction ConvertStrToTime:model.pay_time withType:@"yyyy-MM-dd"];
     self.paymentsLabel.text = [NSString stringWithFormat:@"-%@元",model.red_price];
+    self.paymentsLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];
+
     self.restLabel.text = [NSString stringWithFormat:@"%@/%@",model.gain_num,model.red_num];
 
 }
@@ -65,6 +67,8 @@
     self.contentLabel.text = @"【红包】我发出的";
     self.timeLabel.text = [QCClassFunction ConvertStrToTime:model.pay_time withType:@"yyyy-MM-dd"];
     self.restLabel.text = [NSString stringWithFormat:@"%@/%@",model.gain_num,model.red_num];
+    self.paymentsLabel.textColor = [QCClassFunction stringTOColor:@"#ffba00"];
+
 
 }
 @end

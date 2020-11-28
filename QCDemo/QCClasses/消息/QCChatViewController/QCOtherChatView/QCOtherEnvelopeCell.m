@@ -80,8 +80,7 @@
     return self;
 }
 - (void)fillCellWithModel:(QCChatModel *)model {
-    
-    [QCClassFunction sd_imageView:self.headerImageView ImageURL:K_HEADIMAGE AppendingString:nil placeholderImage:@"header"];
+    [QCClassFunction sd_imageView:self.headerImageView ImageURL:model.uhead AppendingString:nil placeholderImage:@"header"];
     NSArray * arr = [model.message componentsSeparatedByString:@"|"];
     
     self.contentLabel.text = arr[2];

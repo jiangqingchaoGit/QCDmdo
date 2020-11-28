@@ -239,6 +239,7 @@
         
         NSArray * arr = [model.listId componentsSeparatedByString:@"|"];
         chatViewController.groupId = [arr lastObject];
+        model.uid = [arr lastObject];
         chatViewController.model = model;
         
         

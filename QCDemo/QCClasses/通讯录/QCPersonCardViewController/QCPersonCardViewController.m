@@ -209,7 +209,7 @@
     [self.view addSubview:self.nickImageView];
     
     self.sendButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(275) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
-    self.sendButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    self.sendButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     self.sendButton.titleLabel.font = K_18_FONT;
     [self.sendButton setTitle:@"发送消息" forState:UIControlStateNormal];
     [self.sendButton setTitleColor:KTEXT_COLOR forState:UIControlStateSelected];

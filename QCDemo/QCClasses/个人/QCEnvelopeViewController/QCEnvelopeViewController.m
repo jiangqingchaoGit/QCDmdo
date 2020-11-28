@@ -195,7 +195,7 @@
     [self.view addSubview:self.headerView];
 
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(375), KSCALE_WIDTH(160) + KTabHight)];
-    view.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    view.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     [self.headerView addSubview:view];
     
     UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(100), KStatusHight, KSCALE_WIDTH(175), KSCALE_WIDTH(44))];
@@ -246,7 +246,7 @@
         [button setTitleColor:[QCClassFunction stringTOColor:@"#999999"] forState:UIControlStateNormal];
         [button setTitleColor:[QCClassFunction stringTOColor:@"#363636"] forState:UIControlStateSelected];
         [button setTitle:titleArr[i] forState:UIControlStateNormal];
-        [QCClassFunction filletImageView:button withRadius:KSCALE_WIDTH(2)];
+        [QCClassFunction filletImageView:button withRadius:KSCALE_WIDTH(14.5)];
         
         [chooseView addSubview:button];
         
@@ -292,6 +292,8 @@
         cell.contentLabel.text = @"【红包】我发出的";
         cell.paymentsLabel.text = [NSString stringWithFormat:@"-%@元",model.red_price];
         cell.timeLabel.text = [QCClassFunction ConvertStrToTime:model.pay_time withType:@"yyyy-MM-dd"];
+        cell.paymentsLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];
+
         cell.restLabel.hidden = NO;
         
 
@@ -299,6 +301,8 @@
         cell.contentLabel.text = [NSString stringWithFormat:@"%@的【红包】",model.nick];
         cell.paymentsLabel.text = [NSString stringWithFormat:@"%@元",model.price];
         cell.timeLabel.text = [QCClassFunction ConvertStrToTime:model.addtime withType:@"yyyy-MM-dd"];
+        cell.paymentsLabel.textColor = [QCClassFunction stringTOColor:@"#ffba00"];
+
         cell.restLabel.hidden = YES;
 
     }

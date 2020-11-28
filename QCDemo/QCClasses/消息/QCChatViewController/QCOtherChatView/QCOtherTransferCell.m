@@ -75,8 +75,8 @@
 }
 - (void)fillCellWithModel:(QCChatModel *)model {
     
-    NSArray * arr = [model.message componentsSeparatedByString:@"|"];
     [QCClassFunction sd_imageView:self.headerImageView ImageURL:model.uhead AppendingString:nil placeholderImage:@"header"];
+    NSArray * arr = [model.message componentsSeparatedByString:@"|"];
     self.contentLabel.text = [NSString stringWithFormat:@"¥%@",arr[2]];
     self.typeLabel.text = @"小闲闲转账";
 

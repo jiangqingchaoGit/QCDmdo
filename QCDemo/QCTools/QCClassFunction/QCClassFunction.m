@@ -1205,4 +1205,16 @@ static QCClassFunction * _classFunction = nil;
 
     return attStr;
 }
+
++(UIImage *)Base64StrToUIImage:(NSString *)encodedImageStr
+
+{
+    
+    NSData * decodedImageData   = [[NSData alloc] initWithBase64EncodedString:encodedImageStr options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    
+    UIImage * decodedImage      = [UIImage imageWithData:decodedImageData];
+    
+    return  decodedImage;
+    
+}
 @end

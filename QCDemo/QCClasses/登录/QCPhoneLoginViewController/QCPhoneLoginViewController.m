@@ -68,7 +68,7 @@
 
     
     self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(275) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
-    self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     self.loginButton.titleLabel.font = K_18_FONT;
     [self.loginButton setTitle:@"确认登录" forState:UIControlStateNormal];
     [self.loginButton setTitleColor:KTEXT_COLOR forState:UIControlStateNormal];

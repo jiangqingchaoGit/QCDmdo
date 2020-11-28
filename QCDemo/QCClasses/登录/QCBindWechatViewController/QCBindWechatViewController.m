@@ -159,7 +159,7 @@
     if (sender.text.length == 11) {
         self.loginButton.selected = YES;
         self.loginButton.userInteractionEnabled = YES;
-        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
 
     }else{
         self.loginButton.selected = NO;

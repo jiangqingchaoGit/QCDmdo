@@ -7,7 +7,7 @@
 //
 
 #import "QCOpenViewController.h"
-
+#import "QCRealnameViewController.h"
 @interface QCOpenViewController ()
 
 @property (nonatomic, strong) UIImageView * backImageView;
@@ -72,7 +72,7 @@
     
     
     self.agreeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(312) + KStatusHight, KSCALE_WIDTH(20), KSCALE_WIDTH(20))];
-    self.agreeImageView.image = KHeaderImage;
+    self.agreeImageView.image = [UIImage imageNamed:@"unselected_p"];
     [self.view addSubview: self.agreeImageView];
     
     UILabel * markLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(60), KSCALE_WIDTH(315) + KStatusHight, KSCALE_WIDTH(240), KSCALE_WIDTH(14))];
@@ -113,7 +113,7 @@
 
 - (void)backAction:(UIButton *)sender {
 
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -126,7 +126,7 @@
 
 - (void)agreeAction:(UIButton *)sender {
     if (sender.selected) {
-        self.agreeImageView.image = KHeaderImage;
+        self.agreeImageView.image = [UIImage imageNamed:@"unselected_p"];
         sender.selected = NO;
 
         self.loginButton.selected = NO;
@@ -135,12 +135,12 @@
         
 
     }else{
-        self.agreeImageView.image = KHeaderImage;
+        self.agreeImageView.image = [UIImage imageNamed:@"selected_p"];
         sender.selected = YES;
 
         self.loginButton.selected = YES;
         self.loginButton.userInteractionEnabled = YES;
-        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
 
     }
     
@@ -168,7 +168,10 @@
         
         
         if ([responseObject[@"msg"] isEqualToString:@"成功"]) {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            //  跳个人认证界面
+            QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
+            realnameViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:realnameViewController animated:YES];
             
         }else{
             [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];

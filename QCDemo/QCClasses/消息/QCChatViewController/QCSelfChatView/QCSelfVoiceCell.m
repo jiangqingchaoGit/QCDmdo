@@ -35,7 +35,7 @@
 
         self.voiceButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(67), KSCALE_WIDTH(10), KSCALE_WIDTH(241), KSCALE_WIDTH(42))];
 
-        self.voiceButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+        self.voiceButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
         [QCClassFunction filletImageView:self.voiceButton withRadius:KSCALE_WIDTH(5)];
         [self.contentView addSubview:self.voiceButton];
         
@@ -65,9 +65,8 @@
 
 - (void)fillCellWithModel:(QCChatModel *)model {
     
-    
-    self.canButton.frame = CGRectMake(KSCALE_WIDTH(30), KSCALE_WIDTH(15), KSCALE_WIDTH(32), KSCALE_WIDTH(32));
-    self.loadingImageView.frame = CGRectMake(KSCALE_WIDTH(30), KSCALE_WIDTH(15), KSCALE_WIDTH(32), KSCALE_WIDTH(32));
+    [QCClassFunction sd_imageView:self.headerImageView ImageURL:K_HEADIMAGE AppendingString:nil placeholderImage:@"header"];
+
     
     self.loadingImageView.hidden = YES;
     if ([model.canSend isEqualToString:@"0"]) {
@@ -96,10 +95,13 @@
     if (longV > 30) {
         self.voiceButton.frame = CGRectMake(KSCALE_WIDTH(308) - KSCALE_WIDTH(174) * (longV + 20) / (longV + 30), KSCALE_WIDTH(10), KSCALE_WIDTH(174) * (longV + 20) / (longV + 30) , KSCALE_WIDTH(42));
 
-
+        self.canButton.frame = CGRectMake(KSCALE_WIDTH(271) - KSCALE_WIDTH(174) * (longV + 20) / (longV + 30), KSCALE_WIDTH(15), KSCALE_WIDTH(32), KSCALE_WIDTH(32));
+        self.loadingImageView.frame = CGRectMake(KSCALE_WIDTH(271) - KSCALE_WIDTH(174) * (longV + 20) / (longV + 30), KSCALE_WIDTH(15), KSCALE_WIDTH(32), KSCALE_WIDTH(32));
+        
     }else{
         self.voiceButton.frame = CGRectMake(KSCALE_WIDTH(308) - KSCALE_WIDTH(174) * (longV + 20) / 50, KSCALE_WIDTH(10), KSCALE_WIDTH(174) * (longV + 20) / 50 , KSCALE_WIDTH(42));
-
+        self.canButton.frame = CGRectMake(KSCALE_WIDTH(271) - KSCALE_WIDTH(174) * (longV + 20) / 50, KSCALE_WIDTH(15), KSCALE_WIDTH(32), KSCALE_WIDTH(32));
+        self.loadingImageView.frame = CGRectMake(KSCALE_WIDTH(271) - KSCALE_WIDTH(174) * (longV + 20) / 50, KSCALE_WIDTH(15), KSCALE_WIDTH(32), KSCALE_WIDTH(32));
     }
     
 }

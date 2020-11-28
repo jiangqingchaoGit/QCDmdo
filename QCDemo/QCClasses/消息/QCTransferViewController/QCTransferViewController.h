@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QCOpenViewController.h"
+#import "QCRealnameViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef void (^TransferBlock)(NSMutableDictionary * messageDic);
 

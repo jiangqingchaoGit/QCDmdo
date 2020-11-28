@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QCPaymentsModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel * paymentsLabel;
 @property (nonatomic, strong) UILabel * restLabel;
 
-
+- (void)fillCellWithModel:(QCPaymentsModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

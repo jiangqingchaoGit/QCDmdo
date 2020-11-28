@@ -64,6 +64,32 @@
 
 - (void)loginAction:(UIButton *)sender {
     //  充值
+    
+    
+    if ([[QCClassFunction Read:@"wallet"] isEqualToString:@"0"]) {
+
+        //  开通说明
+        QCOpenViewController * openViewController = [[QCOpenViewController alloc] init];
+        openViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:openViewController animated:YES];
+        return;
+        
+    }else if([[QCClassFunction Read:@"realName"] isEqualToString:@""] || [QCClassFunction Read:@"realName"] == nil) {
+        
+        //  开通说明
+        QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
+        realnameViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:realnameViewController animated:YES];
+        return;
+
+    }else{
+
+
+    }
+    
+    
+    
+    
     [self.moneyTextField resignFirstResponder];
     UIView * backView = [[QCClassFunction shared] createBackView];
 
@@ -82,7 +108,7 @@
     if ([sender.text floatValue] > 0) {
         self.loginButton.selected = YES;
         self.loginButton.userInteractionEnabled = YES;
-        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
 
     }else{
         self.loginButton.selected = NO;

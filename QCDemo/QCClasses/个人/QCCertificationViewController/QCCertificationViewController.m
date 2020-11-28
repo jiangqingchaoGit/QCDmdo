@@ -92,7 +92,7 @@
         
         
         UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(268) + KStatusHight + i * KSCALE_WIDTH(59), KSCALE_WIDTH(309), KSCALE_WIDTH(1))];
-        lineView.backgroundColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
+        lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
         [self.view addSubview:lineView];
         
         switch (i) {
@@ -121,7 +121,7 @@
 
     
     self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(380) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
-    self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     self.loginButton.titleLabel.font = K_18_FONT;
     [self.loginButton setTitle:@"开始验证" forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[QCClassFunction stringTOColor:@"#000000"] forState:UIControlStateNormal];

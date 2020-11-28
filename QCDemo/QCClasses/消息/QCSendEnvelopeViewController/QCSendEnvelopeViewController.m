@@ -11,6 +11,9 @@
 
 #define myDotNumbers     @"0123456789.\n"
 #define myNumbers          @"0123456789\n"
+#import "QCOpenViewController.h"
+#import "QCRealnameViewController.h"
+
 @interface QCSendEnvelopeViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) QCPayView * payView;
@@ -40,30 +43,42 @@
 @property (nonatomic, strong) NSString * moneyStr;
 @property (nonatomic, strong) UILabel * bankLabel;
 
+@property (nonatomic, strong) NSString * red_type;
+
 @end
 
 @implementation QCSendEnvelopeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.type = @"0";
-    self.moneyStr = @"11111111";
+    self.red_type = @"2";
     [self createSenderView];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 
 }
 
 #pragma mark - tapAction
 - (void)typeAction:(UIButton *)sender {
+    
     if (sender.selected == YES) {
         sender.selected = NO;
         self.typeLabel.text = @"当前为普通红包，改为拼手气红包";
         self.moneyLabel.text = @"单个金额";
         self.typeLabel.attributedText = [QCClassFunction getColorWithString:self.typeLabel.text andTargetString:@"改为拼手气红包" withColor:[UIColor purpleColor]];
+        self.red_type = @"2";
+
     }else{
         sender.selected = YES;
         self.typeLabel.text = @"当前为拼手气红包，改为普通红包";
         self.moneyLabel.text = @"总金额";
         self.typeLabel.attributedText = [QCClassFunction getColorWithString:self.typeLabel.text andTargetString:@"改为普通红包" withColor:[UIColor purpleColor]];
+        self.red_type = @"1";
+
         
     }
 }
@@ -105,17 +120,7 @@
     button.backgroundColor = [UIColor clearColor];
     [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
-    
-    
 
-    
-//    self.restMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake( 0, KSCALE_WIDTH(20), KSCREEN_WIDTH, KSCALE_WIDTH(30))];
-//    self.restMoneyLabel.text = @"剩余金额:¥00.00";
-//    self.restMoneyLabel.font = K_24_BFONT;
-//    self.restMoneyLabel.textColor = KTEXT_COLOR;
-//    self.restMoneyLabel.textAlignment = NSTextAlignmentCenter;
-//    [self.view addSubview:self.restMoneyLabel];
-    
     UIView * moneyView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(90), KSCALE_WIDTH(335), KSCALE_WIDTH(52))];
     moneyView.backgroundColor = KBACK_COLOR;
     [QCClassFunction filletImageView:moneyView withRadius:KSCALE_WIDTH(5)];
@@ -174,7 +179,7 @@
     self.messageTextField.delegate = self;
     [self.messageView addSubview:self.messageTextField];
     
-    if ([self.type isEqualToString:@"1"]) {
+    if ([self.target_type isEqualToString:@"1"]) {
         self.numView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(190), KSCALE_WIDTH(335), KSCALE_WIDTH(52))];
         self.numView.backgroundColor = KBACK_COLOR;
         [QCClassFunction filletImageView:self.numView withRadius:KSCALE_WIDTH(5)];
@@ -260,7 +265,7 @@
     
     UIButton * sureButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(450), KSCALE_WIDTH(335), KSCALE_WIDTH(52))];
     sureButton.titleLabel.font = K_16_FONT;
-    sureButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    sureButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     [sureButton setTitle:@"塞钱进红包" forState:UIControlStateNormal];
     [sureButton setTitleColor:[QCClassFunction stringTOColor:@"#FFFFFF"] forState:UIControlStateNormal];
     [sureButton addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -276,10 +281,32 @@
     [self.messageTextField resignFirstResponder];
 
     
-    if ([self.totalMoneyTextField.text floatValue]> [self.moneyStr floatValue]) {
-        [QCClassFunction showMessage:@"余额不足请充值" toView:self.view];
+    if ([[QCClassFunction Read:@"wallet"] isEqualToString:@"0"]) {
+
+        //  开通说明
+        QCOpenViewController * openViewController = [[QCOpenViewController alloc] init];
+        openViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:openViewController animated:YES];
         return;
+        
+    }else if([[QCClassFunction Read:@"realName"] isEqualToString:@""] || [QCClassFunction Read:@"realName"] == nil) {
+        
+        //  开通说明
+        QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
+        realnameViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:realnameViewController animated:YES];
+        return;
+
+    }else{
+
+
     }
+    
+    
+//    if ([self.totalMoneyTextField.text floatValue]> [self.moneyStr floatValue]) {
+//        [QCClassFunction showMessage:@"余额不足请充值" toView:self.view];
+//        return;
+//    }
     if ([self.totalMoneyTextField.text isEqualToString:@""] || self.totalMoneyTextField.text == nil) {
 
         [QCClassFunction showMessage:@"请输入红包金额" toView:self.view];
@@ -291,7 +318,7 @@
 
         return;
     }
-    if ([self.type isEqualToString:@"1"]) {
+    if ([self.target_type isEqualToString:@"1"]) {
         if ([self.moneyNumTextField.text isEqualToString:@""] || self.moneyNumTextField.text == nil) {
 
             [QCClassFunction showMessage:@"请输入红包数量" toView:self.view];
@@ -315,7 +342,12 @@
 
     self.payView = [[QCPayView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KSCREEN_HEIGHT / 2.0 - KSCALE_WIDTH(180), KSCALE_WIDTH(315), KSCALE_WIDTH(315))];
     self.payView.type = @"2";
-    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:@{@"method":@"1",@"red_price":self.totalMoneyTextField.text,@"target_type":@"2",@"red_num":self.moneyNumTextField.text?self.moneyNumTextField.text:@"1",@"red_type":@"2",@"message":messageStr}];
+    //  method  1为余额支付，2为支付平台支付
+    //  target_type 1为群红包，2为个人红包
+    //  red_num  红包个数，个人为数量为1，群为红包个数
+    //  red_type  红包类型，1为随机红包，2为普通红包
+    
+    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:@{@"method":@"1",@"red_price":self.totalMoneyTextField.text,@"target_type":self.target_type,@"red_num":self.moneyNumTextField.text?self.moneyNumTextField.text:@"1",@"red_type":self.red_type,@"message":messageStr}];
     self.payView.messageDic = dic;
     
     [self.payView initUI];

@@ -10,12 +10,15 @@
 #import "QCPaymentsCell.h"
 #import "QCPaymentsDetailsViewController.h"
 @interface QCPaymentsViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic, strong) NSMutableArray * dataArr;
+@property (nonatomic, assign) NSInteger i;
+
 @property (nonatomic, strong) UIButton * incomeButton;
 @property (nonatomic, strong) UIButton * spendingButton;
 @property (nonatomic, strong) UIButton * withdrawalButton;
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIView * headerView;
-
+@property (nonatomic, strong) NSString * c_type;
 
 
 @end
@@ -42,13 +45,86 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 
+    self.dataArr = [[NSMutableArray alloc] init];
+    self.c_type = @"1";
+    self.i = 1;
+    [self GETDATA];
     [self initUI];
     [self createTableView];
     [self createHeaderView];
+    [self refreshData];
+
 }
+
+
+#pragma mark - GETDATA
+- (void)GETDATA {
+    
+    NSString * str = [NSString stringWithFormat:@"c_type=%@&limit=15&page=%@&token=%@&uid=%@",self.c_type,[NSString stringWithFormat:@"%ld",self.i],K_TOKEN,K_UID?K_UID:@""];
+    NSString * signStr = [QCClassFunction MD5:str];
+    NSDictionary * dic = @{@"c_type":self.c_type,@"limit":@"15",@"page":[NSString stringWithFormat:@"%ld",self.i],@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
+    
+    NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+    NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    
+    NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+    [QCAFNetWorking QCPOST:@"/api/finance/walletrecord" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+
+        
+        if ([responseObject[@"status"] intValue] == 1) {
+            if (self.i == 0) {
+                [self.dataArr removeAllObjects];
+
+            }
+            for (NSDictionary * dic in responseObject[@"data"]) {
+                QCPaymentsModel * model = [[QCPaymentsModel alloc] initWithDictionary:dic error:nil];
+                [self.dataArr addObject:model];
+            }
+            [self.tableView reloadData];
+            
+        }else{
+            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+            
+        }
+        
+        
+        
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+    }];
+    
+}
+
+
+- (void)refreshData {
+    
+    MJRefreshNormalHeader * header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.i = 1;
+        [self GETDATA];
+    }];
+    MJRefreshAutoNormalFooter * footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        self.i++;
+        [self GETDATA];
+        
+    }];
+    self.tableView.mj_footer = footer;
+    self.tableView.mj_header = header;
+    
+    
+}
+
+
 
 #pragma mark - tapAction
 - (void)buttonAction:(UIButton *)sender {
+    
+    [self.dataArr removeAllObjects];
+    self.i = 1;
     switch (sender.tag) {
         case 1:
             self.incomeButton.selected = YES;
@@ -58,7 +134,8 @@
             self.spendingButton.backgroundColor = KCLEAR_COLOR;
             self.withdrawalButton.backgroundColor = KCLEAR_COLOR;
 
-
+            self.c_type = @"1";
+            [self GETDATA];
 
             break;
         case 2:
@@ -68,6 +145,8 @@
             self.incomeButton.backgroundColor = KCLEAR_COLOR;
             self.spendingButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
             self.withdrawalButton.backgroundColor = KCLEAR_COLOR;
+            self.c_type = @"0";
+            [self GETDATA];
 
             break;
         case 3:
@@ -77,6 +156,8 @@
             self.incomeButton.backgroundColor = KCLEAR_COLOR;
             self.spendingButton.backgroundColor = KCLEAR_COLOR;
             self.withdrawalButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFFFFF"];
+            self.c_type = @"3";
+            [self GETDATA];
 
             break;
             
@@ -87,15 +168,13 @@
 #pragma mark - initUI
 
 - (void)initUI {
-    
+
     self.view.backgroundColor = KBACK_COLOR;
     self.title = @"收支明细";
-    
-
-    
+   
 }
 - (void)createTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:KSCREEN_BOUNDS style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(375), KSCREEN_HEIGHT - KNavHight) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = NO;
@@ -119,7 +198,7 @@
     [QCClassFunction filletImageView:view withRadius:KSCALE_WIDTH(4)];
     [self.headerView addSubview:view];
     
-    NSArray * titleArr = @[@"收入",@"支出",@"提现"];
+    NSArray * titleArr = @[@"收入",@"支出",@"账单"];
     for (NSInteger i = 0; i < 3; i++) {
         UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(5) + i * KSCALE_WIDTH(111), KSCALE_WIDTH(3), KSCALE_WIDTH(103), KSCALE_WIDTH(29))];
         button.backgroundColor = [UIColor clearColor];
@@ -129,7 +208,7 @@
         [button setTitleColor:[QCClassFunction stringTOColor:@"#999999"] forState:UIControlStateNormal];
         [button setTitleColor:[QCClassFunction stringTOColor:@"#363636"] forState:UIControlStateSelected];
         [button setTitle:titleArr[i] forState:UIControlStateNormal];
-        [QCClassFunction filletImageView:button withRadius:KSCALE_WIDTH(2)];
+        [QCClassFunction filletImageView:button withRadius:KSCALE_WIDTH(14.5)];
         
         [view addSubview:button];
         
@@ -160,7 +239,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return self.dataArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -172,6 +251,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QCPaymentsCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    QCPaymentsModel * model = self.dataArr[indexPath.row];
+    [cell fillCellWithModel:model];
+    
     return cell;
     
 }

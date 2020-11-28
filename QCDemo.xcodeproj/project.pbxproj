@@ -158,6 +158,7 @@
 		CC899B172564C12A00F1C17D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC899B162564C12A00F1C17D /* Photos.framework */; };
 		CC899B192564C13200F1C17D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC899B182564C13200F1C17D /* AssetsLibrary.framework */; };
 		CC899B1B25651C2300F1C17D /* 123.gif in Resources */ = {isa = PBXBuildFile; fileRef = CC899B1A25651C2300F1C17D /* 123.gif */; };
+		CC9744F225729E0A0057AB6E /* QCPaymentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9744F125729E0A0057AB6E /* QCPaymentsModel.m */; };
 		CCAC46BD254971A800A7B7B3 /* QCHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAC46BC254971A800A7B7B3 /* QCHelpViewController.m */; };
 		CCAC46C6254971F700A7B7B3 /* QCHelpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAC46C5254971F700A7B7B3 /* QCHelpCell.m */; };
 		CCAC46CD2549757200A7B7B3 /* QCSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAC46CC2549757200A7B7B3 /* QCSetViewController.m */; };
@@ -528,6 +529,8 @@
 		CC899B162564C12A00F1C17D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		CC899B182564C13200F1C17D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		CC899B1A25651C2300F1C17D /* 123.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 123.gif; sourceTree = "<group>"; };
+		CC9744F025729E0A0057AB6E /* QCPaymentsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCPaymentsModel.h; sourceTree = "<group>"; };
+		CC9744F125729E0A0057AB6E /* QCPaymentsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCPaymentsModel.m; sourceTree = "<group>"; };
 		CCAC46BB254971A800A7B7B3 /* QCHelpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCHelpViewController.h; sourceTree = "<group>"; };
 		CCAC46BC254971A800A7B7B3 /* QCHelpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCHelpViewController.m; sourceTree = "<group>"; };
 		CCAC46C4254971F700A7B7B3 /* QCHelpCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCHelpCell.h; sourceTree = "<group>"; };
@@ -1074,6 +1077,8 @@
 				CC8262302539926C001C3AD9 /* QCPaymentsViewController.m */,
 				CC8262382539A190001C3AD9 /* QCPaymentsCell.h */,
 				CC8262392539A190001C3AD9 /* QCPaymentsCell.m */,
+				CC9744F025729E0A0057AB6E /* QCPaymentsModel.h */,
+				CC9744F125729E0A0057AB6E /* QCPaymentsModel.m */,
 			);
 			path = QCPaymentsViewController;
 			sourceTree = "<group>";
@@ -2212,6 +2217,7 @@
 				CC157261254A62E400D00805 /* QChangeBindingViewController.m in Sources */,
 				CC826264253D3856001C3AD9 /* QCBankCell.m in Sources */,
 				CCBE36C32546AF7F005337C8 /* QCSearchViewController.m in Sources */,
+				CC9744F225729E0A0057AB6E /* QCPaymentsModel.m in Sources */,
 				CC728000256FCCC0000C1FA8 /* QCTransferDetailsViewController.m in Sources */,
 				CCAC46D3254975C700A7B7B3 /* QCSetCell.m in Sources */,
 				CC7011382559381400667464 /* QCEnvelopeCell.m in Sources */,

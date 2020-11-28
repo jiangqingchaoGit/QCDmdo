@@ -52,7 +52,7 @@
         
    
         self.agreeButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(289), KSCALE_WIDTH(20), KSCALE_WIDTH(66), KSCALE_WIDTH(32))];
-        self.agreeButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+        self.agreeButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
         self.agreeButton.titleLabel.font = K_14_FONT;
         [self.agreeButton setTitle:@"同意" forState:UIControlStateNormal];
         [self.agreeButton setTitleColor:KTEXT_COLOR forState:UIControlStateNormal];

@@ -41,13 +41,14 @@
         
         
         self.labelView = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(67), KSCALE_WIDTH(10), KSCALE_WIDTH(241), KSCALE_WIDTH(42))];
-        self.labelView.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+        self.labelView.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
         [QCClassFunction filletImageView:self.labelView withRadius:KSCALE_WIDTH(5)];
         [self.contentView addSubview:self.labelView];
         
         
         self.canButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
-        self.canButton.backgroundColor = [UIColor redColor];
+        self.canButton.backgroundColor = [UIColor clearColor];
+        [self.canButton setImage:[UIImage imageNamed:@"lahei"] forState:UIControlStateNormal];
         [QCClassFunction filletImageView:self.canButton withRadius:KSCALE_WIDTH(16)];
         [self.contentView addSubview:self.canButton];
         
@@ -65,7 +66,7 @@
         [self.contentView addSubview:self.contentLabel];
         
         //        self.unreadLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(80), KSCALE_WIDTH(10), KSCALE_WIDTH(200), KSCALE_WIDTH(42))];
-        //        self.unreadLabel.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+        //        self.unreadLabel.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
         //        self.unreadLabel.font = K_16_FONT;
         //        self.unreadLabel.numberOfLines = 0;
         //        self.unreadLabel.textColor = KTEXT_COLOR;
@@ -78,7 +79,7 @@
         //
         //
         //        self.readLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(80), KSCALE_WIDTH(10), KSCALE_WIDTH(200), KSCALE_WIDTH(42))];
-        //        self.readLabel.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+        //        self.readLabel.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
         //        self.readLabel.font = K_16_FONT;
         //        self.readLabel.numberOfLines = 0;
         //        self.readLabel.textColor = KTEXT_COLOR;
@@ -95,31 +96,23 @@
 - (void)fillCellWithModel:(QCChatModel *)model {
     //  动态计算高度
     NSDictionary * dic = [QCClassFunction dictionaryWithJsonString:model.message];
-
     self.contentLabel.attributedText = [QCClassFunction stringToAttributeString:dic[@"message"]];
+    [QCClassFunction sd_imageView:self.headerImageView ImageURL:K_HEADIMAGE AppendingString:nil placeholderImage:@"header"];
+
     
     CGSize attSize = [self.contentLabel.attributedText boundingRectWithSize:CGSizeMake(KSCALE_WIDTH(221), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
     
-    if (attSize.height <= 24) {
-        
-        
+    if (attSize.height <= 30) {
         CGFloat labelW = [self.contentLabel.attributedText boundingRectWithSize:CGSizeMake(MAXFLOAT, KSCALE_WIDTH(42)) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size.width;
-
-        
         if (labelW > 221) {
             self.labelView.frame = CGRectMake(KSCALE_WIDTH(67), KSCALE_WIDTH(10), KSCALE_WIDTH(241), KSCALE_WIDTH(42));
             self.canButton.frame = CGRectMake(KSCALE_WIDTH(30), KSCALE_WIDTH(15), KSCALE_WIDTH(32), KSCALE_WIDTH(32));
             self.loadingImageView.frame = CGRectMake(KSCALE_WIDTH(30), KSCALE_WIDTH(15), KSCALE_WIDTH(32), KSCALE_WIDTH(32));
-            
-            
             self.contentLabel.frame = CGRectMake(KSCALE_WIDTH(77), KSCALE_WIDTH(10), KSCALE_WIDTH(221), KSCALE_WIDTH(42));
         }else{
             self.labelView.frame = CGRectMake(KSCALE_WIDTH(288) - labelW, KSCALE_WIDTH(10), labelW + KSCALE_WIDTH(20), KSCALE_WIDTH(42));
-            
             self.canButton.frame = CGRectMake(KSCALE_WIDTH(251) - labelW, KSCALE_WIDTH(15), KSCALE_WIDTH(32), KSCALE_WIDTH(32));
             self.loadingImageView.frame = CGRectMake(KSCALE_WIDTH(251) - labelW, KSCALE_WIDTH(15), KSCALE_WIDTH(32), KSCALE_WIDTH(32));
-            
-            
             self.contentLabel.frame = CGRectMake(KSCALE_WIDTH(298) - labelW, KSCALE_WIDTH(10), labelW, KSCALE_WIDTH(42));
         }
         
@@ -129,19 +122,11 @@
         self.labelView.frame = CGRectMake(KSCALE_WIDTH(67), KSCALE_WIDTH(10), KSCALE_WIDTH(241), attSize.height + KSCALE_WIDTH(25));
         self.canButton.frame = CGRectMake(KSCALE_WIDTH(30), (attSize.height + KSCALE_WIDTH(13)) / 2.0, KSCALE_WIDTH(32), KSCALE_WIDTH(32));
         self.loadingImageView.frame = CGRectMake(KSCALE_WIDTH(30), (attSize.height + KSCALE_WIDTH(13)) / 2.0, KSCALE_WIDTH(32), KSCALE_WIDTH(32));
-        
-        
         self.contentLabel.frame = CGRectMake(KSCALE_WIDTH(77), KSCALE_WIDTH(10), KSCALE_WIDTH(221), attSize.height + KSCALE_WIDTH(25));
         self.labelH = attSize.height + KSCALE_WIDTH(25);
     }
     
-    [QCClassFunction sd_imageView:self.headerImageView ImageURL:K_HEADIMAGE AppendingString:nil placeholderImage:@"header"];
     model.cellH = [NSString stringWithFormat:@"%f",self.labelH + KSCALE_WIDTH(20)];
-    
-
-
-    
-    
 
     self.loadingImageView.hidden = YES;
     if ([model.canSend isEqualToString:@"0"]) {

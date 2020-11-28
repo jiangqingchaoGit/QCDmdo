@@ -245,7 +245,7 @@
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(60), KSCALE_WIDTH(44))];
     
     self.numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, KSCALE_WIDTH(7), KSCALE_WIDTH(60), KSCALE_WIDTH(30))];
-    self.numberLabel.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    self.numberLabel.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     self.numberLabel.text = @"确认";
     self.numberLabel.alpha = 0.5;
     self.numberLabel.textColor = KBACK_COLOR;

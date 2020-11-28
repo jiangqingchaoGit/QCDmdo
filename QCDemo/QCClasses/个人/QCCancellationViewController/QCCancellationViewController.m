@@ -87,7 +87,7 @@
     [self.view addSubview:contentLabel];
     
     self.sureButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_HEIGHT(667) - KNavHight - KSCALE_WIDTH(65), KSCALE_WIDTH(335), KSCALE_WIDTH(50))];
-    self.sureButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    self.sureButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     self.sureButton.titleLabel.font = K_18_FONT;
     [self.sureButton setTitle:@"申请注销" forState:UIControlStateNormal];
     [self.sureButton setTitleColor:KTEXT_COLOR forState:UIControlStateNormal];

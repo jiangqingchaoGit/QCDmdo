@@ -33,7 +33,7 @@
         [self.contentView addSubview:self.imageViewButton];
 
         self.voiceButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(67), KSCALE_WIDTH(10), KSCALE_WIDTH(241), KSCALE_WIDTH(42))];
-        self.voiceButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+        self.voiceButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
         [QCClassFunction filletImageView:self.voiceButton withRadius:KSCALE_WIDTH(5)];
         [self.contentView addSubview:self.voiceButton];
         
@@ -53,9 +53,8 @@
 
 
 - (void)fillCellWithModel:(QCChatModel *)model {
-    
+    [QCClassFunction sd_imageView:self.headerImageView ImageURL:model.uhead AppendingString:nil placeholderImage:@"header"];
     NSArray * arr = [model.message componentsSeparatedByString:@"|"];
-
     float longV  = [self audioDurationFromURL:[arr firstObject]];
     self.voiceLabel.text = [NSString stringWithFormat:@"%.0f''",longV];
 

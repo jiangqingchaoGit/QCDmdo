@@ -30,7 +30,7 @@
         
 
         self.chooseSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(300), KSCALE_WIDTH(10.5), KSCALE_WIDTH(0), KSCALE_WIDTH(0))];
-        self.chooseSwitch.onTintColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+        self.chooseSwitch.onTintColor = [QCClassFunction stringTOColor:@"#ffba00"];
         self.chooseSwitch.tintColor = [UIColor greenColor];
         self.chooseSwitch.on = YES;
         self.chooseSwitch.thumbTintColor = [UIColor whiteColor];

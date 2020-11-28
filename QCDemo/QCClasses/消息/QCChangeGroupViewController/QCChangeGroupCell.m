@@ -26,7 +26,7 @@
         UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(0), KSCALE_WIDTH(335), KSCALE_WIDTH(60))];
         lineView.backgroundColor = [UIColor clearColor];
         lineView.layer.borderWidth = KSCALE_WIDTH(1);
-        lineView.layer.borderColor = [QCClassFunction stringTOColor:@"#FFCC00"].CGColor;
+        lineView.layer.borderColor = [QCClassFunction stringTOColor:@"#ffba00"].CGColor;
         [QCClassFunction filletImageView:lineView withRadius:KSCALE_WIDTH(8)];
         [self.contentView addSubview:lineView];
         

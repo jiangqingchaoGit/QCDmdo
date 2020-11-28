@@ -91,7 +91,7 @@
     [self.view addSubview:self.nameLabel];
     
     self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(80), KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
-    self.addButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    self.addButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     self.addButton.titleLabel.font = K_18_FONT;
     [self.addButton setTitleColor:KTEXT_COLOR forState:UIControlStateNormal];
     self.addButton.hidden = YES;

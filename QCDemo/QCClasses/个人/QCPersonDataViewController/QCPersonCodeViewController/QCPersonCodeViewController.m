@@ -156,7 +156,7 @@
     self.view.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
     
     UIView * backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(375), KSCALE_WIDTH(266) + KTabHight)];
-    backView.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    backView.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     [self.view addSubview:backView];
     
     self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KNavHight - 44, 56, 44)];

@@ -259,7 +259,7 @@
     [self.view addSubview:markLabel];
     
     self.sureButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KSCALE_HEIGHT(602) - KNavHight, KSCALE_WIDTH(315), KSCALE_HEIGHT(50))];
-    self.sureButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    self.sureButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     self.sureButton.titleLabel.font = K_18_FONT;
     [self.sureButton setTitle:@"绑定" forState:UIControlStateNormal];
     [self.sureButton setTitleColor:KTEXT_COLOR forState:UIControlStateNormal];

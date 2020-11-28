@@ -141,6 +141,14 @@
         case 3:
    
         {
+
+            //  提现记录
+            
+
+        }
+            break;
+        case 4:
+        {
             if ([[QCClassFunction Read:@"cardNum"] isEqual:@""] || [QCClassFunction Read:@"cardNum"] == nil) {
 
                 QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
@@ -151,20 +159,17 @@
                 realnamedViewController.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:realnamedViewController animated:YES];
             }
-
-            
-
         }
+            
             break;
-        case 4:
+        case 5:
         {
             QCBankViewController * bankViewController = [[QCBankViewController alloc] init];
             bankViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:bankViewController animated:YES];
         }
-            
             break;
-        case 5:
+        case 6:
         {
 
         }
@@ -180,7 +185,7 @@
     self.view.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
     
     UIView * backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(375), KSCALE_WIDTH(266) + KTabHight)];
-    backView.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    backView.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     [self.view addSubview:backView];
     
     self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KNavHight - 44, 56, 44)];
@@ -213,23 +218,23 @@
         button.titleLabel.font = K_18_FONT;
         button.tag = i + 1;
         
-        [button setTitleColor:[QCClassFunction stringTOColor:@"#FFCC00"] forState:UIControlStateNormal];
+        [button setTitleColor:[QCClassFunction stringTOColor:@"#ffba00"] forState:UIControlStateNormal];
         [button setTitle:titleArr[i] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(functionAction:) forControlEvents:UIControlEventTouchUpInside];
         [QCClassFunction filletImageView:button withRadius:KSCALE_WIDTH(19)];
         [backView addSubview:button];
     }
     
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KSCALE_WIDTH(200) + KTabHight, KSCALE_WIDTH(315), KSCALE_WIDTH(325))];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KSCALE_WIDTH(200) + KTabHight, KSCALE_WIDTH(315), KSCALE_WIDTH(390))];
     view.backgroundColor = KBACK_COLOR;
     [QCClassFunction filletImageView:view withRadius:KSCALE_WIDTH(18)];
     [self.view addSubview:view];
     
     
-    NSArray * labelArr = @[@"收支明细",@"红包明细",@"实名认证",@"我的银行卡",@"服务须知"];
-    NSArray * imageArr = @[@"收支明细",@"红包明细",@"实名认证",@"我的银行卡",@"服务须知"];
+    NSArray * labelArr = @[@"收支明细",@"红包明细",@"提现记录",@"实名认证",@"我的银行卡",@"服务须知"];
+    NSArray * imageArr = @[@"收支明细",@"红包明细",@"我的银行卡",@"实名认证",@"我的银行卡",@"服务须知"];
 
-    for (NSInteger i = 0; i < 5; i++) {
+    for (NSInteger i = 0; i < 6; i++) {
         
         UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(0, i * KSCALE_WIDTH(65), KSCALE_WIDTH(315), KSCALE_WIDTH(65))];
         button.backgroundColor = KCLEAR_COLOR;
@@ -249,7 +254,7 @@
         label.textColor = [QCClassFunction stringTOColor:@"#000000"];
         [view addSubview:label];
         
-        if (i < 4) {
+        if (i < 5) {
             UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(65), KSCALE_WIDTH(64) + i * KSCALE_WIDTH(65), KSCALE_WIDTH(237.5), KSCALE_WIDTH(1))];
             lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
             [view addSubview:lineView];

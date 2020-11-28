@@ -99,7 +99,7 @@
     //    self.lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(200), KSCALE_WIDTH(330), KSCALE_WIDTH(90), KSCALE_WIDTH(5))];
     self.lineView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(85), KSCALE_WIDTH(515), KSCALE_WIDTH(90), KSCALE_WIDTH(5))];
     
-    self.lineView.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    self.lineView.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     [self addSubview:self.lineView];
     
 }

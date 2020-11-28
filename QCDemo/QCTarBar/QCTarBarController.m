@@ -38,7 +38,7 @@
         
     }
     //  选中时的颜色
-    self.tabBar.tintColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    self.tabBar.tintColor = [QCClassFunction stringTOColor:@"#ffba00"];
     self.delegate = self;
     QCHomeViewController * homeViewController = [[QCHomeViewController alloc] init];
     BaseNavigationController * homeViewNav = [[BaseNavigationController alloc] initWithRootViewController:homeViewController];

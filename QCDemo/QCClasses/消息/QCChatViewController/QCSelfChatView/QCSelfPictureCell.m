@@ -58,6 +58,7 @@
 - (void)fillCellWithModel:(QCChatModel *)model {
     NSArray * arr = [model.message componentsSeparatedByString:@"|"];
     [QCClassFunction sd_imageView:self.headerImageView ImageURL:K_HEADIMAGE AppendingString:nil placeholderImage:@"header"];
+    self.pictureImageView.image =  [QCClassFunction Base64StrToUIImage:arr[0]];
 
     
     if ([arr[1] floatValue] > [arr[2] floatValue]) {

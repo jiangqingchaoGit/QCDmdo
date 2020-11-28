@@ -49,7 +49,7 @@
     
     self.sureButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(450), KSCALE_WIDTH(335), KSCALE_WIDTH(52))];
     self.sureButton.titleLabel.font = K_16_FONT;
-    self.sureButton.backgroundColor = [QCClassFunction stringTOColor:@"#FFCC00"];
+    self.sureButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     [self.sureButton setTitle:@"确认收款" forState:UIControlStateNormal];
     [self.sureButton setTitleColor:[QCClassFunction stringTOColor:@"#FFFFFF"] forState:UIControlStateNormal];
     [self.sureButton addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchUpInside];

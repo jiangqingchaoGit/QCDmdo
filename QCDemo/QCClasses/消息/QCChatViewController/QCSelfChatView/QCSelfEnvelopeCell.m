@@ -84,8 +84,8 @@
 - (void)fillCellWithModel:(QCChatModel *)model {
     
     NSArray * arr = [model.message componentsSeparatedByString:@"|"];
-    NSLog(@"%@",model.message);
-    
+    [QCClassFunction sd_imageView:self.headerImageView ImageURL:K_HEADIMAGE AppendingString:nil placeholderImage:@"header"];
+
     if ([arr[0] isEqualToString:@"0"]) {
         self.backImageView.alpha = 1;
         self.fHeaderImageView.alpha = 1;
@@ -102,7 +102,6 @@
     }
     
     
-    [QCClassFunction sd_imageView:self.headerImageView ImageURL:K_HEADIMAGE AppendingString:nil placeholderImage:@"header"];
     self.contentLabel.text = arr[2];
     
     self.loadingImageView.hidden = YES;
