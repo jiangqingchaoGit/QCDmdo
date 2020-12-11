@@ -177,6 +177,8 @@ static QCDataBase * dataBase = nil;
     if ([self.db  open]) {
         
         [self.db  executeUpdate:@"delete from chat   where mtype = ? and listId = ?",typeStr ,listId];
+        
+        
         [self.db  close];
     }else{
         

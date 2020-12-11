@@ -162,7 +162,7 @@
     [self addSubview:self.contentTextView];
     
     
-    self.bannedLabel = [[UILabel alloc] init];
+    self.bannedLabel = [[UILabel alloc] initWithFrame: CGRectMake(KSCALE_WIDTH(58), KSCALE_WIDTH(11.25), KSCALE_WIDTH(213), KSCALE_WIDTH(35.5))];
     self.bannedLabel.text = @"全员禁言";
     self.bannedLabel.backgroundColor = KBACK_COLOR;
     self.bannedLabel.font = K_14_FONT;
@@ -1029,10 +1029,10 @@
     NSString *filepath = [[NSBundle bundleWithPath:[[NSBundle mainBundle] bundlePath]] pathForResource:@"语音-(6)" ofType:nil];
     NSData *imagedata = [NSData dataWithContentsOfFile:filepath];
     UIImage * image = [UIImage sd_imageWithGIFData:imagedata];
-    self.volumeImageView.contentMode = UIViewContentModeCenter;
+    self.volumeImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.volumeImageView.image = image;
 //    self.volumeImageView.image = [UIImage imageNamed:@"header"];
-//    [self.volumeBgView addSubview:self.volumeImageView];
+    [self.volumeBgView addSubview:self.volumeImageView];
     
     self.volumeLabel = [[UILabel alloc] init];
     self.volumeLabel.frame = CGRectMake(0, KSCALE_WIDTH(150), KSCALE_WIDTH(155), KSCALE_WIDTH(30));
@@ -1230,7 +1230,7 @@
     
     self.volumeLabel.text = @"松开手指，取消发送";
     self.volumeLabel.textColor =  [UIColor redColor];
-    self.volumeImageView.image = [UIImage imageNamed:@"header"];
+//    self.volumeImageView.image = [UIImage imageNamed:@"header"];
 }
 
 - (void)recordButtonTouchUpDragEnter {

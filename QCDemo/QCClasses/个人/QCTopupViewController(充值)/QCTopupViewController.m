@@ -65,7 +65,7 @@
     kWeakSelf(self);
     [self.moneyTextField resignFirstResponder];
     UIView * backView = [[QCClassFunction shared] createBackView];
-    self.payView = [[QCPayView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KSCREEN_HEIGHT / 2.0 - KSCALE_WIDTH(180), KSCALE_WIDTH(315), KSCALE_WIDTH(315))];
+    self.payTypeView = [[QCPayTypeView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT - KSCALE_WIDTH(312), KSCALE_WIDTH(375), KSCALE_WIDTH(312))];
     self.payTypeView.statusStr = @"0";
     self.payTypeView.typeStr = @"充值";
     [self.payTypeView initUI];
@@ -74,6 +74,7 @@
     };
 
     [backView addSubview:self.payTypeView];
+    
 }
 
 - (void)loginAction:(UIButton *)sender {

@@ -154,6 +154,14 @@
 		CC7542E725831EE4000846A5 /* QCComplaintsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7542E625831EE4000846A5 /* QCComplaintsCell.m */; };
 		CC7542EA25831F6F000846A5 /* QCComplaintsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7542E925831F6F000846A5 /* QCComplaintsModel.m */; };
 		CC7542ED25834FEE000846A5 /* QCComplaintsView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7542EC25834FEE000846A5 /* QCComplaintsView.m */; };
+		CC7542F125835B65000846A5 /* QCComplaintsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7542F025835B65000846A5 /* QCComplaintsListViewController.m */; };
+		CC7542F425835C14000846A5 /* QCComplaintsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7542F325835C14000846A5 /* QCComplaintsListCell.m */; };
+		CC7542F725835C23000846A5 /* QCComplaintsListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7542F625835C23000846A5 /* QCComplaintsListModel.m */; };
+		CC7542FB25836BBE000846A5 /* QCComplaintsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7542FA25836BBE000846A5 /* QCComplaintsDetailsViewController.m */; };
+		CC7542FE25839C28000846A5 /* QCSupportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7542FD25839C28000846A5 /* QCSupportViewController.m */; };
+		CC75430225839C71000846A5 /* QCSupportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC75430125839C71000846A5 /* QCSupportCell.m */; };
+		CC75430525839C9D000846A5 /* QCSupportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC75430425839C9D000846A5 /* QCSupportModel.m */; };
+		CC7543082583B004000846A5 /* QCSupportView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7543072583B004000846A5 /* QCSupportView.m */; };
 		CC82621D25394013001C3AD9 /* QCPersonHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82621C25394013001C3AD9 /* QCPersonHeaderView.m */; };
 		CC82622325397F49001C3AD9 /* QCPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82622225397F49001C3AD9 /* QCPersonCell.m */; };
 		CC82622A25398402001C3AD9 /* QCWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC82622925398402001C3AD9 /* QCWalletViewController.m */; };
@@ -583,6 +591,22 @@
 		CC7542E925831F6F000846A5 /* QCComplaintsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCComplaintsModel.m; sourceTree = "<group>"; };
 		CC7542EB25834FEE000846A5 /* QCComplaintsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCComplaintsView.h; sourceTree = "<group>"; };
 		CC7542EC25834FEE000846A5 /* QCComplaintsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCComplaintsView.m; sourceTree = "<group>"; };
+		CC7542EF25835B65000846A5 /* QCComplaintsListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCComplaintsListViewController.h; sourceTree = "<group>"; };
+		CC7542F025835B65000846A5 /* QCComplaintsListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCComplaintsListViewController.m; sourceTree = "<group>"; };
+		CC7542F225835C14000846A5 /* QCComplaintsListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCComplaintsListCell.h; sourceTree = "<group>"; };
+		CC7542F325835C14000846A5 /* QCComplaintsListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCComplaintsListCell.m; sourceTree = "<group>"; };
+		CC7542F525835C23000846A5 /* QCComplaintsListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCComplaintsListModel.h; sourceTree = "<group>"; };
+		CC7542F625835C23000846A5 /* QCComplaintsListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCComplaintsListModel.m; sourceTree = "<group>"; };
+		CC7542F925836BBE000846A5 /* QCComplaintsDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCComplaintsDetailsViewController.h; sourceTree = "<group>"; };
+		CC7542FA25836BBE000846A5 /* QCComplaintsDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCComplaintsDetailsViewController.m; sourceTree = "<group>"; };
+		CC7542FC25839C28000846A5 /* QCSupportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCSupportViewController.h; sourceTree = "<group>"; };
+		CC7542FD25839C28000846A5 /* QCSupportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCSupportViewController.m; sourceTree = "<group>"; };
+		CC75430025839C71000846A5 /* QCSupportCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCSupportCell.h; sourceTree = "<group>"; };
+		CC75430125839C71000846A5 /* QCSupportCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCSupportCell.m; sourceTree = "<group>"; };
+		CC75430325839C9D000846A5 /* QCSupportModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCSupportModel.h; sourceTree = "<group>"; };
+		CC75430425839C9D000846A5 /* QCSupportModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCSupportModel.m; sourceTree = "<group>"; };
+		CC7543062583B004000846A5 /* QCSupportView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCSupportView.h; sourceTree = "<group>"; };
+		CC7543072583B004000846A5 /* QCSupportView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCSupportView.m; sourceTree = "<group>"; };
 		CC82621B25394013001C3AD9 /* QCPersonHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCPersonHeaderView.h; sourceTree = "<group>"; };
 		CC82621C25394013001C3AD9 /* QCPersonHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCPersonHeaderView.m; sourceTree = "<group>"; };
 		CC82622125397F49001C3AD9 /* QCPersonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCPersonCell.h; sourceTree = "<group>"; };
@@ -987,7 +1011,7 @@
 			path = QCTransferViewController;
 			sourceTree = "<group>";
 		};
-		CC213770257A1B4800F578AA /* QCPersonOrderViewController */ = {
+		CC213770257A1B4800F578AA /* QCPersonOrderViewController（我买到的） */ = {
 			isa = PBXGroup;
 			children = (
 				CC213771257A1B6500F578AA /* QCPersonOrderViewController.h */,
@@ -997,7 +1021,7 @@
 				CC213777257A1F2700F578AA /* QCPersonOrderCell.h */,
 				CC213778257A1F2700F578AA /* QCPersonOrderCell.m */,
 			);
-			path = QCPersonOrderViewController;
+			path = "QCPersonOrderViewController（我买到的）";
 			sourceTree = "<group>";
 		};
 		CC21377A257A271200F578AA /* QCDeliveryViewController */ = {
@@ -1031,7 +1055,7 @@
 			path = QCOrderDetailsViewController;
 			sourceTree = "<group>";
 		};
-		CC33AAF3257A63E9002BC4B5 /* QCAddressListsViewController */ = {
+		CC33AAF3257A63E9002BC4B5 /* QCAddressListsViewController（地址列表） */ = {
 			isa = PBXGroup;
 			children = (
 				CCFB96B8257A733F001C0976 /* QCAddressViewController.h */,
@@ -1043,7 +1067,7 @@
 				CC5B8DEA257B7BA30057A6D8 /* QCAddressModel.h */,
 				CC5B8DEB257B7BA30057A6D8 /* QCAddressModel.m */,
 			);
-			path = QCAddressListsViewController;
+			path = "QCAddressListsViewController（地址列表）";
 			sourceTree = "<group>";
 		};
 		CC37BA41257DD8B900D126FD /* QCPersonSellViewController */ = {
@@ -1432,6 +1456,41 @@
 			path = "QCComplaintsViewController（举报投诉）";
 			sourceTree = "<group>";
 		};
+		CC7542EE25835B47000846A5 /* QCComplaintsListViewController（投诉列表） */ = {
+			isa = PBXGroup;
+			children = (
+				CC7542EF25835B65000846A5 /* QCComplaintsListViewController.h */,
+				CC7542F025835B65000846A5 /* QCComplaintsListViewController.m */,
+				CC7542F225835C14000846A5 /* QCComplaintsListCell.h */,
+				CC7542F325835C14000846A5 /* QCComplaintsListCell.m */,
+				CC7542F525835C23000846A5 /* QCComplaintsListModel.h */,
+				CC7542F625835C23000846A5 /* QCComplaintsListModel.m */,
+			);
+			path = "QCComplaintsListViewController（投诉列表）";
+			sourceTree = "<group>";
+		};
+		CC7542F825836BA0000846A5 /* QCComplaintsDetailsViewController（投诉详情） */ = {
+			isa = PBXGroup;
+			children = (
+				CC7542F925836BBE000846A5 /* QCComplaintsDetailsViewController.h */,
+				CC7542FA25836BBE000846A5 /* QCComplaintsDetailsViewController.m */,
+			);
+			path = "QCComplaintsDetailsViewController（投诉详情）";
+			sourceTree = "<group>";
+		};
+		CC7542FF25839C33000846A5 /* QCSupportViewController（支持的银行） */ = {
+			isa = PBXGroup;
+			children = (
+				CC7542FC25839C28000846A5 /* QCSupportViewController.h */,
+				CC7542FD25839C28000846A5 /* QCSupportViewController.m */,
+				CC75430025839C71000846A5 /* QCSupportCell.h */,
+				CC75430125839C71000846A5 /* QCSupportCell.m */,
+				CC75430325839C9D000846A5 /* QCSupportModel.h */,
+				CC75430425839C9D000846A5 /* QCSupportModel.m */,
+			);
+			path = "QCSupportViewController（支持的银行）";
+			sourceTree = "<group>";
+		};
 		CC826227253983BD001C3AD9 /* QCWalletViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1476,7 +1535,7 @@
 			path = QCEnvelopeViewController;
 			sourceTree = "<group>";
 		};
-		CC826258253D36CC001C3AD9 /* QCBankViewController */ = {
+		CC826258253D36CC001C3AD9 /* QCBankViewController（银行卡列表） */ = {
 			isa = PBXGroup;
 			children = (
 				CC826259253D36E7001C3AD9 /* QCBankViewController.h */,
@@ -1486,16 +1545,18 @@
 				CC4446A225753D94009A0524 /* QCBankModel.h */,
 				CC4446A325753D94009A0524 /* QCBankModel.m */,
 			);
-			path = QCBankViewController;
+			path = "QCBankViewController（银行卡列表）";
 			sourceTree = "<group>";
 		};
-		CC826268253D40FC001C3AD9 /* QCAddBankViewController */ = {
+		CC826268253D40FC001C3AD9 /* QCAddBankViewController（绑定银行卡） */ = {
 			isa = PBXGroup;
 			children = (
 				CC826269253D4119001C3AD9 /* QCAddBankViewController.h */,
 				CC82626A253D4119001C3AD9 /* QCAddBankViewController.m */,
+				CC7543062583B004000846A5 /* QCSupportView.h */,
+				CC7543072583B004000846A5 /* QCSupportView.m */,
 			);
-			path = QCAddBankViewController;
+			path = "QCAddBankViewController（绑定银行卡）";
 			sourceTree = "<group>";
 		};
 		CC826272253D68C1001C3AD9 /* QCCertificationViewController */ = {
@@ -1931,7 +1992,7 @@
 			path = "QCWithdrawalViewController(提现)";
 			sourceTree = "<group>";
 		};
-		CCBE37342549559C005337C8 /* QCPersonDataViewController */ = {
+		CCBE37342549559C005337C8 /* QCPersonDataViewController（个人资料） */ = {
 			isa = PBXGroup;
 			children = (
 				CCBE374B25496838005337C8 /* QCPersonCodeViewController */,
@@ -1941,7 +2002,7 @@
 				CCBE373B254958EC005337C8 /* QCPersonDataCell.h */,
 				CCBE373C254958EC005337C8 /* QCPersonDataCell.m */,
 			);
-			path = QCPersonDataViewController;
+			path = "QCPersonDataViewController（个人资料）";
 			sourceTree = "<group>";
 		};
 		CCBE374A25496822005337C8 /* QCChangeNicknameViewController */ = {
@@ -2143,11 +2204,14 @@
 		CCD509B62536A096002CECEF /* 个人 */ = {
 			isa = PBXGroup;
 			children = (
+				CC7542FF25839C33000846A5 /* QCSupportViewController（支持的银行） */,
+				CC7542F825836BA0000846A5 /* QCComplaintsDetailsViewController（投诉详情） */,
+				CC7542EE25835B47000846A5 /* QCComplaintsListViewController（投诉列表） */,
 				CC37BA41257DD8B900D126FD /* QCPersonSellViewController */,
-				CC33AAF3257A63E9002BC4B5 /* QCAddressListsViewController */,
+				CC33AAF3257A63E9002BC4B5 /* QCAddressListsViewController（地址列表） */,
 				CC33AAE9257A4262002BC4B5 /* QCOrderDetailsViewController */,
 				CC21377A257A271200F578AA /* QCDeliveryViewController */,
-				CC213770257A1B4800F578AA /* QCPersonOrderViewController */,
+				CC213770257A1B4800F578AA /* QCPersonOrderViewController（我买到的） */,
 				CC44469E25751F4C009A0524 /* QCWithdrawalListViewController */,
 				CC15728D254AA41400D00805 /* QCCancellationViewController */,
 				CC157286254A9ACD00D00805 /* QCTouchpasswordViewController */,
@@ -2158,7 +2222,7 @@
 				CC157230254A519300D00805 /* QCSaveViewController */,
 				CCAC46CA2549755900A7B7B3 /* QCSetViewController（设置） */,
 				CCAC46BA2549719400A7B7B3 /* QCHelpViewController（帮助） */,
-				CCBE37342549559C005337C8 /* QCPersonDataViewController */,
+				CCBE37342549559C005337C8 /* QCPersonDataViewController（个人资料） */,
 				CCBE372A2549501A005337C8 /* QCWithdrawalViewController(提现) */,
 				CCBE371A254900FF005337C8 /* QCTopupViewController(充值) */,
 				CC826294253D8987001C3AD9 /* QCRealnameViewController */,
@@ -2166,13 +2230,13 @@
 				CC826280253D7A54001C3AD9 /* QCCertificationPasswordViewController */,
 				CC826279253D718A001C3AD9 /* QCSetPasswordViewController */,
 				CC826272253D68C1001C3AD9 /* QCCertificationViewController */,
-				CC826268253D40FC001C3AD9 /* QCAddBankViewController */,
-				CC826258253D36CC001C3AD9 /* QCBankViewController */,
+				CC826268253D40FC001C3AD9 /* QCAddBankViewController（绑定银行卡） */,
+				CC826258253D36CC001C3AD9 /* QCBankViewController（银行卡列表） */,
 				CC826248253D2E69001C3AD9 /* QCEnvelopeViewController */,
 				CC82623E253D2236001C3AD9 /* QCPaymentsDetailsViewController */,
 				CC82622E25399250001C3AD9 /* QCPaymentsViewController */,
 				CC826227253983BD001C3AD9 /* QCWalletViewController */,
-				CCD509C42536A15C002CECEF /* QCPersonViewController */,
+				CCD509C42536A15C002CECEF /* QCPersonViewController（个人中心） */,
 			);
 			path = "个人";
 			sourceTree = "<group>";
@@ -2198,7 +2262,7 @@
 				CC727FF3256F8224000C1FA8 /* QCEnvelopeViewController */,
 				CC1EB747256E045C00F4BD05 /* QCTransferViewController */,
 				CCEEDFE9256CFD61009C37AC /* QCSendCardViewController */,
-				CCEEDFE5256BA325009C37AC /* QCSendEnvelopeViewController */,
+				CCEEDFE5256BA325009C37AC /* QCSendEnvelopeViewController（发红包） */,
 				CC899B0F2563C07500F1C17D /* QCChatDetailsViewController */,
 				CCACAF47255C2CAF0081B1D9 /* QCGroupRpplyListViewController */,
 				CCACAF43255C169C0081B1D9 /* QCGroupManagerViewController */,
@@ -2237,7 +2301,7 @@
 			isa = PBXGroup;
 			children = (
 				CC37BA54257E482000D126FD /* QCStoresViewController */,
-				CCE11718257884BC0077D04F /* QCGoodsDetailsViewController */,
+				CCE11718257884BC0077D04F /* QCGoodsDetailsViewController（商品详情页） */,
 				CCE117112577C9900077D04F /* QCGoodsListViewController */,
 				CC4446DE25769923009A0524 /* QCClassificationViewcontroller */,
 				CCD509AC25369D2F002CECEF /* QCHomeViewController */,
@@ -2286,7 +2350,7 @@
 			path = QCBookViewController;
 			sourceTree = "<group>";
 		};
-		CCD509C42536A15C002CECEF /* QCPersonViewController */ = {
+		CCD509C42536A15C002CECEF /* QCPersonViewController（个人中心） */ = {
 			isa = PBXGroup;
 			children = (
 				CCD509D42536A1B3002CECEF /* QCPersonViewController.h */,
@@ -2298,7 +2362,7 @@
 				CCBE36992543FBEC005337C8 /* QCPersonModel.h */,
 				CCBE369A2543FBEC005337C8 /* QCPersonModel.m */,
 			);
-			path = QCPersonViewController;
+			path = "QCPersonViewController（个人中心）";
 			sourceTree = "<group>";
 		};
 		CCE117112577C9900077D04F /* QCGoodsListViewController */ = {
@@ -2312,7 +2376,7 @@
 			path = QCGoodsListViewController;
 			sourceTree = "<group>";
 		};
-		CCE11718257884BC0077D04F /* QCGoodsDetailsViewController */ = {
+		CCE11718257884BC0077D04F /* QCGoodsDetailsViewController（商品详情页） */ = {
 			isa = PBXGroup;
 			children = (
 				CCE11715257884B30077D04F /* QCGoodsDetailsViewController.h */,
@@ -2334,16 +2398,16 @@
 				CC37BA4B257E298100D126FD /* QCCardModel.h */,
 				CC37BA4C257E298100D126FD /* QCCardModel.m */,
 			);
-			path = QCGoodsDetailsViewController;
+			path = "QCGoodsDetailsViewController（商品详情页）";
 			sourceTree = "<group>";
 		};
-		CCEEDFE5256BA325009C37AC /* QCSendEnvelopeViewController */ = {
+		CCEEDFE5256BA325009C37AC /* QCSendEnvelopeViewController（发红包） */ = {
 			isa = PBXGroup;
 			children = (
 				CCEEDFE6256BA34F009C37AC /* QCSendEnvelopeViewController.h */,
 				CCEEDFE7256BA34F009C37AC /* QCSendEnvelopeViewController.m */,
 			);
-			path = QCSendEnvelopeViewController;
+			path = "QCSendEnvelopeViewController（发红包）";
 			sourceTree = "<group>";
 		};
 		CCEEDFE9256CFD61009C37AC /* QCSendCardViewController */ = {
@@ -2574,6 +2638,7 @@
 				CC727FF2256F821B000C1FA8 /* QCGetEnvelopeViewController.m in Sources */,
 				CC7011082556F54200667464 /* PPEmojiPreviewView.m in Sources */,
 				CC7542EA25831F6F000846A5 /* QCComplaintsModel.m in Sources */,
+				CC7542FB25836BBE000846A5 /* QCComplaintsDetailsViewController.m in Sources */,
 				CC8263AC25427F81001C3AD9 /* QCGroupManagerCell.m in Sources */,
 				CC82638A25416912001C3AD9 /* QCChatFooterView.m in Sources */,
 				CC70115E255BCB3900667464 /* QCGroupDeleteViewController.m in Sources */,
@@ -2605,6 +2670,7 @@
 				CC2137652578CC3100F578AA /* QCGoodsDetailsModel.m in Sources */,
 				CC45DB3125806E1700E74A05 /* QCUngetEnvelopeViewController.m in Sources */,
 				CC37BA4D257E298100D126FD /* QCCardModel.m in Sources */,
+				CC75430225839C71000846A5 /* QCSupportCell.m in Sources */,
 				CC82621D25394013001C3AD9 /* QCPersonHeaderView.m in Sources */,
 				CC8262ED253EE50A001C3AD9 /* QCTimeCell.m in Sources */,
 				CC82637225402772001C3AD9 /* QCGroupDataViewController.m in Sources */,
@@ -2613,6 +2679,7 @@
 				CC4446A125751F6A009A0524 /* QCWithdrawalListViewController.m in Sources */,
 				CC37BA7F257F983D00D126FD /* QCPayCell.m in Sources */,
 				CC4E13D625384B3E00337586 /* QCPhoneLoginViewController.m in Sources */,
+				CC7542FE25839C28000846A5 /* QCSupportViewController.m in Sources */,
 				CCBE613D2535515600311269 /* QCTarBarController.m in Sources */,
 				CC4446E6257699C4009A0524 /* QCCityItem.m in Sources */,
 				CC70112C2556F54F00667464 /* PPStickerInputView.m in Sources */,
@@ -2682,6 +2749,7 @@
 				CC7011462559819E00667464 /* QCGroupListModel.m in Sources */,
 				CC4E12DF2536A96500337586 /* XXPageTabItemLable.m in Sources */,
 				CC826241253D2254001C3AD9 /* QCPaymentsDetailsViewController.m in Sources */,
+				CC75430525839C9D000846A5 /* QCSupportModel.m in Sources */,
 				CC14FCC9255679B7000BC814 /* QCBookModel.m in Sources */,
 				CC21375D2578BD5000F578AA /* QCImageDetailsModel.m in Sources */,
 				CC4E13C825381AC800337586 /* QCCodeViewController.m in Sources */,
@@ -2692,6 +2760,7 @@
 				CC70113C2559381E00667464 /* QCEnveolpModel.m in Sources */,
 				CC45DB342580747300E74A05 /* QCUngetModel.m in Sources */,
 				CC8262D8253EE129001C3AD9 /* QCChatViewController.m in Sources */,
+				CC7542F425835C14000846A5 /* QCComplaintsListCell.m in Sources */,
 				CCE116FE257744E70077D04F /* TZTestCell.m in Sources */,
 				CC2322B42551327A00563092 /* QCHomeReusableView.m in Sources */,
 				CC33AAF2257A5E34002BC4B5 /* QCSureOrderCell.m in Sources */,
@@ -2736,6 +2805,7 @@
 				CCBE36722542CEE0005337C8 /* QCBindWechatViewController.m in Sources */,
 				CC7011262556F54800667464 /* PPTextBackedString.m in Sources */,
 				CC82632A253EE786001C3AD9 /* QCOtherVoiceCell.m in Sources */,
+				CC7542F725835C23000846A5 /* QCComplaintsListModel.m in Sources */,
 				CC4E13CF2538445400337586 /* QCAccountViewController.m in Sources */,
 				CC37BA53257E481700D126FD /* QCStoresViewController.m in Sources */,
 				CC33AAF9257A64E8002BC4B5 /* QCAddressCell.m in Sources */,
@@ -2778,6 +2848,8 @@
 				CCBE374325496121005337C8 /* QCChangeNicknameViewController.m in Sources */,
 				CC826297253D89A6001C3AD9 /* QCRealnameViewController.m in Sources */,
 				CCFD0A812553DCED00072827 /* QCFriendModel.m in Sources */,
+				CC7542F125835B65000846A5 /* QCComplaintsListViewController.m in Sources */,
+				CC7543082583B004000846A5 /* QCSupportView.m in Sources */,
 				CCE1170A2577AFDE0077D04F /* QCCategoryModel.m in Sources */,
 				CC614895254D163A006EA845 /* QCPersonReleaseCell.m in Sources */,
 				CC8263B3254285F3001C3AD9 /* QCInactiveViewController.m in Sources */,

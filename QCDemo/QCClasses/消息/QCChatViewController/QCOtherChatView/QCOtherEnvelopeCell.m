@@ -65,7 +65,7 @@
         [self.contentView addSubview:self.fHeaderImageView];
         
         self.moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(188), KSCALE_WIDTH(71), KSCALE_WIDTH(100), KSCALE_WIDTH(28.5))];
-        self.moneyLabel.text = @"¥2.00";
+//        self.moneyLabel.text = @"¥2.00";
         self.moneyLabel.font = K_11_FONT;
         self.moneyLabel.textColor = KWHITE_COLOR;
         self.moneyLabel.textAlignment = NSTextAlignmentRight;

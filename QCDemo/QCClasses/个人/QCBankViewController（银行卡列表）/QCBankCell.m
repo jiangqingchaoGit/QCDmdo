@@ -53,9 +53,8 @@
     return self;;
 }
 - (void)fillCellWithModel:(QCBankModel *)model {
-    self.nameLabel.text = model.bank_code;
     self.bankLabel.text = model.bank_name;
-    self.numberLabel.text = model.bank_no;
+    self.numberLabel.text = [NSString stringWithFormat:@"**** **** **** %@",model.bank_no];
 }
 
 

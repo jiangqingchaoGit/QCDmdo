@@ -346,7 +346,7 @@
         
         UIButton * deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KNavHight - 44, 56, 44)];
         [deleteButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-        [deleteButton addTarget:self action:@selector(delete1Action:) forControlEvents:UIControlEventTouchUpInside];
+        [deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
         [[UIApplication sharedApplication].keyWindow addSubview:deleteButton];
         
     }
@@ -505,6 +505,7 @@
             QCSelfPictureCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfPictureCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell.pictureButton addTarget:self action:@selector(pictureAction:) forControlEvents:UIControlEventTouchUpInside];
+            cell.pictureButton.tag = 1;
             [cell fillCellWithModel:chatModel];
             
             return cell;
@@ -646,7 +647,9 @@
             QCOtherPictureCell * cell = [tableView dequeueReusableCellWithIdentifier:@"otherPictureCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell.pictureButton addTarget:self action:@selector(pictureAction:) forControlEvents:UIControlEventTouchUpInside];
+            cell.pictureButton.tag = 2;
             [cell fillCellWithModel:chatModel];
+            
         
             return cell;
         }else if ([chatModel.mtype isEqualToString:@"2"]){
@@ -1149,13 +1152,19 @@
 
 - (void)pictureAction:(UIButton *)sender {
 
+
     QCSelfPictureCell * cell = (QCSelfPictureCell *)[[sender superview] superview];
     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
     QCChatModel * model = self.dataArr[indexPath.row - 1];
     NSArray * arr = [model.message componentsSeparatedByString:@"|"];
     UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (KSCREEN_HEIGHT - [arr[1] floatValue] / [arr[2] floatValue] * KSCALE_WIDTH(375)) / 2.0, KSCALE_WIDTH(375), [arr[1] floatValue] / [arr[2] floatValue] * KSCALE_WIDTH(375))];
 
-    imageView.image =  [QCClassFunction Base64StrToUIImage:arr[0]];
+    if (sender.tag == 1) {
+        imageView.image =  [QCClassFunction Base64StrToUIImage:arr[0]];
+
+    }else{
+        [QCClassFunction sd_imageView:imageView ImageURL:arr[0] AppendingString:@"" placeholderImage:@""];
+    }
 
     self.videoBackView = [[UIView alloc] initWithFrame:KSCREEN_BOUNDS];
     self.videoBackView.backgroundColor = KBLACK_COLOR;

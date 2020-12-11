@@ -7,6 +7,7 @@
 //
 
 #import "QCAddBankViewController.h"
+#import "QCSupportView.h"
 
 @interface QCAddBankViewController ()<UITextFieldDelegate>
 
@@ -16,6 +17,10 @@
 @property (nonatomic, strong) UITextField * codeTextField;
 @property (nonatomic, strong) UIButton * codeButton;
 @property (nonatomic, strong) UIButton * sureButton;
+@property (nonatomic, strong) UIButton * bankButton;
+@property (nonatomic, strong) NSString * bankId;
+@property (nonatomic, strong) QCSupportView * supportView;
+
 
 @end
 
@@ -99,7 +104,7 @@
 - (void)sureAction:(UIButton *)sender {
     
     if ([self.nameTextField.text isEqual:@""] || self.nameTextField.text == nil) {
-        [QCClassFunction showMessage:@"请输入持卡人姓名" toView:self.view];
+        [QCClassFunction showMessage:@"请选择银行" toView:self.view];
         return;
     }
     
@@ -124,9 +129,9 @@
     //  进行绑定操作
     
 
-    NSString * str = [NSString stringWithFormat:@"cardNo=%@&mobile=%@&token=%@&uid=%@",self.cardTextField.text,self.phoneTextField.text,K_TOKEN,K_UID?K_UID:@""];
+    NSString * str = [NSString stringWithFormat:@"bank_id=%@&cardNo=%@&code=%@&mobileNo=%@&token=%@&type=3&uid=%@",self.bankId,self.cardTextField.text,self.codeTextField.text,self.phoneTextField.text,K_TOKEN,K_UID?K_UID:@""];
     NSString * signStr = [QCClassFunction MD5:str];
-    NSDictionary * dic = @{@"cardNo":self.cardTextField.text,@"mobile":self.phoneTextField.text,@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
+    NSDictionary * dic = @{@"bank_id":self.bankId,@"cardNo":self.cardTextField.text,@"code":self.codeTextField.text,@"mobileNo":self.phoneTextField.text,@"token":K_TOKEN,@"type":@"3",@"uid":K_UID?K_UID:@""};
     NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
@@ -194,6 +199,22 @@
     
     
 }
+
+- (void)bankAction:(UIButton *)sender {
+    UIView * backView = [[QCClassFunction shared] createBackView];
+    self.supportView = [[QCSupportView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT - KSCALE_WIDTH(312), KSCALE_WIDTH(375), KSCALE_WIDTH(312))];
+
+    kWeakSelf(self);
+    self.supportView.bankBlock = ^(NSString * _Nullable bankId, NSString * _Nullable bankName) {
+        weakself.nameTextField.text = bankName;
+        weakself.bankId = bankId;
+
+    };
+
+    [backView addSubview:self.supportView];
+    
+
+}
 #pragma mark - initUI
 - (void)initUI {
     
@@ -217,8 +238,8 @@
     [self.view addSubview:lineView];
     
     
-    NSArray * labelArr = @[@"持卡人",@"卡号",@"手机号",@"验证码"];
-    NSArray * markArr = @[@"请输入持卡人姓名",@"请输入持卡人卡号",@"请输入手机号码",@"请输入验证码"];
+    NSArray * labelArr = @[@"选择银行",@"卡号",@"手机号",@"验证码"];
+    NSArray * markArr = @[@"请选择银行卡",@"请输入持卡人卡号",@"请输入手机号码",@"请输入验证码"];
 
     for (NSInteger i = 0; i < 4; i++) {
         
@@ -265,6 +286,12 @@
 
     }
     
+    
+    self.bankButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(100), KSCALE_WIDTH(175) , KSCALE_WIDTH(200), KSCALE_WIDTH(58))];
+    self.bankButton.backgroundColor = KCLEAR_COLOR;
+    [self.bankButton addTarget:self action:@selector(bankAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.bankButton];
+
     self.codeButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(245), KSCALE_WIDTH(352) , KSCALE_WIDTH(100), KSCALE_WIDTH(58))];
     self.codeButton.backgroundColor = KCLEAR_COLOR;
     self.codeButton.titleLabel.font = K_16_FONT;

@@ -60,10 +60,20 @@
 
 - (void)buttonAction:(UIButton *)sender {
     //  选择银行卡
+    kWeakSelf(self);
+
     [self.moneyTextField resignFirstResponder];
     UIView * backView = [[QCClassFunction shared] createBackView];
     self.payTypeView = [[QCPayTypeView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT - KSCALE_WIDTH(312), KSCALE_WIDTH(375), KSCALE_WIDTH(312))];
+    self.payTypeView.statusStr = @"1";
+    self.payTypeView.typeStr = @"转账";
+    [self.payTypeView initUI];
+    self.payTypeView.typeBlock = ^(NSDictionary * _Nonnull payTypeDic) {
+        weakself.bankLabel.text = [NSString stringWithFormat:@"%@（%@）",payTypeDic[@"payName"],payTypeDic[@"payNo"]];
+    };
+
     [backView addSubview:self.payTypeView];
+    
 
 }
 

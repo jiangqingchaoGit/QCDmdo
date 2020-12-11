@@ -71,7 +71,7 @@
     [self addSubview:passLabel];
     
     self.downButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(275), KSCALE_WIDTH(18), KSCALE_WIDTH(30), KSCALE_WIDTH(30))];
-    [self.downButton setImage:KHeaderImage forState:UIControlStateNormal];
+    [self.downButton setImage:[UIImage imageNamed:@"cloose"] forState:UIControlStateNormal];
     [self.downButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.downButton];
     

@@ -152,7 +152,9 @@
 
             break;
         case 11:
+            self.contentLabel.text = @"[全员禁言]";
 
+            
             break;
         case 12:
             self.contentLabel.text = @"[名片]";

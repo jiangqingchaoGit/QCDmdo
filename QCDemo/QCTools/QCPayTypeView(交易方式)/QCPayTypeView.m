@@ -202,7 +202,7 @@
 
         }else{
             //  选择银行卡
-            QCBankModel * model = self.dataArr[indexPath.row];
+            QCBankModel * model = self.dataArr[indexPath.row - 1];
             NSDictionary * dic = @{@"payType":@"2",@"bankId":model.id?model.id:@"",@"payName":model.bank_name?model.bank_name:@"",@"payNo":model.bank_no?model.bank_no:@""};
             self.typeBlock(dic);
         }

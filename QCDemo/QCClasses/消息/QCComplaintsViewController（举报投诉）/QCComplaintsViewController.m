@@ -24,7 +24,7 @@
 
 @property (nonatomic, strong) UIButton * sureButton;
 @property (nonatomic, strong) NSString * typeStr;
-@property (nonatomic, strong) NSArray * imageArr;
+@property (nonatomic, strong) NSString * imageUrl;
 
 
 
@@ -74,6 +74,13 @@
         return;
     }
     
+    if (self.complaintsView.imageArr.count == 0) {
+        self.imageUrl = @"";
+    }else{
+        self.imageUrl =[self.complaintsView.imageArr componentsJoinedByString:@","];
+        self.imageUrl = [NSString stringWithFormat:@"%@,",self.imageUrl];
+
+    }
     NSString * str = [NSString stringWithFormat:@"attrs=%@&context=%@&mobile=%@&targer_id=%@&targer_type=%@&token=%@&type=%@&uid=%@",@"",self.contentTextView.text,self.phoneTextField.text,self.targer_id,self.status,K_TOKEN,self.typeStr,K_UID];
     NSString * signStr = [QCClassFunction MD5:str];
     NSDictionary * dic = @{@"type":self.typeStr,@"attrs":@"",@"mobile":self.phoneTextField.text,@"targer_type":self.status,@"targer_id":self.targer_id,@"context":self.contentTextView.text,@"token":K_TOKEN,@"uid":K_UID};
@@ -205,14 +212,14 @@
         UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(52) + i * KSCALE_WIDTH(52), KSCALE_WIDTH(100), KSCALE_WIDTH(52))];
         label.text = titleArr[i];
         label.font = K_14_FONT;
-        label.textColor = [QCClassFunction stringTOColor:@"#666666"];
+        label.textColor = [QCClassFunction stringTOColor:@"#000000"];
         [self.footerView addSubview:label];
         
         if (i < 2) {
             UITextField * textField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(120), KSCALE_WIDTH(52) + KSCALE_WIDTH(52) * i, KSCALE_WIDTH(200), KSCALE_WIDTH(52))];
             textField.placeholder = placeholderArr[i];
             textField.font = K_14_FONT;
-            textField.textColor = KTEXT_COLOR;
+            textField.textColor = [QCClassFunction stringTOColor:@"#333333"];
             [self.footerView addSubview:textField];
             if (i == 0) {
                 self.nameTextField = textField;
@@ -249,7 +256,7 @@
     UILabel * imageLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(328), KSCALE_WIDTH(100), KSCALE_WIDTH(52))];
     imageLabel.text = @"图片证据(选填)";
     imageLabel.font = K_14_FONT;
-    imageLabel.textColor = [QCClassFunction stringTOColor:@"#666666"];
+    imageLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];
     [self.footerView addSubview:imageLabel];
     
     

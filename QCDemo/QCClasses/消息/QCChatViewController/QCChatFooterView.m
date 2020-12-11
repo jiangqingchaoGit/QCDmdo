@@ -1200,10 +1200,10 @@
     NSString *filepath = [[NSBundle bundleWithPath:[[NSBundle mainBundle] bundlePath]] pathForResource:@"语音-(6)" ofType:nil];
     NSData *imagedata = [NSData dataWithContentsOfFile:filepath];
     UIImage * image = [UIImage sd_imageWithGIFData:imagedata];
-    self.volumeImageView.contentMode = UIViewContentModeCenter;
+    self.volumeImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.volumeImageView.image = image;
 //    self.volumeImageView.image = [UIImage imageNamed:@"header"];
-//    [self.volumeBgView addSubview:self.volumeImageView];
+    [self.volumeBgView addSubview:self.volumeImageView];
     
     self.volumeLabel = [[UILabel alloc] init];
     self.volumeLabel.frame = CGRectMake(0, KSCALE_WIDTH(150), KSCALE_WIDTH(155), KSCALE_WIDTH(30));
@@ -1350,7 +1350,7 @@
     [self setupUserEnabled:YES];
     
     if (_countDown > 59) {
-        self.volumeImageView.image = [UIImage imageNamed:@"header"];
+//        self.volumeImageView.image = [UIImage imageNamed:@"header"];
         _volumeLabel.text = @"说话时间太短";
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -1401,7 +1401,7 @@
     
     self.volumeLabel.text = @"松开手指，取消发送";
     self.volumeLabel.textColor =  [UIColor redColor];
-    self.volumeImageView.image = [UIImage imageNamed:@"header"];
+//    self.volumeImageView.image = [UIImage imageNamed:@"header"];
 }
 
 - (void)recordButtonTouchUpDragEnter {

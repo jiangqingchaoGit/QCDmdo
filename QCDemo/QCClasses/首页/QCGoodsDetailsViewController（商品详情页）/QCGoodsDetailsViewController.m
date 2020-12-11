@@ -135,7 +135,7 @@
     self.navigationBar.titleLabel.text = @"商品详情";
 
     [self.navigationBar.rightButton addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationBar.rightButton setImage:[UIImage imageNamed:@"header"] forState:UIControlStateNormal];
+    [self.navigationBar.rightButton setImage:[UIImage imageNamed:@"share_s"] forState:UIControlStateNormal];
     [self.navigationBar.leftButton addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchUpInside];
 
     [self.view addSubview:self.navigationBar];
@@ -151,7 +151,7 @@
     self.cycleScrollView.isChangeAlpha = NO;
     self.cycleScrollView.isAutoScroll = YES;
     self.cycleScrollView.isInfiniteLoop = YES;
-    self.cycleScrollView.leftRightMargin = KSCALE_WIDTH(32);
+    self.cycleScrollView.leftRightMargin = KSCALE_WIDTH(0);
     [self.headerView addSubview:self.cycleScrollView];
     [self.cycleScrollView addSubview:self.pageControl];
     [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -577,9 +577,9 @@
     GKCycleScrollViewCell *cell = [cycleScrollView dequeueReusableCell];
     if (!cell) {
         cell = [GKCycleScrollViewCell new];
-        cell.layer.cornerRadius = KSCALE_WIDTH(10.0f);
+//        cell.layer.cornerRadius = KSCALE_WIDTH(10.0f);
         cell.layer.masksToBounds = YES;
-        cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        cell.imageView.contentMode = UIViewContentModeScaleToFill;
         
         
     }
@@ -587,8 +587,8 @@
         QCImageDetailsModel * model = self.imageArr[index];
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.goods_img]];
     
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    cell.imageView.layer.cornerRadius = KSCALE_WIDTH(10.0f);
+    cell.imageView.contentMode = UIViewContentModeScaleToFill;
+//    cell.imageView.layer.cornerRadius = KSCALE_WIDTH(10.0f);
     cell.imageView.layer.masksToBounds = YES;
     
     return cell;

@@ -11,6 +11,7 @@
 #import "QCChangeNicknameViewController.h"
 #import "QCPersonCodeViewController.h"
 #import "QCAddressListsViewController.h"
+#import "QCComplaintsListViewController.h"
 
 @interface QCPersonDataViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 @property (nonatomic, strong) UIImageView * headerImageView;
@@ -219,7 +220,7 @@
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -230,8 +231,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSArray * titleArr = @[@"电话",@"昵称",@"我的二维码",@"收货地址"];
-    NSArray * contentArr = @[K_PHONE,K_NICK?K_NICK:@"",@"",@""];
+    NSArray * titleArr = @[@"电话",@"昵称",@"我的二维码",@"收货地址",@"我的投诉"];
+    NSArray * contentArr = @[K_PHONE,K_NICK?K_NICK:@"",@"",@"",@""];
 
     QCPersonDataCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -245,7 +246,7 @@
     if (indexPath.row == 2) {
         cell.picImageView.hidden = NO;
     }
-    if (indexPath.row == 3) {
+    if (indexPath.row == 3 || indexPath.row == 4) {
         cell.picImageView.hidden = YES;
 
     }
@@ -324,6 +325,13 @@
             QCAddressListsViewController * addressListsViewController = [[QCAddressListsViewController alloc] init];
             addressListsViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:addressListsViewController animated:YES];
+        }
+            break;
+        case 4:
+        {
+            QCComplaintsListViewController * complaintsListViewController = [[QCComplaintsListViewController alloc] init];
+            complaintsListViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:complaintsListViewController animated:YES];
         }
             break;
             

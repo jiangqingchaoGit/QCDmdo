@@ -10,6 +10,7 @@
 #import "QCBankCell.h"
 
 #import "QCAddBankViewController.h"
+#import "QCSupportViewController.h"
 @interface QCBankViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -23,7 +24,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    
+    [self GETDATA];
+
     
 }
 
@@ -43,7 +45,6 @@
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 
     self.dataArr = [NSMutableArray new];
-    [self GETDATA];
     [self initUI];
     [self createTableView];
     [self createHeaderView];
@@ -58,6 +59,10 @@
     
 }
 - (void)showAction:(UIButton *)sender {
+    QCSupportViewController * supportViewController = [[QCSupportViewController alloc] init];
+    supportViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:supportViewController animated:YES];
+    
     
 }
 
@@ -207,10 +212,12 @@
 //5
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     //删除
+    
+    kWeakSelf(self);
     UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
 //        删除数据，和删除动画
         
-        QCBankModel * model = self.dataArr[indexPath.row];
+        QCBankModel * model = weakself.dataArr[indexPath.row];
 
 
         
@@ -222,21 +229,21 @@
         NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
 
         NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
-        [QCAFNetWorking QCPOST:@"/api/user/deladdress" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        [QCAFNetWorking QCPOST:@"/api/user/relievecard" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
 
             if ([responseObject[@"status"] intValue] == 1) {
-                [self.dataArr removeObjectAtIndex:indexPath.row];
+                [weakself.dataArr removeObjectAtIndex:indexPath.row];
                 [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
 
             }else{
-                [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+                [QCClassFunction showMessage:responseObject[@"msg"] toView:weakself.view];
 
             }
 
 
 
         } failure:^(NSURLSessionDataTask *operation, NSError *error) {
-            [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+            [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:weakself.view];
         }];
         
         

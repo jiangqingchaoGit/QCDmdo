@@ -148,12 +148,12 @@
             break;
         case 2:
             self.refundButton.hidden = NO;
-            self.reminderButton.hidden = YES;
-            self.goodsButton.hidden = NO;
+            self.reminderButton.hidden = NO;
+            self.goodsButton.hidden = YES;
             self.delectButton.hidden = YES;
 
             self.refundButton.frame = CGRectMake(KSCALE_WIDTH(190), KSCALE_WIDTH(158), KSCALE_WIDTH(80), KSCALE_WIDTH(32));
-            self.goodsButton.frame = CGRectMake(KSCALE_WIDTH(275), KSCALE_WIDTH(158), KSCALE_WIDTH(80), KSCALE_WIDTH(32));
+            self.reminderButton.frame = CGRectMake(KSCALE_WIDTH(275), KSCALE_WIDTH(158), KSCALE_WIDTH(80), KSCALE_WIDTH(32));
             [self.refundButton setTitle:@"退款" forState:UIControlStateNormal];
 
             self.statusLabel.text = @"待发货";
@@ -201,8 +201,8 @@
             self.refundButton.frame = CGRectMake(KSCALE_WIDTH(190), KSCALE_WIDTH(158), KSCALE_WIDTH(80), KSCALE_WIDTH(32));
             self.reminderButton.frame = CGRectMake(KSCALE_WIDTH(275), KSCALE_WIDTH(158), KSCALE_WIDTH(80), KSCALE_WIDTH(32));
 
-            [self.refundButton setTitle:@"同意退款" forState:UIControlStateNormal];
-            [self.reminderButton setTitle:@"拒绝退款" forState:UIControlStateNormal];
+//            [self.refundButton setTitle:@"同意退款" forState:UIControlStateNormal];
+//            [self.reminderButton setTitle:@"拒绝退款" forState:UIControlStateNormal];
 
             
             self.statusLabel.text = @"退款中";

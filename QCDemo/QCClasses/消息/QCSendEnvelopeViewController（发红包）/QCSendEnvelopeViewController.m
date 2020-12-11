@@ -87,6 +87,19 @@
 
         
     }
+    
+    if ([self.red_type isEqualToString:@"2"]) {
+        //  普通红包
+        self.totalMoneyLabel.text = [NSString stringWithFormat:@"¥%.2f",            [self.moneyNumTextField.text intValue] * [self.totalMoneyTextField.text floatValue]
+];
+
+    }else{
+        self.totalMoneyLabel.text =  [NSString stringWithFormat:@"¥%.2f",[self.totalMoneyTextField.text floatValue]];
+
+
+    }
+    
+    
 }
 - (void)buttonAction:(UIButton *)sender {
     //  选择银行卡
@@ -95,9 +108,18 @@
     [self.moneyNumTextField resignFirstResponder];
     [self.messageTextField resignFirstResponder];
 
+    kWeakSelf(self);
     UIView * backView = [[QCClassFunction shared] createBackView];
     self.payTypeView = [[QCPayTypeView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT - KSCALE_WIDTH(312), KSCALE_WIDTH(375), KSCALE_WIDTH(312))];
+    self.payTypeView.statusStr = @"1";
+    self.payTypeView.typeStr = @"发红包";
+    [self.payTypeView initUI];
+    self.payTypeView.typeBlock = ^(NSDictionary * _Nonnull payTypeDic) {
+        weakself.bankLabel.text = [NSString stringWithFormat:@"%@（%@）",payTypeDic[@"payName"],payTypeDic[@"payNo"]];
+    };
+
     [backView addSubview:self.payTypeView];
+    
 
 }
 
@@ -212,6 +234,7 @@
         self.moneyNumTextField.delegate = self;
         self.moneyNumTextField.keyboardType = UIKeyboardTypeNumberPad;
         self.moneyNumTextField.textAlignment = NSTextAlignmentRight;
+
         [self.numView addSubview:self.moneyNumTextField];
 
         self.numUnitLabel = [[UILabel alloc] initWithFrame:CGRectMake( KSCALE_WIDTH(300), KSCALE_WIDTH(0), KSCALE_WIDTH(20), KSCALE_WIDTH(52))];
@@ -392,19 +415,39 @@
 {
     if (textField == _totalMoneyTextField) {
         
-        if (_totalMoneyTextField.text == nil || [_totalMoneyTextField.text isEqualToString:@""]) {
-            _totalMoneyLabel.text = [NSString stringWithFormat:@"¥00.00"];
+
+        
+        if ([self.red_type isEqualToString:@"2"]) {
+            //  普通红包
+            self.totalMoneyLabel.text = [NSString stringWithFormat:@"¥%.2f",            [self.moneyNumTextField.text intValue] * [self.totalMoneyTextField.text floatValue]
+];
 
         }else{
-            _totalMoneyLabel.text = [NSString stringWithFormat:@"¥%.2f",[textField.text floatValue]];
+            self.totalMoneyLabel.text =  [NSString stringWithFormat:@"¥%.2f",[self.totalMoneyTextField.text floatValue]];
+
 
         }
+
 
         
     }
     return YES;
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField == self.moneyNumTextField) {
+        if ([self.red_type isEqualToString:@"2"]) {
+            //  普通红包
+            self.totalMoneyLabel.text = [NSString stringWithFormat:@"¥%.2f",            [string intValue] * [self.totalMoneyTextField.text floatValue]
+];
+
+        }else{
+            self.totalMoneyLabel.text =  [NSString stringWithFormat:@"¥%.2f",[self.totalMoneyTextField.text floatValue]];
+
+
+        }
+    }
+    
+    
     if (textField == _totalMoneyTextField) {
 
         // 判断是否输入内容，或者用户点击的是键盘的删除按钮

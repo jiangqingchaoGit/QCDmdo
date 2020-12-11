@@ -1111,14 +1111,18 @@
 //  发送群公告
 - (void)sendTextMessage:(NSString *)bannedStr {
     self.tipArr = [NSMutableArray new];
-    
+    NSMutableArray * arr = [[QCDataBase shared] querywithListId:[NSString stringWithFormat:@"%@|000000|%@",K_UID,self.groupId]];
+    QCListModel * listModel;
+    if (arr.count > 0) {
+        listModel = [arr firstObject];
+    }
     NSString * type = @"chat";
     NSString * ctype = @"1";    //  0 为单聊  传入touid  1为群聊 传入gid
     NSString * message = bannedStr;
     NSString * mtype = @"22";    //  消息类别
     NSString * msgid = [NSString stringWithFormat:@"%@|%@|%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.groupId];
     NSString * gid = self.groupId;
-    NSString * touid = self.groupId;
+    NSString * touid = @"0";
     NSString * uid = K_UID;
     
     NSString * listId = [NSString stringWithFormat:@"%@|000000|%@",K_UID,self.groupId];
@@ -1145,11 +1149,13 @@
     
     
     //  在更新消息表格
-    NSDictionary * listDic = @{@"listId":listId,@"type":type,@"uid":touid,@"rid":uid,@"msgid":msgid,@"message":message,@"time":time,@"count":count,@"isTop":isTop,@"isRead":isRead,@"isChat":isChat,@"cType":ctype,@"mtype":mtype,@"disturb":disturb,@"isBanned":isBanned};
-    QCListModel * model = [[QCListModel alloc] initWithDictionary:listDic error:nil];
-    [[QCDataBase shared] queryByListId:model];
+//    NSDictionary * listDic = @{@"listId":listId,@"type":type,@"uid":touid,@"rid":uid,@"msgid":msgid,@"message":message,@"time":time,@"count":count,@"isTop":isTop,@"isRead":isRead,@"isChat":isChat,@"cType":ctype,@"mtype":mtype,@"disturb":disturb,@"isBanned":isBanned};
+//    QCListModel * model = [[QCListModel alloc] initWithDictionary:listDic error:nil];
+    listModel.mtype = @"22";
+    listModel.message = message;
+
+    [[QCDataBase shared] queryByListId:listModel];
     
-    message = [NSString stringWithFormat:@"%@|0",message];
 
     NSString * str = [NSString stringWithFormat:@"ctype=%@&gid=%@&message=%@&msgid=%@&mtype=%@&token=%@&touid=%@&type=%@&uid=%@",ctype,gid,message,msgid,mtype,K_TOKEN,touid,type,uid];
     NSString * signStr = [QCClassFunction MD5:str];

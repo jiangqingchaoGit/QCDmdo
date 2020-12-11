@@ -185,7 +185,7 @@
         cell = [GKCycleScrollViewCell new];
         cell.layer.cornerRadius = KSCALE_WIDTH(10.0f);
         cell.layer.masksToBounds = YES;
-        cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        cell.imageView.contentMode = UIViewContentModeScaleToFill;
         
         
     }
@@ -193,7 +193,7 @@
         QCBanModel * model = self.bannerData[index];
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.img_url]];
     
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    cell.imageView.contentMode = UIViewContentModeScaleToFill;
     cell.imageView.layer.cornerRadius = KSCALE_WIDTH(10.0f);
     cell.imageView.layer.masksToBounds = YES;
     
