@@ -10,6 +10,8 @@
 #import "QCPersonDataCell.h"
 #import "QCChangeNicknameViewController.h"
 #import "QCPersonCodeViewController.h"
+#import "QCAddressListsViewController.h"
+
 @interface QCPersonDataViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 @property (nonatomic, strong) UIImageView * headerImageView;
 @property (nonatomic, strong) UILabel * idLabel;
@@ -217,7 +219,7 @@
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -228,8 +230,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSArray * titleArr = @[@"电话",@"昵称",@"我的二维码"];
-    NSArray * contentArr = @[K_PHONE,K_NICK?K_NICK:@"",@""];
+    NSArray * titleArr = @[@"电话",@"昵称",@"我的二维码",@"收货地址"];
+    NSArray * contentArr = @[K_PHONE,K_NICK?K_NICK:@"",@"",@""];
 
     QCPersonDataCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -242,6 +244,10 @@
     }
     if (indexPath.row == 2) {
         cell.picImageView.hidden = NO;
+    }
+    if (indexPath.row == 3) {
+        cell.picImageView.hidden = YES;
+
     }
     
     return cell;
@@ -312,6 +318,16 @@
             [self.navigationController pushViewController:personCodeViewController animated:YES];
         }
             break;
+            
+        case 3:
+        {
+            QCAddressListsViewController * addressListsViewController = [[QCAddressListsViewController alloc] init];
+            addressListsViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:addressListsViewController animated:YES];
+        }
+            break;
+            
+            
             
         default:
             break;

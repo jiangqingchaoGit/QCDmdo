@@ -80,7 +80,7 @@
     self.contentLabel.text = [NSString stringWithFormat:@"¥%@",arr[2]];
     self.typeLabel.text = @"小闲闲转账";
 
-    if ([model.mtype isEqualToString:@"13"]) {
+    if ([model.mtype isEqualToString:@"5"]) {
         if ([arr[0] isEqualToString:@"0"]) {
             self.getLabel.text = @"转账给你";
             self.backImageView.alpha = 1;

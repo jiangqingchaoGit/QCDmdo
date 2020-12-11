@@ -172,7 +172,7 @@
                 QCChatModel * chatModel = [[QCChatModel alloc] initWithDictionary:chatDic error:nil];
                 [[QCDataBase shared] insertChatModel:chatModel];
 
-                NSDictionary * listDic = @{@"listId":listId,@"type":result[@"type"],@"uid":result[@"uid"],@"rid":result[@"touid"],@"msgid":result[@"msgid"],@"message":result[@"message"],@"time":[NSString stringWithFormat:@"%ld",[result[@"time"] integerValue] * 1000],@"count":@"1",@"headImage":@"headImageUrl",@"isTop":@"0",@"isRead":@"0",@"isChat":@"2",@"cType":@"0",@"mtype":@"0",@"tohead":result[@"tohead"],@"tonick":result[@"tonick"],@"uhead":result[@"uhead"],@"unick":result[@"unick"],@"ghead":result[@"ghead"],@"gname":result[@"gname"],@"disturb":@"0"};
+                NSDictionary * listDic = @{@"listId":listId,@"type":result[@"type"],@"uid":result[@"uid"],@"rid":result[@"touid"],@"msgid":result[@"msgid"],@"message":result[@"message"],@"time":[NSString stringWithFormat:@"%ld",[result[@"time"] integerValue] * 1000],@"count":@"1",@"headImage":@"headImageUrl",@"isTop":@"0",@"isRead":@"0",@"isChat":@"2",@"cType":@"0",@"mtype":@"0",@"tohead":result[@"tohead"],@"tonick":result[@"tonick"],@"uhead":result[@"uhead"],@"unick":result[@"unick"],@"ghead":result[@"ghead"],@"gname":result[@"gname"],@"disturb":@"0",@"isBanned":@"0"};
                 QCListModel * listModel = [[QCListModel alloc] initWithDictionary:listDic error:nil];
                 [[QCDataBase shared] queryByListId:listModel];
                 
@@ -234,7 +234,15 @@
                 QCChatModel * chatModel = [[QCChatModel alloc] initWithDictionary:chatDic error:nil];
                 [[QCDataBase shared] insertChatModel:chatModel];
 
-                NSDictionary * listDic = @{@"listId":listId,@"type":result[@"type"],@"uid":result[@"uid"],@"rid":result[@"touid"],@"msgid":result[@"msgid"],@"message":result[@"message"],@"time":[NSString stringWithFormat:@"%ld",[result[@"time"] integerValue] * 1000],@"count":@"1",@"headImage":@"headImageUrl",@"isTop":@"0",@"isRead":@"0",@"isChat":@"2",@"cType":[result[@"ctype"] stringValue],@"mtype":[result[@"mtype"] stringValue],@"tohead":result[@"tohead"],@"tonick":result[@"tonick"],@"uhead":result[@"uhead"],@"unick":result[@"unick"],@"ghead":result[@"ghead"],@"gname":result[@"gname"],@"disturb":@"0"};
+                NSString * isBanned;
+                if ([result[@"message"] containsString:@"全员禁言"]) {
+                    isBanned = @"1";
+                }else{
+                    isBanned = @"0";
+                }
+                NSDictionary * listDic = @{@"listId":listId,@"type":result[@"type"],@"uid":result[@"uid"],@"rid":result[@"touid"],@"msgid":result[@"msgid"],@"message":result[@"message"],@"time":[NSString stringWithFormat:@"%ld",[result[@"time"] integerValue] * 1000],@"count":@"1",@"headImage":@"headImageUrl",@"isTop":@"0",@"isRead":@"0",@"isChat":@"2",@"cType":[result[@"ctype"] stringValue],@"mtype":[result[@"mtype"] stringValue],@"tohead":result[@"tohead"],@"tonick":result[@"tonick"],@"uhead":result[@"uhead"],@"unick":result[@"unick"],@"ghead":result[@"ghead"],@"gname":result[@"gname"],@"disturb":@"0",@"isBanned":isBanned};
+                
+                
                 QCListModel * listModel = [[QCListModel alloc] initWithDictionary:listDic error:nil];
                 [[QCDataBase shared] queryByListId:listModel];
             }
@@ -250,9 +258,9 @@
 
         if ([result[@"atype"] isEqualToString:@"apply"]) {
             //  存数据库操作
+            NSLog(@"%@",result);
             [QCClassFunction  noticeWithmsgId:result[@"smsid"]];
 
-            NSLog(@"%@",result);
 
             NSDictionary * dic = result;
             NSString * associatedId = [NSString stringWithFormat:@"%@|000000|%@",result[@"touid"],result[@"uid"]];

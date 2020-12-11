@@ -19,7 +19,7 @@
 - (void)setNav {
     self.frame = CGRectMake(0, 0, KSCREEN_WIDTH, KNavHight);
     
-    self.backColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@""]];
+//    self.backColor = [UIColor purpleColor];
     self.backgroundColor = [self.backColor colorWithAlphaComponent:1];
     [self addSubview:self.leftButton];
     [self addSubview:self.titleLabel];
@@ -51,20 +51,26 @@
 - (void)showNavWithAlpha:(CGFloat)alpha {
     if (alpha > 1) {
         self.backgroundColor = [self.backColor colorWithAlphaComponent:1];
-
+        self.titleLabel.alpha = 1;
     }else if (alpha < 0) {
         self.backgroundColor = [self.backColor colorWithAlphaComponent:0];
+        self.titleLabel.alpha = 0;
 
     }else{
         self.backgroundColor = [self.backColor colorWithAlphaComponent:alpha];
+        self.titleLabel.alpha = alpha;
 
     }
 }
 - (void)hiddenNav {
     self.backgroundColor = [self.backColor colorWithAlphaComponent:0];
+    self.titleLabel.alpha = 0;
+
 }
 - (void)showNav {
     self.backgroundColor = [self.backColor colorWithAlphaComponent:1];
+    self.titleLabel.alpha = 1;
+
 }
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
@@ -72,7 +78,7 @@
         _titleLabel.font = KSCALE_FONT(16);
         _titleLabel.textColor = KBLACK_COLOR;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.text = @"简约";
+        _titleLabel.text = @"";
         _titleLabel.backgroundColor = KCLEAR_COLOR;
 
         
@@ -83,7 +89,7 @@
 - (UIButton *)leftButton {
     if (!_leftButton) {
         _leftButton = [UIButton new];
-        [_leftButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+        [_leftButton setImage:[UIImage imageNamed:@"back_s"] forState:UIControlStateNormal];
         [_leftButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
         
     }

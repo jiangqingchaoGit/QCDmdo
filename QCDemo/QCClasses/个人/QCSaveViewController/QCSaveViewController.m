@@ -18,6 +18,8 @@
 #import "QCTouchpasswordViewController.h"
 // 注销账号
 #import "QCCancellationViewController.h"
+#import "YWUnlockView.h"
+
 @interface QCSaveViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
@@ -93,7 +95,8 @@
     self.tableView.tableHeaderView = self.headerView;
     
     UIImageView * headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(137.5), KSCALE_WIDTH(5), KSCALE_WIDTH(100), KSCALE_WIDTH(100))];
-    headerImageView.image = KHeaderImage;
+    headerImageView.image = [UIImage imageNamed:@"safety"];
+    headerImageView.contentMode = UIViewContentModeCenter;
     [self.headerView addSubview:headerImageView];
     
     self.footView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(0), KSCALE_HEIGHT(667) - KNavHight - KSCALE_WIDTH(51), KSCALE_WIDTH(375), KSCALE_WIDTH(51))];
@@ -186,9 +189,10 @@
             break;
         case 3:
         {
-            QCTouchpasswordViewController * touchpasswordViewController = [[QCTouchpasswordViewController alloc] init];
-            touchpasswordViewController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:touchpasswordViewController animated:YES];
+
+            [YWUnlockView showUnlockViewWithType:YWUnlockViewCreate callBack:^(BOOL result) {
+                NSLog(@"-->%@",@(result));
+            }];
         }
             break;
             

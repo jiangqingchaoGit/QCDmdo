@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIView * footerView;
+@property (nonatomic, strong) NSMutableArray * dataArr;
 
 @end
 
@@ -41,6 +42,7 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 
+    self.dataArr = [NSMutableArray new];
     [self GETDATA];
     [self initUI];
     [self createTableView];
@@ -76,7 +78,14 @@
         
         
         if ([responseObject[@"msg"] isEqualToString:@"成功"]) {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            [self.dataArr removeAllObjects];
+            
+            for (NSDictionary * dic in responseObject[@"data"]) {
+                QCBankModel * model = [[QCBankModel alloc] initWithDictionary:dic error:nil];
+                [self.dataArr addObject:model];
+            }
+            [self.tableView reloadData];
             
         }else{
             [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
@@ -149,7 +158,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.dataArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -163,6 +172,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QCBankCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    QCBankModel * model = self.dataArr[indexPath.row];
+    [cell fillCellWithModel:model];
     return cell;
     
 }
@@ -170,6 +181,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
 }
+
 
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -190,25 +202,50 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     //在这里实现删除操作
     
-    //删除数据，和删除动画
-//    [self.myarray removeObjectAtIndex:deleteRow];
-//    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:deleteRow inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+
 }
 //5
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     //删除
     UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-      
-    }];
-    //编辑
-    UITableViewRowAction *editRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"编辑" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-       
+//        删除数据，和删除动画
+        
+        QCBankModel * model = self.dataArr[indexPath.row];
+
+
+        
+        NSString * str = [NSString stringWithFormat:@"id=%@&token=%@&uid=%@",model.id,K_TOKEN,K_UID?K_UID:@""];
+        NSString * signStr = [QCClassFunction MD5:str];
+        NSDictionary * dic = @{@"id":model.id,@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
+
+        NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
+        NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+
+        NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
+        [QCAFNetWorking QCPOST:@"/api/user/deladdress" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+
+            if ([responseObject[@"status"] intValue] == 1) {
+                [self.dataArr removeObjectAtIndex:indexPath.row];
+                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+
+            }else{
+                [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+
+            }
+
+
+
+        } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+            [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
+        }];
+        
+        
         
     }];
-    return @[deleteRowAction,editRowAction];
+    //编辑
+
+    return @[deleteRowAction];
+
 }
-
-
-
 
 @end

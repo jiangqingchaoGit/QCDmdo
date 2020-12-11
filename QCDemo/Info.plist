@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>weixinULAPI</string>
@@ -152,8 +152,6 @@
 	<string>APP需要访问你的相册来保存图片</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>APP需要访问你的相册来上传图片</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

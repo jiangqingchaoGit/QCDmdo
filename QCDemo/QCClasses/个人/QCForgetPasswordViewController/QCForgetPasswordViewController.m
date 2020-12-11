@@ -76,7 +76,7 @@
     self.codeTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(120), KSCALE_WIDTH(207) + KStatusHight, KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
     self.codeTextField.placeholder = @"请输入验证码";
     self.codeTextField.keyboardType = UIKeyboardTypeNumberPad;
-    self.codeTextField.font = K_20_BFONT;
+    self.codeTextField.font = K_18_FONT;
     self.codeTextField.textColor = KTEXT_COLOR;
     self.codeTextField.textAlignment = NSTextAlignmentLeft;
     self.codeTextField.delegate = self;
@@ -106,7 +106,7 @@
     self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(120), KSCALE_WIDTH(276) + KStatusHight, KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
     self.passwordTextField.placeholder = @"请输入密码";
     self.passwordTextField.keyboardType = UIKeyboardTypeNumberPad;
-    self.passwordTextField.font = K_20_BFONT;
+    self.passwordTextField.font = K_18_FONT;
     self.passwordTextField.textColor = KTEXT_COLOR;
     self.passwordTextField.secureTextEntry = YES;
     self.passwordTextField.textAlignment = NSTextAlignmentLeft;
@@ -129,7 +129,7 @@
     self.surePasswordTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(120), KSCALE_WIDTH(345) + KStatusHight, KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
     self.surePasswordTextField.placeholder = @"请再次输入新密码";
     self.surePasswordTextField.keyboardType = UIKeyboardTypeNumberPad;
-    self.surePasswordTextField.font = K_20_BFONT;
+    self.surePasswordTextField.font = K_18_FONT;
     self.surePasswordTextField.textColor = KTEXT_COLOR;
     self.surePasswordTextField.secureTextEntry = YES;
     self.surePasswordTextField.textAlignment = NSTextAlignmentLeft;
@@ -156,7 +156,7 @@
     self.loginButton.userInteractionEnabled = NO;
     [self.loginButton setTitle:@"重置密码" forState:UIControlStateNormal];
     [self.loginButton setTitleColor:KBACK_COLOR forState:UIControlStateNormal];
-    [self.loginButton setTitleColor:KTEXT_COLOR forState:UIControlStateSelected];
+    [self.loginButton setTitleColor:KBACK_COLOR forState:UIControlStateSelected];
     [self.loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
     [QCClassFunction filletImageView:self.loginButton withRadius:KSCALE_WIDTH(13)];
     [self.view addSubview:self.loginButton];
@@ -244,16 +244,17 @@
     [self.codeTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
     [self.surePasswordTextField resignFirstResponder];
-
+//    1-设置支付密码,2-待处理订单,3-绑定银行卡,4-找回支付密码,5-绑定手机,6-账号登录,7-验证码
     
-    NSString * str = [NSString stringWithFormat:@"mobile=%@&password=%@",self.codeTextField.text,self.passwordTextField.text];
+    NSString * str = [NSString stringWithFormat:@"code=%@&password=%@&token=%@&uid=%@",self.codeTextField.text,self.passwordTextField.text,K_TOKEN,K_UID];
+
     NSString * signStr = [QCClassFunction MD5:str];
-    NSDictionary * dic = @{@"password":self.passwordTextField.text,@"mobile":self.codeTextField.text};
+    NSDictionary * dic = @{@"password":self.passwordTextField.text,@"code":self.codeTextField.text,@"token":K_TOKEN,@"uid":K_UID};
     NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
 
-    [QCAFNetWorking QCPOST:@"/api/login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+    [QCAFNetWorking QCPOST:@"/api/user/reset_pwd" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
 
         
         NSLog(@"%@",responseObject[@"msg"]);
@@ -268,10 +269,10 @@
 
 #pragma mark - GETDATA
 - (void)GETCODE {
-    NSString * str = [NSString stringWithFormat:@"mobile=%@&type=%@",self.phoneStr,@"1"];
+    NSString * str = [NSString stringWithFormat:@"mobile=%@&type=%@",self.phoneStr,@"7"];
 
     NSString * signStr = [QCClassFunction MD5:str];
-    NSDictionary * dic = @{@"mobile":self.phoneStr,@"type":@"1"};
+    NSDictionary * dic = @{@"mobile":self.phoneStr,@"type":@"7"};
     NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};

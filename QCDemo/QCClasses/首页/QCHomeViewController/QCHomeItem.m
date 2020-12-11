@@ -23,43 +23,66 @@
         [self.contentView addSubview:self.backView];
         
         self.goodsImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(167.5), KSCALE_WIDTH(175))];
-        self.goodsImageView.image = KHeaderImage;
         [self.contentView addSubview:self.goodsImageView];
         
         self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(8), KSCALE_WIDTH(180), KSCALE_WIDTH(161), KSCALE_WIDTH(40))];
         self.contentLabel.font = K_16_FONT;
         self.contentLabel.textColor = KTEXT_COLOR;
         self.contentLabel.numberOfLines = 0;
-        self.contentLabel.text = @"泰国进口山竹精选大果5斤装";
         [self.contentView addSubview:self.contentLabel];
         
         self.priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(8), KSCALE_WIDTH(220), KSCALE_WIDTH(80), KSCALE_WIDTH(24))];
         self.priceLabel.font = K_20_BFONT;
         self.priceLabel.textColor = [QCClassFunction stringTOColor:@"#FF3333"];
-        self.priceLabel.text = @"￥88.0";
         [self.contentView addSubview:self.priceLabel];
         
-        self.serviceLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(95), KSCALE_WIDTH(220), KSCALE_WIDTH(60), KSCALE_WIDTH(24))];
+        self.serviceLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(75), KSCALE_WIDTH(220), KSCALE_WIDTH(80), KSCALE_WIDTH(24))];
         self.serviceLabel.font = K_12_FONT;
         self.serviceLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
-        self.serviceLabel.text = @"包邮+全新";
         self.serviceLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:self.serviceLabel];
         
         self.addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(8), KSCALE_WIDTH(244), KSCALE_WIDTH(100), KSCALE_WIDTH(20))];
         self.addressLabel.font = K_12_FONT;
         self.addressLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
-        self.addressLabel.text = @"重庆市渝北区";
         [self.contentView addSubview:self.addressLabel];
         
         self.browseLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(95), KSCALE_WIDTH(244), KSCALE_WIDTH(60), KSCALE_WIDTH(20))];
         self.browseLabel.font = K_12_FONT;
         self.browseLabel.textColor = [QCClassFunction stringTOColor:@"#BCBCBC"];
-        self.browseLabel.text = @"655";
         self.browseLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:self.browseLabel];
         
     }
     return self;
+}
+
+- (void)fillItemWithModel:(QCGoodsModel *)model  {
+    [QCClassFunction sd_imageView:self.goodsImageView ImageURL:model.first_img AppendingString:@"" placeholderImage:@"header"];
+    self.contentLabel.text = model.name;
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%@",model.goods_price];
+    
+    NSString * freeStr;
+
+    if ([model.delivery_type isEqualToString:@"1"] ) {
+        freeStr = @"自提";
+    }else if ([model.delivery_type isEqualToString:@"2"] ) {
+        freeStr = @"不包邮";
+    }else{
+        freeStr = @"包邮";
+    }
+    
+    
+    if (model.is_new) {
+        self.serviceLabel.text = [NSString stringWithFormat:@"%@+全新",freeStr];
+
+    }else{
+        self.serviceLabel.text = freeStr;
+
+    }
+    self.addressLabel.text = model.ship_address;
+    self.browseLabel.text = model.hot;
+    
+
 }
 @end

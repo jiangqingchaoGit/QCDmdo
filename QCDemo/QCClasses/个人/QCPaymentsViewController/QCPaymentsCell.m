@@ -73,4 +73,34 @@
     
 }
 
+
+- (void)fillCellWithDrawalModel:(QCWithdrawalModel *)model {
+    self.restLabel.text = [NSString stringWithFormat:@"余额:%@",model.balance];
+
+    if ([model.status isEqualToString:@"0"]) {
+        self.paymentsLabel.text = [NSString stringWithFormat:@"-¥%.2f",[model.amount floatValue]];
+        self.paymentsLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];
+        self.contentLabel.text = [NSString stringWithFormat:@"【%@】",@"提现中"];
+
+    }
+
+    if ([model.status isEqualToString:@"1"]) {
+        self.paymentsLabel.text = [NSString stringWithFormat:@"-¥%.2f",[model.amount floatValue]];
+        self.paymentsLabel.textColor = [QCClassFunction stringTOColor:@"#000000"];
+        self.contentLabel.text = [NSString stringWithFormat:@"【%@】",@"提现成功"];
+
+    }
+    
+    if ([model.status isEqualToString:@"2"]) {
+        self.paymentsLabel.text = [NSString stringWithFormat:@"+¥%.2f",[model.amount floatValue]];
+        self.paymentsLabel.textColor = [QCClassFunction stringTOColor:@"#ffba00"];
+        self.contentLabel.text = [NSString stringWithFormat:@"【%@】",@"提现失败"];
+
+    }
+    
+
+    self.timeLabel.text = model.addtime;
+    
+    
+}
 @end

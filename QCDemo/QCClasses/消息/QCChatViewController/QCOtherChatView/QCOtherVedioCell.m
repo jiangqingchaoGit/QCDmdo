@@ -37,8 +37,8 @@
         [QCClassFunction filletImageView:self.pictureImageView withRadius:KSCALE_WIDTH(5)];
         [self.contentView addSubview:self.pictureImageView];
         
-        self.vedioButton = [[UIButton alloc] initWithFrame:CGRectMake(97, 50, 30, 30)];
-        [self.vedioButton setImage:KHeaderImage forState:UIControlStateNormal];
+        self.vedioButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        [self.vedioButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.vedioButton];
         
         
@@ -63,6 +63,8 @@
         self.pictureImageView.frame = CGRectMake(KSCALE_WIDTH(67), KSCALE_WIDTH(10), KSCALE_WIDTH(150), [model.cellH floatValue] - KSCALE_WIDTH(20));
 
     }
+    self.vedioButton.frame = self.pictureImageView.frame;
+
     
 
     

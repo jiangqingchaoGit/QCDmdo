@@ -22,8 +22,32 @@
     [manager GET:urlStr parameters:dict headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
+        
         NSString * jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         id result = [QCClassFunction dictionaryWithJsonString:[QCClassFunction AES128_Decrypt:@"6961260090843016" withStr:jsonStr]];
+        successBlock(task,result);
+        
+        
+        
+        
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(task,error);
+    }];
+    
+    
+}
+
++(void)QCGETWeather:(NSString *)urlStr parameters:(NSDictionary *)dict success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = NO;
+    [manager GET:urlStr parameters:dict headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        
+        id  result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         successBlock(task,result);
         
         

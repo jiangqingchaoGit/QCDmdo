@@ -41,8 +41,8 @@
        [self.contentView addSubview:self.pictureImageView];
        
    
-       self.vedioButton = [[UIButton alloc] initWithFrame:CGRectMake(250, 50, 30, 30)];
-       [self.vedioButton setImage:KHeaderImage forState:UIControlStateNormal];
+       self.vedioButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+       [self.vedioButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
        [self.contentView addSubview:self.vedioButton];
        
        self.canButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
@@ -81,6 +81,9 @@
        self.loadingImageView.frame = CGRectMake(KSCALE_WIDTH(121), [model.cellH floatValue] / 2.0 - KSCALE_WIDTH(16), KSCALE_WIDTH(32), KSCALE_WIDTH(32));
 
    }
+    
+    
+    self.vedioButton.frame = self.pictureImageView.frame;
    
    self.loadingImageView.hidden = NO;
    if ([model.canSend isEqualToString:@"0"]) {

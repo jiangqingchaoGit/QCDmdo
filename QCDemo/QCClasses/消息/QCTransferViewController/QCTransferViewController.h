@@ -14,6 +14,12 @@ typedef void (^TransferBlock)(NSMutableDictionary * messageDic);
 
 @interface QCTransferViewController : UIViewController
 @property (nonatomic, copy)TransferBlock myBlock;
+@property (nonatomic, strong) UILabel * bankLabel;
+
+@property (nonatomic, strong)NSString * bankId;
+@property (nonatomic, strong)NSString * payType;
+
+@property (nonatomic, strong)NSDictionary * payDic;
 
 @end
 

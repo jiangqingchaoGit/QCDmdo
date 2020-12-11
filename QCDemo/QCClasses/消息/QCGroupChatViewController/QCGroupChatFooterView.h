@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)sendTime;
 - (void)storeMessageWithModel:(NSMutableDictionary *)dataDic;
+
+- (void)banned;
+- (void)disBanned;
 @end
 
 NS_ASSUME_NONNULL_END

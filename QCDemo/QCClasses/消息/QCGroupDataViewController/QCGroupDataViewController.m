@@ -25,6 +25,12 @@
 #import "QCBookModel.h"
 #import "QCSearchViewController.h"
 #import "QCMessageSearchViewController.h"
+
+//  未领取的红包
+#import "QCUngetEnvelopeViewController.h"
+
+//  举报投诉
+#import "QCComplaintsViewController.h"
 @interface QCGroupDataViewController ()<UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 
 
@@ -231,6 +237,15 @@
         
         if ([responseObject[@"status"] intValue] == 1) {
             
+            QCChatModel * chatModel = [[QCChatModel alloc] init];
+            chatModel.listId = [NSString stringWithFormat:@"%@|000000|%@",K_UID,self.groupId];
+            [[QCDataBase shared] deleteChatModel:chatModel];
+            
+            QCListModel * listModel = [[QCListModel alloc] init];
+            listModel.listId = [NSString stringWithFormat:@"%@|000000|%@",K_UID,self.groupId];
+            [[QCDataBase shared] deleteListModel:listModel];
+
+            [self.navigationController popToRootViewControllerAnimated:YES];
             
             
         }else{
@@ -674,6 +689,12 @@
                     }
                     break;
                 case 1:
+                {
+                    QCUngetEnvelopeViewController  * ungetEnvelopeViewController = [[QCUngetEnvelopeViewController alloc] init];
+                    ungetEnvelopeViewController.hidesBottomBarWhenPushed = YES;
+                    ungetEnvelopeViewController.group_id = self.groupId;
+                    [self.navigationController pushViewController:ungetEnvelopeViewController animated:YES];
+                }
                     
                     break;
                     
@@ -732,7 +753,14 @@
                 }
                     break;
                 case 3:
-                    
+                {
+                    QCComplaintsViewController * complaintsViewController = [[QCComplaintsViewController alloc] init];
+                    complaintsViewController.hidesBottomBarWhenPushed = YES;
+                    complaintsViewController.status = @"group";
+                    complaintsViewController.targer_id = self.groupId;
+
+                    [self.navigationController pushViewController:complaintsViewController animated:YES];
+                }
                     break;
                     
                 default:
@@ -1090,7 +1118,7 @@
     NSString * mtype = @"22";    //  消息类别
     NSString * msgid = [NSString stringWithFormat:@"%@|%@|%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.groupId];
     NSString * gid = self.groupId;
-    NSString * touid = @"0";
+    NSString * touid = self.groupId;
     NSString * uid = K_UID;
     
     NSString * listId = [NSString stringWithFormat:@"%@|000000|%@",K_UID,self.groupId];
@@ -1106,7 +1134,7 @@
     NSString * isTop = @"0";
     NSString * isRead = @"0";
     NSString * isChat = @"0";
-    
+    NSString * isBanned = @"0";
 
 
     //  先存消息
@@ -1117,7 +1145,7 @@
     
     
     //  在更新消息表格
-    NSDictionary * listDic = @{@"listId":listId,@"type":type,@"uid":touid,@"rid":uid,@"msgid":msgid,@"message":message,@"time":time,@"count":count,@"isTop":isTop,@"isRead":isRead,@"isChat":isChat,@"cType":ctype,@"mtype":mtype,@"disturb":disturb};
+    NSDictionary * listDic = @{@"listId":listId,@"type":type,@"uid":touid,@"rid":uid,@"msgid":msgid,@"message":message,@"time":time,@"count":count,@"isTop":isTop,@"isRead":isRead,@"isChat":isChat,@"cType":ctype,@"mtype":mtype,@"disturb":disturb,@"isBanned":isBanned};
     QCListModel * model = [[QCListModel alloc] initWithDictionary:listDic error:nil];
     [[QCDataBase shared] queryByListId:model];
     

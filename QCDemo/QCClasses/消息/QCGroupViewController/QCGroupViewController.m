@@ -147,7 +147,8 @@
             listModel.ghead = responseObject[@"data"][@"head_img"];
             listModel.gname = responseObject[@"data"][@"name"];
             listModel.disturb = @"";
-            
+            listModel.isBanned = @"0";
+
             groupChatViewController.hidesBottomBarWhenPushed = YES;
             groupChatViewController.model = listModel;
             groupChatViewController.groupId = responseObject[@"data"][@"group_id"];

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString<Optional>*group_code;    //  群号
 @property (nonatomic, strong) NSString<Optional>*group_user_id; //  群主ID
 @property (nonatomic, strong) NSString<Optional>*head_img;  //  群头像
+
 @property (nonatomic, strong) NSString<Optional>*id;    //  群ID
 @property (nonatomic, strong) NSString<Optional>*is_delete; //  群已经解散
 @property (nonatomic, strong) NSString<Optional>*is_jieping;    //  截屏

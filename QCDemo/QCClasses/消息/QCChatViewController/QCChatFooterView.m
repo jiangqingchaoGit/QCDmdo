@@ -9,6 +9,7 @@
 #import "QCChatFooterView.h"
 #import "QCExpressionItem.h"
 #import "QCChatViewController.h"
+#import <UIImage+GIF.h>
 
 
 
@@ -23,7 +24,8 @@
 //  转账
 #import "QCTransferViewController.h"
 
-#define KVIEW_H (KSCREEN_HEIGHT - KSCALE_WIDTH(58) -KNavHight)
+#define footerH (KTabHight + KSCALE_WIDTH(9))
+#define KVIEW_H (KSCREEN_HEIGHT - footerH -KNavHight)
 
 @interface QCChatFooterView ()<UITextViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,TZImagePickerControllerDelegate>
 
@@ -50,6 +52,12 @@
 @property (nonatomic,strong)UIImagePickerController * picker2;
 
 //  发语音
+
+
+@property (nonatomic, strong) UIView * volumeBgView;     //音量背景视图
+@property (nonatomic, strong) UIImageView * volumeImageView;  //音量图片
+@property (nonatomic, strong) UILabel * volumeLabel;      //提示文字
+
 @property (nonatomic, assign) NSInteger countDown;  //  时间
 @property (nonatomic, strong) NSTimer * timer;            //定时器
 
@@ -159,9 +167,11 @@
     
     self.speakButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.speakButton.hidden = YES;
-    self.speakButton.backgroundColor = [UIColor purpleColor];;
-    [self.speakButton setImage:[UIImage imageNamed:@"header"] forState:UIControlStateNormal];
-    [self.speakButton setImage:[UIImage imageNamed:@"header"] forState:UIControlStateHighlighted];
+    self.speakButton.backgroundColor = [UIColor whiteColor];;
+    
+    [self.speakButton setTitle:@"按住 说话" forState:UIControlStateNormal];
+    [self.speakButton setTitle:@"松开 结束" forState:UIControlStateHighlighted];
+    [self.speakButton setTitleColor:KTEXT_COLOR forState:UIControlStateNormal];
     [self.speakButton addTarget:self action:@selector(recordButtonTouchDown) forControlEvents:UIControlEventTouchDown];
     [self.speakButton addTarget:self action:@selector(recordButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
     [self.speakButton addTarget:self action:@selector(recordButtonTouchUpOutside) forControlEvents:UIControlEventTouchUpOutside];
@@ -173,7 +183,7 @@
     self.changeH = KSCALE_WIDTH(35.5);
     self.viewH = KVIEW_H;
     
-    self.frame = CGRectMake(0, self.viewH - self.changeH + KSCALE_WIDTH(35.5), KSCREEN_WIDTH, KSCALE_WIDTH(408) + self.changeH - KSCALE_WIDTH(35.5));
+    self.frame = CGRectMake(0, self.viewH - self.changeH  + KSCALE_WIDTH(35.5), KSCREEN_WIDTH, KSCALE_WIDTH(408) + self.changeH - KSCALE_WIDTH(35.5));
     
     self.contentTextView.frame = CGRectMake(KSCALE_WIDTH(58), KSCALE_WIDTH(11.25), KSCALE_WIDTH(213), self.changeH);
     
@@ -181,12 +191,12 @@
     
     self.expressionButton.frame = CGRectMake(KSCALE_WIDTH(283), KSCALE_WIDTH(12) + self.changeH - KSCALE_WIDTH(35.5), KSCALE_WIDTH(34), KSCALE_WIDTH(34));
     
-    self.expressionView.frame = CGRectMake(KSCALE_WIDTH(0), self.viewH + KSCALE_WIDTH(58), KSCALE_WIDTH(375), KSCALE_WIDTH(260));
+    self.expressionView.frame = CGRectMake(KSCALE_WIDTH(0), self.viewH + footerH, KSCALE_WIDTH(375), KSCALE_WIDTH(260));
     
     
     self.functionButton.frame = CGRectMake(KSCALE_WIDTH(329), KSCALE_WIDTH(12) + self.changeH - KSCALE_WIDTH(35.5), KSCALE_WIDTH(34), KSCALE_WIDTH(34));
     
-    self.functionView.frame = CGRectMake(KSCALE_WIDTH(0), self.viewH + KSCALE_WIDTH(58), KSCALE_WIDTH(375), KSCALE_WIDTH(220));
+    self.functionView.frame = CGRectMake(KSCALE_WIDTH(0), self.viewH + footerH, KSCALE_WIDTH(375), KSCALE_WIDTH(220));
     
     self.speakButton.frame = CGRectMake(KSCALE_WIDTH(58), KSCALE_WIDTH(11.25), KSCALE_WIDTH(213), KSCALE_WIDTH(35.5));
     
@@ -200,7 +210,7 @@
     layout.minimumLineSpacing =  KSCALE_WIDTH(0);
     layout.sectionInset = UIEdgeInsetsMake(KSCALE_WIDTH(9), KSCALE_WIDTH(9), KSCALE_WIDTH(9), KSCALE_WIDTH(9));
     
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,KSCALE_WIDTH(0),KSCALE_WIDTH(375),KSCALE_WIDTH(260)) collectionViewLayout:layout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,KSCALE_WIDTH(0),KSCALE_WIDTH(375),KSCALE_WIDTH(260) + footerH - KSCALE_WIDTH(58)) collectionViewLayout:layout];
     self.collectionView.backgroundColor = KBACK_COLOR;
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -218,6 +228,11 @@
     
     self.expressionButton.selected = NO;
     self.functionButton.selected = NO;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.expressionView.frame = CGRectMake(KSCALE_WIDTH(0), self.viewH + footerH, KSCALE_WIDTH(375), KSCALE_WIDTH(260));
+        self.functionView.frame = CGRectMake(KSCALE_WIDTH(0), self.viewH + footerH, KSCALE_WIDTH(375), KSCALE_WIDTH(220));
+    }];
+    
     
     
     if (sender.selected == NO) {
@@ -255,8 +270,8 @@
         self.viewH = KVIEW_H - KSCALE_WIDTH(260);
         [self getTextViewH:self.contentTextView];
         [UIView animateWithDuration:0.25 animations:^{
-            self.expressionView.frame = CGRectMake(KSCALE_WIDTH(0), KSCALE_WIDTH(22.5) + self.changeH, KSCALE_WIDTH(375), KSCALE_WIDTH(260));
-            self.functionView.frame = CGRectMake(KSCALE_WIDTH(0), KSCREEN_HEIGHT - KNavHight, KSCALE_WIDTH(375), KSCALE_WIDTH(220));
+            self.expressionView.frame = CGRectMake(KSCALE_WIDTH(0), KSCALE_WIDTH(22.5) + self.changeH, KSCALE_WIDTH(375), KSCALE_WIDTH(260) + footerH - KSCALE_WIDTH(58));
+            self.functionView.frame = CGRectMake(KSCALE_WIDTH(0), KSCREEN_HEIGHT - KNavHight, KSCALE_WIDTH(375), KSCALE_WIDTH(220) + footerH - KSCALE_WIDTH(58));
             
         }];
         
@@ -286,8 +301,8 @@
         [self getTextViewH:self.contentTextView];
         
         [UIView animateWithDuration:0.25 animations:^{
-            self.expressionView.frame = CGRectMake(KSCALE_WIDTH(0), KSCREEN_HEIGHT - KNavHight, KSCALE_WIDTH(375), KSCALE_WIDTH(260));
-            self.functionView.frame = CGRectMake(KSCALE_WIDTH(0), KSCALE_WIDTH(22.5) + self.changeH, KSCALE_WIDTH(375), KSCALE_WIDTH(220));
+            self.expressionView.frame = CGRectMake(KSCALE_WIDTH(0), KSCREEN_HEIGHT - KNavHight, KSCALE_WIDTH(375), KSCALE_WIDTH(260) + footerH - KSCALE_WIDTH(58));
+            self.functionView.frame = CGRectMake(KSCALE_WIDTH(0), KSCALE_WIDTH(22.5) + self.changeH , KSCALE_WIDTH(375), KSCALE_WIDTH(220)  + footerH - KSCALE_WIDTH(58));
         }];
         
     }else{
@@ -304,30 +319,167 @@
     
     NSTextAttachment *textAttachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
     textAttachment.image = [UIImage imageNamed:allValues[sender.tag - 1]]; //要添加的图片
-
+    
     
     CGFloat width = CGRectGetWidth(self.contentTextView.frame);
     self.contentTextView.text = [NSString stringWithFormat: @"%@%@",self.contentTextView.text,allValues[sender.tag]];
     CGSize newSize = [self.contentTextView sizeThatFits:CGSizeMake(width,MAXFLOAT)];
     self.changeH = newSize.height;
     
-
+    
     
     if (self.changeH > 73.5) {
         self.changeH = 73.5;
     }
     
-    self.expressionView.frame = CGRectMake(KSCALE_WIDTH(0), self.changeH + KSCALE_WIDTH(22.5), KSCALE_WIDTH(375), KSCALE_WIDTH(220));
-
+    self.expressionView.frame = CGRectMake(KSCALE_WIDTH(0), self.changeH + KSCALE_WIDTH(22.5), KSCALE_WIDTH(375), KSCALE_WIDTH(220) + footerH - KSCALE_WIDTH(58));
+    
     
     [self updataSize];
     
     
 }
 
+
+#pragma mark - updataSize
+
+- (void)packUp {
+    [self.contentTextView resignFirstResponder];
+    self.expressionButton.selected = NO;
+    self.functionButton.selected = NO;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.expressionView.frame = CGRectMake(KSCALE_WIDTH(0), self.viewH + footerH, KSCALE_WIDTH(375), KSCALE_WIDTH(260));
+        self.functionView.frame = CGRectMake(KSCALE_WIDTH(0), self.viewH + footerH, KSCALE_WIDTH(375), KSCALE_WIDTH(220));
+    }];
+    
+    
+    if (self.voiceButton.selected == YES) {
+        
+    }else{
+        self.viewH = KVIEW_H;
+        [self getTextViewH:self.contentTextView];
+    }
+    
+    
+}
+- (void)updataSize {
+    
+    
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        if (self.chatViewController.contentH < (self.viewH - self.changeH + KSCALE_WIDTH(35.5)) && self.viewH != KVIEW_H) {
+            
+            
+        }else if (self.chatViewController.contentH > (self.viewH - self.changeH + KSCALE_WIDTH(35.5)) && self.chatViewController.contentH < KVIEW_H) {
+            
+            if (self.viewH == KVIEW_H) {
+                
+                self.chatViewController.tableView.frame = CGRectMake(0,self.changeH + KSCALE_WIDTH(35.5), KSCREEN_WIDTH, KVIEW_H);
+            }else{
+                self.chatViewController.tableView.frame = CGRectMake(0, - self.chatViewController.contentH  + ( self.viewH - self.changeH), KSCREEN_WIDTH, KVIEW_H);
+            }
+            
+        }else{
+            self.chatViewController.tableView.frame = CGRectMake(0, self.viewH - self.changeH + KSCALE_WIDTH(35.5) - KVIEW_H, KSCREEN_WIDTH, KVIEW_H);
+            
+        }
+        
+        
+        
+        self.frame = CGRectMake(0, self.viewH - self.changeH + KSCALE_WIDTH(35.5) , KSCREEN_WIDTH, KSCALE_WIDTH(408) + self.changeH - KSCALE_WIDTH(35.5));
+        
+        
+        
+        
+        
+        self.contentTextView.frame = CGRectMake(KSCALE_WIDTH(58), KSCALE_WIDTH(11.25), KSCALE_WIDTH(213), self.changeH);
+        
+        self.voiceButton.frame = CGRectMake(KSCALE_WIDTH(12), KSCALE_WIDTH(12) + self.changeH - KSCALE_WIDTH(35.5), KSCALE_WIDTH(34), KSCALE_WIDTH(34));
+        
+        self.expressionButton.frame = CGRectMake(KSCALE_WIDTH(283), KSCALE_WIDTH(12) + self.changeH - KSCALE_WIDTH(35.5), KSCALE_WIDTH(34), KSCALE_WIDTH(34));
+        
+        
+        self.functionButton.frame = CGRectMake(KSCALE_WIDTH(329), KSCALE_WIDTH(12) + self.changeH - KSCALE_WIDTH(35.5), KSCALE_WIDTH(34), KSCALE_WIDTH(34));
+        
+        
+    }];
+    
+    
+}
+
+
+
+
+-(void)textViewDidChange:(UITextView *)textView {
+    //获得textView的初始尺寸
+    CGFloat width = CGRectGetWidth(textView.frame);
+    CGSize newSize = [textView sizeThatFits:CGSizeMake(width,MAXFLOAT)];
+    self.changeH = newSize.height;
+    
+    if (self.changeH > 73.5) {
+        self.changeH = 73.5;
+    }
+    
+    [self updataSize];
+    
+    
+}
+
+- (void)getTextViewH:(UITextView *)textView {
+    
+    
+    CGFloat width = CGRectGetWidth(textView.frame);
+    CGSize newSize = [textView sizeThatFits:CGSizeMake(width,MAXFLOAT)];
+    self.changeH = newSize.height;
+    
+    if (self.changeH > 73.5) {
+        self.changeH = 73.5;
+    }
+    
+    [self updataSize];
+}
+
+
+
+- (void)keyboardAction:(NSNotification*)sender{
+    
+    
+    if ([self.keyboardStr isEqualToString:@"1"]) {
+        if ([self isKindOfClass:[QCChatFooterView class]]) {
+            self.voiceButton.selected = NO;
+            self.expressionButton.selected = NO;
+            self.functionButton.selected = NO;
+            
+            
+            self.expressionView.frame = CGRectMake(KSCALE_WIDTH(0), KVIEW_H + footerH, KSCALE_WIDTH(375), KSCALE_WIDTH(260));
+            self.functionView.frame = CGRectMake(KSCALE_WIDTH(0), KVIEW_H + footerH, KSCALE_WIDTH(375), KSCALE_WIDTH(220));
+            
+            self.viewH = KVIEW_H;
+            [self getTextViewH:self.contentTextView];
+            
+            CGFloat duration = [sender.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+            CGRect keyboardFrame = [sender.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+            [UIView animateWithDuration:duration animations:^{
+                
+                self.viewH = self.viewH - keyboardFrame.size.height + footerH - KSCALE_WIDTH(58);
+                self.frame = CGRectMake(0, self.viewH, KSCREEN_WIDTH, KSCALE_WIDTH(408) + self.changeH - KSCALE_WIDTH(35.5));
+                [self updataSize];
+                
+            }];
+            
+        }
+        
+        
+    }
+    
+    
+}
+
+
 - (void)funcAction:(UIButton *)sender {
     
-
+    
     
     switch (sender.tag) {
         case 1:
@@ -341,7 +493,7 @@
             QCSendEnvelopeViewController * sendEnvelopeViewController = [[QCSendEnvelopeViewController alloc] init];
             sendEnvelopeViewController.hidesBottomBarWhenPushed = YES;
             sendEnvelopeViewController.target_type = @"2";
-
+            
             
             sendEnvelopeViewController.myBlock = ^(NSMutableDictionary * _Nonnull envelopeDic) {
                 //  先http请求
@@ -367,9 +519,9 @@
                     if ([responseObject[@"status"]  intValue] == 1) {
                         NSMutableDictionary * dataDic = [[NSMutableDictionary alloc] init];
                         [dataDic setValue:@"0" forKey:@"ctype"];
-                        [dataDic setValue:[NSString stringWithFormat:@"0|%@|%@|%@",responseObject[@"data"][@"red_id"],envelopeDic[@"message"],envelopeDic[@"red_price"]] forKey:@"message"];
-                        [dataDic setValue:[NSString stringWithFormat:@"0|%@|%@|%@",responseObject[@"data"][@"red_id"],envelopeDic[@"message"],envelopeDic[@"red_price"]] forKey:@"selfMessage"];
-
+                        [dataDic setValue:[NSString stringWithFormat:@"0|%@|%@|%@",responseObject[@"data"][@"red_id"],envelopeDic[@"red_price"],envelopeDic[@"message"]] forKey:@"message"];
+                        [dataDic setValue:[NSString stringWithFormat:@"0|%@|%@|%@",responseObject[@"data"][@"red_id"],envelopeDic[@"red_price"],envelopeDic[@"message"]] forKey:@"selfMessage"];
+                        
                         [dataDic setValue:@"3" forKey:@"mtype"];
                         [dataDic setValue:[NSString stringWithFormat:@"%@｜%@｜%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.chatViewController.model.uid] forKey:@"msgid"];
                         [dataDic setValue:@"0" forKey:@"gid"];
@@ -493,8 +645,9 @@
                         [dataDic setValue:@"0" forKey:@"ctype"];
                         [dataDic setValue:[NSString stringWithFormat:@"0|%@|%@",responseObject[@"data"][@"tran_id"],messageDic[@"red_price"]] forKey:@"message"];
                         [dataDic setValue:[NSString stringWithFormat:@"0|%@|%@",responseObject[@"data"][@"tran_id"],messageDic[@"red_price"]] forKey:@"selfMessage"];
-
-                        [dataDic setValue:@"13" forKey:@"mtype"];
+                        
+                        //  转账
+                        [dataDic setValue:@"5" forKey:@"mtype"];
                         [dataDic setValue:[NSString stringWithFormat:@"%@｜%@｜%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.chatViewController.model.uid] forKey:@"msgid"];
                         [dataDic setValue:@"0" forKey:@"gid"];
                         [dataDic setValue:self.chatViewController.model.uid forKey:@"touid"];
@@ -694,7 +847,7 @@
             [dataDic setValue:@"0" forKey:@"ctype"];
             [dataDic setValue:@"0" forKey:@"message"];
             [dataDic setValue:@"0" forKey:@"selfMessage"];
-            [dataDic setValue:@"5" forKey:@"mtype"];
+            [dataDic setValue:@"7" forKey:@"mtype"];
             [dataDic setValue:[NSString stringWithFormat:@"%@｜%@｜%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.chatViewController.model.uid] forKey:@"msgid"];
             [dataDic setValue:@"0" forKey:@"gid"];
             [dataDic setValue:self.chatViewController.model.uid forKey:@"touid"];
@@ -775,135 +928,7 @@
     }
 }
 
-#pragma mark - updataSize
 
-- (void)packUp {
-    [self.contentTextView resignFirstResponder];
-    self.expressionButton.selected = NO;
-    self.functionButton.selected = NO;
-    
-    if (self.voiceButton.selected == YES) {
-        
-    }else{
-        self.viewH = KVIEW_H;
-        [self getTextViewH:self.contentTextView];
-    }
-    
-    
-}
-- (void)updataSize {
-    
-    
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        
-        if (self.chatViewController.contentH < (self.viewH - self.changeH + KSCALE_WIDTH(35.5)) && self.viewH != KVIEW_H) {
-            
-            
-        }else if (self.chatViewController.contentH > (self.viewH - self.changeH + KSCALE_WIDTH(35.5)) && self.chatViewController.contentH < KVIEW_H) {
-            
-            if (self.viewH == KVIEW_H) {
-                
-                self.chatViewController.tableView.frame = CGRectMake(0,self.changeH + KSCALE_WIDTH(35.5), KSCREEN_WIDTH, KVIEW_H);
-            }else{
-                self.chatViewController.tableView.frame = CGRectMake(0, - self.chatViewController.contentH  + ( self.viewH - self.changeH), KSCREEN_WIDTH, KVIEW_H);
-            }
-            
-        }else{
-            self.chatViewController.tableView.frame = CGRectMake(0, self.viewH - self.changeH + KSCALE_WIDTH(35.5) - KVIEW_H, KSCREEN_WIDTH, KVIEW_H);
-            
-        }
-        
-        
-        
-        self.frame = CGRectMake(0, self.viewH - self.changeH + KSCALE_WIDTH(35.5), KSCREEN_WIDTH, KSCALE_WIDTH(408) + self.changeH - KSCALE_WIDTH(35.5));
-        
-        
-        
-        
-        
-        self.contentTextView.frame = CGRectMake(KSCALE_WIDTH(58), KSCALE_WIDTH(11.25), KSCALE_WIDTH(213), self.changeH);
-        
-        self.voiceButton.frame = CGRectMake(KSCALE_WIDTH(12), KSCALE_WIDTH(12) + self.changeH - KSCALE_WIDTH(35.5), KSCALE_WIDTH(34), KSCALE_WIDTH(34));
-        
-        self.expressionButton.frame = CGRectMake(KSCALE_WIDTH(283), KSCALE_WIDTH(12) + self.changeH - KSCALE_WIDTH(35.5), KSCALE_WIDTH(34), KSCALE_WIDTH(34));
-        
-
-        self.functionButton.frame = CGRectMake(KSCALE_WIDTH(329), KSCALE_WIDTH(12) + self.changeH - KSCALE_WIDTH(35.5), KSCALE_WIDTH(34), KSCALE_WIDTH(34));
-
-        
-    }];
-    
-    
-}
-
-
-
-
--(void)textViewDidChange:(UITextView *)textView {
-    //获得textView的初始尺寸
-    CGFloat width = CGRectGetWidth(textView.frame);
-    CGSize newSize = [textView sizeThatFits:CGSizeMake(width,MAXFLOAT)];
-    self.changeH = newSize.height;
-    
-    if (self.changeH > 73.5) {
-        self.changeH = 73.5;
-    }
-    
-    [self updataSize];
-    
-    
-}
-
-- (void)getTextViewH:(UITextView *)textView {
-    
-
-    CGFloat width = CGRectGetWidth(textView.frame);
-    CGSize newSize = [textView sizeThatFits:CGSizeMake(width,MAXFLOAT)];
-    self.changeH = newSize.height;
-    
-    if (self.changeH > 73.5) {
-        self.changeH = 73.5;
-    }
-    
-    [self updataSize];
-}
-
-
-
-- (void)keyboardAction:(NSNotification*)sender{
-    
-    
-    if ([self.keyboardStr isEqualToString:@"1"]) {
-        if ([self isKindOfClass:[QCChatFooterView class]]) {
-            self.voiceButton.selected = NO;
-            self.expressionButton.selected = NO;
-            self.functionButton.selected = NO;
-            
-
-            self.expressionView.frame = CGRectMake(KSCALE_WIDTH(0), KVIEW_H + KSCALE_WIDTH(58), KSCALE_WIDTH(375), KSCALE_WIDTH(260));
-            self.functionView.frame = CGRectMake(KSCALE_WIDTH(0), KVIEW_H + KSCALE_WIDTH(58), KSCALE_WIDTH(375), KSCALE_WIDTH(220));
-            
-            self.viewH = KVIEW_H;
-            [self getTextViewH:self.contentTextView];
-            
-            CGFloat duration = [sender.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
-            CGRect keyboardFrame = [sender.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-            [UIView animateWithDuration:duration animations:^{
-                
-                self.viewH = self.viewH - keyboardFrame.size.height;
-                self.frame = CGRectMake(0, self.viewH, KSCREEN_WIDTH, KSCALE_WIDTH(408) + self.changeH - KSCALE_WIDTH(35.5));
-                [self updataSize];
-                
-            }];
-            
-        }
-        
-        
-    }
-    
-    
-}
 
 #pragma mark - UICollectionViewDelegate,UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -1053,7 +1078,7 @@
 -(void)takePhoto {
     // 从相册选择相片
     
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:@"1" delegate:self pushPhotoPickerVc:YES];
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:1 delegate:self pushPhotoPickerVc:YES];
     
 #pragma mark - 五类个性化设置，这些参数都可以不传，此时会走默认设置
     imagePickerVc.isSelectOriginalPhoto = YES;
@@ -1119,7 +1144,7 @@
         UIImageWriteToSavedPhotosAlbum(image, self, nil, nil);
     }
     [self sendImageViewWithImage:image withMtype:@"1"];
-
+    
     
     self.headerImageData = UIImageJPEGRepresentation(image, .1);
     if (self.headerImageData.length>100*1024) {
@@ -1157,6 +1182,40 @@
     //禁止其它按钮交互
     [self setupUserEnabled:NO];
     
+    //音量视图
+    if (self.volumeBgView) {
+        [self.volumeBgView removeFromSuperview];
+        self.volumeBgView = nil;
+    }
+    
+    self.volumeBgView = [[UIView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCREEN_HEIGHT / 2.0 - KSCALE_WIDTH(90) - KNavHight, KSCALE_WIDTH(155), KSCALE_WIDTH(180))];
+    self.volumeBgView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    self.volumeBgView.layer.cornerRadius = KSCALE_WIDTH(10);
+    [self.chatViewController.view addSubview:self.volumeBgView];
+    
+    
+    
+    self.volumeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(10), KSCALE_WIDTH(115), KSCALE_WIDTH(140))];
+    
+    NSString *filepath = [[NSBundle bundleWithPath:[[NSBundle mainBundle] bundlePath]] pathForResource:@"语音-(6)" ofType:nil];
+    NSData *imagedata = [NSData dataWithContentsOfFile:filepath];
+    UIImage * image = [UIImage sd_imageWithGIFData:imagedata];
+    self.volumeImageView.contentMode = UIViewContentModeCenter;
+    self.volumeImageView.image = image;
+//    self.volumeImageView.image = [UIImage imageNamed:@"header"];
+//    [self.volumeBgView addSubview:self.volumeImageView];
+    
+    self.volumeLabel = [[UILabel alloc] init];
+    self.volumeLabel.frame = CGRectMake(0, KSCALE_WIDTH(150), KSCALE_WIDTH(155), KSCALE_WIDTH(30));
+    self.volumeLabel.font = [UIFont systemFontOfSize:14];
+    self.volumeLabel.textAlignment = NSTextAlignmentCenter;
+    self.volumeLabel.textColor = [UIColor whiteColor];
+    self.volumeLabel.text = @"手指上滑，取消发送";
+    [self.volumeBgView addSubview:self.volumeLabel];
+    
+    
+    
+    
     
     //开始录音
     self.countDown = 60;
@@ -1188,10 +1247,10 @@
                                     AVLinearPCMIsBigEndianKey: @NO};
     
     self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL fileURLWithPath:_recordFilePath] settings:recordSetting error:nil];
-    if (_recorder) {
-        _recorder.meteringEnabled = YES;
-        [_recorder prepareToRecord];
-        [_recorder record];
+    if (self.recorder) {
+        self.recorder.meteringEnabled = YES;
+        [self.recorder prepareToRecord];
+        [self.recorder record];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self recordButtonTouchUpInside];
@@ -1222,7 +1281,6 @@
 
 //  禁止其他按钮交互
 - (void)setupUserEnabled:(BOOL)enable {
-    
 }
 
 //  倒计时
@@ -1249,22 +1307,22 @@
     }
     
     NSInteger voice = level*10 + 1;
-    voice = voice > 8 ? 8 : voice;
+    voice = voice > 4 ? 4 : voice;
     
-    NSString *imageIndex = [NSString stringWithFormat:@"voice_%ld", voice];
-    //    if (_isLeaveSpeakBtn) {
-    //        _volumeImageView.image = [UIImage imageNamed:@"rc_ic_volume_cancel"];
-    //    } else {
-    //        _volumeImageView.image = [UIImage imageNamed:imageIndex];
-    //    }
+        NSString *imageIndex = [NSString stringWithFormat:@"%ld%ld",voice, voice];
+    if (self.isLeaveSpeakBtn) {
+//        self.volumeImageView.image = [UIImage imageNamed:@"header"];
+    } else {
+        self.volumeImageView.image = [UIImage imageNamed:imageIndex];
+    }
     
     _countDown --;
     
-    if (_countDown < 10 && _countDown > 0) {
-        //        _volumeLabel.text = [NSString stringWithFormat:@"还剩 %ld 秒",(long)_countDown];
+    if (self.countDown < 10 && _countDown > 0) {
+        self.volumeLabel.text = [NSString stringWithFormat:@"还剩 %ld 秒",(long)_countDown];
     }
     //超时自动发送
-    if (_countDown < 1) {
+    if (self.countDown < 1) {
         [self recordButtonTouchUpInside];
     }
 }
@@ -1274,7 +1332,7 @@
 - (void)recordButtonTouchUpInside {
     NSLog(@"recordButtonTouchUpInside");
     
-    _isLeaveSpeakBtn = NO;
+    self.isLeaveSpeakBtn = NO;
     
     if (!_timer) { //松开之后为何还会触发
         return;
@@ -1292,26 +1350,22 @@
     [self setupUserEnabled:YES];
     
     if (_countDown > 59) {
-        //        _volumeImageView.image = [UIImage imageNamed:@"rc_ic_volume_wraning"];
-        //        _volumeLabel.text = @"说话时间太短";
+        self.volumeImageView.image = [UIImage imageNamed:@"header"];
+        _volumeLabel.text = @"说话时间太短";
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //            if (_volumeBgView) {
-            //                [_volumeBgView removeFromSuperview];
-            //                _volumeBgView = nil;
-            //            }
+            if (self->_volumeBgView) {
+                [self->_volumeBgView removeFromSuperview];
+                self->_volumeBgView = nil;
+            }
         });
         return;
     }
     
-    //    if (_volumeBgView) {
-    //        [_volumeBgView removeFromSuperview];
-    //        _volumeBgView = nil;
-    //    }
-    
-    //音频数据
-    //    [NSData dataWithContentsOfFile:_recordFilePath];
-    
+    if (_volumeBgView) {
+        [_volumeBgView removeFromSuperview];
+        _volumeBgView = nil;
+    }
     
     [self sendVoice:self.recordFilePath];
     
@@ -1322,7 +1376,7 @@
 - (void)recordButtonTouchUpOutside {
     NSLog(@"recordButtonTouchUpOutside");
     
-    _isLeaveSpeakBtn = NO;
+    self.isLeaveSpeakBtn = NO;
     
     //停止录音 移除定时器
     [_timer invalidate];
@@ -1334,28 +1388,27 @@
     
     //允许其它按钮交互
     [self setupUserEnabled:YES];
-    //
-    //    if (_volumeBgView) {
-    //        [_volumeBgView removeFromSuperview];
-    //        _volumeBgView = nil;
-    //    }
+    
+    if (_volumeBgView) {
+        [_volumeBgView removeFromSuperview];
+        _volumeBgView = nil;
+    }
 }
 
 
 - (void)recordButtonTouchUpDragExit {
-    NSLog(@"recordButtonTouchUpDragExit");
-    _isLeaveSpeakBtn = YES;
-    //
-    //    _volumeLabel.text = @"松开手指，取消发送";
-    //    _volumeLabel.backgroundColor =  [UIColor redColor];
-    //    _volumeImageView.image = [UIImage imageNamed:@"rc_ic_volume_cancel"];
+    self.isLeaveSpeakBtn = YES;
+    
+    self.volumeLabel.text = @"松开手指，取消发送";
+    self.volumeLabel.textColor =  [UIColor redColor];
+    self.volumeImageView.image = [UIImage imageNamed:@"header"];
 }
 
 - (void)recordButtonTouchUpDragEnter {
-    NSLog(@"recordButtonTouchUpDragEnter");
-    _isLeaveSpeakBtn = NO;
-    //    _volumeLabel.text = @"手指上滑，取消发送";
-    //    _volumeLabel.backgroundColor =  [UIColor clearColor];
+    self.isLeaveSpeakBtn = NO;
+    self.volumeLabel.text = @"手指上滑，取消发送";
+    self.volumeLabel.textColor =  [UIColor whiteColor];
+    self.volumeLabel.backgroundColor =  [UIColor clearColor];
 }
 
 
@@ -1704,7 +1757,7 @@
     
     NSString * selfMessage = dataDic[@"selfMessage"];
     NSString * message = dataDic[@"message"];
-
+    
     NSString * mtype = dataDic[@"mtype"];    //  消息类别
     NSString * msgid = dataDic[@"msgid"];
     NSString * gid = dataDic[@"gid"];
@@ -1723,6 +1776,9 @@
     NSString * isTop = @"0";
     NSString * isRead = @"0";
     NSString * isChat = @"0";
+    NSString * isBanned = self.chatViewController.model.isBanned;
+    
+    
     
     NSString * gname = dataDic[@"gname"]?dataDic[@"gname"]:@"0";
     NSString * ghead = dataDic[@"ghead"]?dataDic[@"ghead"]:@"0";
@@ -1741,7 +1797,7 @@
     [dataDic setValue:msgid forKey:@"msgid"];
     [dataDic setValue:message forKey:@"message"];
     [dataDic setValue:selfMessage forKey:@"selfMessage"];
-
+    
     
     //  先存消息
     NSDictionary * chatDic = @{@"chatId":msgid,@"listId":listId,@"type":type,@"uid":uid,@"rid":touid,@"msgid":msgid,@"message":selfMessage,@"time":time,@"ctype":ctype,@"smsid":smsid,@"gid":gid,@"mtype":mtype,@"isSend":isSend,@"canSend":canSend,@"canMessage":canMessage,@"gname":gname,@"ghead":ghead,@"tnick":tnick,@"thead":thead,@"unick":unick,@"uhead":uhead};
@@ -1751,7 +1807,7 @@
     
     
     if ([canSend isEqualToString:@"0"]) {
-        NSDictionary * chatDic = @{@"chatId":[NSString stringWithFormat:@"%@|",msgid],@"listId":listId,@"type":type,@"uid":uid,@"rid":touid,@"msgid":msgid,@"message":selfMessage,@"time":time,@"ctype":ctype,@"smsid":smsid,@"gid":gid,@"mtype":@"11",@"isSend":isSend,@"canSend":canSend,@"canMessage":canMessage,@"gname":gname,@"ghead":ghead,@"tnick":tnick,@"thead":thead,@"unick":unick,@"uhead":uhead};
+        NSDictionary * chatDic = @{@"chatId":[NSString stringWithFormat:@"%@|",msgid],@"listId":listId,@"type":type,@"uid":uid,@"rid":touid,@"msgid":msgid,@"message":selfMessage,@"time":time,@"ctype":ctype,@"smsid":smsid,@"gid":gid,@"mtype":@"20",@"isSend":isSend,@"canSend":canSend,@"canMessage":canMessage,@"gname":gname,@"ghead":ghead,@"tnick":tnick,@"thead":thead,@"unick":unick,@"uhead":uhead};
         QCChatModel * chatModel = [[QCChatModel alloc] initWithDictionary:chatDic error:nil];
         [[QCDataBase shared] insertChatModel:chatModel];
         [self.chatViewController GETDATA];
@@ -1761,11 +1817,14 @@
     [self.chatViewController GETDATA];
     
     //  在更新消息表格
-    NSDictionary * listDic = @{@"listId":listId,@"type":type,@"uid":touid,@"rid":uid,@"msgid":msgid,@"message":selfMessage,@"time":time,@"count":count,@"isTop":isTop,@"isRead":isRead,@"isChat":isChat,@"cType":ctype,@"mtype":mtype,@"disturb":disturb,@"gname":gname,@"ghead":ghead,@"tnick":tnick,@"thead":thead,@"unick":unick,@"uhead":uhead};
+    NSDictionary * listDic = @{@"listId":listId,@"type":type,@"uid":touid,@"rid":uid,@"msgid":msgid,@"message":selfMessage,@"time":time,@"count":count,@"isTop":isTop,@"isRead":isRead,@"isChat":isChat,@"cType":ctype,@"mtype":mtype,@"disturb":disturb,@"gname":gname,@"ghead":ghead,@"tnick":tnick,@"thead":thead,@"unick":unick,@"uhead":uhead,@"isBanned":isBanned};
     QCListModel * model = [[QCListModel alloc] initWithDictionary:listDic error:nil];
     [[QCDataBase shared] queryByListId:model];
     
-    if ([mtype isEqualToString:@"0"] || [mtype isEqualToString:@"3"] || [mtype isEqualToString:@"6"] || [mtype isEqualToString:@"5"] || [mtype isEqualToString:@"13"] || [mtype isEqualToString:@"14"] || [mtype isEqualToString:@"18"]) {
+    if ([mtype isEqualToString:@"0"] || [mtype isEqualToString:@"3"] || [mtype isEqualToString:@"6"] || [mtype isEqualToString:@"5"] || [mtype isEqualToString:@"7"] || [mtype isEqualToString:@"13"] || [mtype isEqualToString:@"14"]) {
+        
+        
+        
         [self sendTextMessageWithDic:dataDic];
     }
     
@@ -1802,14 +1861,14 @@
     
     [QCAFNetWorking QCUpload:@"/api/chat/upload" parameters:dataDic formData:^(id<AFMultipartFormData> formData) {
         
-        if ([webDic[@"mtype"] isEqualToString:@"1"] || [webDic[@"mtype"] isEqualToString:@"5"]) {
+        if ([webDic[@"mtype"] isEqualToString:@"1"] || [webDic[@"mtype"] isEqualToString:@"7"]) {
             NSData * imageData = UIImageJPEGRepresentation((UIImage *)dataMessage,0.1);
             [formData appendPartWithFileData:imageData name:@"file" fileName:@".png" mimeType:@"image/jpg/png/jpeg"];
         }
         
         if ([webDic[@"mtype"] isEqualToString:@"2"]) {
             NSData * voiceData = [NSData dataWithContentsOfFile:(NSString *)dataMessage];
-            [formData appendPartWithFileData:voiceData name:@"file" fileName:@".amr" mimeType:@"amr/mp3/wmr"];
+            [formData appendPartWithFileData:voiceData name:@"file" fileName:@".wmr" mimeType:@"amr/mp3/wmr"];
             
             
         }
@@ -1886,19 +1945,19 @@
             if ([mtype isEqualToString:@"0"]) {
                 NSDictionary * dic = @{@"message":message,@"isfive":@"1"};
                 message = [QCClassFunction jsonStringWithDictionary:dic];
-
+                
             }else{
                 message = [NSString stringWithFormat:@"%@|1",message];
-
+                
             }
         }else{
             if ([mtype isEqualToString:@"0"]) {
                 NSDictionary * dic = @{@"message":message,@"isfive":@"0"};
                 message = [QCClassFunction jsonStringWithDictionary:dic];
-
+                
             }else{
                 message = [NSString stringWithFormat:@"%@|0",message];
-
+                
             }
             
         }
@@ -1906,11 +1965,11 @@
         if ([mtype isEqualToString:@"0"]) {
             NSDictionary * dic = @{@"message":message,@"isfive":@"1"};
             message = [QCClassFunction jsonStringWithDictionary:dic];
-
-
+            
+            
         }else{
             message = [NSString stringWithFormat:@"%@|1",message];
-
+            
         }
         
     }

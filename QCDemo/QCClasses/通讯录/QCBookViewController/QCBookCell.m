@@ -37,8 +37,7 @@
         self.nameLabel.textColor = KTEXT_COLOR;
         [self.contentView addSubview:self.nameLabel];
 
-
-        
+  
     }
     return self;
 }

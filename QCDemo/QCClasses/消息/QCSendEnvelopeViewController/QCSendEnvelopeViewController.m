@@ -8,6 +8,7 @@
 
 #import "QCSendEnvelopeViewController.h"
 #import "QCPayView.h"
+#import "QCPayTypeView.h"
 
 #define myDotNumbers     @"0123456789.\n"
 #define myNumbers          @"0123456789\n"
@@ -41,9 +42,11 @@
 
 
 @property (nonatomic, strong) NSString * moneyStr;
-@property (nonatomic, strong) UILabel * bankLabel;
 
 @property (nonatomic, strong) NSString * red_type;
+
+@property (nonatomic, strong) QCPayTypeView * payTypeView;
+
 
 @end
 
@@ -51,6 +54,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.payType = @"1";
+    
+
     self.red_type = @"2";
     [self createSenderView];
 
@@ -82,9 +88,17 @@
         
     }
 }
-
 - (void)buttonAction:(UIButton *)sender {
-    
+    //  选择银行卡
+
+    [self.totalMoneyTextField resignFirstResponder];
+    [self.moneyNumTextField resignFirstResponder];
+    [self.messageTextField resignFirstResponder];
+
+    UIView * backView = [[QCClassFunction shared] createBackView];
+    self.payTypeView = [[QCPayTypeView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT - KSCALE_WIDTH(312), KSCALE_WIDTH(375), KSCALE_WIDTH(312))];
+    [backView addSubview:self.payTypeView];
+
 }
 
 - (void)createSenderView {
@@ -113,7 +127,7 @@
     [self.view addSubview:contentLabel];
     
     UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(329), KSCALE_WIDTH(42), KSCALE_WIDTH(16), KSCALE_WIDTH(16))];
-    imageView.image = KHeaderImage;
+    imageView.image = [UIImage imageNamed:@"leftarrow"];
     [self.view addSubview:imageView];
     
     UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(375), KSCALE_WIDTH(70))];
@@ -347,7 +361,7 @@
     //  red_num  红包个数，个人为数量为1，群为红包个数
     //  red_type  红包类型，1为随机红包，2为普通红包
     
-    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:@{@"method":@"1",@"red_price":self.totalMoneyTextField.text,@"target_type":self.target_type,@"red_num":self.moneyNumTextField.text?self.moneyNumTextField.text:@"1",@"red_type":self.red_type,@"message":messageStr}];
+    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:@{@"method":self.payType,@"bankId":self.bankId?self.bankId:@"",@"red_price":self.totalMoneyTextField.text,@"target_type":self.target_type,@"red_num":self.moneyNumTextField.text?self.moneyNumTextField.text:@"1",@"red_type":self.red_type,@"message":messageStr}];
     self.payView.messageDic = dic;
     
     [self.payView initUI];

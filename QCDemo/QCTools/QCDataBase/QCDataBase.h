@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)insertListModel:(QCListModel *)model;
 -(void)deleteListModel:(QCListModel *)model;
 -(void)updateListModel:(QCListModel *)model;
+
+-(void)isBannedListModel:(QCListModel *)model withIsBanned:(NSString *)isBanned;
 -(NSMutableArray *)queryMsgId:(NSString *)msgId;
 -(NSMutableArray *)queryListModel:(QCListModel *)model;
 -(NSMutableArray *)querywithListId:(NSString *)listId;

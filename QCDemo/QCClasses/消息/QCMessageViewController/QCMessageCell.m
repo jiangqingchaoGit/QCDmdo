@@ -128,7 +128,7 @@
 
             break;
         case 5:
-            self.contentLabel.text = @"[戳一戳]";
+            self.contentLabel.text = @"[转账]";
 
             break;
         case 6:
@@ -136,7 +136,8 @@
             break;
             
         case 7:
-            self.contentLabel.text = @"[图片]";
+            self.contentLabel.text = @"[戳一戳]";
+
 
             break;
         case 8:
@@ -148,11 +149,9 @@
 
             break;
         case 10:
-//            self.contentLabel.text = @"[视频]";
 
             break;
         case 11:
-//            self.contentLabel.text = @"[视频]";
 
             break;
         case 12:
@@ -162,11 +161,12 @@
             
 
         case 13:
-            self.contentLabel.text = @"[转账]";
+            self.contentLabel.text = @"[红包]";
             break;
 
         case 14:
             self.contentLabel.text = @"[转账]";
+            
             break;
         case 15:
             self.contentLabel.text = @"[转账]";

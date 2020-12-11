@@ -56,7 +56,8 @@
     self.title = @"更换手机号";
     
     UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(150), KSCALE_WIDTH(44), KSCALE_WIDTH(75), KSCALE_WIDTH(75))];
-    imageView.image = KHeaderImage;
+    imageView.image = [UIImage imageNamed:@"更换手机号"];
+    imageView.contentMode = UIViewContentModeCenter;
     [self.view addSubview:imageView];
     
     UILabel * contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(20), KSCALE_WIDTH(140), KSCALE_WIDTH(345), KSCALE_WIDTH(30))];
@@ -78,7 +79,7 @@
     self.sureButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     self.sureButton.titleLabel.font = K_18_FONT;
     [self.sureButton setTitle:@"更换手机号" forState:UIControlStateNormal];
-    [self.sureButton setTitleColor:KTEXT_COLOR forState:UIControlStateNormal];
+    [self.sureButton setTitleColor:KBACK_COLOR forState:UIControlStateNormal];
     [self.sureButton addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchUpInside];
     [QCClassFunction filletImageView:self.sureButton withRadius:KSCALE_WIDTH(13)];
     [self.view addSubview:self.sureButton];

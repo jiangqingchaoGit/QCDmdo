@@ -14,6 +14,8 @@
 
 #import "QCBookViewController.h"
 #import "QCMessageViewController.h"
+#import "YWUnlockView.h"
+
 @interface AppDelegate ()<WXApiDelegate>
 
 @end
@@ -23,15 +25,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    
+     
     [self GETURL];
     
-    [WXApi registerApp:@"wxee57a3177d3643b4" universalLink:@"https://universal-links.xianduoduo123.com/"];
+    [WXApi registerApp:@"wxee57a3177d3643b4" universalLink:@"https://applinks:xiaoxianxian.cn/"];
 
     [UMSocialGlobal shareInstance].isUsingWaterMark = YES;
     [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxee57a3177d3643b4" appSecret:@"5ae16e3a812bbe1c7051b6ebe8a0da26" redirectURL:@"https://universal-links.xianduoduo123.com/"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxee57a3177d3643b4" appSecret:@"5ae16e3a812bbe1c7051b6ebe8a0da26" redirectURL:@"https://applinks:xiaoxianxian.cn/"];
     [UMConfigure initWithAppkey:@"5b92186af29d9806c800021c" channel:@"AppStore"];
 
     
@@ -90,6 +91,7 @@
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
 
 
+    
     if (![[UMSocialManager defaultManager] handleUniversalLink:userActivity options:nil]) {
           // 其他SDK的回调
 
@@ -161,57 +163,63 @@
 -  (void)applicationWillEnterForeground:(UIApplication *)application {
 
     NSLog(@"应用程序将要进入活动状态，即将进入前台运行");
-    [QCClassFunction loginWithWebsocket];
-    
-    QCAssociatedModel * model = [[QCAssociatedModel alloc] init];
-    NSArray * arr = [[QCDataBase shared] queryAssociatedModel:model];
-    
-    UITabBarItem * item = [[QCClassFunction getCurrentViewController].tabBarController.tabBar.items objectAtIndex:2];
-    if (arr.count == 0) {
-        item.badgeValue = nil;
-
-    }else{
-        [item setBadgeValue:[NSString stringWithFormat:@"%ld",arr.count]];
+    [YWUnlockView showUnlockViewWithType:YWUnlockViewUnlock callBack:^(BOOL result) {
+        NSLog(@"-->%@",@(result));
         
-        if ([[QCClassFunction getCurrentViewController] isKindOfClass:[QCBookViewController class]]) {
-            QCBookViewController * bookViewController = (QCBookViewController *)[QCClassFunction getCurrentViewController];
-            
-            
-            [bookViewController GETDATA];
-            
-        }else{
-
-        }
+            [QCClassFunction loginWithWebsocket];
         
-    }
-    
-    
-    QCListModel * listModel = [[QCListModel alloc] init];
-    NSMutableArray * dataArr = [[QCDataBase shared] queryListModel:listModel];
-
-    NSInteger count = 0;
-    for (QCListModel * model in dataArr) {
-        count = count + [model.count integerValue];
-    }
-    
-    UITabBarItem * item1 = [[QCClassFunction getCurrentViewController].tabBarController.tabBar.items objectAtIndex:1];
-    if (count == 0) {
-        item1.badgeValue = nil;
-
-    }else{
-        item1.badgeValue = [NSString stringWithFormat:@"%ld",count];
-
-    }
-    
-    if ([[QCClassFunction getCurrentViewController] isKindOfClass:[QCMessageViewController class]]) {
-        QCMessageViewController * messageViewController = (QCMessageViewController *)[QCClassFunction getCurrentViewController];
+            QCAssociatedModel * model = [[QCAssociatedModel alloc] init];
+            NSArray * arr = [[QCDataBase shared] queryAssociatedModel:model];
+        
+            UITabBarItem * item = [[QCClassFunction getCurrentViewController].tabBarController.tabBar.items objectAtIndex:2];
+            if (arr.count == 0) {
+                item.badgeValue = nil;
+        
+            }else{
+                [item setBadgeValue:[NSString stringWithFormat:@"%ld",arr.count]];
+        
+                if ([[QCClassFunction getCurrentViewController] isKindOfClass:[QCBookViewController class]]) {
+                    QCBookViewController * bookViewController = (QCBookViewController *)[QCClassFunction getCurrentViewController];
         
         
-        [messageViewController GETDATA];
+                    [bookViewController GETDATA];
         
-    }else{
+                }else{
+        
+                }
+        
+            }
+        
+        
+            QCListModel * listModel = [[QCListModel alloc] init];
+            NSMutableArray * dataArr = [[QCDataBase shared] queryListModel:listModel];
+        
+            NSInteger count = 0;
+            for (QCListModel * model in dataArr) {
+                count = count + [model.count integerValue];
+            }
+        
+            UITabBarItem * item1 = [[QCClassFunction getCurrentViewController].tabBarController.tabBar.items objectAtIndex:1];
+            if (count == 0) {
+                item1.badgeValue = nil;
+        
+            }else{
+                item1.badgeValue = [NSString stringWithFormat:@"%ld",count];
+        
+            }
+        
+            if ([[QCClassFunction getCurrentViewController] isKindOfClass:[QCMessageViewController class]]) {
+                QCMessageViewController * messageViewController = (QCMessageViewController *)[QCClassFunction getCurrentViewController];
+        
+        
+                [messageViewController GETDATA];
+        
+            }else{
+        
+            }
+    }];
+    
 
-    }
     
 
     

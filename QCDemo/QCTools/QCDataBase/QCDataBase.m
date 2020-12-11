@@ -59,7 +59,7 @@ static QCDataBase * dataBase = nil;
         
         
         //  聊天列表
-        BOOL chatList = [self.db  executeUpdate:@"CREATE TABLE IF NOT EXISTS chatList (id integer PRIMARY KEY AUTOINCREMENT,listId text NOT NULL,type text NOT NULL, uid text NOT NULL, rid text NOT NULL, msgid text NOT NULL, message text NOT NULL, time text NOT NULL, count text NOT NULL, isTop text NOT NULL, isRead text NOT NULL, isChat text NOT NULL,cType text NOT NULL,mtype text NOT NULL, tohead text NOT NULL, tonick text NOT NULL,  uhead text NOT NULL, unick text NOT NULL,ghead text NOT NULL, gname text NOT NULL,disturb text NOT NULL);"];
+        BOOL chatList = [self.db  executeUpdate:@"CREATE TABLE IF NOT EXISTS chatList (id integer PRIMARY KEY AUTOINCREMENT,listId text NOT NULL,type text NOT NULL, uid text NOT NULL, rid text NOT NULL, msgid text NOT NULL, message text NOT NULL, time text NOT NULL, count text NOT NULL, isTop text NOT NULL, isRead text NOT NULL, isChat text NOT NULL,cType text NOT NULL,mtype text NOT NULL, tohead text NOT NULL, tonick text NOT NULL,  uhead text NOT NULL, unick text NOT NULL,ghead text NOT NULL, gname text NOT NULL,disturb text NOT NULL,isBanned text NOT NULL);"];
         
         //  好友列表
         BOOL friendList = [self.db  executeUpdate:@"CREATE TABLE IF NOT EXISTS friendList (associatedId text PRIMARY KEY NOT NULL, type text NOT NULL, uid text NOT NULL, rid text NOT NULL, msgid text NOT NULL, message text NOT NULL, time text NOT NULL, status text NOT NULL, applyid text NOT NULL, smsid text NOT NULL);"];
@@ -423,17 +423,17 @@ static QCDataBase * dataBase = nil;
 
             }
             if ([model.mtype isEqualToString:@"2"]) {
-                //  yuyin
+                //  yuyin语音
                 model.cellH = [NSString stringWithFormat:@"%f",KSCALE_WIDTH(72)];
 
             }
             
             if ([model.mtype isEqualToString:@"3"] || [model.mtype isEqualToString:@"6"]) {
-                //  红包
+                //  红包  //  6名片
                 model.cellH = [NSString stringWithFormat:@"%f",KSCALE_WIDTH(108.5)];
 
             }
-            if ([model.mtype isEqualToString:@"5"]) {
+            if ([model.mtype isEqualToString:@"7"]) {
                 //  chuoyichuo
                 model.cellH = [NSString stringWithFormat:@"%f",KSCALE_WIDTH(72)];
 
@@ -450,12 +450,12 @@ static QCDataBase * dataBase = nil;
 
             }
             
-            if ([model.mtype isEqualToString:@"13"] || [model.mtype isEqualToString:@"14"]) {
+            if ([model.mtype isEqualToString:@"5"] || [model.mtype isEqualToString:@"14"]) {
                 //  转账
                 model.cellH = [NSString stringWithFormat:@"%f",KSCALE_WIDTH(108.5)];
 
             }
-            if ([model.mtype isEqualToString:@"18"]) {
+            if ([model.mtype isEqualToString:@"13"]) {
                 //  领取红包
                 model.cellH = [NSString stringWithFormat:@"%f",KSCALE_WIDTH(30)];
 
@@ -467,6 +467,7 @@ static QCDataBase * dataBase = nil;
 
             }
 
+            //  视频
             if ([model.mtype isEqualToString:@"4"]) {
                 NSArray * arr = [model.message componentsSeparatedByString:@"|"];
 
@@ -524,7 +525,7 @@ static QCDataBase * dataBase = nil;
         
         
         
-        [self.db  executeUpdate:@"INSERT INTO chatList (id,listId,type, uid, rid, msgid, message, time, count, isTop,isRead, isChat,cType,mtype,disturb) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",self.db .lastInsertRowId,model.listId,model.type,model.uid,model.rid,model.msgid,model.message,model.time,model.count,model.isTop,model.isRead,model.isChat,model.cType,model.mtype,model.disturb];
+        [self.db  executeUpdate:@"INSERT INTO chatList (id,listId,type, uid, rid, msgid, message, time, count, isTop,isRead, isChat,cType,mtype,disturb,isBanned) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",self.db .lastInsertRowId,model.listId,model.type,model.uid,model.rid,model.msgid,model.message,model.time,model.count,model.isTop,model.isRead,model.isChat,model.cType,model.mtype,model.disturb,model.isBanned];
         
         
         
@@ -588,6 +589,7 @@ static QCDataBase * dataBase = nil;
             model.ghead = [set stringForColumn:@"ghead"];
             model.gname = [set stringForColumn:@"gname"];
             model.disturb = [set stringForColumn:@"disturb"];
+            model.isBanned = [set stringForColumn:@"isBanned"];
 
             
             
@@ -636,6 +638,7 @@ static QCDataBase * dataBase = nil;
             model.ghead = [set stringForColumn:@"ghead"];
             model.gname = [set stringForColumn:@"gname"];
             model.disturb = [set stringForColumn:@"disturb"];
+            model.isBanned = [set stringForColumn:@"isBanned"];
 
             
             
@@ -702,9 +705,19 @@ static QCDataBase * dataBase = nil;
                 isChat = @"1";
 
             }
+            if ([model.message containsString:@"全员禁言"]) {
+                model.isBanned = @"1";
+
+            }
+            
+            if ([model.message containsString:@"全员禁言已解除"]) {
+                model.isBanned = @"0";
+
+            }
+
 
             
-            [self.db  executeUpdate:@"UPDATE chatList SET message = ?,time = ? ,count = ?  ,isChat = ?,tohead = ? ,tonick = ? ,uhead = ? ,unick = ? ,ghead = ? ,gname = ? ,mtype = ? WHERE listId = ?",model.message,model.time,countStr,isChat,model.tohead?model.tohead:@"",model.tonick?model.tonick:@"",model.uhead?model.uhead:@"",model.unick?model.unick:@"",model.ghead?model.ghead:@"",model.gname?model.gname:@"",model.mtype,model.listId];
+            [self.db  executeUpdate:@"UPDATE chatList SET message = ?,time = ? ,count = ?  ,isChat = ?,tohead = ? ,tonick = ? ,uhead = ? ,unick = ? ,ghead = ? ,gname = ? ,mtype = ?,isBanned = ? WHERE listId = ?",model.message,model.time,countStr,isChat,model.tohead?model.tohead:@"",model.tonick?model.tonick:@"",model.uhead?model.uhead:@"",model.unick?model.unick:@"",model.ghead?model.ghead:@"",model.gname?model.gname:@"",model.mtype,model.isBanned,model.listId];
 
             
             
@@ -738,7 +751,7 @@ static QCDataBase * dataBase = nil;
             
             
             //  没有数据添加数据
-            [self.db  executeUpdate:@"INSERT INTO chatList (id,listId,type, uid, rid, msgid, message, time, count, isTop,isRead,isChat,cType,mtype, tohead, tonick, uhead, unick, ghead, gname, disturb) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",self.db .lastInsertRowId,model.listId,model.type,model.uid,model.rid,model.msgid,model.message,model.time,model.count,model.isTop,model.isRead,model.isChat,model.cType,model.mtype,model.tohead?model.tohead:@"",model.tonick?model.tonick:@"",model.uhead?model.uhead:@"",model.unick?model.unick:@"",model.ghead?model.ghead:@"",model.gname?model.gname:@"",model.disturb];
+            [self.db  executeUpdate:@"INSERT INTO chatList (id,listId,type, uid, rid, msgid, message, time, count, isTop,isRead,isChat,cType,mtype, tohead, tonick, uhead, unick, ghead, gname, disturb,isBanned) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",self.db .lastInsertRowId,model.listId,model.type,model.uid,model.rid,model.msgid,model.message,model.time,model.count,model.isTop,model.isRead,model.isChat,model.cType,model.mtype,model.tohead?model.tohead:@"",model.tonick?model.tonick:@"",model.uhead?model.uhead:@"",model.unick?model.unick:@"",model.ghead?model.ghead:@"",model.gname?model.gname:@"",model.disturb,model.isBanned];
             
             
         }
@@ -813,6 +826,22 @@ static QCDataBase * dataBase = nil;
     }
 }
 
+-(void)isBannedListModel:(QCListModel *)model withIsBanned:(NSString *)isBanned{
+    if ([self.db  open]) {
+    
+        NSString * str = [NSString stringWithFormat:@"select * from chatList where listId = '%@'",model.listId];
+        FMResultSet * set = [self.db  executeQuery:str];
+
+        if ([set next]) {
+
+            [self.db  executeUpdate:@"UPDATE chatList SET isBanned = ? WHERE listId = ?",isBanned,model.listId];
+  
+        }
+        [self.db  close];
+
+    }
+}
+
 
 - (void )upDisturbByListId:(NSString *)listId withIsDisturb:(NSString *)isDisturb{
 
@@ -847,9 +876,7 @@ static QCDataBase * dataBase = nil;
 
 #pragma mark ----
 -(void)insertAssociatedModel:(QCAssociatedModel *)model {
-    
-    //        NSDictionary * associatedDic = @{@"associatedId":dic[@"msgid"],@"type":dic[@"type"],@"uid":dic[@"uid"],@"rid":dic[@"touid"],@"msgid":dic[@"msgid"],@"message":dic[@"message"],@"time":dic[@"time"],@"status":@"0",@"applyid":dic[@"applyid"],@"smsid":dic[@"smsid"]};
-    
+
     if ([self.db  open]) {
         [self.db  executeUpdate:@"INSERT INTO friendList (associatedId,type, uid, rid, msgid, message, time, status, applyid, smsid) VALUES (?,?,?,?,?,?,?,?,?);",model.associatedId,model.type,model.uid,model.rid,model.msgid,model.message,model.time,model.status,model.applyid,model.smsid];
         [self.db  close];

@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <MBProgressHUD.h>
-//  数据请求成功的block的回调
+
+//#import "UIImage+ImgSize.h"
+#import <ImageIO/ImageIO.h>//  数据请求成功的block的回调
 typedef void(^successChange)(NSString * responseObject);
 
 //  数据请求失败的block的回调
@@ -199,4 +201,6 @@ typedef void(^failureChange)(NSString * error);
  *  base64转image
  */
 +(UIImage *)Base64StrToUIImage:(NSString *)encodedImageStr;
+
++ (CGSize)getImageSizeWithURL:(id)URL;
 @end

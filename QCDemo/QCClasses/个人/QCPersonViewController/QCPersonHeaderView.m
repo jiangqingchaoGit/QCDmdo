@@ -24,6 +24,14 @@
 //  个人发布
 #import "QCPersonReleaseViewController.h"
 
+//  我买到的
+#import "QCPersonOrderViewController.h"
+
+//  我卖出的
+#import "QCPersonSellViewController.h"
+
+
+
 @interface QCPersonHeaderView()
 @property (nonatomic, strong) UIImageView * headerImageView;
 @property (nonatomic, strong) UIButton * headerButton;
@@ -129,10 +137,20 @@
         }
             break;
         case 2:
-            //  我的订单
+            //  我卖出的
+        {
+            QCPersonSellViewController * personSellViewController = [[QCPersonSellViewController alloc] init];
+            personSellViewController.hidesBottomBarWhenPushed = YES;
+            [[QCClassFunction parentController:self].navigationController pushViewController:personSellViewController animated:YES];
+        }
             break;
         case 3:
             //  我买到的
+        {
+            QCPersonOrderViewController * personOrderViewController = [[QCPersonOrderViewController alloc] init];
+            personOrderViewController.hidesBottomBarWhenPushed = YES;
+            [[QCClassFunction parentController:self].navigationController pushViewController:personOrderViewController animated:YES];
+        }
             break;
         case 4:
             //  收藏

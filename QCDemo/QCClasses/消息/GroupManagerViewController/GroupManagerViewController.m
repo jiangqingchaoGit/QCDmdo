@@ -172,6 +172,8 @@
             [self sendTextMessage:bannedStr];
             
             
+            
+            
         }else{
             [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
             //  全员禁言失败
@@ -437,6 +439,8 @@
         {
             QCAssistantViewController * assistantViewController = [[QCAssistantViewController alloc] init];
             assistantViewController.hidesBottomBarWhenPushed = YES;
+            assistantViewController.group_id = self.group_id;
+
             [self.navigationController pushViewController:assistantViewController animated:YES];
         }
             break;
@@ -466,14 +470,21 @@
 
 - (void)sendTextMessage:(NSString *)bannedStr {
     self.messageArr = [NSMutableArray new];
+    NSMutableArray * arr = [[QCDataBase shared] querywithListId:[NSString stringWithFormat:@"%@|000000|%@",K_UID,self.group_id]];
+    QCListModel * listModel;
+    if (arr.count > 0) {
+        listModel = [arr firstObject];
+    }
     
-    NSString * type = @"chat";
-    NSString * ctype = @"1";    //  0 为单聊  传入touid  1为群聊 传入gid
+    
+    
+    NSString * type = listModel.type;
+    NSString * ctype = listModel.cType;    //  0 为单聊  传入touid  1为群聊 传入gid
     NSString * message = bannedStr;
-    NSString * mtype = @"20";    //  消息类别
+    NSString * mtype = @"11";    //  消息类别
     NSString * msgid = [NSString stringWithFormat:@"%@|%@|%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.group_id];
     NSString * gid = self.group_id;
-    NSString * touid = @"0";
+    NSString * touid = self.group_id;
     NSString * uid = K_UID;
     
     NSString * listId = [NSString stringWithFormat:@"%@|000000|%@",K_UID,self.group_id];
@@ -481,17 +492,25 @@
     NSString * isSend = @"0";
     NSString * canSend = @"1";
     NSString * canMessage = @"0";
-    NSString * disturb = @"0";
+    NSString * disturb = listModel.disturb;
 
 
     NSString * smsid = @"0";
-    NSString * count = @"0";
-    NSString * isTop = @"0";
-    NSString * isRead = @"0";
-    NSString * isChat = @"0";
+    NSString * count = listModel.count;
+    NSString * isTop = listModel.isTop;
+    NSString * isRead = listModel.isRead?listModel.isRead:@"0";
+    NSString * isChat = listModel.isChat;
+    
+    NSString * isBanned;
+    if ([self.muteStr isEqualToString:@"3"]) {
+        isBanned = @"1";
+    }
+    if ([self.muteStr isEqualToString:@"0"]) {
+        isBanned = @"0";
+    }
     
 
-
+    
     //  先存消息
     NSDictionary * chatDic = @{@"chatId":msgid,@"listId":listId,@"type":type,@"uid":uid,@"rid":touid,@"msgid":msgid,@"message":message,@"time":time,@"ctype":ctype,@"smsid":smsid,@"gid":gid,@"mtype":mtype,@"isSend":isSend,@"canSend":canSend,@"canMessage":canMessage};
     
@@ -500,15 +519,22 @@
     
     
     //  在更新消息表格
-    NSDictionary * listDic = @{@"listId":listId,@"type":type,@"uid":touid,@"rid":uid,@"msgid":msgid,@"message":message,@"time":time,@"count":count,@"isTop":isTop,@"isRead":isRead,@"isChat":isChat,@"cType":ctype,@"mtype":mtype,@"disturb":disturb};
-    QCListModel * model = [[QCListModel alloc] initWithDictionary:listDic error:nil];
-    [[QCDataBase shared] queryByListId:model];
+    NSDictionary * listDic = @{@"listId":listId,@"type":type,@"uid":touid,@"rid":uid,@"msgid":msgid,@"message":message,@"time":time,@"count":count,@"isTop":isTop,@"isRead":isRead,@"isChat":isChat,@"cType":ctype,@"mtype":mtype,@"disturb":disturb,@"isBanned":isBanned};
+//    QCListModel * model = [[QCListModel alloc] initWithDictionary:listDic error:nil];
+//    [[QCDataBase shared] isBannedListModel:model withIsBanned:isBanned];
+    listModel.message = message;
+    listModel.isBanned = isBanned;
+    listModel.uid = self.group_id;
+
     
+    [[QCDataBase shared] queryByListId:listModel];
+    
+
     message = [NSString stringWithFormat:@"%@|0",message];
 
-    NSString * str = [NSString stringWithFormat:@"ctype=%@&gid=%@&message=%@&msgid=%@&mtype=%@&token=%@&touid=%@&type=%@&uid=%@",ctype,gid,message,msgid,mtype,K_TOKEN,touid,type,uid];
+    NSString * str = [NSString stringWithFormat:@"ctype=%@&gid=%@&message=%@&msgid=%@&mtype=%@&token=%@&touid=%@&type=%@&uid=%@",ctype,gid,message,msgid,mtype,K_TOKEN,@"0",type,uid];
     NSString * signStr = [QCClassFunction MD5:str];
-    NSDictionary * dic = @{@"ctype":ctype,@"gid":gid,@"message":message,@"mtype":mtype,@"msgid":msgid ,@"token":K_TOKEN,@"touid":touid,@"type":type,@"uid":uid};
+    NSDictionary * dic = @{@"ctype":ctype,@"gid":gid,@"message":message,@"mtype":mtype,@"msgid":msgid ,@"token":K_TOKEN,@"touid":@"0",@"type":type,@"uid":uid};
     
     
     NSString * jsonDic = [QCClassFunction jsonStringWithDictionary:dic];
@@ -528,6 +554,7 @@
         self.messageTimer =  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(Timered:) userInfo:nil repeats:YES];
 
     }
+    
     [[QCWebSocket shared] reciveData:^(NSString * _Nonnull msgid) {
 
         for (NSDictionary * dic in self.messageArr) {

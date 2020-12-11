@@ -50,6 +50,10 @@
 }
 // 是否允许触发手势，如果是根视图控制器则不需要
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
+        return NO;
+    }
     return self.childViewControllers.count > 1;
 }
 - (void)didReceiveMemoryWarning {

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "QCPaymentsModel.h"
-
+#import "QCWithdrawalModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QCPaymentsCell : UITableViewCell
@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel * restLabel;
 
 - (void)fillCellWithModel:(QCPaymentsModel *)model;
+- (void)fillCellWithDrawalModel:(QCWithdrawalModel *)model;
+
 @end
 
 NS_ASSUME_NONNULL_END

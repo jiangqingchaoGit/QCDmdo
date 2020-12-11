@@ -279,7 +279,8 @@
     listModel.ghead = model.head_img?model.head_img:@"";
     listModel.gname = model.name;
     listModel.disturb = @"";
-    
+    listModel.isBanned = @"0";
+
     groupChatViewController.hidesBottomBarWhenPushed = YES;
     groupChatViewController.model = listModel;
     groupChatViewController.groupId = model.id;

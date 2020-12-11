@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QCGoodsModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QCHomeItem : UICollectionViewCell
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel * serviceLabel;
 @property (nonatomic, strong) UILabel * addressLabel;
 @property (nonatomic, strong) UILabel * browseLabel;
-
+- (void)fillItemWithModel:(QCGoodsModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

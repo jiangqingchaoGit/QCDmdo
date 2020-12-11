@@ -38,8 +38,13 @@ typedef void(^statusBlock)(AFNetworkReachabilityStatus status);
  */
 +(void)QCPOST:(NSString *)urlStr parameters:(NSDictionary *)dict success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 /*
+ 
+
  *  POST数据请求
  */
+
++(void)QCGETWeather:(NSString *)urlStr parameters:(NSDictionary *)dict success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+
 +(void)QCGET:(NSString *)urlStr parameters:(NSDictionary *)dict success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 /*
  *  下载请求

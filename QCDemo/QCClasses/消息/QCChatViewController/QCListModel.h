@@ -33,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString<Optional>*ghead;
 @property (nonatomic, strong) NSString<Optional>*gname;
 @property (nonatomic, strong) NSString<Optional>*disturb;
+@property (nonatomic, strong) NSString<Optional>*isBanned;
+
 
 
 

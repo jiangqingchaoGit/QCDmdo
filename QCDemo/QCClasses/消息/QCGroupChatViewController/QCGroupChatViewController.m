@@ -97,6 +97,9 @@
 //@property (nonatomic, strong) QCGroupChatFooterView * footerView;
 @property (nonatomic, strong) UIView * hiddenView;
 @property (nonatomic, strong) UIView * tipView;
+@property (nonatomic, strong) UIButton * delectButton;
+
+
 @property (nonatomic, strong) WQLPaoMaView * paoma;
 
 
@@ -116,6 +119,9 @@
 @implementation QCGroupChatViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    BaseNavigationController * navigationController = (BaseNavigationController *)[QCClassFunction currentNC];
+    navigationController.panGestureRecognizer.enabled = NO;
+    navigationController.edgePanGestureRecognizer.enabled = NO;
     self.dataArr = [[NSMutableArray alloc] init];
     
     self.mumberDataArr = [[NSMutableArray alloc] init];
@@ -137,7 +143,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 
-    
     //  操作数据库 count设置为0
     //  先查询 然后修改
     self.currentIndex = -1;
@@ -160,8 +165,24 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+
+    
+    
+    
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.footerView.keyboardStr = @"1";
+    
+    NSMutableArray * listArr = [[QCDataBase shared] querywithListId:self.model.listId];
+    if (listArr.count > 0) {
+        QCListModel * listModel = [listArr firstObject];
+        self.model = listModel;
+        self.model.uid = self.groupId;
+
+    }
+    
+    
+    
     self.model.isChat = @"2";
     [[QCDataBase shared] queryByListId:self.model];
     [self GETDATA];
@@ -200,7 +221,17 @@
         self.contentH = self.contentH + [model.cellH floatValue];
     }
     
+    NSMutableArray * listArr = [[QCDataBase shared] querywithListId:self.model.listId];
+    QCListModel * listModel = [listArr firstObject];
     
+    
+    
+    if ([listModel.isBanned isEqualToString:@"0"]) {
+        [self.footerView disBanned];
+    }
+    if ([listModel.isBanned isEqualToString:@"1"]) {
+        [self.footerView banned];
+    }
     
     if (self.dataArr.count == 0) {
         [self.tableView reloadData];
@@ -208,18 +239,11 @@
     }
     
     for (QCChatModel * chatModel in self.dataArr) {
-        if ([chatModel.message isEqualToString:@"全员禁言"]) {
-            //  全员禁言
-            self.hiddenView.hidden = NO;
-            
-        }else {
-            //  全员禁言已解除
-            self.hiddenView.hidden = YES;
-
-        }
         
         if ([chatModel.mtype isEqualToString:@"22"]) {
             self.tipView.hidden = NO;
+            self.delectButton.hidden = NO;
+
             [self.paoma removeFromSuperview];
             self.paoma = [[WQLPaoMaView alloc]initWithFrame:CGRectMake(KSCALE_WIDTH(20), 0, KSCALE_WIDTH(335), KSCALE_WIDTH(58)) withTitle:[NSString stringWithFormat:@"公告:%@",chatModel.message]];
             self.paoma.backgroundColor = [UIColor clearColor];
@@ -227,6 +251,8 @@
 
         }else{
             self.tipView.hidden = YES;
+            self.delectButton.hidden = YES;
+
             [self.paoma removeFromSuperview];
 
         }
@@ -510,7 +536,7 @@
 
 - (void)createTableView {
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH,  KSCREEN_HEIGHT - KSCALE_WIDTH(58) - KNavHight) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH,  KSCREEN_HEIGHT - KSCALE_WIDTH(9) - KNavHight - KTabHight) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = NO;
@@ -555,11 +581,11 @@
 
 - (void)createFooterView {
     
-    self.footerView = [[QCGroupChatFooterView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT - KSCALE_WIDTH(58) -KNavHight, KSCREEN_WIDTH, KSCALE_WIDTH(58))];
+    self.footerView = [[QCGroupChatFooterView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT - KTabHight - KNavHight - KSCALE_WIDTH(9), KSCREEN_WIDTH, KSCALE_WIDTH(9) + KTabHight)];
     [self.view addSubview:self.footerView];
     [self.footerView getParent];
     
-    self.hiddenView = [[UIView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT - KSCALE_WIDTH(58) -KNavHight, KSCREEN_WIDTH, KSCALE_WIDTH(58))];
+    self.hiddenView = [[UIView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT - KTabHight - KNavHight - KSCALE_WIDTH(9), KSCREEN_WIDTH, KSCALE_WIDTH(9) + KTabHight)];
     self.hiddenView.backgroundColor = [UIColor purpleColor];
     self.hiddenView.hidden = YES;
     [self.view addSubview:self.hiddenView];
@@ -569,15 +595,19 @@
     self.tipView.hidden = YES;
     [self.view addSubview:self.tipView];
         
-    UIButton * delectButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(331), KSCALE_WIDTH(0), KSCALE_WIDTH(44), KSCALE_WIDTH(44))];
-    [delectButton setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-    [delectButton addTarget:self action:@selector(delectAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.tipView addSubview:delectButton];
+    self.delectButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(317), KSCALE_WIDTH(0), KSCALE_WIDTH(58), KSCALE_WIDTH(58))];
+    [self.delectButton setImage:[UIImage imageNamed:@"header"] forState:UIControlStateNormal];
+    [self.delectButton addTarget:self action:@selector(delectAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.delectButton.hidden = YES;
+    [self.view addSubview:self.delectButton];
     
 }
 
 - (void)delectAction:(UIButton *)sender {
+    
+    
     [[QCDataBase shared] deleteChatWithMtype:@"22" byListId:[NSString stringWithFormat:@"%@|000000|%@",K_UID,self.groupId]];
+    
     [self GETDATA];
 }
 
@@ -628,6 +658,7 @@
             //  图片
             QCSelfPictureCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfPictureCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell.pictureButton addTarget:self action:@selector(pittureAction:) forControlEvents:UIControlEventTouchUpInside];
             [cell fillCellWithModel:chatModel];
             
             return cell;
@@ -655,7 +686,7 @@
             [cell.vedioButton addTarget:self action:@selector(videoAction:) forControlEvents:UIControlEventTouchUpInside];
             [cell fillCellWithModel:chatModel];
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"5"]) {
+        }else if ([chatModel.mtype isEqualToString:@"7"]) {
             //  戳一戳
             QCSelfPokeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfPokeCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -683,27 +714,6 @@
             [cell fillCellWithModel:chatModel];
 
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"7"]) {
-            QCSelfVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfVoiceCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.voiceButton addTarget:self action:@selector(selfVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
-            [cell fillCellWithModel:chatModel];
-
-            return cell;
-        }else if ([chatModel.mtype isEqualToString:@"8"]) {
-            QCSelfVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfVoiceCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.voiceButton addTarget:self action:@selector(selfVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
-            [cell fillCellWithModel:chatModel];
-
-            return cell;
-        }else if ([chatModel.mtype isEqualToString:@"9"]) {
-            QCSelfVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfVoiceCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.voiceButton addTarget:self action:@selector(selfVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
-            [cell fillCellWithModel:chatModel];
-
-            return cell;
         }else if ([chatModel.mtype isEqualToString:@"10"]) {
             //  时间
             QCTimeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"timeCell"];
@@ -712,14 +722,14 @@
 
             
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"11"]) {
+        }else if ([chatModel.mtype isEqualToString:@"20"]) {
             //  消息发送验证
             QCSaveCell * cell = [tableView dequeueReusableCellWithIdentifier:@"saveCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.saveLabel.text = chatModel.canMessage;
             
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"13"]) {
+        }else if ([chatModel.mtype isEqualToString:@"5"]) {
             //  转账
             QCSelfTransferCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfTransferCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -746,14 +756,17 @@
 
             
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"18"]) {
+        }else if ([chatModel.mtype isEqualToString:@"13"]) {
             //  领取红包
+       
             QCSaveCell * cell = [tableView dequeueReusableCellWithIdentifier:@"saveCell"];
+            NSArray * arr = [chatModel.message componentsSeparatedByString:@"|"];
+
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.saveLabel.text = chatModel.message;
+            cell.saveLabel.text = [arr firstObject];
             
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"20"]) {
+        }else if ([chatModel.mtype isEqualToString:@"11"]) {
             
             QCSaveCell * cell = [tableView dequeueReusableCellWithIdentifier:@"saveCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -786,8 +799,9 @@
         }else if ([chatModel.mtype isEqualToString:@"1"]) {
             QCOtherPictureCell * cell = [tableView dequeueReusableCellWithIdentifier:@"otherPictureCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell.pictureButton addTarget:self action:@selector(pittureAction:) forControlEvents:UIControlEventTouchUpInside];
             [cell fillCellWithModel:chatModel];
-            
+        
             return cell;
         }else if ([chatModel.mtype isEqualToString:@"2"]){
             QCOtherVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"otherVoiceCell"];
@@ -811,7 +825,7 @@
             [cell fillCellWithModel:chatModel];
             return cell;
             
-        }else if ([chatModel.mtype isEqualToString:@"5"]) {
+        }else if ([chatModel.mtype isEqualToString:@"7"]) {
             QCOtherPokeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"otherPokeCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSArray * arr = [chatModel.message componentsSeparatedByString:@"|"];
@@ -833,34 +847,13 @@
             [cell fillCellWithModel:chatModel];
 
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"7"]) {
-            QCSelfVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfVoiceCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.voiceButton addTarget:self action:@selector(selfVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
-            [cell fillCellWithModel:chatModel];
-
-            return cell;
-        }else if ([chatModel.mtype isEqualToString:@"8"]) {
-            QCSelfVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfVoiceCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.voiceButton addTarget:self action:@selector(selfVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
-            [cell fillCellWithModel:chatModel];
-
-            return cell;
-        }else if ([chatModel.mtype isEqualToString:@"9"]) {
-            QCSelfVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfVoiceCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.voiceButton addTarget:self action:@selector(selfVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
-            [cell fillCellWithModel:chatModel];
-
-            return cell;
         }else if ([chatModel.mtype isEqualToString:@"10"]) {
             QCTimeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"timeCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell fillCellWithModel:chatModel];
 
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"13"]) {
+        }else if ([chatModel.mtype isEqualToString:@"5"]) {
 
 
             QCOtherTransferCell * cell = [tableView dequeueReusableCellWithIdentifier:@"otherTransferCell"];
@@ -885,18 +878,20 @@
 
             
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"18"]) {
-            //  消息发送验证
+        }else if ([chatModel.mtype isEqualToString:@"13"]) {
+            //  领取红包
             QCSaveCell * cell = [tableView dequeueReusableCellWithIdentifier:@"saveCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSArray * arr = [chatModel.message componentsSeparatedByString:@"|"];
             cell.saveLabel.text = [arr firstObject];
             
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"20"]) {
+        }else if ([chatModel.mtype isEqualToString:@"11"]) {
             QCSaveCell * cell = [tableView dequeueReusableCellWithIdentifier:@"saveCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.saveLabel.text = chatModel.message;
+            NSArray * arr = [chatModel.message componentsSeparatedByString:@"|"];
+
+            cell.saveLabel.text = [arr firstObject];
             
             return cell;
         }else if ([chatModel.mtype isEqualToString:@"22"]) {

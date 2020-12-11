@@ -19,6 +19,9 @@
 #import "QCRealnameViewController.h"
 #import "QCRealnamedViewController.h"
 
+//  提现记录
+#import "QCWithdrawalListViewController.h"
+
 @interface QCWalletViewController ()
 @property (nonatomic, strong) UIButton * backButton;
 @property (nonatomic, strong) UIButton * eyeButton;
@@ -33,7 +36,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-
+    
     
 }
 
@@ -55,7 +58,7 @@
     NSDictionary * dic = @{@"token":K_TOKEN,@"uid":K_UID?K_UID:@""};
     NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
-  
+    
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
     [QCAFNetWorking QCPOST:@"/api/user/getinfo" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         
@@ -65,9 +68,9 @@
         
         if ([responseObject[@"msg"] isEqualToString:@"成功"]) {
             self.moneyStr = data[@"balance"];
-
+            
         }
-
+        
         
         
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
@@ -80,19 +83,19 @@
 
 - (void)backAction:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
-
+    
 }
 
 - (void)eyeAction:(UIButton *)sender {
     if (sender.selected) {
         sender.selected = NO;
         self.moneyLabel.text = @"******";
-
+        
     }else{
         sender.selected = YES;
         self.moneyLabel.text = self.moneyStr;
-
-
+        
+        
     }
 }
 
@@ -103,7 +106,7 @@
             break;
         case 2:
         {
-
+            
             
             if ([[QCClassFunction Read:@"cardNum"] isEqual:@""] || [QCClassFunction Read:@"cardNum"] == nil) {
                 QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
@@ -123,7 +126,7 @@
 }
 - (void)buttonAction:(UIButton *)sender {
     switch (sender.tag) {
-
+            
         case 1:
         {
             QCPaymentsViewController * paymentsViewController = [[QCPaymentsViewController alloc] init];
@@ -139,18 +142,21 @@
         }
             break;
         case 3:
-   
-        {
-
-            //  提现记录
             
-
+        {
+            
+            //  提现记录
+            QCWithdrawalListViewController * withdrawalListViewController  = [[QCWithdrawalListViewController alloc] init];
+            withdrawalListViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:withdrawalListViewController animated:YES];
+            
+            
         }
             break;
         case 4:
         {
             if ([[QCClassFunction Read:@"cardNum"] isEqual:@""] || [QCClassFunction Read:@"cardNum"] == nil) {
-
+                
                 QCRealnameViewController * realnameViewController = [[QCRealnameViewController alloc] init];
                 realnameViewController.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:realnameViewController animated:YES];
@@ -171,7 +177,7 @@
             break;
         case 6:
         {
-
+            
         }
             break;
             
@@ -233,19 +239,19 @@
     
     NSArray * labelArr = @[@"收支明细",@"红包明细",@"提现记录",@"实名认证",@"我的银行卡",@"服务须知"];
     NSArray * imageArr = @[@"收支明细",@"红包明细",@"我的银行卡",@"实名认证",@"我的银行卡",@"服务须知"];
-
+    
     for (NSInteger i = 0; i < 6; i++) {
         
         UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(0, i * KSCALE_WIDTH(65), KSCALE_WIDTH(315), KSCALE_WIDTH(65))];
         button.backgroundColor = KCLEAR_COLOR;
         [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = i + 1;
-
+        
         [view addSubview:button];
         
         UIImageView * headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(27), KSCALE_WIDTH(20) + i * KSCALE_WIDTH(65), KSCALE_WIDTH(24), KSCALE_WIDTH(24))];
         headerImageView.image = [UIImage imageNamed:imageArr[i]];
-//        headerImageView.contentMode = UIViewContentModeCenter;
+        //        headerImageView.contentMode = UIViewContentModeCenter;
         [view addSubview:headerImageView];
         
         UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(65), KSCALE_WIDTH(20) + i * KSCALE_WIDTH(65), KSCALE_WIDTH(100), KSCALE_WIDTH(24))];
@@ -259,7 +265,7 @@
             lineView.backgroundColor = [QCClassFunction stringTOColor:@"#F2F2F2"];
             [view addSubview:lineView];
         }
- 
+        
         
         UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(280), KSCALE_WIDTH(22) + i * KSCALE_WIDTH(65), KSCALE_WIDTH(20), KSCALE_WIDTH(20))];
         imageView.image = [UIImage imageNamed:@"leftarrow"];

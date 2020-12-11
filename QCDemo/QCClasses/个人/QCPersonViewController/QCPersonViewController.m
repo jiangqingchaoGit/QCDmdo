@@ -21,6 +21,7 @@
 #import "QCSetViewController.h"
 #import "QCRealnameViewController.h"
 
+
 @interface QCPersonViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) QCPersonHeaderView * headerView;
@@ -203,6 +204,9 @@
             [self.navigationController pushViewController:setViewController animated:YES];
         }
             break;
+
+            
+            
         default:
             break;
     }

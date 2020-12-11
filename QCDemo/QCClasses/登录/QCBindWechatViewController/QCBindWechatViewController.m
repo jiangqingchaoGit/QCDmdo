@@ -85,7 +85,7 @@
     self.clearButton.hidden = YES;
 //    [self.clearButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     
-    [self.clearButton setImage:KHeaderImage forState:UIControlStateNormal];
+    [self.clearButton setImage:[UIImage imageNamed:@"叉"] forState:UIControlStateNormal];
     [self.clearButton addTarget:self action:@selector(clearAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.clearButton];
     

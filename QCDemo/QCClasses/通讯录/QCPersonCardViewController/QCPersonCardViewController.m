@@ -93,6 +93,7 @@
     listModel.ghead = @"";
     listModel.gname = @"";
     listModel.disturb = @"0";
+    listModel.isBanned = @"0";
 
     listModel.mtype = @"0";
     

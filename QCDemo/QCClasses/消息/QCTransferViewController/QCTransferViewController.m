@@ -8,14 +8,15 @@
 
 #import "QCTransferViewController.h"
 #import "QCPayView.h"
-
+#import "QCPayTypeView.h"
 @interface QCTransferViewController ()<UITextFieldDelegate>
 
-@property (nonatomic, strong) UILabel * bankLabel;
 @property (nonatomic, strong) UITextField * moneyTextField;
 @property (nonatomic, strong) UIButton * loginButton;
 
 @property (nonatomic, strong) QCPayView * payView;
+@property (nonatomic, strong) QCPayTypeView * payTypeView;
+
 @end
 
 @implementation QCTransferViewController
@@ -44,6 +45,7 @@
     UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignAction)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
 
+    self.payType = @"1";
     [self initUI];
     
 
@@ -59,6 +61,9 @@
 - (void)buttonAction:(UIButton *)sender {
     //  选择银行卡
     [self.moneyTextField resignFirstResponder];
+    UIView * backView = [[QCClassFunction shared] createBackView];
+    self.payTypeView = [[QCPayTypeView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT - KSCALE_WIDTH(312), KSCALE_WIDTH(375), KSCALE_WIDTH(312))];
+    [backView addSubview:self.payTypeView];
 
 }
 
@@ -96,7 +101,7 @@
 
     self.payView = [[QCPayView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(30), KSCREEN_HEIGHT / 2.0 - KSCALE_WIDTH(180), KSCALE_WIDTH(315), KSCALE_WIDTH(315))];
     
-    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:@{@"red_price":self.moneyTextField.text,@"method":@"1"}];
+    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithDictionary:@{@"red_price":self.moneyTextField.text,@"method":self.payType,@"bankId":self.bankId?self.bankId:@""}];
     self.payView.messageDic = dic;
     self.payView.type = @"1";
     [self.payView initUI];
@@ -143,7 +148,7 @@
     [self.view addSubview:contentLabel];
     
     UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(329), KSCALE_WIDTH(42), KSCALE_WIDTH(16), KSCALE_WIDTH(16))];
-    imageView.image = KHeaderImage;
+    imageView.image = [UIImage imageNamed:@"leftarrow"];
     [self.view addSubview:imageView];
     
     UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, KSCALE_WIDTH(375), KSCALE_WIDTH(70))];
@@ -190,6 +195,7 @@
     [QCClassFunction filletImageView:self.loginButton withRadius:KSCALE_WIDTH(13)];
     [self.view addSubview:self.loginButton];
 }
+
 
 
 

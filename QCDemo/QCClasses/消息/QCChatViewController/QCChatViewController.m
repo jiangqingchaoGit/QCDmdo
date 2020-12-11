@@ -92,7 +92,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataArr = [[NSMutableArray alloc] init];
-    
+    BaseNavigationController * navigationController = (BaseNavigationController *)[QCClassFunction currentNC];
+    navigationController.panGestureRecognizer.enabled = NO;
+    navigationController.edgePanGestureRecognizer.enabled = NO;
     
     [self initUI];
     [self createTableView];
@@ -103,9 +105,12 @@
 }
 
 
+
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+ 
     //  操作数据库 count设置为0
     //  先查询 然后修改
     self.footerView.keyboardStr = @"0";
@@ -138,6 +143,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+
+    
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.footerView.keyboardStr = @"1";
     self.model.isChat = @"2";
@@ -223,6 +231,7 @@
     
     self.player = nil;
     
+//    yunyin-left
     if (model.message) {
         
         self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:model.message] error:nil];
@@ -230,6 +239,11 @@
         [session setActive:YES error:nil];
         [session setCategory:AVAudioSessionCategoryPlayback error:nil];
         [self.player play];
+        
+//        NSString *filepath = [[NSBundle bundleWithPath:[[NSBundle mainBundle] bundlePath]] pathForResource:@"yunyin-right.gif" ofType:nil];
+//        NSData *imagedata = [NSData dataWithContentsOfFile:filepath];
+//        UIImage * image = [UIImage sd_imageWithGIFData:imagedata];
+//        cell.voiceImageView.image = image;
     }
 }
 
@@ -243,12 +257,22 @@
     if (model.message) {
         NSArray * arr = [model.message componentsSeparatedByString:@"|"];
         
+        NSLog(@"%@",arr[0]);
         
-        self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[arr firstObject]]] error:nil];
-        AVAudioSession * session =[AVAudioSession sharedInstance];
-        [session setActive:YES error:nil];
-        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+        NSString * urlStr = [arr[0] stringByReplacingOccurrencesOfString:@" " withString:@""];
+
+        
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]] error:nil];
+//        AVAudioSession * session =[AVAudioSession sharedInstance];
+//        [session setActive:YES error:nil];
+//        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
         [self.audioPlayer play];
+        
+        
+//        NSString *filepath = [[NSBundle bundleWithPath:[[NSBundle mainBundle] bundlePath]] pathForResource:@"yunyin-left.gif" ofType:nil];
+//        NSData *imagedata = [NSData dataWithContentsOfFile:filepath];
+//        UIImage * image = [UIImage sd_imageWithGIFData:imagedata];
+//        cell.voiceImageView.image = image;
     }
 }
 
@@ -275,7 +299,7 @@
         
         
         UIButton * deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KNavHight - 44, 56, 44)];
-        [deleteButton setImage:[UIImage imageNamed:@"back_s"] forState:UIControlStateNormal];
+        [deleteButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
         [deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
         [[UIApplication sharedApplication].keyWindow addSubview:deleteButton];
         
@@ -321,7 +345,7 @@
         [[UIApplication sharedApplication].keyWindow.layer addSublayer:self.playerLayer];
         
         UIButton * deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KNavHight - 44, 56, 44)];
-        [deleteButton setImage:[UIImage imageNamed:@"back_s"] forState:UIControlStateNormal];
+        [deleteButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
         [deleteButton addTarget:self action:@selector(delete1Action:) forControlEvents:UIControlEventTouchUpInside];
         [[UIApplication sharedApplication].keyWindow addSubview:deleteButton];
         
@@ -385,7 +409,7 @@
 
 - (void)createTableView {
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH,  KSCREEN_HEIGHT - KSCALE_WIDTH(58) - KNavHight) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KSCREEN_WIDTH,  KSCREEN_HEIGHT - KSCALE_WIDTH(9) - KNavHight - KTabHight) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = NO;
@@ -427,7 +451,7 @@
 
 - (void)createFooterView {
     
-    self.footerView = [[QCChatFooterView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT - KSCALE_WIDTH(58) -KNavHight, KSCREEN_WIDTH, KSCALE_WIDTH(58))];
+    self.footerView = [[QCChatFooterView alloc] initWithFrame:CGRectMake(0, KSCREEN_HEIGHT - KTabHight - KNavHight - KSCALE_WIDTH(9), KSCREEN_WIDTH, KSCALE_WIDTH(9) + KTabHight)];
     [self.view addSubview:self.footerView];
     [self.footerView getParent];
 }
@@ -480,6 +504,7 @@
             //  图片
             QCSelfPictureCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfPictureCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell.pictureButton addTarget:self action:@selector(pictureAction:) forControlEvents:UIControlEventTouchUpInside];
             [cell fillCellWithModel:chatModel];
             
             return cell;
@@ -507,7 +532,7 @@
             [cell.vedioButton addTarget:self action:@selector(videoAction:) forControlEvents:UIControlEventTouchUpInside];
             [cell fillCellWithModel:chatModel];
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"5"]) {
+        }else if ([chatModel.mtype isEqualToString:@"7"]) {
             //  戳一戳
             QCSelfPokeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfPokeCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -535,27 +560,6 @@
             [cell fillCellWithModel:chatModel];
 
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"7"]) {
-            QCSelfVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfVoiceCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.voiceButton addTarget:self action:@selector(selfVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
-            [cell fillCellWithModel:chatModel];
-
-            return cell;
-        }else if ([chatModel.mtype isEqualToString:@"8"]) {
-            QCSelfVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfVoiceCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.voiceButton addTarget:self action:@selector(selfVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
-            [cell fillCellWithModel:chatModel];
-
-            return cell;
-        }else if ([chatModel.mtype isEqualToString:@"9"]) {
-            QCSelfVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfVoiceCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.voiceButton addTarget:self action:@selector(selfVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
-            [cell fillCellWithModel:chatModel];
-
-            return cell;
         }else if ([chatModel.mtype isEqualToString:@"10"]) {
             //  时间
             QCTimeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"timeCell"];
@@ -571,7 +575,7 @@
             cell.saveLabel.text = chatModel.canMessage;
             
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"13"]) {
+        }else if ([chatModel.mtype isEqualToString:@"5"]) {
             //  转账
             QCSelfTransferCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfTransferCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -598,11 +602,14 @@
 
             
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"18"]) {
+        }else if ([chatModel.mtype isEqualToString:@"13"]) {
             //  领取红包
+         
             QCSaveCell * cell = [tableView dequeueReusableCellWithIdentifier:@"saveCell"];
+            NSArray * arr = [chatModel.message componentsSeparatedByString:@"|"];
+
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.saveLabel.text = chatModel.message;
+            cell.saveLabel.text = [arr firstObject];
             
             return cell;
         }else if ([chatModel.mtype isEqualToString:@"20"]) {
@@ -638,8 +645,9 @@
         }else if ([chatModel.mtype isEqualToString:@"1"]) {
             QCOtherPictureCell * cell = [tableView dequeueReusableCellWithIdentifier:@"otherPictureCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell.pictureButton addTarget:self action:@selector(pictureAction:) forControlEvents:UIControlEventTouchUpInside];
             [cell fillCellWithModel:chatModel];
-            
+        
             return cell;
         }else if ([chatModel.mtype isEqualToString:@"2"]){
             QCOtherVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"otherVoiceCell"];
@@ -663,7 +671,7 @@
             [cell fillCellWithModel:chatModel];
             return cell;
             
-        }else if ([chatModel.mtype isEqualToString:@"5"]) {
+        }else if ([chatModel.mtype isEqualToString:@"7"]) {
             QCOtherPokeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"otherPokeCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSArray * arr = [chatModel.message componentsSeparatedByString:@"|"];
@@ -685,34 +693,13 @@
             [cell fillCellWithModel:chatModel];
 
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"7"]) {
-            QCSelfVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfVoiceCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.voiceButton addTarget:self action:@selector(selfVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
-            [cell fillCellWithModel:chatModel];
-
-            return cell;
-        }else if ([chatModel.mtype isEqualToString:@"8"]) {
-            QCSelfVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfVoiceCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.voiceButton addTarget:self action:@selector(selfVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
-            [cell fillCellWithModel:chatModel];
-
-            return cell;
-        }else if ([chatModel.mtype isEqualToString:@"9"]) {
-            QCSelfVoiceCell * cell = [tableView dequeueReusableCellWithIdentifier:@"selfVoiceCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.voiceButton addTarget:self action:@selector(selfVoiceAction:) forControlEvents:UIControlEventTouchUpInside];
-            [cell fillCellWithModel:chatModel];
-
-            return cell;
         }else if ([chatModel.mtype isEqualToString:@"10"]) {
             QCTimeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"timeCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell fillCellWithModel:chatModel];
 
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"13"]) {
+        }else if ([chatModel.mtype isEqualToString:@"5"]) {
 
 
             QCOtherTransferCell * cell = [tableView dequeueReusableCellWithIdentifier:@"otherTransferCell"];
@@ -737,8 +724,8 @@
 
             
             return cell;
-        }else if ([chatModel.mtype isEqualToString:@"18"]) {
-            //  消息发送验证
+        }else if ([chatModel.mtype isEqualToString:@"13"]) {
+            //  领取红包
             QCSaveCell * cell = [tableView dequeueReusableCellWithIdentifier:@"saveCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSArray * arr = [chatModel.message componentsSeparatedByString:@"|"];
@@ -809,7 +796,6 @@
         NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
         QCChatModel * chatModel = self.dataArr[indexPath.row - 1];
         
-//    https://app-test.xianduoduo123.com/api/finance/verifyred
         
         NSMutableArray * arr = [[NSMutableArray alloc] init];
         [arr addObjectsFromArray:[chatModel.message componentsSeparatedByString:@"|"]];
@@ -1064,14 +1050,15 @@
                 transferDetailsViewController.type = @"1";
 
                 
+                
                 transferDetailsViewController.sureBlock = ^(NSString * _Nonnull messageStr) {
                     NSMutableDictionary * dataDic = [[NSMutableDictionary alloc] init];
                     
-                    NSString *str= [arr componentsJoinedByString:@"|"];
                     [dataDic setValue:@"0" forKey:@"ctype"];
-                    [dataDic setValue:str forKey:@"message"];
-                    [dataDic setValue:str forKey:@"selfMessage"];
-                    
+                    [dataDic setValue:[NSString stringWithFormat:@"1|%@|%@",arr[1],arr[2]] forKey:@"message"];
+                    [dataDic setValue:[NSString stringWithFormat:@"1|%@|%@",arr[1],arr[2]] forKey:@"selfMessage"];
+
+
                     [dataDic setValue:@"14" forKey:@"mtype"];
                     [dataDic setValue:[NSString stringWithFormat:@"%@｜%@｜%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.model.uid] forKey:@"msgid"];
                     [dataDic setValue:@"0" forKey:@"gid"];
@@ -1154,29 +1141,19 @@
             } failure:^(NSURLSessionDataTask *operation, NSError *error) {
             
         }];
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
     }
     
     
 }
 
-- (void)pittureAction:(UIButton *)sender {
+- (void)pictureAction:(UIButton *)sender {
 
     QCSelfPictureCell * cell = (QCSelfPictureCell *)[[sender superview] superview];
     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
     QCChatModel * model = self.dataArr[indexPath.row - 1];
     NSArray * arr = [model.message componentsSeparatedByString:@"|"];
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:KSCREEN_BOUNDS];
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (KSCREEN_HEIGHT - [arr[1] floatValue] / [arr[2] floatValue] * KSCALE_WIDTH(375)) / 2.0, KSCALE_WIDTH(375), [arr[1] floatValue] / [arr[2] floatValue] * KSCALE_WIDTH(375))];
 
     imageView.image =  [QCClassFunction Base64StrToUIImage:arr[0]];
 
@@ -1187,7 +1164,7 @@
     
     
     UIButton * deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KNavHight - 44, 56, 44)];
-    [deleteButton setImage:[UIImage imageNamed:@"back_s"] forState:UIControlStateNormal];
+    [deleteButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     [deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
     [[UIApplication sharedApplication].keyWindow addSubview:deleteButton];
     
@@ -1204,6 +1181,7 @@
 - (void)laterExecute {
     [self.cuoImageView removeFromSuperview];
 }
+
 
 
 

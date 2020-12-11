@@ -102,7 +102,7 @@
     }
     
     
-    self.contentLabel.text = arr[2];
+    self.contentLabel.text = arr[3];
     
     self.loadingImageView.hidden = YES;
     if ([model.canSend isEqualToString:@"0"]) {

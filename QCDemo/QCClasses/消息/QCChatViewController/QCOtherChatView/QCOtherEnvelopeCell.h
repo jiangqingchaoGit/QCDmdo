@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QCUngetModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QCOtherEnvelopeCell : UITableViewCell
@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton * canButton;
 @property (nonatomic, strong) UIImageView * loadingImageView;
 - (void)fillCellWithModel:(QCChatModel *)model;
+
+- (void)fillCellWithUngetModel:(QCUngetModel *)model;
+
 @end
 
 NS_ASSUME_NONNULL_END

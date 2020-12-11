@@ -232,18 +232,21 @@
 
                 
                 
-                [dataDic setValue:@"1" forKey:@"ctype"];
+                [dataDic setValue:@"0" forKey:@"ctype"];
                 
                 if ([self.model.uid isEqualToString:K_UID]) {
-                    [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包",@"自己"] forKey:@"selfMessage"];
+                    [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包|%@",@"自己",arr[1]] forKey:@"selfMessage"];
+                    
+                    [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包|%@",@"自己",arr[1]] forKey:@"selfMessage"];
+
 
                 }else{
-                    [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包",self.model.unick] forKey:@"selfMessage"];
-                    [dataDic setValue:[NSString stringWithFormat:@"%@领取了你的红包",K_NICK] forKey:@"message"];
+                    [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包|%@",self.model.unick,arr[1]] forKey:@"selfMessage"];
+                    [dataDic setValue:[NSString stringWithFormat:@"%@领取了你的红包|%@",K_NICK,arr[1]] forKey:@"message"];
 
                 }
 
-                [dataDic setValue:@"18" forKey:@"mtype"];
+                [dataDic setValue:@"13" forKey:@"mtype"];
                 [dataDic setValue:[NSString stringWithFormat:@"%@｜%@｜%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.model.uid] forKey:@"msgid"];
                 [dataDic setValue:self.model.gid forKey:@"gid"];
                 [dataDic setValue:self.model.uid forKey:@"touid"];
@@ -261,7 +264,7 @@
 
 
 
-                NSDictionary * info = @{@"fuid":self.model.gid,@"type":@"2"};
+                NSDictionary * info = @{@"fuid":self.model.uid,@"type":@"1"};
 
 
 
@@ -388,15 +391,15 @@
 
                 
                 if ([self.model.uid isEqualToString:[K_UID stringValue]]) {
-                    [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包",@"自己"] forKey:@"selfMessage"];
+                    [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包|%@",@"自己",arr[1]] forKey:@"selfMessage"];
 
                 }else{
-                    [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包",self.model.unick] forKey:@"selfMessage"];
-                    [dataDic setValue:[NSString stringWithFormat:@"%@领取了你的红包",K_NICK] forKey:@"message"];
+                    [dataDic setValue:[NSString stringWithFormat:@"你领取了%@的红包|%@",self.model.unick,arr[1]] forKey:@"selfMessage"];
+                    [dataDic setValue:[NSString stringWithFormat:@"%@领取了你的红包|%@",K_NICK,arr[1]] forKey:@"message"];
 
                 }
 
-                [dataDic setValue:@"18" forKey:@"mtype"];
+                [dataDic setValue:@"13" forKey:@"mtype"];
                 [dataDic setValue:[NSString stringWithFormat:@"%@｜%@｜%@",K_UID,[QCClassFunction getNowTimeTimestamp3],self.model.uid] forKey:@"msgid"];
                 [dataDic setValue:self.model.gid forKey:@"gid"];
                 [dataDic setValue:self.model.uid forKey:@"touid"];

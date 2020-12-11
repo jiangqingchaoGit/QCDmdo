@@ -74,9 +74,9 @@
     [self.view addSubview:passwordLabel];
     
     self.oldpasswordTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(120), KSCALE_WIDTH(207) + KStatusHight, KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
-    self.oldpasswordTextField.placeholder = @"请输入密码";
+    self.oldpasswordTextField.placeholder = @"请输入原始密码";
     self.oldpasswordTextField.keyboardType = UIKeyboardTypeNumberPad;
-    self.oldpasswordTextField.font = K_20_BFONT;
+    self.oldpasswordTextField.font = K_18_FONT;
     self.oldpasswordTextField.textColor = KTEXT_COLOR;
     self.oldpasswordTextField.textAlignment = NSTextAlignmentLeft;
     self.oldpasswordTextField.secureTextEntry = YES;
@@ -106,9 +106,9 @@
     [self.view addSubview:passLabel];
     
     self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(120), KSCALE_WIDTH(276) + KStatusHight, KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
-    self.passwordTextField.placeholder = @"请输入密码";
+    self.passwordTextField.placeholder = @"请输入新密码";
     self.passwordTextField.keyboardType = UIKeyboardTypeNumberPad;
-    self.passwordTextField.font = K_20_BFONT;
+    self.passwordTextField.font = K_18_FONT;
     self.passwordTextField.textColor = KTEXT_COLOR;
     self.passwordTextField.secureTextEntry = YES;
     self.passwordTextField.textAlignment = NSTextAlignmentLeft;
@@ -130,7 +130,7 @@
     self.surePasswordTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(120), KSCALE_WIDTH(345) + KStatusHight, KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
     self.surePasswordTextField.placeholder = @"请再次输入新密码";
     self.surePasswordTextField.keyboardType = UIKeyboardTypeNumberPad;
-    self.surePasswordTextField.font = K_20_BFONT;
+    self.surePasswordTextField.font = K_18_FONT;
     self.surePasswordTextField.textColor = KTEXT_COLOR;
     self.surePasswordTextField.secureTextEntry = YES;
     self.surePasswordTextField.textAlignment = NSTextAlignmentLeft;
@@ -152,13 +152,13 @@
 
     
     self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(33), KSCALE_WIDTH(460) + KStatusHight, KSCALE_WIDTH(309), KSCALE_WIDTH(50))];
-    self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
+    self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
     self.loginButton.titleLabel.font = K_18_FONT;
-    self.loginButton.selected = NO;
-    self.loginButton.userInteractionEnabled = NO;
+//    self.loginButton.selected = NO;
+//    self.loginButton.userInteractionEnabled = NO;
     [self.loginButton setTitle:@"重置密码" forState:UIControlStateNormal];
     [self.loginButton setTitleColor:KBACK_COLOR forState:UIControlStateNormal];
-    [self.loginButton setTitleColor:KTEXT_COLOR forState:UIControlStateSelected];
+//    [self.loginButton setTitleColor:KTEXT_COLOR forState:UIControlStateSelected];
     [self.loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
     [QCClassFunction filletImageView:self.loginButton withRadius:KSCALE_WIDTH(13)];
     [self.view addSubview:self.loginButton];
@@ -248,19 +248,19 @@
     [self.surePasswordTextField resignFirstResponder];
 
     //  获取验证码
-    if ([QCClassFunction isMobile:self.oldpasswordTextField.text]) {
-        [QCClassFunction showMessage:@"请输入正确的手机号码" toView:self.view];
-        return;
-    }
+//    if ([QCClassFunction isMobile:self.oldpasswordTextField.text]) {
+//        [QCClassFunction showMessage:@"请输入正确的手机号码" toView:self.view];
+//        return;
+//    }
     
-    NSString * str = [NSString stringWithFormat:@"mobile=%@&password=%@",self.oldpasswordTextField.text,self.passwordTextField.text];
+    NSString * str = [NSString stringWithFormat:@"password=%@&rpassword=%@&token=%@&uid=%@",self.oldpasswordTextField.text,self.passwordTextField.text,K_TOKEN,K_UID];
     NSString * signStr = [QCClassFunction MD5:str];
-    NSDictionary * dic = @{@"password":self.passwordTextField.text,@"mobile":self.oldpasswordTextField.text};
+    NSDictionary * dic = @{@"password":self.oldpasswordTextField.text,@"rpassword":self.passwordTextField.text,@"token":K_TOKEN,@"uid":K_UID};
     NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
 
-    [QCAFNetWorking QCPOST:@"/api/login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+    [QCAFNetWorking QCPOST:@"/api/user/update_pwd" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
 
         
         NSLog(@"%@",responseObject[@"msg"]);
@@ -305,18 +305,18 @@
 }
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidChange:(UITextField *)sender {
-    
-    if (self.oldpasswordTextField.text.length == 11) {
-        self.loginButton.selected = YES;
-        self.loginButton.userInteractionEnabled = YES;
-        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
-        
-    }else{
-        self.loginButton.selected = NO;
-        self.loginButton.userInteractionEnabled = NO;
-        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
-        
-    }
+//
+//    if (self.oldpasswordTextField.text.length == 11) {
+//        self.loginButton.selected = YES;
+//        self.loginButton.userInteractionEnabled = YES;
+//        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#ffba00"];
+//
+//    }else{
+//        self.loginButton.selected = NO;
+//        self.loginButton.userInteractionEnabled = NO;
+//        self.loginButton.backgroundColor = [QCClassFunction stringTOColor:@"#E4E4E4"];
+//
+//    }
     
 }
 

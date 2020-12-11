@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QCAdModel.h"
+#import "QCBanModel.h"
 
 /*
  *  滚动切换视图
@@ -23,11 +25,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray * bannerData;
 @property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) NSMutableArray * classData;
+@property (nonatomic, strong) NSMutableArray * advertisingData;
+
 @property (nonatomic, strong) UIButton * advertisingButton;
 @property (nonatomic, strong) UIButton * recommendedButton;
 @property (nonatomic, strong) UIButton * limitButton;
 @property (nonatomic, strong) UIView * lineView;
 
+- (void)fillSize;
 
 
 @end

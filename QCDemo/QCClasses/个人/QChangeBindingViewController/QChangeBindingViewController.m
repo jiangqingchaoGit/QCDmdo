@@ -70,7 +70,7 @@
     self.phoneTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(207) + KStatusHight, KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
     self.phoneTextField.placeholder = @"请输入新手机号";
     self.phoneTextField.keyboardType = UIKeyboardTypeNumberPad;
-    self.phoneTextField.font = K_20_BFONT;
+    self.phoneTextField.font = K_18_FONT;
     self.phoneTextField.textColor = KTEXT_COLOR;
     self.phoneTextField.textAlignment = NSTextAlignmentLeft;
     self.phoneTextField.delegate = self;
@@ -79,8 +79,7 @@
     
     self.clearButton = [[UIButton alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(310), KSCALE_WIDTH(207) + KStatusHight,KSCALE_WIDTH(32), KSCALE_WIDTH(32))];
     self.clearButton.hidden = YES;
-    //    [self.clearButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    [self.clearButton setImage:KHeaderImage forState:UIControlStateNormal];
+    [self.clearButton setImage:[UIImage imageNamed:@"叉"] forState:UIControlStateNormal];
     [self.clearButton addTarget:self action:@selector(clearAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.clearButton];
     
@@ -101,7 +100,7 @@
     self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(KSCALE_WIDTH(110), KSCALE_WIDTH(276) + KStatusHight, KSCALE_WIDTH(250), KSCALE_WIDTH(32))];
     self.passwordTextField.placeholder = @"请输入验证码";
     self.passwordTextField.keyboardType = UIKeyboardTypeNumberPad;
-    self.passwordTextField.font = K_20_BFONT;
+    self.passwordTextField.font = K_18_FONT;
     self.passwordTextField.textColor = KTEXT_COLOR;
     self.passwordTextField.textAlignment = NSTextAlignmentLeft;
     self.passwordTextField.delegate = self;
@@ -133,7 +132,7 @@
     self.loginButton.userInteractionEnabled = NO;
     [self.loginButton setTitle:@"确认更换" forState:UIControlStateNormal];
     [self.loginButton setTitleColor:KBACK_COLOR forState:UIControlStateNormal];
-    [self.loginButton setTitleColor:KTEXT_COLOR forState:UIControlStateSelected];
+    [self.loginButton setTitleColor:KBACK_COLOR forState:UIControlStateSelected];
     [self.loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
     [QCClassFunction filletImageView:self.loginButton withRadius:KSCALE_WIDTH(13)];
     [self.view addSubview:self.loginButton];
@@ -218,17 +217,23 @@
         return;
     }
     
-    NSString * str = [NSString stringWithFormat:@"mobile=%@&password=%@",self.phoneTextField.text,self.passwordTextField.text];
+    NSString * str = [NSString stringWithFormat:@"code=%@&mobile=%@&token=%@&uid=%@",self.passwordTextField.text,self.phoneTextField.text,K_TOKEN,K_UID];
     NSString * signStr = [QCClassFunction MD5:str];
-    NSDictionary * dic = @{@"password":self.passwordTextField.text,@"mobile":self.phoneTextField.text};
+    
+    NSDictionary * dic = @{@"mobile":self.phoneTextField.text,@"code":self.passwordTextField.text,@"token":K_TOKEN,@"uid":K_UID};
     NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};
 
-    [QCAFNetWorking QCPOST:@"/api/login" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+    [QCAFNetWorking QCPOST:@"/api/user/update_mobile" parameters:dataDic success:^(NSURLSessionDataTask *operation, id responseObject) {
 
-        
-        NSLog(@"%@",responseObject[@"msg"]);
+        if ([responseObject[@"status"] intValue] == 1) {
+            [QCClassFunction showMessage:@"更换手机号码成功" toView:self.view];
+
+        }else{
+            [QCClassFunction showMessage:responseObject[@"msg"] toView:self.view];
+
+        }
         
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         [QCClassFunction showMessage:@"网络请求失败，请重新连接" toView:self.view];
@@ -240,10 +245,10 @@
 
 #pragma mark - GETDATA
 - (void)GETCODE {
-    NSString * str = [NSString stringWithFormat:@"mobile=%@&type=%@",self.phoneTextField.text,@"1"];
+    NSString * str = [NSString stringWithFormat:@"mobile=%@&type=%@",self.phoneTextField.text,@"5"];
 
     NSString * signStr = [QCClassFunction MD5:str];
-    NSDictionary * dic = @{@"mobile":self.phoneTextField.text,@"type":@"1"};
+    NSDictionary * dic = @{@"mobile":self.phoneTextField.text,@"type":@"5"};
     NSString * jsonString = [QCClassFunction jsonStringWithDictionary:dic];
     NSString * outPut = [[QCClassFunction AES128_Encrypt:K_AESKEY encryptData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     NSDictionary * dataDic = @{@"sign":signStr,@"data":outPut};

@@ -83,7 +83,7 @@
 
 #pragma mark - tapAction
 - (void)backAction:(UIButton *)sender {
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

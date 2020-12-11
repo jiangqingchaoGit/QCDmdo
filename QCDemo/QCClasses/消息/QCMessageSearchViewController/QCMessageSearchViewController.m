@@ -156,9 +156,7 @@
     
     [self.searchTextField resignFirstResponder];
     QCChatModel * model = self.dataArr[indexPath.row];
-//    model.chatId;
-//
-    
+
     //  进入聊天界面
     QCGroupChatViewController * chatViewController = [[QCGroupChatViewController alloc] init];
     chatViewController.hidesBottomBarWhenPushed = YES;

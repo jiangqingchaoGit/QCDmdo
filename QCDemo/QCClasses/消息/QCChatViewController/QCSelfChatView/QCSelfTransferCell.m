@@ -82,7 +82,7 @@
 
     
     
-    if ([model.mtype isEqualToString:@"13"]) {
+    if ([model.mtype isEqualToString:@"5"]) {
         if ([arr[0] isEqualToString:@"0"]) {
             self.getLabel.text = [NSString stringWithFormat:@"转账给%@",model.unick];
             self.backImageView.alpha = 1;

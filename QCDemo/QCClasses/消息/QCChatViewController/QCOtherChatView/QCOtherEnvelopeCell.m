@@ -83,7 +83,7 @@
     [QCClassFunction sd_imageView:self.headerImageView ImageURL:model.uhead AppendingString:nil placeholderImage:@"header"];
     NSArray * arr = [model.message componentsSeparatedByString:@"|"];
     
-    self.contentLabel.text = arr[2];
+    self.contentLabel.text = arr[3];
     if ([arr[0] isEqualToString:@"0"]) {
         self.backImageView.alpha = 1;
         self.fHeaderImageView.alpha = 1;
@@ -93,7 +93,6 @@
     }else{
         self.backImageView.alpha = 0.5;
         self.fHeaderImageView.alpha = 0.5;
-
         self.getLabel.text = @"已领取";
 
 
@@ -116,6 +115,13 @@
     
 
 
+
+}
+
+- (void)fillCellWithUngetModel:(QCUngetModel *)model {
+    [QCClassFunction sd_imageView:self.headerImageView ImageURL:model.head AppendingString:nil placeholderImage:@"header"];
+    self.getLabel.text = @"领取红包";
+    self.contentLabel.text = @"恭喜发财，大吉大利";
 
 }
 @end
